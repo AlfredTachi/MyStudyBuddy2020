@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
+import'../drawer/drawer.dart';
+
 class Dashboard extends StatefulWidget {
   @override
   DashboardState createState() => DashboardState();
@@ -24,6 +26,7 @@ class DashboardState extends State<Dashboard> {
       appBar: AppBar(
         title: Text("MyStudyBuddy"),
       ),
+      drawer: OwnDrawer(),
       body: Column(
         children: <Widget>[
           Material(
