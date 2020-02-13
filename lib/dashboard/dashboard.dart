@@ -14,7 +14,7 @@ class DashboardState extends State<Dashboard> {
     dataMap.putIfAbsent("Flutter", () => 5);
     dataMap.putIfAbsent("React", () => 3);
     dataMap.putIfAbsent("Xamarin", () => 2);
-    dataMap.putIfAbsent("Ionic", () => 2);
+    dataMap.putIfAbsent("Ionic", () => 2);    
     super.initState();
   }
 
@@ -29,16 +29,16 @@ class DashboardState extends State<Dashboard> {
           Material(
             elevation: 15,
             child: Container(
-                height: MediaQuery.of(context).size.height / 3,
-                color: Colors.white,
+                height: MediaQuery.of(context).size.height / 3.5,
                 child: Row(
                   children: <Widget>[
                     Container(
                       height: 200,
                       width: 200,
-                      padding: EdgeInsets.only(left: 0, bottom: 20, top: 20),
+                      padding: EdgeInsets.all(10),
                       child: PieChart(
                         dataMap: dataMap,
+                        chartRadius: 130,
                         showLegends: false,
                         chartType: ChartType.ring,
                         showChartValues: false,
