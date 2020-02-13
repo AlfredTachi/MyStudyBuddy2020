@@ -26,40 +26,90 @@ class DashboardState extends State<Dashboard> {
       ),
       body: Column(
         children: <Widget>[
-          Container(
-              color: Colors.white,
-              padding: EdgeInsets.all(10),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    height: 200,
-                    width: 200,
-                    padding: EdgeInsets.all(15),
-                    child: PieChart(
-                      dataMap: dataMap,
-                      showLegends: false,
-                      chartType: ChartType.ring,
-                      showChartValues: false,
-                    ),
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[Icon(Icons.headset), Text("0")],
+          Material(
+            elevation: 15,
+            child: Container(
+                height: MediaQuery.of(context).size.height / 3,
+                color: Colors.white,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      height: 200,
+                      width: 200,
+                      padding: EdgeInsets.only(left: 0, bottom: 20, top: 20),
+                      child: PieChart(
+                        dataMap: dataMap,
+                        showLegends: false,
+                        chartType: ChartType.ring,
+                        showChartValues: false,
+                        showChartValueLabel: false,
                       ),
-                      Row(
+                    ),
+                    VerticalDivider(),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Icon(Icons.headset),
-                          Text("Noch keinen")
+                          Row(
+                            children: <Widget>[Icon(Icons.headset), Text("0")],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Icon(Icons.gps_not_fixed),
+                              Text("Noch keinen")
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Icon(Icons.person),
+                              Text("inf2802")
+                            ],
+                          )
                         ],
                       ),
-                      Row(
-                        children: <Widget>[Icon(Icons.person), Text("inf2802")],
-                      )
-                    ],
-                  )
-                ],
-              )),
+                    ),
+                  ],
+                )),
+          ),
+          Divider(),
+          Material(
+            elevation: 15,
+            child: Container(
+                padding: EdgeInsets.all(15),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.library_books),
+                    Text(
+                      " Dein 1. Semester",
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    ),
+                  ],
+                )),
+          ),
+          Divider(),
+          Expanded(
+            flex: 2,
+            child: Material(
+              elevation: 15,
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Center(
+                      child: Text(
+                        "Du hast zurzeit keine Module geplant!",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
