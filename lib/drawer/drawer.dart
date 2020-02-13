@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class OwnDrawer extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _OwnDrawerState();
   }
 }
@@ -32,7 +31,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
                 leading: Icon(Icons.home),
                 title: Text('Übersicht'),
                 onTap: () {
-                 // Navigator.pushNamed(context, '/');
+                 Navigator.pushNamed(context, '/');
                 },
               ),
               ListTile(
