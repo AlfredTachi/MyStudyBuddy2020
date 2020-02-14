@@ -12,7 +12,8 @@ Material progress(ProgressBar progressBar) {
   );
 }
 
-Material persondetails(String infnumber, String special) {
+Material persondetails(
+    IconData icon, String infnumber, IconData icontwo, String special) {
   return Material(
       color: Colors.white,
       elevation: 14.0,
@@ -24,14 +25,24 @@ Material persondetails(String infnumber, String special) {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(infnumber, style: TextStyle(fontSize: 20)),
-            Text(special, style: TextStyle(fontSize: 20))
+            Row(
+              children: <Widget>[
+                Icon(icon),
+                Text(infnumber, style: TextStyle(fontSize: 20)),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Icon(icontwo),
+                Flexible(child: Text(special, style: TextStyle(fontSize: 20))),
+              ],
+            )
           ],
         ),
       ));
 }
 
-Material grades(String heading, double grades) {
+Material grades(IconData icon, String heading, double grades) {
   return Material(
       color: Colors.white,
       elevation: 14.0,
@@ -42,6 +53,7 @@ Material grades(String heading, double grades) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Icon(icon),
             Text(heading, style: TextStyle(fontSize: 20)),
             Text(grades.toString(), style: TextStyle(fontSize: 20))
           ],
@@ -87,8 +99,9 @@ class _StaggeredViewState extends State<StaggeredView> {
           mainAxisSpacing: 5,
           children: <Widget>[
             progress(ProgressBar()),
-            persondetails("inf2730", "Software Konstruktion"),
-            grades("Notendurchschnitt:", 5.0),
+            persondetails(
+                Icons.person, "inf2730", Icons.work, "Software Konstruktion"),
+            grades(Icons.local_library, "Notendurchschnitt:", 5.0),
             module("Deine Module")
           ],
           staggeredTiles: [
