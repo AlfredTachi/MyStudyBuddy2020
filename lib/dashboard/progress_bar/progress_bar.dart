@@ -92,7 +92,7 @@ class ProgressBarState extends State<ProgressBar>
     return Text(
       "${_nextPercentage.toInt()}",
       style: TextStyle(
-          fontSize: 40, fontWeight: FontWeight.w800, color: Colors.green),
+          fontSize: 32, fontWeight: FontWeight.w800, color: Colors.green),
     );
   }
 
