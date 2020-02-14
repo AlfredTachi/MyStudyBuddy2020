@@ -1,12 +1,7 @@
-// TODO: Remove outcommented code if this is stable
-
 import 'package:MyStudyBuddy2/drawer/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-// import 'dart:async';
-
-// import 'package:MyStudyBuddy2/drawer/drawer.dart';
 
 class MensaPlan extends StatefulWidget {
   @override
@@ -15,27 +10,13 @@ class MensaPlan extends StatefulWidget {
 
 class MensaPlanState extends State<MensaPlan> {
   Map<String, double> dataMap = new Map();
-  //Completer<WebViewController> _controller = Completer<WebViewController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-/*       appBar: AppBar(
-        title: Text("MyStudyBuddy"),
-      ),
-      drawer: OwnDrawer(), */
       body: WebViewContainer('https://stw-vp.de/de/mensa-webapp'),
     );
   }
-
-/*   WebView buildMensaWebApp(BuildContext context) {
-    return WebView(
-        initialUrl: 'https://stw-vp.de/de/mensa-webapp/',
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) {
-          _controller.complete(webViewController);
-        });
-  } */
 }
 
 class _WebViewContainerState extends State<WebViewContainer> {
