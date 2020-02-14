@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:MyStudyBuddy2/drawer/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,36 +11,84 @@ class Weather extends StatefulWidget {
 class WeatherState extends State<Weather> {
   WeatherData data = WeatherData();
 
+  TextStyle _headerStyle() {
+    return TextStyle(
+      fontSize: 20,
+    );
+  }
+
+  TextStyle _itemStyle() {
+    return TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
   @override
   void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  void fetchData() {
     fetchWeather().then((_data) {
       setState(() {
         data = _data;
       });
     });
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Wetter"),
+      ),
+      drawer: OwnDrawer(),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(data.timestamp.toString()),
-            Text(data.trend.toString()),
-            Text(data.barometer.toString()),
-            Text(data.temperature.toString()),
-            Text(data.humidity.toString()),
-            OutlineButton(
-                child: Text("Aktualisieren"),
-                onPressed: () async {
-                  fetchWeather().then((_data) {
-                    setState(() {
-                      data = _data;
-                    });
-                  });
-                })
+            Column(
+              children: <Widget>[
+                Text(
+                  data.temperature.toString() + " °C",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: MediaQuery.of(context).size.height / 9),
+                ),
+                Divider(),
+                Text("Aktueller Wettertrend", style: _headerStyle()),
+                Container(
+                    padding: EdgeInsets.all(10),
+                    child: Text(data.trend.toString(), style: _itemStyle())),
+                Divider(),
+                Text("Luftdruck", style: _headerStyle()),
+                Container(
+                    padding: EdgeInsets.all(10),
+                    child: Text(data.barometer.toString() + " hPa",
+                        style: _itemStyle())),
+                Divider(),
+                Text("Luftfeuchtigkeit", style: _headerStyle()),
+                Container(
+                    padding: EdgeInsets.all(10),
+                    child: Text(data.humidity.toString() + "%",
+                        style: _itemStyle())),
+              ],
+            ),
+            Divider(),
+            Container(
+              width: MediaQuery.of(context).size.width / 2,
+              height: MediaQuery.of(context).size.height / 10,
+              child: OutlineButton(
+                  child: Text("Aktualisieren",
+                      style: TextStyle(
+                        fontSize: 24,
+                      )),
+                  onPressed: () async {
+                    fetchData();
+                  }),
+            )
           ],
         ),
       ),
@@ -59,22 +107,16 @@ class WeatherState extends State<Weather> {
 }
 
 class WeatherData {
-  var timestamp;
+  int timestamp = 0;
   var trend;
   var barometer;
   var temperature;
   var humidity;
 
-  WeatherData(
-      {this.timestamp,
-      this.trend,
-      this.barometer,
-      this.temperature,
-      this.humidity});
+  WeatherData({this.trend, this.barometer, this.temperature, this.humidity});
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
     return WeatherData(
-      timestamp: json['ts'],
       trend: json['trend']["text"],
       barometer: json['baro'],
       temperature: json['temp']["out"]["c"],
