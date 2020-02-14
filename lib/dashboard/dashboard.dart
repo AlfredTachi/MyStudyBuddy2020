@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pie_chart/pie_chart.dart';
+import 'progress_bar/progress_bar.dart';
+import '../drawer/drawer.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -7,23 +8,13 @@ class Dashboard extends StatefulWidget {
 }
 
 class DashboardState extends State<Dashboard> {
-  Map<String, double> dataMap = new Map();
-
-  @override
-  void initState() {
-    dataMap.putIfAbsent("Flutter", () => 5);
-    dataMap.putIfAbsent("React", () => 3);
-    dataMap.putIfAbsent("Xamarin", () => 2);
-    dataMap.putIfAbsent("Ionic", () => 2);    
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("MyStudyBuddy"),
       ),
+      drawer: OwnDrawer(),
       body: Column(
         children: <Widget>[
           Material(
@@ -33,18 +24,10 @@ class DashboardState extends State<Dashboard> {
                 child: Row(
                   children: <Widget>[
                     Container(
-                      height: 200,
-                      width: 200,
-                      padding: EdgeInsets.all(10),
-                      child: PieChart(
-                        dataMap: dataMap,
-                        chartRadius: 130,
-                        showLegends: false,
-                        chartType: ChartType.ring,
-                        showChartValues: false,
-                        showChartValueLabel: false,
-                      ),
-                    ),
+                        height: 200,
+                        width: 200,
+                        padding: EdgeInsets.all(10),
+                        child: ProgressBar()),
                     VerticalDivider(),
                     Container(
                       alignment: Alignment.center,
