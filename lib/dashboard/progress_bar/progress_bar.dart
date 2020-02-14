@@ -105,28 +105,18 @@ class ProgressBarState extends State<ProgressBar>
         defaultCircleColor: Colors.amber,
         percentageCompletedCircleColor: Colors.green,
         compltetedPercentage: _percentage,
-        circleWidth: 40,
+        circleWidth: 20,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-            height: 200,
-            width: 200,
-            padding: EdgeInsets.all(20),
-            margin: EdgeInsets.all(10),
-            child: progressView()),
-        OutlineButton(
-          child: Text("Start"),
-          onPressed: () {
-            publishProgress();
-          },
-        )
-      ],
+    return Center(
+      child: Container(
+          padding: EdgeInsets.all(10),
+          margin: EdgeInsets.all(30),
+          child: progressView()),
     );
   }
 }
