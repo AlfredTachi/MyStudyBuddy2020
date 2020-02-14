@@ -33,7 +33,7 @@ class WeatherState extends State<Weather> {
             Text(data.temperature.toString()),
             Text(data.humidity.toString()),
             OutlineButton(
-                child: Text("Press me if you can"),
+                child: Text("Aktualisieren"),
                 onPressed: () async {
                   fetchWeather().then((_data) {
                     setState(() {
@@ -59,11 +59,11 @@ class WeatherState extends State<Weather> {
 }
 
 class WeatherData {
-  int timestamp = 0;
-  String trend = "";
-  double barometer = 0.0;
-  double temperature = 0.0;
-  int humidity = 0;
+  var timestamp;
+  var trend;
+  var barometer;
+  var temperature;
+  var humidity;
 
   WeatherData(
       {this.timestamp,
