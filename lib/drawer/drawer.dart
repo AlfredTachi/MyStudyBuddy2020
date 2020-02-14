@@ -59,7 +59,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
                 leading: Icon(Icons.restaurant),
                 title: Text('Mensa Plan'),
                 onTap: () {
-                 // Navigator.pushNamed(context, '/todo');
+                 Navigator.pushNamed(context, '/mensa_plan');
                 },
               ),
               ListTile(
