@@ -79,7 +79,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.settings),
           title: Text('Einstellungen'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/settings');
           },
         ),
       ])),
