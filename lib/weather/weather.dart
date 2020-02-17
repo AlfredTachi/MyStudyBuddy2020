@@ -12,12 +12,6 @@ class Weather extends StatefulWidget {
 class WeatherState extends State<Weather> {
   WeatherData data = WeatherData();
 
-  TextStyle _headerStyle() {
-    return TextStyle(
-      fontSize: 20,
-    );
-  }
-
   TextStyle _itemStyle() {
     return TextStyle(
       fontSize: 24,
@@ -57,60 +51,96 @@ class WeatherState extends State<Weather> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Wetter"),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                fetchData();
+              })
+        ],
       ),
       drawer: OwnDrawer(),
       body: Center(
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Text(
-                  data.temperature.toString() + " °C",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: MediaQuery.of(context).size.height / 9),
+        child: Container(
+          padding: EdgeInsets.only(top: 20),
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                Colors.blue,
+                Colors.blue[300],
+                Colors.blue[200],
+                Colors.blue[100]
+              ])),
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 4),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "Worms",
+                            style: TextStyle(
+                              fontSize: 60,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text("Zuletzt aktualisiert: " + dateTimeToString()),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              data.temperature.toString() + " °C",
+                              style: TextStyle(
+                                fontSize: 40,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    // Divider(),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: <Widget>[
+                    //     Icon(Icons.arrow_drop_down),
+                    //     Text(" Sonstige Daten "),
+                    //     Icon(Icons.arrow_drop_down),
+                    //   ],
+                    // ),
+                    // Divider(),
+                  ],
                 ),
-                Divider(),
-                Text("Aktueller Wettertrend", style: _headerStyle()),
-                Container(
-                    padding: EdgeInsets.all(10),
-                    child: Center(
-                        child: FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: Text(data.forecast.toString(),
-                                style: _itemStyle())))),
-                Divider(),
-                Text("Luftdruck", style: _headerStyle()),
-                Container(
-                    padding: EdgeInsets.all(10),
-                    child: Text(data.barometer.toString() + " hPa",
-                        style: _itemStyle())),
-                Divider(),
-                Text("Luftfeuchtigkeit", style: _headerStyle()),
-                Container(
-                    padding: EdgeInsets.all(10),
-                    child: Text(data.humidity.toString() + "%",
-                        style: _itemStyle())),
-              ],
-            ),
-            Divider(),
-            Container(
-              width: MediaQuery.of(context).size.width / 2,
-              height: MediaQuery.of(context).size.height / 10,
-              child: OutlineButton(
-                  child: Text("Aktualisieren",
-                      style: TextStyle(
-                        fontSize: 24,
-                      )),
-                  onPressed: () async {
-                    fetchData();
-                  }),
-            )
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  String dateTimeToString() {
+    DateTime _date = DateTime.now();
+    return fixMissingZero(_date.hour) +
+        ":" +
+        fixMissingZero(_date.minute) +
+        " Uhr";
+  }
+
+  String fixMissingZero(int number) {
+    if (number < 10) {
+      return "0" + number.toString();
+    } else {
+      return number.toString();
+    }
   }
 
   Future<WeatherData> fetchWeather() async {
