@@ -99,8 +99,7 @@ class _StaggeredViewState extends State<StaggeredView> {
           mainAxisSpacing: 5,
           children: <Widget>[
             progress(ProgressBar()),
-            persondetails(
-                Icons.person, "inf2730", Icons.work, "Software Konstruktion"),
+            persondetails(Icons.person, "inf2730", Icons.work, "Software Konstruktion"),
             grades(Icons.local_library, "Notendurchschnitt:", 5.0),
             module("Deine Module")
           ],

@@ -8,6 +8,7 @@ class OwnDrawer extends StatefulWidget {
 }
 
 class _OwnDrawerState extends State<OwnDrawer> {
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -38,6 +39,13 @@ class _OwnDrawerState extends State<OwnDrawer> {
           title: Text('Semsterverlauf'),
           onTap: () {
             // Navigator.pushNamed(context, '/second');
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.exposure),
+          title: Text('Noten Rechner'),
+          onTap: () {
+            Navigator.pushNamed(context, '/grades_prognosis');
           },
         ),
         ListTile(
