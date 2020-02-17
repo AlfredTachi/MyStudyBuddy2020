@@ -27,55 +27,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
             ),
           ),
         ),
-        ListTile(                
-                leading: Icon(Icons.home),
-                title: Text('Übersicht'),
-                onTap: () {
-                 Navigator.pushNamed(context, '/');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.check_box),
-                title: Text('Semsterverlauf'),
-                onTap: () {
-                 Navigator.pushNamed(context, '/semesterverlauf');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.chrome_reader_mode),
-                title: Text('Modulhandbuch'),
-                onTap: () {
-                 // Navigator.pushNamed(context, '/todo');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.map),
-                title: Text('Campusplan'),
-                onTap: () {
-                 // Navigator.pushNamed(context, '/todo');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.restaurant),
-                title: Text('Mensa Plan'),
-                onTap: () {
-                 // Navigator.pushNamed(context, '/todo');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.calendar_today),
-                title: Text('Terminplan'),
-                onTap: () {
-                 // Navigator.pushNamed(context, '/todo');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Einstellungen'),
-                onTap: () {
-                 // Navigator.pushNamed(context, '/todo');
-                },
-              ),
+        ListTile(   
           leading: Icon(Icons.home),
           title: Text('Übersicht'),
           onTap: () {
@@ -86,7 +38,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.check_box),
           title: Text('Semsterverlauf'),
           onTap: () {
-            // Navigator.pushNamed(context, '/second');
+            Navigator.pushNamed(context, '/studyprogress');
           },
         ),
         ListTile(
@@ -107,7 +59,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.map),
           title: Text('Campusplan'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/map');
           },
         ),
         ListTile(

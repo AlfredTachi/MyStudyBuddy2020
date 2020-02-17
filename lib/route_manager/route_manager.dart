@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/campus_plan/campus_plan.dart';
 import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/studyprogress/studyprogress.dart';
 import 'package:MyStudyBuddy2/grades_prognosis/grades_prognosis.dart';
@@ -17,6 +18,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => MensaPlan());
       case '/weather':
         return MaterialPageRoute(builder: (_) => Weather());
+       case '/map':
+        return MaterialPageRoute(builder: (_) => CampusPlan());
       case '/settings':
         return MaterialPageRoute(builder: (_) => Settings());
       case '/grades_prognosis':
