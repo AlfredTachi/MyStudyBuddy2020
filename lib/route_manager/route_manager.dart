@@ -12,7 +12,7 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
       return MaterialPageRoute(builder: (_) => Dashboard());
-      case '/semesterverlauf':
+      case '/studyprogress':
       return MaterialPageRoute(builder: (_) => Studyprogress());      
       case '/mensa_plan':
         return MaterialPageRoute(builder: (_) => MensaPlan());
