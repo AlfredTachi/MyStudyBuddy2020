@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/campus_plan/campus_plan.dart';
 import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
 import 'package:MyStudyBuddy2/weather/weather.dart';
@@ -12,6 +13,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => MensaPlan());
       case '/weather':
         return MaterialPageRoute(builder: (_) => Weather());
+       case '/map':
+        return MaterialPageRoute(builder: (_) => CampusPlan());
       default:
         return _errorRoute();
     }

@@ -51,7 +51,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.map),
           title: Text('Campusplan'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/map');
           },
         ),
         ListTile(
