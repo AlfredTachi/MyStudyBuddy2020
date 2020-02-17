@@ -13,6 +13,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   WeatherData data = WeatherData();
   AnimationController animationCtrl;
   bool showDetails = false;
+  String status = "";
 
   @override
   void initState() {
@@ -29,9 +30,14 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
     await fetchWeather().then((_data) {
       setState(() {
         data = _data;
+        status = "";
       });
-    }).catchError((err){
-      print(err);
+    }).catchError((err) {
+      setState(() {
+        status =
+            "Es ist ein Problem bei der Verbindung zum angeforderten Dienst aufgetreten!";
+        print(err);
+      });
     });
   }
 
@@ -89,6 +95,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
                             top: MediaQuery.of(context).size.height / 5),
                         child: Column(
                           children: <Widget>[
+                            (status.isNotEmpty) ? Text(status) : Container(),
                             Text(
                               "HS Worms",
                               style: TextStyle(
