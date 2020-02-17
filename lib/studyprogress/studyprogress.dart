@@ -15,12 +15,7 @@ class StudyprogressState extends State<Studyprogress> {
         title: Text("Studienverlauf"),
       ),
       drawer: OwnDrawer(),
-      body:StaggeredView(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Modul hinzufügen',
-        child: Icon(Icons.add),
-      ),
+      body:StaggeredView()
     );
   }
 }
