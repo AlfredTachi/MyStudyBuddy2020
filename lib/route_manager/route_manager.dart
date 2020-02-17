@@ -1,4 +1,5 @@
 import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
+import 'package:MyStudyBuddy2/studyprogress/studyprogress.dart';
 import 'package:flutter/material.dart';
 
 
@@ -7,7 +8,9 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-      return MaterialPageRoute(builder: (_)=> Dashboard());      
+      return MaterialPageRoute(builder: (_)=> Dashboard());
+      case '/semesterverlauf':
+      return MaterialPageRoute(builder: (_)=> Studyprogress());      
       default:
         return _errorRoute();
     }

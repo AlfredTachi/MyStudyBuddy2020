@@ -1,16 +1,26 @@
-import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:MyStudyBuddy2/studyprogress/staggered_view_studyprogress/StaggeredView.dart';
+import '../drawer/drawer.dart';
 
-void main() => runApp(MyApp());
+class Studyprogress extends StatefulWidget {
+  @override
+  StudyprogressState createState() => StudyprogressState();
+}
 
-class MyApp extends StatelessWidget {
+class StudyprogressState extends State<Studyprogress> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: true,
-      home: Scaffold(
-        body: Dashboard(),
-      )
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Studienverlauf"),
+      ),
+      drawer: OwnDrawer(),
+      body:StaggeredView(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Modul hinzufügen',
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
