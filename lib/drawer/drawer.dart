@@ -8,6 +8,7 @@ class OwnDrawer extends StatefulWidget {
 }
 
 class _OwnDrawerState extends State<OwnDrawer> {
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -26,7 +27,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
             ),
           ),
         ),
-        ListTile(
+        ListTile(   
           leading: Icon(Icons.home),
           title: Text('Übersicht'),
           onTap: () {
@@ -37,7 +38,14 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.check_box),
           title: Text('Semsterverlauf'),
           onTap: () {
-            // Navigator.pushNamed(context, '/second');
+            Navigator.pushNamed(context, '/studyprogress');
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.exposure),
+          title: Text('Noten Rechner'),
+          onTap: () {
+            Navigator.pushNamed(context, '/grades_prognosis');
           },
         ),
         ListTile(
@@ -79,7 +87,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.settings),
           title: Text('Einstellungen'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/settings');
           },
         ),
       ])),
