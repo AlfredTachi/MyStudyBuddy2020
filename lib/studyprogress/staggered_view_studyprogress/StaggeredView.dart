@@ -30,6 +30,11 @@ Material semester(String heading) {
                     )),
               ),
             ]),
+            Row(
+              children: <Widget>[
+                module("test!"),
+              ],
+            ),
           ],
         ),
       ));
@@ -50,8 +55,12 @@ Material module(String heading) {
               Align(
                 alignment: Alignment.center,
                 child: Container(
-                  child: Text(heading,
-                      style: TextStyle(fontSize: 20, color: Colors.white)),
+                  height: 40,
+                  width: 40,
+                  child: Center(
+                    child: Text(heading,
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
+                  ),
                 ),
               ),
             ]),
@@ -71,7 +80,6 @@ class _StaggeredViewState extends State<StaggeredView> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    //double screenWidth = MediaQuery.of(context).size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       home: Scaffold(
@@ -80,7 +88,12 @@ class _StaggeredViewState extends State<StaggeredView> {
           crossAxisCount: 2,
           crossAxisSpacing: 5,
           mainAxisSpacing: 5,
-          children: <Widget>[semester("X. Semester")],
+          children: [
+            Stack(
+              children: ListMySemester(),
+              //semester("1. Semester"),
+            ),
+          ],
           staggeredTiles: [
             StaggeredTile.extent(2, screenHeight / 4),
           ],
@@ -88,4 +101,14 @@ class _StaggeredViewState extends State<StaggeredView> {
       ),
     );
   }
+}
+
+List<Widget> ListMySemester() {
+  List<Widget> list = new List();
+  for (int i = 0; i < 5; i++) {
+    list.add(semester((i + 1).toString() + " Semester"));
+    //list.add(new Text((i + 1).toString() + " Semester"));
+    i++;
+  }
+  return list;
 }
