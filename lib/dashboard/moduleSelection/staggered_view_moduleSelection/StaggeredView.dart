@@ -1,5 +1,11 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:MyStudyBuddy2/dashboard/staggered_view_dashboard/StaggeredView.dart'
 import 'package:flutter/material.dart';
+
+import '../../dashboard.dart';
+import '../../dashboard.dart';
+import '../../staggered_view_dashboard/StaggeredView.dart';
+import '../../staggered_view_dashboard/StaggeredView.dart';
 
 Material semester(String heading) {
   return Material(
@@ -31,15 +37,20 @@ Material semester(String heading) {
               ),
             ]),
             Expanded(
+              child: new InkWell(
+                onTap: () {
+                  
+                },
               child: new Container(
                 child: GridView.count(
                   primary: false,
-                  crossAxisCount: 4,
+                  crossAxisCount: 5,
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 5,
                   children: _StaggeredViewState().myModules(),
                 ),
               ),
+            ),
             ),
           ],
         ),
@@ -109,7 +120,7 @@ class _StaggeredViewState extends State<StaggeredView> {
     List<StaggeredTile> list = new List();
     double screenHeight = MediaQuery.of(context).size.height;
     for (int i = 1; i <= 5; i++) {
-      list.add(StaggeredTile.extent(2, screenHeight / 2.5));
+      list.add(StaggeredTile.extent(2, screenHeight / 3));
     }
     return list;
   }

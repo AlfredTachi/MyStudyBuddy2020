@@ -2,6 +2,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import '../progress_bar/progress_bar.dart';
 
+List<Widget> modules = new List();
+
 Material progress(ProgressBar progressBar) {
   return Material(
     color: Colors.white,
@@ -56,9 +58,12 @@ Material grades(String heading, double grades) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-          
-            FittedBox(fit: BoxFit.cover,child: Text(heading, style: TextStyle(fontSize: 20))),
-            FittedBox(fit: BoxFit.cover,child: Text(grades.toString(), style: TextStyle(fontSize: 20)))
+            FittedBox(
+                fit: BoxFit.cover,
+                child: Text(heading, style: TextStyle(fontSize: 20))),
+            FittedBox(
+                fit: BoxFit.cover,
+                child: Text(grades.toString(), style: TextStyle(fontSize: 20)))
           ],
         ),
       ));
@@ -74,11 +79,30 @@ Material module(String heading) {
         padding: EdgeInsets.all(8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(heading, style: TextStyle(fontSize: 25)),
-          ],
+          children: myModules(),
         ),
       ));
+}
+
+List<Widget> myModules() {
+  if (modules.length == 0) {
+    return [Text("Du hast zurzeit keine Module geplant!",
+          style: TextStyle(fontWeight: FontWeight.bold)),
+    ];
+  } else {
+    Expanded(
+      child: new Container(
+        child: GridView.count(
+          primary: false,
+          crossAxisCount: 5,
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
+          children: modules,
+        ),
+      ),
+    );
+    return modules;
+  }
 }
 
 class StaggeredView extends StatefulWidget {
