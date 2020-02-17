@@ -152,6 +152,13 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text("Luftdruck: " + data.barometer.round().toString() + " hPa"),
+        Text("Luftfeuchtigkeit: " + data.humidity.toString() + " %"),
+        Text("Windgesch.: " + data.windSpeed.toString() + " km/h"),
+        Text("Windrichtung: " + data.windDir.toString()),
+        Text("UV Strahlung: " + data.uvImpact.toString()),
+        Text("Regen pro mm^2: " + data.rainPerMM.toString()),
+        Text("Sonnenaufgang: " + data.sunRise.toString()),
+        Text("Sonnenuntergang: " + data.sunSet.toString()),
       ],
     );
   }
@@ -189,8 +196,24 @@ class WeatherData {
   double barometer;
   var temperature;
   var humidity;
+  var windSpeed;
+  String windDir;
+  var uvImpact;
+  var rainPerMM;
+  var sunRise;
+  var sunSet;
 
-  WeatherData({this.forecast, this.barometer, this.temperature, this.humidity});
+  WeatherData(
+      {this.forecast,
+      this.barometer,
+      this.temperature,
+      this.humidity,
+      this.windSpeed,
+      this.windDir,
+      this.uvImpact,
+      this.rainPerMM,
+      this.sunRise,
+      this.sunSet});
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
     return WeatherData(
@@ -198,6 +221,12 @@ class WeatherData {
       barometer: json['baro'],
       temperature: json['temp']["out"]["c"],
       humidity: json['hum']['out'],
+      windSpeed: json["wind"]["speed"]["kmh"],
+      windDir: json["wind"]["dir"]["text"],
+      uvImpact: json["sun"]["uv"],
+      rainPerMM: json["rain"]["day"],
+      sunRise: json["sun"]["rise"],
+      sunSet: json["sun"]["set"],
     );
   }
 }
