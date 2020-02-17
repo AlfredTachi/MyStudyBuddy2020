@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:MyStudyBuddy2/drawer/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
 
 class Weather extends StatefulWidget {
   @override
@@ -40,6 +41,19 @@ class WeatherState extends State<Weather> {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS) {
+      return getCupertinoDesign();
+    } else {
+      return getMaterialDesign();
+    }
+  }
+
+  Widget getCupertinoDesign(){
+    ///TODO implement IOS Design
+    return Container();
+  }
+
+  Widget getMaterialDesign() {
     return Scaffold(
       appBar: AppBar(
         title: Text("Wetter"),
@@ -96,6 +110,7 @@ class WeatherState extends State<Weather> {
   }
 
   Future<WeatherData> fetchWeather() async {
+    //Fehler abfangen
     final http.Response response =
         await http.get('http://wetter2.mt-labor.it.hs-worms.de/api/data');
     if (response.statusCode == 200) {
