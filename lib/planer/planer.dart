@@ -2,6 +2,7 @@ import 'package:MyStudyBuddy2/drawer/drawer.dart';
 import 'package:flutter/material.dart';
 
 class Planer extends StatefulWidget{
+  const Planer({ Key key }) : super(key: key);
   @override
   State<StatefulWidget> createState() {
 
@@ -9,14 +10,39 @@ class Planer extends StatefulWidget{
   }
 }
 
-class _PlanerState extends State<Planer>{
+class _PlanerState extends State<Planer>with SingleTickerProviderStateMixin{
+
+final List<Tab> myTabs = <Tab>[
+    Tab(text: 'Deine Termine'),
+    Tab(text: 'Aktuelles'),
+  ];
+
+TabController _tabController;
+
   @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(vsync: this, length: myTabs.length);
+  }
+
+  @override
+  void dispose() {
+   _tabController.dispose();
+   super.dispose();
+ }
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title:Text("Terminplaner")),
+      appBar: AppBar(title:Text('Termin Planer'),
+      bottom: TabBar(controller:_tabController ,tabs:myTabs)),
       drawer: OwnDrawer(),
-      body:makeBody
+      body:TabBarView(
+        controller: _tabController,
+        children: <Widget>[
+          makeBody,
+          Text('whatever')
+        ],
+      )
 
     );
   }
@@ -43,21 +69,7 @@ final makeBody = Container(
     final makeListTile = ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         leading: Container(
-          padding: EdgeInsets.only(right: 12.0),
-          decoration: new BoxDecoration(
-              border: new Border(
-                  right: new BorderSide(width: 1.0, color: Colors.white24))),
-          child: Icon(Icons.autorenew, color: Colors.white),
+          child:Text('test')
         ),
-        title: Text(
-          "Introduction to Driving",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Row(
-          children: <Widget>[
-            Icon(Icons.linear_scale, color: Colors.yellowAccent),
-            Text(" Intermediate", style: TextStyle(color: Colors.white))
-          ],
-        ),
-        trailing:
-            Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0));
+        trailing: Icon(Icons.favorite),
+        );
