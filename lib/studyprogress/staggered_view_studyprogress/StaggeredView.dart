@@ -70,6 +70,7 @@ Material module(String heading) {
 }
 
 class StaggeredView extends StatefulWidget {
+  
   @override
   State<StatefulWidget> createState() {
     return _StaggeredViewState();
@@ -77,6 +78,7 @@ class StaggeredView extends StatefulWidget {
 }
 
 class _StaggeredViewState extends State<StaggeredView> {
+  
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -88,27 +90,34 @@ class _StaggeredViewState extends State<StaggeredView> {
           crossAxisCount: 2,
           crossAxisSpacing: 5,
           mainAxisSpacing: 5,
-          children: [
-            Stack(
-              children: ListMySemester(),
-              //semester("1. Semester"),
-            ),
-          ],
-          staggeredTiles: [
-            StaggeredTile.extent(2, screenHeight / 4),
-          ],
+          children: mySemester(), //[
+          //Stack(
+          //children: ListMySemester(),
+          //semester("1. Semester"),
+          //),
+          //],
+          staggeredTiles:  mySemesterTiles(context),//[
+          //StaggeredTile.extent(2, screenHeight / 4),
+          //],
         ),
       ),
     );
   }
 }
 
-List<Widget> ListMySemester() {
+List<Widget> mySemester() {
   List<Widget> list = new List();
-  for (int i = 0; i < 5; i++) {
-    list.add(semester((i + 1).toString() + " Semester"));
-    //list.add(new Text((i + 1).toString() + " Semester"));
-    i++;
+  for (int i = 1; i < 5; i++) {
+    list.add(semester((i).toString() + " Semester"));
+  }
+  return list;
+}
+
+List<StaggeredTile> mySemesterTiles(context) {
+  List<StaggeredTile> list = new List();
+  double screenHeight = MediaQuery.of(context).size.height;
+  for (int i = 1; i < 5; i++) {
+    StaggeredTile.extent(2, screenHeight / 4);
   }
   return list;
 }
