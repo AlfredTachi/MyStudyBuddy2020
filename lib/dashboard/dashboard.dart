@@ -12,7 +12,7 @@ class DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("MyStudyBuddy"),
+        title: Text("Übersicht"),
       ),
       drawer: OwnDrawer(),
       body:StaggeredView(),

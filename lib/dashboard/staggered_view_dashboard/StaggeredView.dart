@@ -34,7 +34,10 @@ Material persondetails(
             Row(
               children: <Widget>[
                 Icon(icontwo),
-                Flexible(child: Text(special, style: TextStyle(fontSize: 20))),
+                Flexible(
+                    child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: Text(special, style: TextStyle(fontSize: 20)))),
               ],
             )
           ],
@@ -42,7 +45,7 @@ Material persondetails(
       ));
 }
 
-Material grades(IconData icon, String heading, double grades) {
+Material grades(String heading, double grades) {
   return Material(
       color: Colors.white,
       elevation: 14.0,
@@ -53,9 +56,9 @@ Material grades(IconData icon, String heading, double grades) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(icon),
-            Text(heading, style: TextStyle(fontSize: 20)),
-            Text(grades.toString(), style: TextStyle(fontSize: 20))
+          
+            FittedBox(fit: BoxFit.cover,child: Text(heading, style: TextStyle(fontSize: 20))),
+            FittedBox(fit: BoxFit.cover,child: Text(grades.toString(), style: TextStyle(fontSize: 20)))
           ],
         ),
       ));
@@ -99,8 +102,9 @@ class _StaggeredViewState extends State<StaggeredView> {
           mainAxisSpacing: 5,
           children: <Widget>[
             progress(ProgressBar()),
-            persondetails(Icons.person, "inf2730", Icons.work, "Software Konstruktion"),
-            grades(Icons.local_library, "Notendurchschnitt:", 5.0),
+            persondetails(
+                Icons.person, "inf2730", Icons.work, "Software Konstruktion"),
+            grades("Notendurchschnitt:", 5.0),
             module("Deine Module")
           ],
           staggeredTiles: [
