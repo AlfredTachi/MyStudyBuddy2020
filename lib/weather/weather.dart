@@ -30,6 +30,8 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
       setState(() {
         data = _data;
       });
+    }).catchError((err){
+      print(err);
     });
   }
 
@@ -148,19 +150,23 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   }
 
   Widget details() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text("Luftdruck: " + data.barometer.round().toString() + " hPa"),
-        Text("Luftfeuchtigkeit: " + data.humidity.toString() + " %"),
-        Text("Windgesch.: " + data.windSpeed.toString() + " km/h"),
-        Text("Windrichtung: " + data.windDir.toString()),
-        Text("UV Strahlung: " + data.uvImpact.toString()),
-        Text("Regen pro mm^2: " + data.rainPerMM.toString()),
-        Text("Sonnenaufgang: " + data.sunRise.toString()),
-        Text("Sonnenuntergang: " + data.sunSet.toString()),
-      ],
-    );
+    try {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text("Luftdruck: " + data.barometer.round().toString() + " hPa"),
+          Text("Luftfeuchtigkeit: " + data.humidity.toString() + " %"),
+          Text("Windgesch.: " + data.windSpeed.toString() + " km/h"),
+          Text("Windrichtung: " + data.windDir.toString()),
+          Text("UV Strahlung: " + data.uvImpact.toString()),
+          Text("Regen pro mm^2: " + data.rainPerMM.toString()),
+          Text("Sonnenaufgang: " + data.sunRise.toString()),
+          Text("Sonnenuntergang: " + data.sunSet.toString()),
+        ],
+      );
+    } catch (ex) {
+      return Text("Fehler beim abrufen der Daten!");
+    }
   }
 
   String dateTimeToString() {
@@ -180,7 +186,6 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   }
 
   Future<WeatherData> fetchWeather() async {
-    //Fehler abfangen
     final http.Response response =
         await http.get('http://wetter2.mt-labor.it.hs-worms.de/api/data');
     if (response.statusCode == 200) {
