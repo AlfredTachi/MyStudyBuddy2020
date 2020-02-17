@@ -9,24 +9,24 @@ class Weather extends StatefulWidget {
   State<StatefulWidget> createState() => WeatherState();
 }
 
-class WeatherState extends State<Weather> {
+class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   WeatherData data = WeatherData();
-
-  TextStyle _itemStyle() {
-    return TextStyle(
-      fontSize: 24,
-      fontWeight: FontWeight.bold,
-    );
-  }
+  AnimationController animationCtrl;
+  bool showDetails = false;
 
   @override
   void initState() {
     super.initState();
+    animationCtrl = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+    animationCtrl.animateTo(1);
     fetchData();
   }
 
-  void fetchData() {
-    fetchWeather().then((_data) {
+  void fetchData() async {
+    await fetchWeather().then((_data) {
       setState(() {
         data = _data;
       });
@@ -60,70 +60,99 @@ class WeatherState extends State<Weather> {
         ],
       ),
       drawer: OwnDrawer(),
-      body: Center(
-        child: Container(
-          padding: EdgeInsets.only(top: 20),
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                Colors.blue,
-                Colors.blue[300],
-                Colors.blue[200],
-                Colors.blue[100]
-              ])),
-          child: Column(
-            children: <Widget>[
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height / 4),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            "Worms",
-                            style: TextStyle(
-                              fontSize: 60,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text("Zuletzt aktualisiert: " + dateTimeToString()),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              data.temperature.toString() + " °C",
+      body: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            padding: EdgeInsets.only(top: 20),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                  Colors.blue[800],
+                  Colors.blue[700],
+                  Colors.blue[400],
+                  Colors.blue[200],
+                ])),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height / 5),
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              "HS Worms",
                               style: TextStyle(
-                                fontSize: 40,
+                                fontSize: 50,
                                 color: Colors.white,
                               ),
                             ),
-                          )
-                        ],
+                            Text("Zuletzt aktualisiert: " + dateTimeToString()),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                data.temperature.toString() + " °C",
+                                style: TextStyle(
+                                  fontSize: 44,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    // Divider(),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: <Widget>[
-                    //     Icon(Icons.arrow_drop_down),
-                    //     Text(" Sonstige Daten "),
-                    //     Icon(Icons.arrow_drop_down),
-                    //   ],
-                    // ),
-                    // Divider(),
-                  ],
+                      Divider(),
+                      MaterialButton(
+                        onPressed: () {
+                          if (animationCtrl.isCompleted) {
+                            showDetails = true;
+                            animationCtrl.reverse();
+                          } else {
+                            showDetails = false;
+                            animationCtrl.forward();
+                          }
+                          setState(() {});
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            AnimatedIcon(
+                              icon: AnimatedIcons.close_menu,
+                              progress: animationCtrl,
+                            ),
+                            Text(
+                              "Show more",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Divider(),
+                      (showDetails) ? details() : Container(),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget details() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text("Luftdruck: " + data.barometer.round().toString() + " hPa"),
+      ],
     );
   }
 
@@ -156,9 +185,8 @@ class WeatherState extends State<Weather> {
 }
 
 class WeatherData {
-  int timestamp = 0;
-  var forecast;
-  var barometer;
+  String forecast;
+  double barometer;
   var temperature;
   var humidity;
 
