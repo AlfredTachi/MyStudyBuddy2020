@@ -48,7 +48,7 @@ class WeatherState extends State<Weather> {
     }
   }
 
-  Widget getCupertinoDesign(){
+  Widget getCupertinoDesign() {
     ///TODO implement IOS Design
     return Container();
   }
@@ -61,7 +61,7 @@ class WeatherState extends State<Weather> {
       drawer: OwnDrawer(),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Column(
               children: <Widget>[
@@ -75,7 +75,11 @@ class WeatherState extends State<Weather> {
                 Text("Aktueller Wettertrend", style: _headerStyle()),
                 Container(
                     padding: EdgeInsets.all(10),
-                    child: Text(data.trend.toString(), style: _itemStyle())),
+                    child: Center(
+                        child: FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Text(data.forecast.toString(),
+                                style: _itemStyle())))),
                 Divider(),
                 Text("Luftdruck", style: _headerStyle()),
                 Container(
@@ -123,16 +127,16 @@ class WeatherState extends State<Weather> {
 
 class WeatherData {
   int timestamp = 0;
-  var trend;
+  var forecast;
   var barometer;
   var temperature;
   var humidity;
 
-  WeatherData({this.trend, this.barometer, this.temperature, this.humidity});
+  WeatherData({this.forecast, this.barometer, this.temperature, this.humidity});
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
     return WeatherData(
-      trend: json['trend']["text"],
+      forecast: json['forecast']["text"],
       barometer: json['baro'],
       temperature: json['temp']["out"]["c"],
       humidity: json['hum']['out'],
