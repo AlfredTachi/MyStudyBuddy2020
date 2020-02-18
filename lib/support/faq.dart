@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../drawer/drawer.dart';
 
 class FAQ extends StatefulWidget {
   @override
@@ -12,8 +11,10 @@ class FAQState extends State<FAQ> {
     return Scaffold(
       appBar: AppBar(
         title: Text("FAQ"),
+        leading: IconButton(icon:Icon(Icons.arrow_back),
+        onPressed:() => Navigator.pop(context, false),
       ),
-      drawer: OwnDrawer(),
+    
       /*body: 
       ListView(padding: EdgeInsets.zero, children: [
         ListTile(
@@ -45,6 +46,7 @@ class FAQState extends State<FAQ> {
           },
         ),
       ]),*/   
+    )
     );
   }
 }

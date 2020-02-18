@@ -11,9 +11,10 @@ class QuickaccessState extends State<Quickaccess> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Schnelleinstieg"),
+        title: Text("FAQ"),
+        leading: IconButton(icon:Icon(Icons.arrow_back),
+        onPressed:() => Navigator.pop(context, false),
       ),
-      drawer: OwnDrawer(),
       /*body: 
       ListView(padding: EdgeInsets.zero, children: [
         ListTile(
@@ -45,6 +46,7 @@ class QuickaccessState extends State<Quickaccess> {
           },
         ),
       ]),*/   
+    )
     );
   }
 }

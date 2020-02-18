@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../drawer/drawer.dart';
 
 class MailSupport extends StatefulWidget {
   @override
@@ -11,9 +10,10 @@ class MailSupportState extends State<MailSupport> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("E-Mail Support"),
+        title: Text("FAQ"),
+        leading: IconButton(icon:Icon(Icons.arrow_back),
+        onPressed:() => Navigator.pop(context, false),
       ),
-      drawer: OwnDrawer(),
       /*body: 
       ListView(padding: EdgeInsets.zero, children: [
         ListTile(
@@ -45,6 +45,7 @@ class MailSupportState extends State<MailSupport> {
           },
         ),
       ]),*/   
+    )
     );
   }
 }
