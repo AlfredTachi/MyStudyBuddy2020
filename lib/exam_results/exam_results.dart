@@ -3,6 +3,9 @@
 // You also need to add this to main.dart:
 //   import './exam_results/exam_results.dart
 
+import 'dart:async';
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 
 import 'package:MyStudyBuddy2/exam_results/exam_result.dart';
@@ -16,12 +19,29 @@ class ExamResults {
   }
 
   void fetchResultsRemotely(String userName, String userPassword) async {
-    final loginResponse = await postHttp(
-        'https://lsf.hs-worms.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal&asdf=$userName&fdsa=$userPassword');
+    var loginResponse;
+    try {
+      loginResponse = await postHttp(
+          'https://lsf.hs-worms.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal&asdf=$userName&fdsa=$userPassword');
+    } on SocketException catch (err) {
+      if (err.message.contains('Failed host lookup')) {
+        print("SocketException: No internet connection");
+        throw SocketException('No internet connection');
+      } else if (err.osError.message.contains("timed out")) {
+        print("OSError: Connection to " + err.address.host + " timed out");
+        throw TimeoutException("Connection to " + err.address.host + " timed out");
+      } else {
+        print(err);
+        rethrow;
+      }
+    }
+
+    try {
     if (!loginResponse.headers.keys.first.contains('location')) {
       print(loginResponse.headers.keys.first);
-      return;
+      throw Exception("Invalid login data");
     }
+    
     final homeScreenResponse =
         await getHttp(loginResponse.headers.values.first);
     final examAdministrationResponse = await getHttp(
@@ -33,6 +53,10 @@ class ExamResults {
     final gradesResponse = await getHttp(extractLink(degreeResponse.body,
         'title="Leistungen für Angewandte Informatik  (PO-Version 2018)'));
     parseHtml(gradesResponse.body);
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 
   void parseHtml(String htmlFile) {
@@ -44,7 +68,8 @@ class ExamResults {
     var useFlag = false;
 
     for (var string in htmlTableStrings) {
-      if (string.contains('valign="top">') || string.contains('valign="top" >')) {
+      if (string.contains('valign="top">') ||
+          string.contains('valign="top" >')) {
         useFlag = true;
         continue;
       } else if (useFlag == true) {
@@ -80,7 +105,23 @@ class ExamResults {
           module[8]));
     }
     for (var result in this.results) {
-      print(result.number.toString() + ";" + result.name + ";" + result.term + ";" + result.grade.toString() + ";" + result.passed  + ";" + result.credits.toString() + ";" + result.note + ";" + result.numberOfTries.toString() + ";" + result.date.toString());
+      print(result.number.toString() +
+          ";" +
+          result.name +
+          ";" +
+          result.term +
+          ";" +
+          result.grade.toString() +
+          ";" +
+          result.passed +
+          ";" +
+          result.credits.toString() +
+          ";" +
+          result.note +
+          ";" +
+          result.numberOfTries.toString() +
+          ";" +
+          result.date.toString());
     }
   }
 
@@ -107,10 +148,18 @@ class ExamResults {
   }
 
   Future<http.Response> postHttp(String url) {
-    return http.post(url);
+    try {
+      return http.post(url);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<http.Response> getHttp(String url) {
-    return http.get(url);
+    try {
+      return http.get(url);
+    } catch (err) {
+      rethrow;
+    }
   }
 }
