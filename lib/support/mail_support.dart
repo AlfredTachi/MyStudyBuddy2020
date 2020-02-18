@@ -1,50 +1,50 @@
 import 'package:flutter/material.dart';
 import '../drawer/drawer.dart';
 
-class Support extends StatefulWidget {
+class MailSupport extends StatefulWidget {
   @override
-  SupportState createState() => SupportState();
+  MailSupportState createState() => MailSupportState();
 }
 
-class SupportState extends State<Support> {
+class MailSupportState extends State<MailSupport> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hilfe"),
+        title: Text("E-Mail Support"),
       ),
       drawer: OwnDrawer(),
-      body: 
+      /*body: 
       ListView(padding: EdgeInsets.zero, children: [
         ListTile(
           leading: Icon(Icons.help),
-          title: Text('FAQ'),
+          title: Text('MailSupport'),
           onTap: () {
-            Navigator.pushNamed(context, '/supportMain/FAQ');
+            //Navigator.pushNamed(context, '/');
           },
         ),
         ListTile(
           leading: Icon(Icons.remove_red_eye),
           title: Text('Schnelleinstieg'),
           onTap: () {
-            Navigator.pushNamed(context, '/supportMain/quickaccess');
+            //Navigator.pushNamed(context, '/');
           },
         ),
         ListTile(
           leading: Icon(Icons.book),
           title: Text('Nützliche Links'),
           onTap: () {
-            Navigator.pushNamed(context, '/supportMain/links');
+            //Navigator.pushNamed(context, '/');
           },
         ),
          ListTile(
           leading: Icon(Icons.mail),
-          title: Text('E-Mail Support'),
+          title: Text('MailSupport'),
           onTap: () {
-            Navigator.pushNamed(context, '/supportMain/mailSupport');
+            //Navigator.pushNamed(context, '/');
           },
         ),
-      ]),   
+      ]),*/   
     );
   }
 }
