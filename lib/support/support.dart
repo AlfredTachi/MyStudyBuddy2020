@@ -14,8 +14,7 @@ class SupportState extends State<Support> {
         title: Text("Hilfe"),
       ),
       drawer: OwnDrawer(),
-      body: 
-      ListView(padding: EdgeInsets.zero, children: [
+      body: ListView(padding: EdgeInsets.zero, children: [
         ListTile(
           leading: Icon(Icons.help),
           title: Text('FAQ'),
@@ -31,20 +30,13 @@ class SupportState extends State<Support> {
           },
         ),
         ListTile(
-          leading: Icon(Icons.book),
-          title: Text('Nützliche Links'),
-          onTap: () {
-            Navigator.pushNamed(context, '/supportMain/links');
-          },
-        ),
-         ListTile(
           leading: Icon(Icons.mail),
           title: Text('E-Mail Support'),
           onTap: () {
             Navigator.pushNamed(context, '/supportMain/mailSupport');
           },
         ),
-      ]),   
+      ]),
     );
   }
 }

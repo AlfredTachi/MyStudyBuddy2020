@@ -1,7 +1,6 @@
 import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
 import 'package:MyStudyBuddy2/support/faq.dart';
-import 'package:MyStudyBuddy2/support/links.dart';
 import 'package:MyStudyBuddy2/support/mail_support.dart';
 import 'package:MyStudyBuddy2/support/quickaccess.dart';
 import 'package:MyStudyBuddy2/support/support.dart';
@@ -23,8 +22,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => FAQ());
       case '/supportMain/quickaccess':
         return MaterialPageRoute(builder: (_) => Quickaccess());
-      case '/supportMain/links':
-        return MaterialPageRoute(builder: (_) => Links());
       case '/supportMain/mailSupport':
         return MaterialPageRoute(builder: (_) => MailSupport());
       default:
