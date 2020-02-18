@@ -58,6 +58,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   Widget getMaterialDesign() {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[800],
         title: Text("Wetter"),
         actions: <Widget>[
           IconButton(
@@ -68,88 +69,88 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
         ],
       ),
       drawer: OwnDrawer(),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Container(
-            padding: EdgeInsets.only(top: 20),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                  Colors.blue[800],
-                  Colors.blue[700],
-                  Colors.blue[400],
-                  Colors.blue[200],
-                ])),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height / 5),
-                        child: Column(
-                          children: <Widget>[
-                            (status.isNotEmpty) ? Text(status) : Container(),
-                            Text(
-                              "HS Worms",
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.only(top: 20),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                Colors.blue[800],
+                Colors.blue[700],
+                Colors.blue[400],
+                Colors.blue[200],
+              ])),
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 5),
+                      child: Column(
+                        children: <Widget>[
+                          (status.isNotEmpty) ? Text(status) : Container(),
+                          Text(
+                            "HS Worms",
+                            style: TextStyle(
+                              fontSize: 50,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text("Zuletzt aktualisiert: " + dateTimeToString()),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              data.temperature.toString() + " °C",
                               style: TextStyle(
-                                fontSize: 50,
+                                fontSize: 44,
                                 color: Colors.white,
                               ),
                             ),
-                            Text("Zuletzt aktualisiert: " + dateTimeToString()),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                data.temperature.toString() + " °C",
-                                style: TextStyle(
-                                  fontSize: 44,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Divider(),
-                      MaterialButton(
-                        onPressed: () {
-                          if (animationCtrl.isCompleted) {
-                            showDetails = true;
-                            animationCtrl.reverse();
-                          } else {
-                            showDetails = false;
-                            animationCtrl.forward();
-                          }
-                          setState(() {});
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            AnimatedIcon(
-                              icon: AnimatedIcons.close_menu,
-                              progress: animationCtrl,
-                            ),
-                            Text(
-                              "Show more",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
+                    ),
+                    Divider(),
+                    MaterialButton(
+                      onPressed: () {
+                        if (animationCtrl.isCompleted) {
+                          showDetails = true;
+                          animationCtrl.reverse();
+                        } else {
+                          showDetails = false;
+                          animationCtrl.forward();
+                        }
+                        setState(() {});
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          AnimatedIcon(
+                            icon: AnimatedIcons.close_menu,
+                            progress: animationCtrl,
+                          ),
+                          Text(
+                            "Show more",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
                       ),
-                      Divider(),
-                      (showDetails) ? details() : Container(),
-                    ],
-                  ),
+                    ),
+                    Divider(),
+                    (showDetails)
+                        ? SingleChildScrollView(child: details())
+                        : Container(),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
