@@ -2,13 +2,13 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import '../progress_bar/progress_bar.dart';
 
-Material progress(ProgressBar progressBar) {
+Material progress(Widget progressBar) {
   return Material(
     color: Colors.white,
     elevation: 14.0,
     shadowColor: Colors.black,
     borderRadius: BorderRadius.circular(24.0),
-    child: ProgressBar(),
+    child: progressBar,
   );
 }
 
@@ -56,9 +56,12 @@ Material grades(String heading, double grades) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-          
-            FittedBox(fit: BoxFit.cover,child: Text(heading, style: TextStyle(fontSize: 20))),
-            FittedBox(fit: BoxFit.cover,child: Text(grades.toString(), style: TextStyle(fontSize: 20)))
+            FittedBox(
+                fit: BoxFit.cover,
+                child: Text(heading, style: TextStyle(fontSize: 20))),
+            FittedBox(
+                fit: BoxFit.cover,
+                child: Text(grades.toString(), style: TextStyle(fontSize: 20)))
           ],
         ),
       ));
@@ -89,6 +92,9 @@ class StaggeredView extends StatefulWidget {
 }
 
 class _StaggeredViewState extends State<StaggeredView> {
+  int creditPoints = 0;
+  int maxCreditPoints = 210;
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -101,7 +107,13 @@ class _StaggeredViewState extends State<StaggeredView> {
           crossAxisSpacing: 5,
           mainAxisSpacing: 5,
           children: <Widget>[
-            progress(ProgressBar()),
+            progress(GestureDetector(
+                onTap: () {
+                  setState(() {
+                    creditPoints += 6;
+                  });
+                },
+                child: ProgressBar(creditPoints, maxCreditPoints))),
             persondetails(
                 Icons.person, "inf2730", Icons.work, "Software Konstruktion"),
             grades("Notendurchschnitt:", 5.0),
