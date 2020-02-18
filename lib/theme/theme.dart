@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+
   ThemeData baselight() {  
   ThemeData baselight = ThemeData.light();
   return baselight.copyWith(
+
 
     primaryColor: Colors.orange,
     // iconTheme: IconThemeData(
@@ -11,9 +13,10 @@ import 'package:flutter/material.dart';
     // )
 
     textTheme:TextTheme(
-    title: TextStyle(color: Colors.black,fontSize: 25),
-    body1: TextStyle(color: Colors.black,fontSize: 20),
-    body2: TextStyle(color: Colors.black,fontSize: 20),
+    
+    title: TextStyle(color: Colors.black,fontSize: 25,fontFamily: 'Roboto'),
+    body1: TextStyle(color: Colors.black,fontSize: 20,fontFamily: 'Roboto'),
+    body2: TextStyle(color: Colors.black,fontSize: 20,fontFamily: 'Roboto'),
     ) ,
     appBarTheme: AppBarTheme(color: Colors.orange, textTheme: TextTheme(title:TextStyle(color: Colors.white,fontSize: 22))),
     indicatorColor:Colors.deepOrange ,
@@ -26,26 +29,28 @@ import 'package:flutter/material.dart';
   );}
 
   ThemeData basedark() { 
+
   ThemeData basedark = ThemeData.dark();
   return basedark.copyWith(
-
     primaryColor: Colors.blue,
     // iconTheme: IconThemeData(
     //   color: ,
     //   size: 
     // )
     textTheme:TextTheme(
-    title: TextStyle(color: Colors.white,fontSize: 25),
-    body1: TextStyle(color: Colors.white,fontSize: 20),
-    body2: TextStyle(color: Colors.white,fontSize: 20),
+    
+    title: TextStyle(color: Colors.white,fontSize: 25,fontFamily: 'Roboto Light'),
+    body1: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto Light'),
+    body2: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto Light'),
     ) ,
     appBarTheme: AppBarTheme(color: Colors.black, textTheme: TextTheme(title:TextStyle(color: Colors.white,fontSize: 22))),
-    indicatorColor:Colors.blue ,
-    scaffoldBackgroundColor:Colors.black ,
-    accentColor: Colors.blue,
-    buttonColor: Colors.blue,
-    backgroundColor: Colors.blue,
-    cardColor: Colors.black
+    // indicatorColor:Colors.blue ,
+    // scaffoldBackgroundColor:Colors.black ,
+    // accentColor: Colors.blue,
+    // buttonColor: Colors.blue,
+    // backgroundColor: Colors.blue,
+    // cardColor: Colors.black,
+    brightness: Brightness.dark,
 
   );}
 
