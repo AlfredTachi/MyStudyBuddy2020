@@ -40,11 +40,11 @@ class _OwnDrawerState extends State<OwnDrawer> {
             // Navigator.pushNamed(context, '/second');
           },
         ),
-        ListTile(
+         ListTile(
           leading: Icon(Icons.chrome_reader_mode),
           title: Text('Modulhandbuch'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/modulhandbuch');
           },
         ),
         ListTile(
