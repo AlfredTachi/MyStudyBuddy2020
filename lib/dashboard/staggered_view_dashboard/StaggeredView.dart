@@ -4,9 +4,7 @@ import '../progress_bar/progress_bar.dart';
 
 Material progress(ProgressBar progressBar) {
   return Material(
-    color: Colors.white,
     elevation: 14.0,
-    shadowColor: Colors.black,
     borderRadius: BorderRadius.circular(24.0),
     child: ProgressBar(),
   );
@@ -15,9 +13,7 @@ Material progress(ProgressBar progressBar) {
 Material persondetails(
     IconData icon, String infnumber, IconData icontwo, String special) {
   return Material(
-      color: Colors.white,
       elevation: 14.0,
-      shadowColor: Colors.black,
       borderRadius: BorderRadius.circular(24.0),
       child: Padding(
         padding: EdgeInsets.all(8),
@@ -47,9 +43,7 @@ Material persondetails(
 
 Material grades(String heading, double grades) {
   return Material(
-      color: Colors.white,
       elevation: 14.0,
-      shadowColor: Colors.black,
       borderRadius: BorderRadius.circular(24.0),
       child: Padding(
         padding: EdgeInsets.all(8),
@@ -66,9 +60,7 @@ Material grades(String heading, double grades) {
 
 Material module(String heading) {
   return Material(
-      color: Colors.white,
       elevation: 14.0,
-      shadowColor: Colors.black,
       borderRadius: BorderRadius.circular(24.0),
       child: Padding(
         padding: EdgeInsets.all(8),
@@ -93,9 +85,8 @@ class _StaggeredViewState extends State<StaggeredView> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     //double screenWidth = MediaQuery.of(context).size.width;
-    return MaterialApp(
-      debugShowCheckedModeBanner: true,
-      home: Scaffold(
+    return Material(
+      child: Scaffold(
         body: StaggeredGridView.count(
           crossAxisCount: 2,
           crossAxisSpacing: 5,
