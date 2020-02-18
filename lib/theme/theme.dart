@@ -7,11 +7,6 @@ import 'package:flutter/material.dart';
 
 
     primaryColor: Colors.orange,
-    // iconTheme: IconThemeData(
-    //   color: ,
-    //   size: 
-    // )
-
     textTheme:TextTheme(
     
     title: TextStyle(color: Colors.black,fontSize: 25,fontFamily: 'Roboto'),
@@ -22,35 +17,25 @@ import 'package:flutter/material.dart';
     indicatorColor:Colors.deepOrange ,
     scaffoldBackgroundColor:Colors.white ,
     accentColor: Colors.deepOrangeAccent,
-    buttonColor: Colors.orange,
-    backgroundColor: Colors.white,
-    
-
   );}
 
   ThemeData basedark() { 
 
   ThemeData basedark = ThemeData.dark();
   return basedark.copyWith(
-    primaryColor: Colors.blue,
-    // iconTheme: IconThemeData(
-    //   color: ,
-    //   size: 
-    // )
+
     textTheme:TextTheme(
     
-    title: TextStyle(color: Colors.white,fontSize: 25,fontFamily: 'Roboto Light'),
-    body1: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto Light'),
-    body2: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto Light'),
+    title: TextStyle(color: Colors.white,fontSize: 25,fontFamily: 'Roboto'),
+    body1: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto'),
+    body2: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto'),
     ) ,
-    appBarTheme: AppBarTheme(color: Colors.black, textTheme: TextTheme(title:TextStyle(color: Colors.white,fontSize: 22))),
-    // indicatorColor:Colors.blue ,
-    // scaffoldBackgroundColor:Colors.black ,
-    // accentColor: Colors.blue,
-    // buttonColor: Colors.blue,
-    // backgroundColor: Colors.blue,
-    // cardColor: Colors.black,
+    //appBarTheme: AppBarTheme(color: Colors.black, textTheme: TextTheme(title:TextStyle(color: Colors.white,fontSize: 22))),
+   // scaffoldBackgroundColor: Colors.grey,
     brightness: Brightness.dark,
+    accentColorBrightness: Brightness.dark,
+    primaryColorBrightness: Brightness.dark,
+    
 
   );}
 
