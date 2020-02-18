@@ -89,6 +89,13 @@ class _OwnDrawerState extends State<OwnDrawer> {
             Navigator.pushNamed(context, '/settings');
           },
         ),
+        ListTile(
+          leading: Icon(Icons.help),
+          title: Text('Hilfe'),
+          onTap: () {
+            Navigator.pushNamed(context, '/supportMain');
+          },
+        ),
       ])),
     );
   }
