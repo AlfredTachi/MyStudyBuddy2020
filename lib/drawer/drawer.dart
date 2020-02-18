@@ -18,12 +18,11 @@ class _OwnDrawerState extends State<OwnDrawer> {
           child: DrawerHeader(
             child: Text('ToDo Icon,Name',
                 style: TextStyle(
-                  color: Colors.black,
                   fontSize: 24,
                 )),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  colors: <Color>[Colors.deepOrange[300], Colors.orangeAccent]),
+                  colors: <Color>[Colors.orange, Colors.orangeAccent]),
             ),
           ),
         ),
