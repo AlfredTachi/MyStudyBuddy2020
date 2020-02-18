@@ -23,7 +23,7 @@ class SupportState extends State<Support> {
           },
         ),
         ListTile(
-          leading: Icon(Icons.remove_red_eye),
+          leading: Icon(Icons.book),
           title: Text('Schnelleinstieg'),
           onTap: () {
             Navigator.pushNamed(context, '/supportMain/quickaccess');
