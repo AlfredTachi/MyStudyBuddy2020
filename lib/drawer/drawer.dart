@@ -27,7 +27,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
             ),
           ),
         ),
-        ListTile(
+        ListTile(   
           leading: Icon(Icons.home),
           title: Text('Übersicht'),
           onTap: () {
@@ -38,7 +38,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.check_box),
           title: Text('Semsterverlauf'),
           onTap: () {
-            // Navigator.pushNamed(context, '/second');
+            Navigator.pushNamed(context, '/studyprogress');
           },
         ),
         ListTile(
@@ -59,7 +59,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.map),
           title: Text('Campusplan'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/map');
           },
         ),
         ListTile(
@@ -73,7 +73,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.calendar_today),
           title: Text('Terminplan'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/planer');
           },
         ),
         ListTile(
