@@ -1,4 +1,6 @@
+import 'package:MyStudyBuddy2/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../drawer/drawer.dart';
 
 class Settings extends StatefulWidget {
@@ -8,16 +10,13 @@ class Settings extends StatefulWidget {
   }
 }
 
-class _SettingsState extends State<Settings> {
-  bool darkModeVal = false;
-  bool notifaicationVal = false;
+bool darkModeVal = false;
+bool notifaicationVal = false;
 
-  onDarkMode(bool newVal) {
-    setState(() {
-      darkModeVal = newVal;
-      
-    });
-  }
+class _SettingsState extends State<Settings> {
+  
+  
+
 
   onNotification(bool newVal) {
     setState(() {
@@ -25,10 +24,21 @@ class _SettingsState extends State<Settings> {
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
+    ThemeChanger _themeChanger = Provider.of<ThemeChanger>(context);
+
+    onDarkMode(bool newVal) {
+      setState(() {
+        darkModeVal = newVal;
+        if (newVal == true) {
+          _themeChanger.setTheme(basedark());
+        } else {
+          _themeChanger.setTheme(baselight());
+        }
+      });
+    }
+
     return Scaffold(
         appBar: AppBar(title: Text("Einstellungen")),
         drawer: OwnDrawer(),
@@ -37,7 +47,6 @@ class _SettingsState extends State<Settings> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Card(
-                color: Colors.white,
                 margin: EdgeInsets.all(1.0),
                 child: ListTile(
                   leading: Text("Dark Mode"),
@@ -49,7 +58,6 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
               Card(
-                  color: Colors.white,
                   margin: EdgeInsets.all(1.0),
                   child: ListTile(
                       leading: Text("Notification"),
@@ -59,14 +67,10 @@ class _SettingsState extends State<Settings> {
                             onNotification(newVal);
                           }))),
               Card(
-                  color: Colors.white,
                   margin: EdgeInsets.all(1.0),
                   child: ListTile(
-                      leading: Text("Allgemein"),
-                      trailing: Icon(Icons.edit)
-              )),
+                      leading: Text("Allgemein"), trailing: Icon(Icons.edit))),
               Card(
-                  color: Colors.white,
                   margin: EdgeInsets.all(1.0),
                   child: ListTile(
                       leading: Text("App Einstellungen"),
