@@ -73,7 +73,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.calendar_today),
           title: Text('Terminplan'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/planer');
           },
         ),
         ListTile(
