@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../dashboard/staggered_view_dashboard/StaggeredView.dart';
+import '../dashboard/staggered_view_dashboard/staggered_view_dashboard.dart';
 import '../drawer/drawer.dart';
+import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -15,9 +16,14 @@ class DashboardState extends State<Dashboard> {
         title: Text("Übersicht"),
       ),
       drawer: OwnDrawer(),
-      body:StaggeredView(),
+      body: StaggeredView(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ModuleSelection())
+          );
+        },
         tooltip: 'Modul hinzufügen',
         child: Icon(Icons.add),
       ),

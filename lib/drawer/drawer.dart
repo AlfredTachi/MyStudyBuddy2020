@@ -8,7 +8,6 @@ class OwnDrawer extends StatefulWidget {
 }
 
 class _OwnDrawerState extends State<OwnDrawer> {
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -80,6 +79,13 @@ class _OwnDrawerState extends State<OwnDrawer> {
           title: Text('Wetter'),
           onTap: () {
             Navigator.pushNamed(context, '/weather');
+          },
+        ),
+                ListTile(
+          leading: Icon(Icons.local_library),
+          title: Text('Study Quiz'),
+          onTap: () {
+            Navigator.pushNamed(context, '/quiz');
           },
         ),
         ListTile(
