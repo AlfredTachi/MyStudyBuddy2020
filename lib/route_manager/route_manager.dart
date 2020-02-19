@@ -6,6 +6,7 @@ import 'package:MyStudyBuddy2/study_quiz/quiz_start.dart';
 import 'package:MyStudyBuddy2/studyprogress/studyprogress.dart';
 import 'package:MyStudyBuddy2/grades_prognosis/grades_prognosis.dart';
 import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
+import 'package:MyStudyBuddy2/modulhandbuch/modulhandbuch.dart';
 import 'package:MyStudyBuddy2/support/faq.dart';
 import 'package:MyStudyBuddy2/support/mail_support.dart';
 import 'package:MyStudyBuddy2/support/quickaccess.dart';
@@ -25,6 +26,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => MensaPlan());
       case '/weather':
         return MaterialPageRoute(builder: (_) => Weather());
+      case '/modulhandbuch':
+        return MaterialPageRoute(builder: (_) => ModuleHandbooks());
       case '/supportMain':
         return MaterialPageRoute(builder: (_) => Support());
       case '/supportMain/FAQ':
