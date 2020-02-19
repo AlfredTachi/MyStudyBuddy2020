@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:MyStudyBuddy2/dashboard/moduleSelection/staggered_view_moduleSelection/StaggeredView.dart';
+import 'package:MyStudyBuddy2/dashboard/module_selection/staggered_view_module_selection/staggered_view.dart';
 
 class ModuleSelection extends StatefulWidget {
   @override

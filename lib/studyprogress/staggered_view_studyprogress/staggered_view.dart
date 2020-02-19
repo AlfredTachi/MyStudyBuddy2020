@@ -17,7 +17,10 @@ Material semester(String heading) {
                 alignment: Alignment.topLeft,
                 child: Container(
                   child: Text(heading,
-                      style: TextStyle(fontSize: 20, color: Color(0xFF013D62),)),
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color(0xFF013D62),
+                      )),
                 ),
               ),
               Expanded(
@@ -83,16 +86,14 @@ class StaggeredView extends StatefulWidget {
 class _StaggeredViewState extends State<StaggeredView> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: StaggeredGridView.count(
-          padding: EdgeInsets.all(8.0),
-          crossAxisCount: 2,
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5,
-          children: mySemester(),
-          staggeredTiles: mySemesterTiles(context),
-        ),
+    return Scaffold(
+      body: StaggeredGridView.count(
+        padding: EdgeInsets.all(8.0),
+        crossAxisCount: 2,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
+        children: mySemester(),
+        staggeredTiles: mySemesterTiles(context),
       ),
     );
   }

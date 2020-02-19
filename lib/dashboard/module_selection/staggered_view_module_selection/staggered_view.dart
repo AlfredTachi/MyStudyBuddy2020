@@ -1,11 +1,10 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:MyStudyBuddy2/dashboard/staggered_view_dashboard/StaggeredView.dart'
+import 'package:MyStudyBuddy2/dashboard/staggered_view_dashboard/StaggeredView.dart';
 import 'package:flutter/material.dart';
+import 'package:MyStudyBuddy2/model/module.dart';
+import '../../staggered_view_dashboard/StaggeredView.dart';
 
-import '../../dashboard.dart';
-import '../../dashboard.dart';
-import '../../staggered_view_dashboard/StaggeredView.dart';
-import '../../staggered_view_dashboard/StaggeredView.dart';
+Module myModule = Module(0, "");
 
 Material semester(String heading) {
   return Material(
@@ -23,7 +22,10 @@ Material semester(String heading) {
                 alignment: Alignment.topLeft,
                 child: Container(
                   child: Text(heading,
-                      style: TextStyle(fontSize: 20, color: Color(0xFF013D62),)),
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color(0xFF013D62),
+                      )),
                 ),
               ),
               Expanded(
@@ -39,18 +41,20 @@ Material semester(String heading) {
             Expanded(
               child: new InkWell(
                 onTap: () {
-                  
+                  //myCourses.add(_StaggeredViewState().myModules().elementAt(index));
+                  //myCourses.add(myModule);
+                  myCourses.add(myModule.module());
                 },
-              child: new Container(
-                child: GridView.count(
-                  primary: false,
-                  crossAxisCount: 5,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  children: _StaggeredViewState().myModules(),
+                child: new Container(
+                  child: GridView.count(
+                    primary: false,
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                    children: _StaggeredViewState().myModules(),
+                  ),
                 ),
               ),
-            ),
             ),
           ],
         ),
@@ -94,16 +98,14 @@ class StaggeredView extends StatefulWidget {
 class _StaggeredViewState extends State<StaggeredView> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: StaggeredGridView.count(
-          padding: EdgeInsets.all(8.0),
-          crossAxisCount: 2,
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5,
-          children: mySemester(),
-          staggeredTiles: mySemesterTiles(context),
-        ),
+    return Scaffold(
+      body: StaggeredGridView.count(
+        padding: EdgeInsets.all(8.0),
+        crossAxisCount: 2,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
+        children: mySemester(),
+        staggeredTiles: mySemesterTiles(context),
       ),
     );
   }
@@ -120,7 +122,7 @@ class _StaggeredViewState extends State<StaggeredView> {
     List<StaggeredTile> list = new List();
     double screenHeight = MediaQuery.of(context).size.height;
     for (int i = 1; i <= 5; i++) {
-      list.add(StaggeredTile.extent(2, screenHeight / 3));
+      list.add(StaggeredTile.extent(2, screenHeight / 2.5));
     }
     return list;
   }
@@ -128,7 +130,8 @@ class _StaggeredViewState extends State<StaggeredView> {
   List<Widget> myModules() {
     List<Widget> list = new List();
     for (int i = 1; i <= 7; i++) {
-      list.add(module((i).toString() + ". M"));
+      myModule = Module(i, (i.toString() + ". M").toString());
+      list.add(myModule.module());
     }
     return list;
   }

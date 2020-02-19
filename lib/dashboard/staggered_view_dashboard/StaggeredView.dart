@@ -2,13 +2,11 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import '../progress_bar/progress_bar.dart';
 
-List<Widget> modules = new List();
+final List<Widget> myCourses = [];
 
 Material progress(ProgressBar progressBar) {
   return Material(
-    color: Colors.white,
     elevation: 14.0,
-    shadowColor: Colors.black,
     borderRadius: BorderRadius.circular(24.0),
     child: ProgressBar(),
   );
@@ -17,9 +15,7 @@ Material progress(ProgressBar progressBar) {
 Material persondetails(
     IconData icon, String infnumber, IconData icontwo, String special) {
   return Material(
-      color: Colors.white,
       elevation: 14.0,
-      shadowColor: Colors.black,
       borderRadius: BorderRadius.circular(24.0),
       child: Padding(
         padding: EdgeInsets.all(8),
@@ -49,9 +45,7 @@ Material persondetails(
 
 Material grades(String heading, double grades) {
   return Material(
-      color: Colors.white,
       elevation: 14.0,
-      shadowColor: Colors.black,
       borderRadius: BorderRadius.circular(24.0),
       child: Padding(
         padding: EdgeInsets.all(8),
@@ -71,38 +65,37 @@ Material grades(String heading, double grades) {
 
 Material module(String heading) {
   return Material(
-      color: Colors.white,
-      elevation: 14.0,
-      shadowColor: Colors.black,
-      borderRadius: BorderRadius.circular(24.0),
-      child: Padding(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: myModules(),
-        ),
-      ));
-}
-
-List<Widget> myModules() {
-  if (modules.length == 0) {
-    return [Text("Du hast zurzeit keine Module geplant!",
-          style: TextStyle(fontWeight: FontWeight.bold)),
-    ];
-  } else {
-    Expanded(
-      child: new Container(
-        child: GridView.count(
-          primary: false,
-          crossAxisCount: 5,
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5,
-          children: modules,
-        ),
+    color: Colors.white,
+    elevation: 14.0,
+    shadowColor: Colors.black,
+    borderRadius: BorderRadius.circular(24.0),
+    child: Padding(
+      padding: EdgeInsets.all(8),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Text(heading, style: TextStyle(fontSize: 25)),
+            ],
+          ),
+          Expanded(
+            child: new Container(
+              child: (myCourses.length == 0)
+                  ? Center(child: Text("Du hast zurzeit keine Module geplant!"))
+                  : GridView.count(
+                      primary: false,
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 5,
+                      children: myCourses,
+                    ),
+            ),
+          ),
+        ],
       ),
-    );
-    return modules;
-  }
+    ),
+  );
 }
 
 class StaggeredView extends StatefulWidget {
@@ -117,27 +110,24 @@ class _StaggeredViewState extends State<StaggeredView> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     //double screenWidth = MediaQuery.of(context).size.width;
-    return MaterialApp(
-      debugShowCheckedModeBanner: true,
-      home: Scaffold(
-        body: StaggeredGridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5,
-          children: <Widget>[
-            progress(ProgressBar()),
-            persondetails(
-                Icons.person, "inf2730", Icons.work, "Software Konstruktion"),
-            grades("Notendurchschnitt:", 5.0),
-            module("Deine Module")
-          ],
-          staggeredTiles: [
-            StaggeredTile.extent(1, screenHeight / 3),
-            StaggeredTile.extent(1, screenHeight / 6),
-            StaggeredTile.extent(1, screenHeight / 6),
-            StaggeredTile.extent(2, screenHeight / 2),
-          ],
-        ),
+    return Scaffold(
+      body: StaggeredGridView.count(
+        crossAxisCount: 2,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
+        children: <Widget>[
+          progress(ProgressBar()),
+          persondetails(
+              Icons.person, "inf2730", Icons.work, "Software Konstruktion"),
+          grades("Notendurchschnitt:", 5.0),
+          module("Deine Module"),
+        ],
+        staggeredTiles: [
+          StaggeredTile.extent(1, screenHeight / 3),
+          StaggeredTile.extent(1, screenHeight / 6),
+          StaggeredTile.extent(1, screenHeight / 6),
+          StaggeredTile.extent(2, screenHeight / 2),
+        ],
       ),
     );
   }
