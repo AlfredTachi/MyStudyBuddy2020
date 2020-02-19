@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/semantics.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
 

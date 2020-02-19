@@ -1,4 +1,4 @@
-import 'package:MyStudyBuddy2/dashboard/module_selection/staggered_view_moduleSelection/staggered_view_module_selection_WPF/staggered_view.dart';
+import 'package:MyStudyBuddy2/dashboard/module_selection/staggered_view_module_Selection/staggered_view_module_selection_WPF/staggered_view.dart';
 import 'package:flutter/material.dart';
 
 class ModuleSelectionWPF extends StatefulWidget {
