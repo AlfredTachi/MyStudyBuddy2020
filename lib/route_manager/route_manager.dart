@@ -1,6 +1,7 @@
 import 'package:MyStudyBuddy2/campus_plan/campus_plan.dart';
 import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/planer/planer.dart';
+import 'package:MyStudyBuddy2/study_quiz/quiz_start.dart';
 import 'package:MyStudyBuddy2/studyprogress/studyprogress.dart';
 import 'package:MyStudyBuddy2/grades_prognosis/grades_prognosis.dart';
 import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
@@ -39,6 +40,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => GradesPrognosis());
       case '/planer':
         return MaterialPageRoute(builder: (_) => Planer());
+      case '/quiz':
+        return MaterialPageRoute(builder: (_) => QuizStart());
       default:
         return _errorRoute();
     }
