@@ -8,7 +8,7 @@ Material semester(String heading) {
       shadowColor: Colors.black,
       borderRadius: BorderRadius.circular(12.0),
       child: Padding(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -36,6 +36,7 @@ Material semester(String heading) {
             Expanded(
               child: new Container(
                 child: GridView.count(
+                  padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
                   primary: false,
                   crossAxisCount: 4,
                   crossAxisSpacing: 5,

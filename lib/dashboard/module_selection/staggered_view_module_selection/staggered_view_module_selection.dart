@@ -1,8 +1,8 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:MyStudyBuddy2/dashboard/staggered_view_dashboard/StaggeredView.dart';
+import 'package:MyStudyBuddy2/dashboard/staggered_view_dashboard/staggered_view_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
-import '../../staggered_view_dashboard/StaggeredView.dart';
+import '../../staggered_view_dashboard/staggered_view_dashboard.dart';
 
 Module myModule = Module(0, "");
 

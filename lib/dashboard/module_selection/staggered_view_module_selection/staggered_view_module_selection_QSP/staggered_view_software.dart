@@ -18,7 +18,10 @@ Material module(String heading) {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text(heading, style: TextStyle(fontSize: 25)),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+                  child: Text(heading, style: TextStyle(fontSize: 25)),
+                ),
               ],
             ),
             Expanded(

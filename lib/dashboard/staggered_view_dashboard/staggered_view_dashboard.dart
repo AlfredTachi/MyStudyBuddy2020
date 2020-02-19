@@ -76,7 +76,9 @@ Material module(String heading) {
         children: <Widget>[
           Row(
             children: <Widget>[
-              Text(heading, style: TextStyle(fontSize: 25)),
+              Padding(
+              padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
+              child: Text(heading, style: TextStyle(fontSize: 25)),),
             ],
           ),
           Expanded(
@@ -109,7 +111,6 @@ class _StaggeredViewState extends State<StaggeredView> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    //double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: StaggeredGridView.count(
         crossAxisCount: 2,
