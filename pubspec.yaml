@@ -25,9 +25,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  link: ^1.0.0 #https://pub.dev/packages/link
   flutter_mailer: ^0.4.1+1 #https://pub.dev/packages/flutter_mailer
   validators: ^2.0.0 #https://pub.dev/packages/validators
+  url_launcher: ^5.4.1 #https://pub.dev/packages/url_launcher
 
   provider:
 
