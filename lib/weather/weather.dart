@@ -14,6 +14,8 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   AnimationController animationCtrl;
   bool showDetails = false;
   String status = "";
+  Color backgroundColor = Colors.blue[700];
+  List<Color> gradientColors = List<Color>();
 
   @override
   void initState() {
@@ -22,6 +24,12 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
       vsync: this,
       duration: Duration(milliseconds: 500),
     );
+    gradientColors = [
+      Colors.blue[800],
+      Colors.blue[700],
+      Colors.blue[400],
+      Colors.blue[200],
+    ];
     animationCtrl.animateTo(1);
     fetchData();
   }
@@ -55,10 +63,30 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
     return Container();
   }
 
+  void _checkIfDarkModeEnabled() {
+    final ThemeData theme = Theme.of(context);
+    if (theme.brightness == MediaQuery.of(context).platformBrightness) {
+      backgroundColor = Colors.blue[700];
+      gradientColors = [
+        Colors.blue[800],
+        Colors.blue[700],
+        Colors.blue[400],
+        Colors.blue[200],
+      ];
+    } else {
+      backgroundColor = Colors.grey[700];
+      gradientColors = [
+        Colors.grey[800],
+        Colors.grey[600],
+      ];
+    }
+  }
+
   Widget getMaterialDesign() {
+    _checkIfDarkModeEnabled();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[800],
+        backgroundColor: backgroundColor,
         title: Text("Wetter"),
         actions: <Widget>[
           IconButton(
@@ -78,12 +106,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                Colors.blue[800],
-                Colors.blue[700],
-                Colors.blue[400],
-                Colors.blue[200],
-              ])),
+                  colors: gradientColors)),
           child: Column(
             children: <Widget>[
               Container(
