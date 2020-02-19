@@ -10,8 +10,8 @@ Material progress(ProgressBar progressBar) {
   );
 }
 
-Material persondetails(
-    IconData icon, String infnumber, IconData icontwo, String special) {
+Material persondetails(IconData icon, String infnumber, IconData icontwo,
+    String special, BuildContext context) {
   return Material(
       elevation: 14.0,
       borderRadius: BorderRadius.circular(24.0),
@@ -27,14 +27,21 @@ Material persondetails(
                 Text(infnumber, style: TextStyle(fontSize: 20)),
               ],
             ),
-            Row(
-              children: <Widget>[
-                Icon(icontwo),
-                Flexible(
-                    child: FittedBox(
-                        fit: BoxFit.cover,
-                        child: Text(special, style: TextStyle(fontSize: 20)))),
-              ],
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/qspinfo');
+              },
+              child: Container(
+                  child: Row(
+                children: <Widget>[
+                  Icon(icontwo),
+                  Flexible(
+                      child: FittedBox(
+                          fit: BoxFit.cover,
+                          child:
+                              Text(special, style: TextStyle(fontSize: 20)))),
+                ],
+              )),
             )
           ],
         ),
@@ -50,9 +57,12 @@ Material grades(String heading, double grades) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-          
-            FittedBox(fit: BoxFit.cover,child: Text(heading, style: TextStyle(fontSize: 20))),
-            FittedBox(fit: BoxFit.cover,child: Text(grades.toString(), style: TextStyle(fontSize: 20)))
+            FittedBox(
+                fit: BoxFit.cover,
+                child: Text(heading, style: TextStyle(fontSize: 20))),
+            FittedBox(
+                fit: BoxFit.cover,
+                child: Text(grades.toString(), style: TextStyle(fontSize: 20)))
           ],
         ),
       ));
@@ -93,8 +103,8 @@ class _StaggeredViewState extends State<StaggeredView> {
           mainAxisSpacing: 5,
           children: <Widget>[
             progress(ProgressBar()),
-            persondetails(
-                Icons.person, "inf2730", Icons.work, "Software Konstruktion"),
+            persondetails(Icons.person, "inf2730", Icons.work,
+                "Software Konstruktion", context),
             grades("Notendurchschnitt:", 5.0),
             module("Deine Module")
           ],
