@@ -30,8 +30,12 @@ dependencies:
   validators: ^2.0.0 #https://pub.dev/packages/validators
   provider:
   photo_view: ^0.9.2 #https://pub.dev/packages/photo_view
+  flutter_launcher_icons: ^0.7.4 #https://pub.dev/packages/flutter_launcher_icons#-installing-tab-
 
-
+flutter_icons:
+  android: "launcher_icon" 
+  ios: true
+  image_path: "assets/icons/app_icon/app_icon.png"
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +55,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
       - assets/images/
+      - assets/icons/app_icon/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
