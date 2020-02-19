@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/link/link.dart';
 import 'package:MyStudyBuddy2/qsp_info/q_s_p_info_icons_icons.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ Material qspdetails(
   BuildContext context,
   double percent,
   String text,
+  String urltitle,
+  String url,
 ) {
   return Material(
       elevation: 14.0,
@@ -46,7 +49,14 @@ Material qspdetails(
             Row(
               children: <Widget>[
                 Padding(padding: EdgeInsets.fromLTRB(15,0,0,15)),
-                Flexible(child: Text(qspinfo)),
+                Flexible(child: Text(qspinfo),),
+              ],
+            ),
+            Row(children: <Widget>[Text(" ")]),
+            Row(
+              children: <Widget>[
+                Padding(padding: EdgeInsets.fromLTRB(15,0,0,15)),
+                Link(child: Text(urltitle, style:TextStyle(color: Colors.blue[700], fontSize: 16),textAlign: TextAlign.center), url: url),
               ],
             ),
             Row(
@@ -96,7 +106,9 @@ class _StaggeredViewState extends State<StaggeredView> {
                   "die auf die professionelle Konstruktion komplexer Software-Anwendungen vorbereiten.",
               context,
               3/5,
-              "3/5"
+              "3/5",
+              "Für mehr Infos hier klicken",
+              "https://www.hs-worms.de/software-konstruktion/"
             ),
             qspdetails(
               QSPInfoIcons.medieninformatik_icon,
@@ -105,7 +117,9 @@ class _StaggeredViewState extends State<StaggeredView> {
                   "die in direktem Kontakt zu Benutzer/innen, also zu Menschen stehen.",
               context,
               2/5,
-              "2/5"
+              "2/5",
+              "Für mehr Infos hier klicken",
+              "https://www.hs-worms.de/medieninformatik/"
             ),
             qspdetails(
               QSPInfoIcons.cloud_icon,
@@ -115,13 +129,15 @@ class _StaggeredViewState extends State<StaggeredView> {
                   "Services erforderlich sind.",
               context,
               5/5,
-              "5/5"
+              "5/5",
+              "Für mehr Infos hier klicken",
+              "https://www.hs-worms.de/cloud-internet/"
             )
           ],
           staggeredTiles: [
-            StaggeredTile.extent(1, screenHeight / 3),
-            StaggeredTile.extent(1, screenHeight / 3.2),
-            StaggeredTile.extent(1, screenHeight / 2.75),
+            StaggeredTile.extent(1, screenHeight / 2.5),
+            StaggeredTile.extent(1, screenHeight / 2.7),
+            StaggeredTile.extent(1, screenHeight / 2.3),
           ],
         ),
       ),
