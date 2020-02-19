@@ -1,5 +1,5 @@
+import 'package:MyStudyBuddy2/link/link.dart';
 import 'package:flutter/material.dart';
-import 'package:link/link.dart';
 
 class Quickaccess extends StatefulWidget {
   @override
