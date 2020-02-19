@@ -1,6 +1,7 @@
 import 'package:MyStudyBuddy2/campus_plan/campus_plan.dart';
 import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/planer/planer.dart';
+import 'package:MyStudyBuddy2/qsp_info/qsp_info.dart';
 import 'package:MyStudyBuddy2/study_quiz/quiz_start.dart';
 import 'package:MyStudyBuddy2/studyprogress/studyprogress.dart';
 import 'package:MyStudyBuddy2/grades_prognosis/grades_prognosis.dart';
@@ -17,9 +18,9 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-      return MaterialPageRoute(builder: (_) => Dashboard());
+        return MaterialPageRoute(builder: (_) => Dashboard());
       case '/studyprogress':
-      return MaterialPageRoute(builder: (_) => Studyprogress());      
+        return MaterialPageRoute(builder: (_) => Studyprogress());
       case '/mensa_plan':
         return MaterialPageRoute(builder: (_) => MensaPlan());
       case '/weather':
@@ -32,7 +33,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Quickaccess());
       case '/supportMain/mailSupport':
         return MaterialPageRoute(builder: (_) => MailSupport());
-       case '/map':
+      case '/map':
         return MaterialPageRoute(builder: (_) => CampusPlan());
       case '/settings':
         return MaterialPageRoute(builder: (_) => Settings());
@@ -40,6 +41,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => GradesPrognosis());
       case '/planer':
         return MaterialPageRoute(builder: (_) => Planer());
+      case '/qspinfo':
+        return MaterialPageRoute(builder: (_) => QSPInfo());
       case '/quiz':
         return MaterialPageRoute(builder: (_) => QuizStart());
       default:
