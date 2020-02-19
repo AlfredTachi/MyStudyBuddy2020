@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/qsp_info/staggered_view_qsp/StaggeredView.dart';
 import 'package:flutter/material.dart';
 
 class QSPInfo extends StatefulWidget {
@@ -16,6 +17,7 @@ class QSPInfoState extends State<QSPInfo> {
           onPressed: () => Navigator.pop(context, false),
         ),
       ),
+      body: StaggeredView(),
     );
   }
 }

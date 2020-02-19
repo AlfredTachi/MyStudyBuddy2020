@@ -83,6 +83,10 @@ flutter:
       fonts:
         - asset: fonts/Roboto-Light.ttf
 
+    - family:  QSPInfoIcons
+      fonts:
+        - asset: fonts/QSPInfoIcons.ttf
+
 
   #   - family: Trajan Pro
   #     fonts:
