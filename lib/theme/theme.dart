@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 
     primaryColor: Colors.orange,
     textTheme:TextTheme(
-    
+
+    subhead: TextStyle(color: Colors.black,fontSize: 20,fontFamily: 'Roboto'),
     title: TextStyle(color: Colors.black,fontSize: 25,fontFamily: 'Roboto'),
     body1: TextStyle(color: Colors.black,fontSize: 20,fontFamily: 'Roboto'),
     body2: TextStyle(color: Colors.black,fontSize: 20,fontFamily: 'Roboto'),
@@ -26,6 +27,7 @@ import 'package:flutter/material.dart';
 
     textTheme:TextTheme(
     
+    subhead:TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto'),
     title: TextStyle(color: Colors.white,fontSize: 25,fontFamily: 'Roboto'),
     body1: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto'),
     body2: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto'),
