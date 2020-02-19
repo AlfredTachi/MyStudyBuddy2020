@@ -6,112 +6,53 @@ class Quickaccess extends StatefulWidget {
   QuickaccessState createState() => QuickaccessState();
 }
 
+List<Link> links = [
+  Link(
+      child: Text('HS Worms Website', textAlign: TextAlign.center),
+      url: 'https://www.hs-worms.de/'),
+  Link(
+      child: Text('moodle', textAlign: TextAlign.center),
+      url: 'https://moodle.hs-worms.de/moodle/'),
+  Link(
+      child: Text('LSF', textAlign: TextAlign.center),
+      url: 'https://lsf.hs-worms.de/qisserver/rds?state=user&type=0'),
+  Link(
+      child: Text('Webmailer', textAlign: TextAlign.center),
+      url: 'https://webmailer2.hs-worms.de/roundcube/'),
+  Link(
+      child: Text('Stuedierndenvertretungen', textAlign: TextAlign.center),
+      url:'https://www.hs-worms.de/hochschule/hochschule-worms/gremien/studierendenvertretungen/'),
+  Link(
+      child: Text('Fachschaft Informatik', textAlign: TextAlign.center),
+      url: 'https://fsinf.hs-worms.de/cms/'),
+];
+
 class QuickaccessState extends State<Quickaccess> {
-
-  void _showErrorSnackBar() {
-    Scaffold.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Oops... the URL couldn\'t be opened!'),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Schnelleinstieg"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context, false),
+        appBar: AppBar(
+          title: Text("Schnelleinstieg"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pop(context, false),
+          ),
         ),
-      ),
-      body: ListView(padding: EdgeInsets.zero, children: [
-        ExpansionTile(
-          title: Text('HS Worms Website'),
-          children: <Widget>[
-            Link(
-              child: Text('Link zur Website',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.blue[900],
-                  )),
-              url: 'https://www.hs-worms.de/',
-              onError: _showErrorSnackBar,
-            ),
-          ],
-        ),
-        ExpansionTile(
-          title: Text('Moodle'),
-          children: <Widget>[
-            Link(
-              child: Text('Link zu moodle',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.blue[900],
-                  )),
-              url: 'https://moodle.hs-worms.de/moodle/',
-              onError: _showErrorSnackBar,
-            ),
-          ],
-        ),
-        ExpansionTile(
-          title: Text('LSF'),
-          children: <Widget>[
-            Link(
-              child: Text('Link zum LSF',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.blue[900],
-                  )),
-              url: 'https://lsf.hs-worms.de/qisserver/rds?state=user&type=0',
-              onError: _showErrorSnackBar,
-            ),
-          ],
-        ),
-        ExpansionTile(
-          title: Text('Webmailer'),
-          children: <Widget>[
-            Link(
-              child: Text('Link zum Webmailer',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.blue[900],
-                  )),
-              url: 'https://webmailer2.hs-worms.de/roundcube/',
-              onError: _showErrorSnackBar,
-            ),
-          ],
-        ),
-        ExpansionTile(
-          title: Text('AStA'),
-          children: <Widget>[
-            Link(
-              child: Text('Link zum AStA',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.blue[900],
-                  )),
-              url: 'http://asta.hs-worms.de/',
-              onError: _showErrorSnackBar,
-            ),
-          ],
-        ),
-        ExpansionTile(
-          title: Text('Fachschaft Informatik'),
-          children: <Widget>[
-            Link(
-              child: Text('Link zur FS Info',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.blue[900],
-                  )),
-              url: 'https://fsinf.hs-worms.de/cms/',
-              onError: _showErrorSnackBar,
-            ),
-          ],
-        ),
-      ]),
-    );
+        body: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: links.length,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) => Container(
+              width: MediaQuery.of(context).size.width,
+              child: Card(
+                margin:
+                    new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                elevation: 8.0,
+                child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                    leading: links[index]),
+              )),
+        ));
   }
 }
