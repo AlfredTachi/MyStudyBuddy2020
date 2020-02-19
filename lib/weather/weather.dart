@@ -107,73 +107,76 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: gradientColors)),
-          child: Column(
-            children: <Widget>[
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height / 5),
-                      child: Column(
-                        children: <Widget>[
-                          (status.isNotEmpty) ? Text(status) : Container(),
-                          Text(
-                            "HS Worms",
-                            style: TextStyle(
-                              fontSize: 50,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text("Zuletzt aktualisiert: " + dateTimeToString()),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              data.temperature.toString() + " °C",
-                              style: TextStyle(
-                                fontSize: 44,
-                                color: Colors.white,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height / 5),
+                          child: Column(
+                            children: <Widget>[
+                              (status.isNotEmpty) ? Text(status) : Container(),
+                              Text(
+                                "HS Worms",
+                                style: TextStyle(
+                                  fontSize: 50,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
+                              Text("Zuletzt aktualisiert: " +
+                                  dateTimeToString()),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  data.temperature.toString() + " °C",
+                                  style: TextStyle(
+                                    fontSize: 44,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        Divider(),
+                        MaterialButton(
+                          onPressed: () {
+                            if (animationCtrl.isCompleted) {
+                              showDetails = true;
+                              animationCtrl.reverse();
+                            } else {
+                              showDetails = false;
+                              animationCtrl.forward();
+                            }
+                            setState(() {});
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              AnimatedIcon(
+                                icon: AnimatedIcons.close_menu,
+                                progress: animationCtrl,
+                              ),
+                              Text(
+                                "Show more",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(),
+                        (showDetails) ? details() : Container(),
+                      ],
                     ),
-                    Divider(),
-                    MaterialButton(
-                      onPressed: () {
-                        if (animationCtrl.isCompleted) {
-                          showDetails = true;
-                          animationCtrl.reverse();
-                        } else {
-                          showDetails = false;
-                          animationCtrl.forward();
-                        }
-                        setState(() {});
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          AnimatedIcon(
-                            icon: AnimatedIcons.close_menu,
-                            progress: animationCtrl,
-                          ),
-                          Text(
-                            "Show more",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Divider(),
-                    (showDetails)
-                        ? SingleChildScrollView(child: details())
-                        : Container(),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
