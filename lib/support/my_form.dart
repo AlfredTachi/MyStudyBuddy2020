@@ -23,7 +23,6 @@ class MyFormState extends State<MyForm> {
               width: halfMediaWidth,
               child: MyTextFormField(
                 hintText: 'Vorname',
-                contentpadding: 15.0,
               ),
             ),
             Container(
@@ -31,7 +30,6 @@ class MyFormState extends State<MyForm> {
               width: halfMediaWidth,
               child: MyTextFormField(
                 hintText: 'Nachname',
-                contentpadding: 15.0,
               ),
             ),
           ],
@@ -42,8 +40,8 @@ class MyFormState extends State<MyForm> {
           contentpadding: 15.0,
         ),
         MyTextFormField(
-          hintText: 'Deine Nachricht an uns.',
-          contentpadding: 45.0,
+          hintText: 'Deine Nachricht',
+          maxlines: 5,
         ),
         RaisedButton(
             color: Colors.blueAccent,
@@ -65,12 +63,14 @@ class MyTextFormField extends StatelessWidget {
   final Function onSaved;
   final bool isEmail;
   final double contentpadding;
+  final int maxlines;
 
   MyTextFormField(
       {this.hintText,
       this.validator,
       this.onSaved,
       this.isEmail = false,
+      this.maxlines = 1,
       this.contentpadding});
 
   @override
@@ -78,12 +78,14 @@ class MyTextFormField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: TextFormField(
+        style: TextStyle(color: Colors.black),
+        maxLines: maxlines,
         decoration: InputDecoration(
           hintText: hintText,
-          contentPadding: EdgeInsets.all(contentpadding),
-          border: InputBorder.none,
+          hintStyle: TextStyle(color: Colors.grey[800]),
+          contentPadding: EdgeInsets.all(5),
           filled: true,
-          fillColor: Colors.grey[200],
+          fillColor: Colors.grey[300],
         ),
         validator: validator,
         onSaved: onSaved,
