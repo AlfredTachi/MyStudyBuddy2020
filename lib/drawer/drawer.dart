@@ -81,11 +81,18 @@ class _OwnDrawerState extends State<OwnDrawer> {
             Navigator.pushNamed(context, '/weather');
           },
         ),
-                ListTile(
+        ListTile(
           leading: Icon(Icons.local_library),
           title: Text('Study Quiz'),
           onTap: () {
             Navigator.pushNamed(context, '/quiz');
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.rate_review),
+          title: Text('Evaluation'),
+          onTap: () {
+            Navigator.pushNamed(context, '/profList');
           },
         ),
         ListTile(
