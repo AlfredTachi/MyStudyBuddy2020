@@ -92,8 +92,16 @@ class ExamResults {
 
     try {
       for (var module in moduleList) {
-        module[3] = module[3].replaceFirst(',', '.');
-        module[5] = module[5].replaceFirst(',', '.');
+        if (module[3].isNotEmpty) {
+          module[3] = module[3].replaceFirst(',', '.');
+        } else {
+          module[3] = "0.0";
+        }
+        if (module[5].isNotEmpty) {
+          module[5] = module[5].replaceFirst(',', '.');
+        } else {
+          module[5] = "0.0";
+        }
         if (module[8].isNotEmpty) {
           module[8] = module[8].substring(6, 10) +
               module[8].substring(3, 5) +
