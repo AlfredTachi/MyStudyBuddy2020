@@ -102,7 +102,7 @@ class ProgressBarState extends State<ProgressBar>
     return FittedBox(
       fit: BoxFit.cover,
       child: Text(
-        creditPoints.toString() + "/" + maxCreditPoints.toString(),
+        creditPoints.toString() + "/" + maxCreditPoints.toString() + " CP",
         style: TextStyle(
             fontSize: 28, fontWeight: FontWeight.w800),
       ),
