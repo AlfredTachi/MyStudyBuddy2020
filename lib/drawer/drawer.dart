@@ -40,7 +40,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
         ),
         ListTile(
           leading: Icon(Icons.check_box),
-          title: Text('Semsterverlauf'),
+          title: Text('Studienverlauf'),
           onTap: () {
             Navigator.pushNamed(context, '/studyprogress');
           },

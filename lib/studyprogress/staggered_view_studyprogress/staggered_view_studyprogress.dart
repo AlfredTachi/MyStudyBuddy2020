@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 Material semester(String heading) {
   return Material(
-      color: Colors.white,
       elevation: 2.0,
       shadowColor: Colors.black,
       borderRadius: BorderRadius.circular(12.0),
