@@ -17,16 +17,15 @@ class _OwnDrawerState extends State<OwnDrawer> {
           child: DrawerHeader(
             child: Text('ToDo Icon,Name',
                 style: TextStyle(
-                  color: Colors.black,
                   fontSize: 24,
                 )),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  colors: <Color>[Colors.deepOrange[300], Colors.orangeAccent]),
+                  colors: <Color>[Colors.orange, Colors.orangeAccent]),
             ),
           ),
         ),
-        ListTile(
+        ListTile(   
           leading: Icon(Icons.home),
           title: Text('Übersicht'),
           onTap: () {
@@ -37,21 +36,28 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.check_box),
           title: Text('Semsterverlauf'),
           onTap: () {
-            // Navigator.pushNamed(context, '/second');
+            Navigator.pushNamed(context, '/studyprogress');
           },
         ),
         ListTile(
+          leading: Icon(Icons.exposure),
+          title: Text('Noten Rechner'),
+          onTap: () {
+            Navigator.pushNamed(context, '/grades_prognosis');
+          },
+        ),
+         ListTile(
           leading: Icon(Icons.chrome_reader_mode),
           title: Text('Modulhandbuch'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/modulhandbuch');
           },
         ),
         ListTile(
           leading: Icon(Icons.map),
           title: Text('Campusplan'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/map');
           },
         ),
         ListTile(
@@ -65,7 +71,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.calendar_today),
           title: Text('Terminplan'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/planer');
           },
         ),
         ListTile(
@@ -75,11 +81,25 @@ class _OwnDrawerState extends State<OwnDrawer> {
             Navigator.pushNamed(context, '/weather');
           },
         ),
+                ListTile(
+          leading: Icon(Icons.local_library),
+          title: Text('Study Quiz'),
+          onTap: () {
+            Navigator.pushNamed(context, '/quiz');
+          },
+        ),
         ListTile(
           leading: Icon(Icons.settings),
           title: Text('Einstellungen'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/settings');
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.help),
+          title: Text('Hilfe'),
+          onTap: () {
+            Navigator.pushNamed(context, '/supportMain');
           },
         ),
       ])),
