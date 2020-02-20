@@ -12,6 +12,14 @@
 ///       - asset: fonts/QSPInfoIcons.ttf
 ///
 /// 
+/// * Typicons, (c) Stephen Hutchings 2012
+///         Author:    Stephen Hutchings
+///         License:   SIL (http://scripts.sil.org/OFL)
+///         Homepage:  http://typicons.com/
+/// * Font Awesome, Copyright (C) 2016 by Dave Gandy
+///         Author:    Dave Gandy
+///         License:   SIL ()
+///         Homepage:  http://fortawesome.github.com/Font-Awesome/
 ///
 import 'package:flutter/widgets.dart';
 
@@ -23,4 +31,6 @@ class QSPInfoIcons {
   static const IconData cloud_icon = const IconData(0xe800, fontFamily: _kFontFam);
   static const IconData medieninformatik_icon = const IconData(0xe801, fontFamily: _kFontFam);
   static const IconData software_icon = const IconData(0xe802, fontFamily: _kFontFam);
+  static const IconData calculator = const IconData(0xe803, fontFamily: _kFontFam);
+  static const IconData calc = const IconData(0xf1ec, fontFamily: _kFontFam);
 }
