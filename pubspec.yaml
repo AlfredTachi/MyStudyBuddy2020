@@ -18,26 +18,26 @@ environment:
 
 dependencies:
   flutter:
-    sdk: flutter
-  webview_flutter: ^0.3.19+7 #https://pub.dev/packages/webview_flutter
-  http: ^0.12.0+4 #https://pub.dev/packages/http
-  flutter_staggered_grid_view: ^0.3.0 #https://pub.dev/packages/flutter_staggered_grid_view
+    sdk: flutter # https://https://flutter.dev/ *** BSD ***
+  webview_flutter: ^0.3.19+7 # https://pub.dev/packages/webview_flutter *** BSD ***
+  http: ^0.12.0+4 # https://pub.dev/packages/http *** BSD ***
+  flutter_staggered_grid_view: ^0.3.0 # https://pub.dev/packages/flutter_staggered_grid_view *** MIT ***
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
-  flutter_plugin_pdf_viewer: ^1.0.7
-  flutter_mailer: ^0.4.1+1 #https://pub.dev/packages/flutter_mailer
-  validators: ^2.0.0 #https://pub.dev/packages/validators
-  url_launcher: ^5.4.1 #https://pub.dev/packages/url_launcher
+  cupertino_icons: ^0.1.2 # https://pub.dev/packages/cupertino_icons *** MIT ***
+  flutter_plugin_pdf_viewer: ^1.0.7 # https://pub.dev/packages/flutter_plugin_pdf_viewer *** BSD ***
+  flutter_mailer: ^0.4.1+1 # https://pub.dev/packages/flutter_mailer *** MIT ***
+  validators: ^2.0.0 # https://pub.dev/packages/validators *** MIT ***
+  url_launcher: ^5.4.1 # https://pub.dev/packages/url_launcher *** BSD ***
 
-  provider:
-  photo_view: ^0.9.2 #https://pub.dev/packages/photo_view
-  percent_indicator: ^2.1.1 #https://pub.dev/packages/percent_indicator
-  flutter_launcher_icons: ^0.7.4 #https://pub.dev/packages/flutter_launcher_icons#-installing-tab-
-  smooth_star_rating: 1.0.4+2 #https://pub.dev/packages/smooth_star_rating
+  provider: ^4.0.4 # https://pub.dev/packages/provider *** MIT ***
+  photo_view: ^0.9.2 #https://pub.dev/packages/photo_view *** MIT ***
+  percent_indicator: ^2.1.1 #https://pub.dev/packages/percent_indicator *** BSD ***
+  flutter_launcher_icons: ^0.7.4 #https://pub.dev/packages/flutter_launcher_icons *** MIT ***
+  smooth_star_rating: 1.0.4+2 #https://pub.dev/packages/smooth_star_rating *** MIT ***
 
 flutter_icons:
-  android: "launcher_icon" 
+  android: "launcher_icon" # https://pub.dev/packages/flutter_launcher_icons *** MIT ***
   ios: true
   image_path: "assets/icons/app_icon/app_icon.png"
 
