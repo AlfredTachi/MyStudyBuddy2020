@@ -1,7 +1,7 @@
 import 'package:MyStudyBuddy2/support/my_form.dart';
 import 'package:flutter/material.dart';
-import 'package:validators/validators.dart' as validators;
-import 'package:flutter_mailer/flutter_mailer.dart';
+//import 'package:validators/validators.dart' as validators;
+//import 'package:flutter_mailer/flutter_mailer.dart';
 
 /* final MailOptions mailOptions = MailOptions(
       body: 'a long body for the email <br> with a subset of HTML',

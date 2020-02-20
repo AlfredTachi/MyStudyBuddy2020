@@ -190,10 +190,10 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
         children: <Widget>[
           Text("Luftdruck: " + data.barometer.round().toString() + " hPa"),
           Text("Luftfeuchtigkeit: " + data.humidity.toString() + " %"),
-          Text("Windgesch.: " + data.windSpeed.toString() + " km/h"),
+          Text("Windgesch.: " + (data.windSpeed / 3.6).round().toString() + " m/s"),
           Text("Windrichtung: " + data.windDir.toString()),
           Text("UV Strahlung: " + data.uvImpact.toString()),
-          Text("Regen pro mm^2: " + data.rainPerMM.toString()),
+          Text("Regen pro mm: " + data.rainPerMM.toString()),
           Text("Sonnenaufgang: " + data.sunRise.toString()),
           Text("Sonnenuntergang: " + data.sunSet.toString()),
         ],

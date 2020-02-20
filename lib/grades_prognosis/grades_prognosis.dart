@@ -124,7 +124,7 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
                   gradesAverage(Icons.check, "Notendurchschnitt:", 5.0),
                   bestPossible("Best case:", Icons.thumb_up, 5.0),
                   worstPossible(
-                      "Worse case:", Icons.thumb_down, 5.0),
+                      "Worst case:", Icons.thumb_down, 5.0),
                   openModules("Aktuell geplante Module:")
                 ],
                 staggeredTiles: [
