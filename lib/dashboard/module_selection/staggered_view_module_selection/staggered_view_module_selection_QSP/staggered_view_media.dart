@@ -60,7 +60,7 @@ class _StaggeredViewState extends State<StaggeredViewMedia> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
-                    child: Text("Medieninformatik",
+                    child: Text("Visual Computing",
                         style: TextStyle(fontSize: 25)),
                   ),
                 ],
