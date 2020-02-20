@@ -4,11 +4,11 @@ import '../progress_bar/progress_bar.dart';
 
 final List<Widget> myCourses = [];
 
-Material progress(ProgressBar progressBar) {
+Material progress(Widget progressBar) {
   return Material(
     elevation: 14.0,
     borderRadius: BorderRadius.circular(24.0),
-    child: ProgressBar(),
+    child: progressBar,
   );
 }
 
@@ -84,8 +84,9 @@ Material module(String heading) {
           Row(
             children: <Widget>[
               Padding(
-              padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
-              child: Text(heading, style: TextStyle(fontSize: 25)),),
+                padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
+                child: Text(heading, style: TextStyle(fontSize: 25)),
+              ),
             ],
           ),
           Expanded(
@@ -114,6 +115,9 @@ class StaggeredView extends StatefulWidget {
   }
 }
 
+int _creditPoints = 0;
+int _maxCreditPoints = 210;
+
 class _StaggeredViewState extends State<StaggeredView> {
   @override
   Widget build(BuildContext context) {
@@ -124,9 +128,15 @@ class _StaggeredViewState extends State<StaggeredView> {
         crossAxisSpacing: 5,
         mainAxisSpacing: 5,
         children: <Widget>[
-          progress(ProgressBar()),
-          persondetails(
-              Icons.person, "inf2730", Icons.work, "Software Konstruktion", context),
+          progress(GestureDetector(
+              onTap: () {
+                setState(() {
+                  _creditPoints += 6;
+                });
+              },
+              child: ProgressBar(_creditPoints, _maxCreditPoints))),
+          persondetails(Icons.person, "inf2730", Icons.work,
+              "Software Konstruktion", context),
           grades("Notendurchschnitt:", 5.0),
           module("Deine Module"),
         ],
