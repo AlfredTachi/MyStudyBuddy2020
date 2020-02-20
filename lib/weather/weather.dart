@@ -195,7 +195,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
               " m/s"),
           Text("Windrichtung: " + data.windDir.toString()),
           Text("UV Strahlung: " + data.getUvEvaluation()),
-          Text("Regen pro mm: " + data.rainPerMM.toString()),
+          Text("Regen: " + data.rainPerMM.toString() + "mm"),
           Text("Sonnenaufgang: " + data.sunRise.toString()),
           Text("Sonnenuntergang: " + data.sunSet.toString()),
         ],
