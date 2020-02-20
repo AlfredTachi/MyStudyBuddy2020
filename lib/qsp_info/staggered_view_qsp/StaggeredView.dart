@@ -33,7 +33,7 @@ Material qspdetails(
                 Column(children: <Widget>[Text("  ")]),
                 Column(children: <Widget>[
                   Padding(padding: EdgeInsets.fromLTRB(25.0,0,0,0)),                  
-                  Text(qsptitle, style:TextStyle(fontWeight:FontWeight.bold,fontSize: 16)),
+                  Text(qsptitle, style:TextStyle(fontWeight:FontWeight.bold,fontSize: 14)),
                 ]),
               ],
             ),
