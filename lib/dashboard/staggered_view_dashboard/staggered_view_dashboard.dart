@@ -25,6 +25,7 @@ Material persondetails(IconData icon, String infnumber, IconData icontwo,
           children: <Widget>[
             Row(
               children: <Widget>[
+                Padding(padding: EdgeInsets.only(left:15)),
                 Icon(icon),
                 Text(infnumber, style: TextStyle(fontSize: 20)),
               ],
@@ -36,6 +37,7 @@ Material persondetails(IconData icon, String infnumber, IconData icontwo,
               child: Container(
                   child: Row(
                 children: <Widget>[
+                  Padding(padding: EdgeInsets.only(left:15)),
                   Icon(icontwo),
                   Flexible(
                       child: FittedBox(
@@ -134,8 +136,7 @@ class _StaggeredViewState extends State<StaggeredView> {
                 });
               },
               child: ProgressBar(_creditPoints, _maxCreditPoints))),
-          persondetails(Icons.person, "inf2730", Icons.work,
-              "Software Konstruktion", context),
+          persondetails(Icons.person, "inf2730", Icons.work, "SED", context),
           grades("Notendurchschnitt:", 5.0),
           module("Deine Module"),
         ],
