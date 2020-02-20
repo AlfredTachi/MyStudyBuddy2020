@@ -65,6 +65,8 @@ class EvaluationState extends State<Evaluation> {
                                   Padding(
                                       padding: EdgeInsets.only(right: 20.0)),
                                   SmoothStarRating(
+                                    color: Colors.yellow,
+                                    borderColor: Colors.yellow,
                                     rating: ratings[index],
                                     size: 20,
                                     filledIconData: Icons.star,
