@@ -131,9 +131,9 @@ class _StaggeredViewState extends State<StaggeredView> {
           module("Deine Module"),
         ],
         staggeredTiles: [
-          StaggeredTile.extent(1, screenHeight / 3),
-          StaggeredTile.extent(1, screenHeight / 6),
-          StaggeredTile.extent(1, screenHeight / 6),
+          StaggeredTile.extent(2, screenHeight / 3),
+          StaggeredTile.extent(1, screenHeight / 8),
+          StaggeredTile.extent(1, screenHeight / 8),
           StaggeredTile.extent(2, screenHeight / 2),
         ],
       ),
