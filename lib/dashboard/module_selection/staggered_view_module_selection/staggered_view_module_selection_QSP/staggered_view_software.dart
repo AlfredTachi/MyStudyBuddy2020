@@ -60,7 +60,7 @@ class _StaggeredViewState extends State<StaggeredViewSoftware> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
-                    child: Text("Software-Konstruktion",
+                    child: Text("Software Engineering\nand Development",
                         style: TextStyle(fontSize: 25)),
                   ),
                 ],
