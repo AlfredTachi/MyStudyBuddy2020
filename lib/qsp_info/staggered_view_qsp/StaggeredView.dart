@@ -4,14 +4,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-/*Material progress(ProgressBar progressBar) {
-  return Material(
-    elevation: 14.0,
-    borderRadius: BorderRadius.circular(24.0),
-    child: ProgressBar(),
-  );
-}*/
-
 Material qspdetails(
   IconData icon,
   String qsptitle,
