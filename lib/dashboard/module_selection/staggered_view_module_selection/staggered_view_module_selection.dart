@@ -8,7 +8,6 @@ Module myModule = Module(0, "");
 
 Material semester(String heading) {
   return Material(
-      color: Colors.white,
       elevation: 2.0,
       shadowColor: Colors.black,
       borderRadius: BorderRadius.circular(12.0),
