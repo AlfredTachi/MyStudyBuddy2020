@@ -1,32 +1,53 @@
-// For debugging add this line to the MyApp class in main.dart:
-//   final examResultTestVariable = new ExamResults("<RZ-Account User Name>", "RZ-Account Password");
-// You also need to add this to main.dart:
-//   import './exam_results/exam_results.dart
-
-import 'dart:async';
 import 'dart:io';
+import 'dart:async';
 
 import 'package:http/http.dart' as http;
 
 import 'package:MyStudyBuddy2/exam_results/exam_result.dart';
 
 class ExamResults {
-  List<ExamResult> results;
+  // Singleton
+  static final ExamResults _singleton = new ExamResults._internal();
 
-  ExamResults(String userName, String userPassword) {
-    this.results = new List<ExamResult>();
-    fetchResultsRemotely(userName, userPassword);
+  // External Contructor
+  factory ExamResults() => _singleton;
+
+  // Internal Constructor
+  ExamResults._internal() {
+    this.results = List<ExamResult>();
+    _getData();
   }
 
-  void fetchResultsRemotely(String userName, String userPassword) async {
+  // Variables
+  List<ExamResult> results;
+  String userName = "";
+  String userPassword = "";
+
+  // Methods
+  void _getData() async {
+    try {
+      final result = await InternetAddress.lookup('lsf.hs-worms.de');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        // connected
+        _fetchDataFromLSFServer();
+      }
+    } on SocketException {
+      // not connected
+    }
+  }
+
+  void _fetchDataFromLSFServer() async {
+    // TODO: Implement and call LSF login screen
+
     var loginResponse;
+
     try {
       loginResponse = await postHttp(
-          'https://lsf.hs-worms.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal&asdf=$userName&fdsa=$userPassword');
+          "https://lsf.hs-worms.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal&asdf=$userName&fdsa=$userPassword");
     } on SocketException catch (err) {
-      if (err.message.contains('Failed host lookup')) {
-        print("SocketException: No internet connection");
-        throw SocketException('No internet connection');
+      if (err.message.contains("Failed host lookup")) {
+        print("SocketException: No internet connction");
+        throw SocketException("No internet connection");
       } else if (err.osError.message.contains("timed out")) {
         print("OSError: Connection to " + err.address.host + " timed out");
         throw TimeoutException(
@@ -36,41 +57,34 @@ class ExamResults {
         rethrow;
       }
     }
-
     try {
       if (!loginResponse.headers.keys.first.contains('location')) {
         print(loginResponse.headers.keys.first);
         throw Exception("Invalid login data");
       }
-
       final homeScreenResponse =
           await getHttp(loginResponse.headers.values.first);
-      final examAdministrationResponse = await getHttp(
-          extractLink(homeScreenResponse.body, ">Prüfungsverwaltung"));
-      final examExtractResponse = await getHttp(
-          extractLink(examAdministrationResponse.body, ">Notenspiegel"));
-      final degreeResponse =
-          await getHttp(extractLink(examExtractResponse.body, ">Abschluss"));
-      final gradesResponse = await getHttp(extractLink(degreeResponse.body,
-          'title="Leistungen für Angewandte Informatik  (PO-Version 2018)'));
-      parseHtml(gradesResponse.body);
+      final examAdministrationResponse = await getHttp(_extractLink(homeScreenResponse.body, ">Prüfungsverwaltung"));
+      final examExtractResponse = await getHttp(_extractLink(examAdministrationResponse.body, ">Notenspiegel"));
+      final degreeResponse = await getHttp(_extractLink(examExtractResponse.body, ">Abschluss"));
+      final gradesResponse = await getHttp(_extractLink(degreeResponse.body, 'title="Leistungen für Angewandte Informatik  (PO-Version 2018)'));
+      _parseHtml(gradesResponse.body);
     } catch (err) {
       print(err);
       rethrow;
     }
   }
 
-  void parseHtml(String htmlFile) {
+  void _parseHtml(String htmlFile) {
     var htmlTable = htmlFile.substring(htmlFile.indexOf('<table border="0">'));
     htmlTable = htmlTable.substring(0, htmlTable.indexOf('</table>'));
 
     final htmlTableStrings = htmlTable.split('\n');
-    var htmlTrimmedStrings = new List<String>();
+    var htmlTrimmedStrings = List<String>();
     var useFlag = false;
 
     for (var string in htmlTableStrings) {
-      if (string.contains('valign="top">') ||
-          string.contains('valign="top" >')) {
+      if (string.contains('valign="top">') || string.contains('valign="top" >')) {
         useFlag = true;
         continue;
       } else if (useFlag == true) {
@@ -80,17 +94,17 @@ class ExamResults {
     }
 
     if (htmlTrimmedStrings.length % 9 != 0) {
-      throw Exception('There has been a problem with parsing the LSF data');
+      throw Exception("There has been a problem with parsing the LSF data");
     }
 
-    var moduleList = new List<List<String>>();
+    var moduleList = List<List<String>>();
 
     while (htmlTrimmedStrings.isNotEmpty) {
       moduleList.add(htmlTrimmedStrings.sublist(0, 9));
       htmlTrimmedStrings.removeRange(0, 9);
     }
 
-    try {
+try {
       for (var module in moduleList) {
         if (module[3].isNotEmpty) {
           module[3] = module[3].replaceFirst(',', '.');
@@ -118,6 +132,8 @@ class ExamResults {
             int.parse(module[7]),
             module[8]));
       }
+
+      // TODO: Remove this Debug Output before release
       for (var result in this.results) {
         print(result.number.toString() +
             ";" +
@@ -142,16 +158,13 @@ class ExamResults {
     }
   }
 
-  void loadResultsLocally() {}
-  void saveResultsLocally() {}
-
-  String extractLink(String htmlBody, String linkText) {
+  String _extractLink(String htmlBody, String linkText) {
     try {
       var htmlList = htmlBody.split('<a');
-      var linkLine = getItemFromListContainingString(linkText, htmlList);
+      var linkLine = _getItemFromListContainingString(linkText, htmlList);
       linkLine = linkLine.trim();
       var splittedLine = linkLine.split('"');
-      var link = getItemFromListContainingString('https', splittedLine);
+      var link = _getItemFromListContainingString('https', splittedLine);
       link = link.replaceAll('&amp;', '&');
       return link;
     } catch (err) {
@@ -159,7 +172,7 @@ class ExamResults {
     }
   }
 
-  String getItemFromListContainingString(String string, List<String> list) {
+  String _getItemFromListContainingString(String string, List<String> list) {
     for (var listItem in list) {
       if (listItem.contains(string)) {
         return listItem;
@@ -171,7 +184,7 @@ class ExamResults {
   Future<http.Response> postHttp(String url) {
     try {
       return http.post(url);
-    } catch (e) {
+    } catch (err) {
       rethrow;
     }
   }

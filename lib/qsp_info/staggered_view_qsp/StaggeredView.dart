@@ -33,7 +33,7 @@ Material qspdetails(
                 Column(children: <Widget>[Text("  ")]),
                 Column(children: <Widget>[
                   Padding(padding: EdgeInsets.fromLTRB(25.0,0,0,0)),                  
-                  Text(qsptitle),
+                  Text(qsptitle, style:TextStyle(fontWeight:FontWeight.bold,fontSize: 16)),
                 ]),
               ],
             ),
@@ -41,14 +41,14 @@ Material qspdetails(
             Row(
               children: <Widget>[
                 Padding(padding: EdgeInsets.fromLTRB(15,0,0,15)),
-                Flexible(child: Text(qspinfo),),
+                Flexible(child: Text(qspinfo, style:TextStyle(fontSize: 15))),
               ],
             ),
             Row(children: <Widget>[Text(" ")]),
             Row(
               children: <Widget>[
                 Padding(padding: EdgeInsets.fromLTRB(15,0,0,15)),
-                Link(child: Text(urltitle, style:TextStyle(color: Colors.blue[700], fontSize: 16),textAlign: TextAlign.center), url: url),
+                Link(child: Text(urltitle, style:TextStyle(color: Colors.blue[700], fontSize: 14),textAlign: TextAlign.center), url: url),
               ],
             ),
             Row(
@@ -93,8 +93,8 @@ class _StaggeredViewState extends State<StaggeredView> {
           children: <Widget>[
             qspdetails(
               QSPInfoIcons.software_icon,
-              "Software-Konstruktion",
-              "Die Module dieses Qualifikations schwerpunkts vertiefen klassische Informatik-Themen," +
+              "Software Engineering and Development (SED)",
+              "Die Module dieses Qualifikationsschwerpunkts vertiefen klassische Informatik-Themen," +
                   "die auf die professionelle Konstruktion komplexer Software-Anwendungen vorbereiten.",
               context,
               3/5,
@@ -104,7 +104,7 @@ class _StaggeredViewState extends State<StaggeredView> {
             ),
             qspdetails(
               QSPInfoIcons.medieninformatik_icon,
-              "Medieninformatik",
+              "Visual Computing (VC)",
               "Die Medieninformatik konzentriert sich auf die Teile der Informatik und ihres Umfelds," +
                   "die in direktem Kontakt zu Benutzer/innen, also zu Menschen stehen.",
               context,
@@ -115,7 +115,7 @@ class _StaggeredViewState extends State<StaggeredView> {
             ),
             qspdetails(
               QSPInfoIcons.cloud_icon,
-              "Cloud und Internet",
+              "Security and Networks (SN)",
               "Im Qualifikationsschwerpunkt „Cloud und Internet“ dreht es sich verstärkt um Themen der Infrastruktur, " +
                   "d.h. insbesondere Rechnersysteme und Netzwerke,die zur Bereitstellung der heutigen netzwerkbasierten" +
                   "Services erforderlich sind.",
@@ -127,9 +127,9 @@ class _StaggeredViewState extends State<StaggeredView> {
             )
           ],
           staggeredTiles: [
+            StaggeredTile.extent(1, screenHeight / 3),
+            StaggeredTile.extent(1, screenHeight / 3),
             StaggeredTile.extent(1, screenHeight / 2.5),
-            StaggeredTile.extent(1, screenHeight / 2.7),
-            StaggeredTile.extent(1, screenHeight / 2.3),
           ],
         ),
       ),

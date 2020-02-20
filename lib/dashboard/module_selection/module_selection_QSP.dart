@@ -28,20 +28,42 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
         currentIndex: _currentIndex,
         items: [
           new BottomNavigationBarItem(
-            icon: Image.asset('assets/icons/QSP/Cloud_Icon.png', height: 30, width: 30),
+            icon: _currentIndex == 0 ? ImageIcon(AssetImage("assets/icons/QSP/Cloud_Icon.png"),
+                size: 30, color: Colors.orange): ImageIcon(AssetImage("assets/icons/QSP/Cloud_Icon.png"),
+                size: 30, color: setBottomNavigationBarIconColor()),
             title: Text('Cloud und Internet', style: TextStyle(fontSize: 12)),
           ),
           new BottomNavigationBarItem(
-            icon: Image.asset('assets/icons/QSP/Medieninformatik_Icon.png', height: 30, width: 30),
-            title: Text('Medieninformatik', style: TextStyle(fontSize: 12)),
-          ),
+              icon: _currentIndex == 1 ? ImageIcon(
+                  AssetImage("assets/icons/QSP/Medieninformatik_Icon.png"),
+                  size: 30,
+                  color: Colors.orange) : ImageIcon(
+                  AssetImage("assets/icons/QSP/Medieninformatik_Icon.png"),
+                  size: 30,
+                  color: setBottomNavigationBarIconColor()),
+              title: Text('Medieninformatik', style: TextStyle(fontSize: 12)),
+              backgroundColor: Colors.red),
           new BottomNavigationBarItem(
-            icon: Image.asset('assets/icons/QSP/Software_Icon.png', height: 30, width: 30),
-            title: Text('Software-Konstruktion', style: TextStyle(fontSize: 12)),
+            icon: _currentIndex == 2 ? ImageIcon(AssetImage("assets/icons/QSP/Software_Icon.png"),
+                size: 30, color: Colors.orange) : ImageIcon(AssetImage("assets/icons/QSP/Software_Icon.png"),
+                size: 30, color: setBottomNavigationBarIconColor()),
+            title:
+                Text('Software-Konstruktion', style: TextStyle(fontSize: 12)),
           ),
         ],
       ),
     );
+  }
+
+  Color setBottomNavigationBarIconColor() {
+    var brightness = Theme.of(context).brightness;
+    Color color;
+    if (brightness == Brightness.dark) {
+      color = Colors.white;
+    } else if (brightness != Brightness.dark) {
+      color = Colors.black;
+    }
+    return color;
   }
 
   void onTabTapped(int index) {

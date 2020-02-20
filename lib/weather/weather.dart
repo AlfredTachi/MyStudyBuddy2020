@@ -190,9 +190,11 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
         children: <Widget>[
           Text("Luftdruck: " + data.barometer.round().toString() + " hPa"),
           Text("Luftfeuchtigkeit: " + data.humidity.toString() + " %"),
-          Text("Windgesch.: " + (data.windSpeed / 3.6).round().toString() + " m/s"),
+          Text("Windgesch.: " +
+              (data.windSpeed / 3.6).round().toString() +
+              " m/s"),
           Text("Windrichtung: " + data.windDir.toString()),
-          Text("UV Strahlung: " + data.uvImpact.toString()),
+          Text("UV Strahlung: " + data.getUvEvaluation()),
           Text("Regen pro mm: " + data.rainPerMM.toString()),
           Text("Sonnenaufgang: " + data.sunRise.toString()),
           Text("Sonnenuntergang: " + data.sunSet.toString()),
@@ -241,6 +243,22 @@ class WeatherData {
   var rainPerMM;
   var sunRise;
   var sunSet;
+  String uvEvaluation = "";
+
+  String getUvEvaluation() {
+    if (uvImpact <= 2) {
+      uvEvaluation = "Niedrig";
+    } else if (2 < uvImpact && uvImpact <= 5) {
+      uvEvaluation = "Mäßig";
+    } else if (5 < uvImpact && uvImpact <= 7) {
+      uvEvaluation = "Hoch";
+    } else if (7 < uvImpact && uvImpact <= 10) {
+      uvEvaluation = "Sehr hoch";
+    } else if (uvImpact > 10) {
+      uvEvaluation = "Extrem";
+    }
+    return uvEvaluation;
+  }
 
   WeatherData(
       {this.forecast,
