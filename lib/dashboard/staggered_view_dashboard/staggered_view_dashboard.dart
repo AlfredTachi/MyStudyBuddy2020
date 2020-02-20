@@ -72,7 +72,6 @@ Material grades(String heading, double grades) {
 
 Material module(String heading) {
   return Material(
-    color: Colors.white,
     elevation: 14.0,
     shadowColor: Colors.black,
     borderRadius: BorderRadius.circular(24.0),
