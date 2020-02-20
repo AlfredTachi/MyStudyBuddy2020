@@ -94,6 +94,13 @@ class _OwnDrawerState extends State<OwnDrawer> {
           },
         ),
         ListTile(
+          leading: Icon(Icons.rate_review),
+          title: Text('Evaluation'),
+          onTap: () {
+            Navigator.pushNamed(context, '/profList');
+          },
+        ),
+        ListTile(
           leading: Icon(Icons.settings),
           title: Text('Einstellungen'),
           onTap: () {
