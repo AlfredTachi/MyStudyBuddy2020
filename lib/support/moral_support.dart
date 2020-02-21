@@ -34,7 +34,7 @@ class MoralSupportState extends State<MoralSupport> {
                       ),
                     ),
                     RaisedButton(
-                        child: Text("Hife!"),
+                        child: Text("Hilfe!"),
                         onPressed: () {
                           setState(() {});
                         })

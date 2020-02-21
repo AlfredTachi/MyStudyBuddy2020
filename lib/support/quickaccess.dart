@@ -20,7 +20,7 @@ List<Widget> links = [
       child: Text('Webmailer', textAlign: TextAlign.center),
       url: 'https://webmailer2.hs-worms.de/roundcube/'),
   Link(
-      child: Text('Stuedierndenvertretungen', textAlign: TextAlign.center),
+      child: Text('Studierendenvertretungen', textAlign: TextAlign.center),
       url:
           'https://www.hs-worms.de/hochschule/hochschule-worms/gremien/studierendenvertretungen/'),
   Link(
