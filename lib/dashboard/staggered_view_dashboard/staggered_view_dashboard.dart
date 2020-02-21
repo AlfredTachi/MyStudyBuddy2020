@@ -123,7 +123,7 @@ class _StaggeredViewState extends State<StaggeredView> {
         ],
         staggeredTiles: [
           StaggeredTile.extent(2, screenHeight / 3),
-          StaggeredTile.extent(2, screenHeight / 8),
+          StaggeredTile.extent(2, screenHeight / 9),
           StaggeredTile.extent(2, screenHeight / 2),
         ],
       ),
