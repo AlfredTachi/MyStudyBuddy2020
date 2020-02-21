@@ -1,5 +1,5 @@
 import 'package:MyStudyBuddy2/link/link.dart';
-import 'package:MyStudyBuddy2/qsp_info/q_s_p_info_icons_icons.dart';
+import 'package:MyStudyBuddy2/qsp_info/qsp_info_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -88,14 +88,14 @@ Widget qspdetails(
   );
 }
 
-class StaggeredView extends StatefulWidget {
+class QSPView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _StaggeredViewState();
+    return _QSPViewState();
   }
 }
 
-class _StaggeredViewState extends State<StaggeredView> {
+class _QSPViewState extends State<QSPView> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
