@@ -103,8 +103,8 @@ class ProgressBarState extends State<ProgressBar>
       fit: BoxFit.cover,
       child: Text(
         creditPoints.toString() + "/" + maxCreditPoints.toString() + " CP",
-        style: TextStyle(
-            fontSize: 28, fontWeight: FontWeight.w800),
+        style: TextStyle(fontSize: 22,
+            fontWeight: FontWeight.w800),
       ),
     );
   }

@@ -22,55 +22,24 @@ Material persondetails(IconData icon, String infnumber, IconData icontwo,
         child: Row(
           children: <Widget>[
             Expanded(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(padding: EdgeInsets.only(left: 15)),
-                Icon(icon),
-                Text(infnumber, style: TextStyle(fontSize: 20)),
-              ],
+                child: ListTile(
+              leading: Icon(icon),
+              title: Text('inf2730'),
             )),
             VerticalDivider(),
             Expanded(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                GestureDetector(
+              child: GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, '/qspinfo');
                   },
-                  child: Row(
-                    children: <Widget>[
-                      Icon(icontwo),
-                      Text(special,
-                          style: TextStyle(
-                              fontSize: 20,
-                              decoration: TextDecoration.underline)),
-                    ],
-                  ),
-                )
-              ],
-            ))
-          ],
-        ),
-      ));
-}
-
-Material grades(String heading, double grades) {
-  return Material(
-      elevation: 14.0,
-      borderRadius: BorderRadius.circular(24.0),
-      child: Padding(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FittedBox(
-                fit: BoxFit.cover,
-                child: Text(heading, style: TextStyle(fontSize: 20))),
-            FittedBox(
-                fit: BoxFit.cover,
-                child: Text(grades.toString(), style: TextStyle(fontSize: 20)))
+                  child: ListTile(
+                    leading: Icon(icontwo),
+                    title: Text(
+                      special,
+                      style: TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  )),
+            )
           ],
         ),
       ));
@@ -79,7 +48,6 @@ Material grades(String heading, double grades) {
 Material module(String heading) {
   return Material(
     elevation: 14.0,
-    shadowColor: Colors.black,
     borderRadius: BorderRadius.circular(24.0),
     child: Padding(
       padding: EdgeInsets.all(8),

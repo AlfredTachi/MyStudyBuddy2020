@@ -98,43 +98,41 @@ class StaggeredView extends StatefulWidget {
 class _StaggeredViewState extends State<StaggeredView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            qspdetails(
-                QSPInfoIcons.software_icon,
-                "Software Engineering and Development (SED)",
-                "Die Module dieses Qualifikationsschwerpunkts vertiefen klassische Informatik-Themen," +
-                    "die auf die professionelle Konstruktion komplexer Software-Anwendungen vorbereiten.",
-                context,
-                3 / 5,
-                "3/5",
-                "Für mehr Infos hier klicken",
-                "https://www.hs-worms.de/software-konstruktion/"),
-            qspdetails(
-                QSPInfoIcons.medieninformatik_icon,
-                "Visual Computing (VC)",
-                "Die Medieninformatik konzentriert sich auf die Teile der Informatik und ihres Umfelds," +
-                    "die in direktem Kontakt zu Benutzer/innen, also zu Menschen stehen.",
-                context,
-                2 / 5,
-                "2/5",
-                "Für mehr Infos hier klicken",
-                "https://www.hs-worms.de/medieninformatik/"),
-            qspdetails(
-                QSPInfoIcons.cloud_icon,
-                "Security and Networks (SN)",
-                "Im Qualifikationsschwerpunkt „Cloud und Internet“ dreht es sich verstärkt um Themen der Infrastruktur, " +
-                    "d.h. insbesondere Rechnersysteme und Netzwerke,die zur Bereitstellung der heutigen netzwerkbasierten" +
-                    "Services erforderlich sind.",
-                context,
-                5 / 5,
-                "5/5",
-                "Für mehr Infos hier klicken",
-                "https://www.hs-worms.de/cloud-internet/")
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          qspdetails(
+              QSPInfoIcons.software_icon,
+              "Software Engineering and Development (SED)",
+              "Die Module dieses Qualifikationsschwerpunkts vertiefen klassische Informatik-Themen," +
+                  "die auf die professionelle Konstruktion komplexer Software-Anwendungen vorbereiten.",
+              context,
+              3 / 5,
+              "3/5",
+              "Für mehr Infos hier klicken",
+              "https://www.hs-worms.de/software-konstruktion/"),
+          qspdetails(
+              QSPInfoIcons.medieninformatik_icon,
+              "Visual Computing (VC)",
+              "Die Medieninformatik konzentriert sich auf die Teile der Informatik und ihres Umfelds," +
+                  "die in direktem Kontakt zu Benutzer/innen, also zu Menschen stehen.",
+              context,
+              2 / 5,
+              "2/5",
+              "Für mehr Infos hier klicken",
+              "https://www.hs-worms.de/medieninformatik/"),
+          qspdetails(
+              QSPInfoIcons.cloud_icon,
+              "Security and Networks (SN)",
+              "Im Qualifikationsschwerpunkt „Cloud und Internet“ dreht es sich verstärkt um Themen der Infrastruktur, " +
+                  "d.h. insbesondere Rechnersysteme und Netzwerke,die zur Bereitstellung der heutigen netzwerkbasierten" +
+                  "Services erforderlich sind.",
+              context,
+              5 / 5,
+              "5/5",
+              "Für mehr Infos hier klicken",
+              "https://www.hs-worms.de/cloud-internet/")
+        ],
       ),
     );
   }
