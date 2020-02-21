@@ -17,6 +17,7 @@ class MoralSupportState extends State<MoralSupport> {
       ),
       body: Center(
           child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           FutureBuilder(
             future: getDogImage(),
