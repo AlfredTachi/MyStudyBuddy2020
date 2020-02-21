@@ -12,6 +12,7 @@ import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
 import 'package:MyStudyBuddy2/modulhandbuch/modulhandbuch.dart';
 import 'package:MyStudyBuddy2/support/faq.dart';
 import 'package:MyStudyBuddy2/support/mail_support.dart';
+import 'package:MyStudyBuddy2/support/moral_support.dart';
 import 'package:MyStudyBuddy2/support/quickaccess.dart';
 import 'package:MyStudyBuddy2/support/support.dart';
 import 'package:MyStudyBuddy2/weather/weather.dart';
@@ -52,11 +53,13 @@ class RouteGenerator {
       case '/quiz':
         return MaterialPageRoute(builder: (_) => QuizStart());
       case '/profList':
-       return MaterialPageRoute(builder: (_) => ProfList());
+        return MaterialPageRoute(builder: (_) => ProfList());
       case '/ModuleList':
-       return MaterialPageRoute(builder: (_) => ModuleList());
+        return MaterialPageRoute(builder: (_) => ModuleList());
       case '/evaluation':
-       return MaterialPageRoute(builder: (_) => Evaluation());
+        return MaterialPageRoute(builder: (_) => Evaluation());
+      case '/supportMain/quickAccess/moralSupport':
+        return MaterialPageRoute(builder: (_) => MoralSupport());
       default:
         return _errorRoute();
     }
