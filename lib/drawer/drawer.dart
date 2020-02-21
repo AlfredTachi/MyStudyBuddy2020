@@ -1,4 +1,5 @@
-import 'package:MyStudyBuddy2/qsp_info/q_s_p_info_icons_icons.dart';
+
+import 'package:MyStudyBuddy2/qsp_info/qsp_info_icons.dart';
 import 'package:flutter/material.dart';
 
 class OwnDrawer extends StatefulWidget {
