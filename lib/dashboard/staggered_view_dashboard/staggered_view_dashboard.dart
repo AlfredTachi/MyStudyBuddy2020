@@ -19,34 +19,38 @@ Material persondetails(IconData icon, String infnumber, IconData icontwo,
       borderRadius: BorderRadius.circular(24.0),
       child: Padding(
         padding: EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Row(
           children: <Widget>[
-            Row(
+            Expanded(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(left:15)),
+                Padding(padding: EdgeInsets.only(left: 15)),
                 Icon(icon),
                 Text(infnumber, style: TextStyle(fontSize: 20)),
               ],
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/qspinfo');
-              },
-              child: Container(
+            )),
+            VerticalDivider(),
+            Expanded(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/qspinfo');
+                  },
                   child: Row(
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.only(left:15)),
-                  Icon(icontwo),
-                  Flexible(
-                      child: FittedBox(
-                          fit: BoxFit.cover,
-                          child:
-                              Text(special, style: TextStyle(fontSize: 20)))),
-                ],
-              )),
-            )
+                    children: <Widget>[
+                      Icon(icontwo),
+                      Text(special,
+                          style: TextStyle(
+                              fontSize: 20,
+                              decoration: TextDecoration.underline)),
+                    ],
+                  ),
+                )
+              ],
+            ))
           ],
         ),
       ));
@@ -129,21 +133,29 @@ class _StaggeredViewState extends State<StaggeredView> {
         crossAxisSpacing: 5,
         mainAxisSpacing: 5,
         children: <Widget>[
-          progress(GestureDetector(
-              onTap: () {
-                setState(() {
-                  _creditPoints += 6;
-                });
-              },
-              child: ProgressBar(_creditPoints, _maxCreditPoints))),
-          persondetails(Icons.person, "inf2730", Icons.work, "SED", context),
-          grades("Notendurchschnitt:", 5.0),
-          module("Deine Module"),
+          Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5, top: 5),
+            child: progress(GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _creditPoints += 6;
+                  });
+                },
+                child: ProgressBar(_creditPoints, _maxCreditPoints))),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            child: persondetails(
+                Icons.person, "inf2730", Icons.work, "SED", context),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
+            child: module("Deine Module"),
+          ),
         ],
         staggeredTiles: [
           StaggeredTile.extent(2, screenHeight / 3),
-          StaggeredTile.extent(1, screenHeight / 8),
-          StaggeredTile.extent(1, screenHeight / 8),
+          StaggeredTile.extent(2, screenHeight / 8),
           StaggeredTile.extent(2, screenHeight / 2),
         ],
       ),

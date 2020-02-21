@@ -14,15 +14,21 @@ class DashboardState extends State<Dashboard> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Übersicht"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              ///TODO Profilseite anzeigen
+            },
+          )
+        ],
       ),
       drawer: OwnDrawer(),
       body: StaggeredView(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ModuleSelection())
-          );
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ModuleSelection()));
         },
         tooltip: 'Modul hinzufügen',
         child: Icon(Icons.add),
