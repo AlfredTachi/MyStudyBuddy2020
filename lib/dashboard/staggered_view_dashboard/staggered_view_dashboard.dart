@@ -4,60 +4,42 @@ import '../progress_bar/progress_bar.dart';
 
 final List<Widget> myCourses = [];
 
-Material progress(ProgressBar progressBar) {
+Material progress(Widget progressBar) {
   return Material(
     elevation: 14.0,
     borderRadius: BorderRadius.circular(24.0),
-    child: ProgressBar(),
+    child: progressBar,
   );
 }
 
-Material persondetails(
-    IconData icon, String infnumber, IconData icontwo, String special) {
+Material persondetails(IconData icon, String infnumber, IconData icontwo,
+    String special, BuildContext context) {
   return Material(
       elevation: 14.0,
       borderRadius: BorderRadius.circular(24.0),
       child: Padding(
         padding: EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Row(
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Icon(icon),
-                Text(infnumber, style: TextStyle(fontSize: 20)),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Icon(icontwo),
-                Flexible(
-                    child: FittedBox(
-                        fit: BoxFit.cover,
-                        child: Text(special, style: TextStyle(fontSize: 20)))),
-              ],
+            Expanded(
+                child: ListTile(
+              leading: Icon(icon),
+              title: Text('inf2730'),
+            )),
+            VerticalDivider(),
+            Expanded(
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/qspinfo');
+                  },
+                  child: ListTile(
+                    leading: Icon(icontwo),
+                    title: Text(
+                      special,
+                      style: TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  )),
             )
-          ],
-        ),
-      ));
-}
-
-Material grades(String heading, double grades) {
-  return Material(
-      elevation: 14.0,
-      borderRadius: BorderRadius.circular(24.0),
-      child: Padding(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FittedBox(
-                fit: BoxFit.cover,
-                child: Text(heading, style: TextStyle(fontSize: 20))),
-            FittedBox(
-                fit: BoxFit.cover,
-                child: Text(grades.toString(), style: TextStyle(fontSize: 20)))
           ],
         ),
       ));
@@ -65,9 +47,7 @@ Material grades(String heading, double grades) {
 
 Material module(String heading) {
   return Material(
-    color: Colors.white,
     elevation: 14.0,
-    shadowColor: Colors.black,
     borderRadius: BorderRadius.circular(24.0),
     child: Padding(
       padding: EdgeInsets.all(8),
@@ -76,7 +56,10 @@ Material module(String heading) {
         children: <Widget>[
           Row(
             children: <Widget>[
-              Text(heading, style: TextStyle(fontSize: 25)),
+              Padding(
+                padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
+                child: Text(heading, style: TextStyle(fontSize: 25)),
+              ),
             ],
           ),
           Expanded(
@@ -105,27 +88,42 @@ class StaggeredView extends StatefulWidget {
   }
 }
 
+int _creditPoints = 0;
+int _maxCreditPoints = 210;
+
 class _StaggeredViewState extends State<StaggeredView> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    //double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: StaggeredGridView.count(
         crossAxisCount: 2,
         crossAxisSpacing: 5,
         mainAxisSpacing: 5,
         children: <Widget>[
-          progress(ProgressBar()),
-          persondetails(
-              Icons.person, "inf2730", Icons.work, "Software Konstruktion"),
-          grades("Notendurchschnitt:", 5.0),
-          module("Deine Module"),
+          Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5, top: 5),
+            child: progress(GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _creditPoints += 6;
+                  });
+                },
+                child: ProgressBar(_creditPoints, _maxCreditPoints))),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            child: persondetails(
+                Icons.person, "inf2730", Icons.work, "SED", context),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
+            child: module("Deine Module"),
+          ),
         ],
         staggeredTiles: [
-          StaggeredTile.extent(1, screenHeight / 3),
-          StaggeredTile.extent(1, screenHeight / 6),
-          StaggeredTile.extent(1, screenHeight / 6),
+          StaggeredTile.extent(2, screenHeight / 3),
+          StaggeredTile.extent(2, screenHeight / 9),
           StaggeredTile.extent(2, screenHeight / 2),
         ],
       ),

@@ -57,7 +57,7 @@ class _StaggeredViewState extends State<StaggeredViewCloud> {
                   children: <Widget>[
                     Padding(
                     padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
-                    child: Text("Cloud und Internet",
+                    child: Text("Security and Network",
                         style: TextStyle(fontSize: 25)),
                     ),],
                 ),

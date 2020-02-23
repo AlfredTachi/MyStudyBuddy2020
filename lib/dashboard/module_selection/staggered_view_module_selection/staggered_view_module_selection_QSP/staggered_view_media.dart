@@ -18,7 +18,10 @@ Material module(String heading) {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text(heading, style: TextStyle(fontSize: 25)),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+                  child: Text(heading, style: TextStyle(fontSize: 25)),
+                ),
               ],
             ),
             Expanded(
@@ -48,35 +51,36 @@ class _StaggeredViewState extends State<StaggeredViewMedia> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Padding(
+      body: Stack(
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Padding(
                     padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
-                    child: Text("Medieninformatik",
+                    child: Text("Visual Computing",
                         style: TextStyle(fontSize: 25)),
-                    ),],
-                ),
-                Expanded(
-                  child: new Container(
-                    padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
-                    child: StaggeredGridView.count(
-                      crossAxisCount: 4,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5,
-                      children: myModules(),
-                      staggeredTiles: myModulesTiles(context),
-                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: new Container(
+                  padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                  child: StaggeredGridView.count(
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                    children: myModules(),
+                    staggeredTiles: myModulesTiles(context),
                   ),
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 

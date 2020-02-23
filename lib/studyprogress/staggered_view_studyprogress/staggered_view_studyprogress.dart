@@ -1,19 +1,13 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:MyStudyBuddy2/dashboard/staggered_view_dashboard/StaggeredView.dart';
 import 'package:flutter/material.dart';
-import 'package:MyStudyBuddy2/model/module.dart';
-import '../../staggered_view_dashboard/StaggeredView.dart';
-
-Module myModule = Module(0, "");
 
 Material semester(String heading) {
   return Material(
-      color: Colors.white,
       elevation: 2.0,
       shadowColor: Colors.black,
       borderRadius: BorderRadius.circular(12.0),
       child: Padding(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -39,20 +33,14 @@ Material semester(String heading) {
               ),
             ]),
             Expanded(
-              child: new InkWell(
-                onTap: () {
-                  //myCourses.add(_StaggeredViewState().myModules().elementAt(index));
-                  //myCourses.add(myModule);
-                  myCourses.add(myModule.module());
-                },
-                child: new Container(
-                  child: GridView.count(
-                    primary: false,
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    children: _StaggeredViewState().myModules(),
-                  ),
+              child: new Container(
+                child: GridView.count(
+                  padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                  primary: false,
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  children: _StaggeredViewState().myModules(),
                 ),
               ),
             ),
@@ -130,8 +118,7 @@ class _StaggeredViewState extends State<StaggeredView> {
   List<Widget> myModules() {
     List<Widget> list = new List();
     for (int i = 1; i <= 7; i++) {
-      myModule = Module(i, (i.toString() + ". M").toString());
-      list.add(myModule.module());
+      list.add(module((i).toString() + ". M"));
     }
     return list;
   }

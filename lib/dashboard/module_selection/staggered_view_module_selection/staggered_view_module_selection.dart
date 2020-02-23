@@ -1,9 +1,13 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:MyStudyBuddy2/dashboard/staggered_view_dashboard/staggered_view_dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:MyStudyBuddy2/model/module.dart';
+import '../../staggered_view_dashboard/staggered_view_dashboard.dart';
+
+Module myModule = Module(0, "");
 
 Material semester(String heading) {
   return Material(
-      color: Colors.white,
       elevation: 2.0,
       shadowColor: Colors.black,
       borderRadius: BorderRadius.circular(12.0),
@@ -34,13 +38,20 @@ Material semester(String heading) {
               ),
             ]),
             Expanded(
-              child: new Container(
-                child: GridView.count(
-                  primary: false,
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  children: _StaggeredViewState().myModules(),
+              child: new InkWell(
+                onTap: () {
+                  //myCourses.add(_StaggeredViewState().myModules().elementAt(index));
+                  //myCourses.add(myModule);
+                  myCourses.add(myModule.module());
+                },
+                child: new Container(
+                  child: GridView.count(
+                    primary: false,
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                    children: _StaggeredViewState().myModules(),
+                  ),
                 ),
               ),
             ),
@@ -118,7 +129,8 @@ class _StaggeredViewState extends State<StaggeredView> {
   List<Widget> myModules() {
     List<Widget> list = new List();
     for (int i = 1; i <= 7; i++) {
-      list.add(module((i).toString() + ". M"));
+      myModule = Module(i, (i.toString() + ". M").toString());
+      list.add(myModule.module());
     }
     return list;
   }
