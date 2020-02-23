@@ -1,8 +1,7 @@
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import '../progress_bar/progress_bar.dart';
-
-final List<Widget> myCourses = [];
 
 Material progress(Widget progressBar) {
   return Material(
@@ -64,14 +63,14 @@ Material module(String heading) {
           ),
           Expanded(
             child: new Container(
-              child: (myCourses.length == 0)
+              child: (ModuleController().getSelectedModules().length == 0)
                   ? Center(child: Text("Du hast zurzeit keine Module geplant!"))
                   : GridView.count(
                       primary: false,
                       crossAxisCount: 4,
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 5,
-                      children: myCourses,
+                      children: ModuleController().getSelectedModulesWidgets(),
                     ),
             ),
           ),

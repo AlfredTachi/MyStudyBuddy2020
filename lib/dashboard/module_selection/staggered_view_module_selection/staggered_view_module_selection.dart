@@ -1,91 +1,6 @@
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:MyStudyBuddy2/dashboard/staggered_view_dashboard/staggered_view_dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:MyStudyBuddy2/model/module.dart';
-import '../../staggered_view_dashboard/staggered_view_dashboard.dart';
-
-Module myModule = Module(0, "");
-
-Material semester(String heading) {
-  return Material(
-      elevation: 2.0,
-      shadowColor: Colors.black,
-      borderRadius: BorderRadius.circular(12.0),
-      child: Padding(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Row(children: <Widget>[
-              Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  child: Text(heading,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Color(0xFF013D62),
-                      )),
-                ),
-              ),
-              Expanded(
-                child: new Container(
-                    margin: const EdgeInsets.only(left: 10.0, right: 10.0),
-                    child: Divider(
-                      color: Color(0xFF013D62),
-                      height: 36,
-                      thickness: 1,
-                    )),
-              ),
-            ]),
-            Expanded(
-              child: new InkWell(
-                onTap: () {
-                  //myCourses.add(_StaggeredViewState().myModules().elementAt(index));
-                  //myCourses.add(myModule);
-                  myCourses.add(myModule.module());
-                },
-                child: new Container(
-                  child: GridView.count(
-                    primary: false,
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    children: _StaggeredViewState().myModules(),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ));
-}
-
-Material module(String heading) {
-  return Material(
-      color: Color(0xFF013D62),
-      elevation: 3.0,
-      shadowColor: Colors.black,
-      borderRadius: BorderRadius.circular(12.0),
-      child: Padding(
-        padding: EdgeInsets.all(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(children: <Widget>[
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  child: Center(
-                    child: Text(heading,
-                        style: TextStyle(fontSize: 20, color: Colors.white)),
-                  ),
-                ),
-              ),
-            ]),
-          ],
-        ),
-      ));
-}
 
 class StaggeredView extends StatefulWidget {
   @override
@@ -126,12 +41,73 @@ class _StaggeredViewState extends State<StaggeredView> {
     return list;
   }
 
-  List<Widget> myModules() {
-    List<Widget> list = new List();
-    for (int i = 1; i <= 7; i++) {
-      myModule = Module(i, (i.toString() + ". M").toString());
-      list.add(myModule.module());
-    }
-    return list;
+  Widget semester(String heading) {
+    return Padding(
+      padding: EdgeInsets.all(8),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Row(children: <Widget>[
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                child: Text(heading,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Color(0xFF013D62),
+                    )),
+              ),
+            ),
+            Expanded(
+              child: new Container(
+                  margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Divider(
+                    color: Color(0xFF013D62),
+                    height: 36,
+                    thickness: 1,
+                  )),
+            ),
+          ]),
+          Expanded(
+            child: new Container(
+              child: GridView.count(
+                primary: false,
+                crossAxisCount: 4,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                children: ModuleController().getAllModulesWidgets(),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget module(String heading) {
+    return Material(
+        color: Color(0xFF013D62),
+        elevation: 3.0,
+        shadowColor: Colors.black,
+        borderRadius: BorderRadius.circular(12.0),
+        child: Padding(
+          padding: EdgeInsets.all(12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(children: <Widget>[
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    child: Center(
+                      child: Text(heading,
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
+                    ),
+                  ),
+                ),
+              ]),
+            ],
+          ),
+        ));
   }
 }
