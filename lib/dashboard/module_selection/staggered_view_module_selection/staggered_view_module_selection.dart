@@ -83,31 +83,4 @@ class _StaggeredViewState extends State<StaggeredView> {
       ),
     );
   }
-
-  Widget module(String heading) {
-    return Material(
-        color: Color(0xFF013D62),
-        elevation: 3.0,
-        shadowColor: Colors.black,
-        borderRadius: BorderRadius.circular(12.0),
-        child: Padding(
-          padding: EdgeInsets.all(12),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(children: <Widget>[
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    child: Center(
-                      child: Text(heading,
-                          style: TextStyle(fontSize: 20, color: Colors.white)),
-                    ),
-                  ),
-                ),
-              ]),
-            ],
-          ),
-        ));
-  }
 }

@@ -3,7 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import '../progress_bar/progress_bar.dart';
 
-Material progress(Widget progressBar) {
+Widget progress(Widget progressBar) {
   return Material(
     elevation: 14.0,
     borderRadius: BorderRadius.circular(24.0),
@@ -11,7 +11,7 @@ Material progress(Widget progressBar) {
   );
 }
 
-Material persondetails(IconData icon, String infnumber, IconData icontwo,
+Widget persondetails(IconData icon, String infnumber, IconData icontwo,
     String special, BuildContext context) {
   return Material(
       elevation: 14.0,
@@ -44,38 +44,36 @@ Material persondetails(IconData icon, String infnumber, IconData icontwo,
       ));
 }
 
-Material module(String heading) {
+Widget module() {
   return Material(
     elevation: 14.0,
     borderRadius: BorderRadius.circular(24.0),
-    child: Padding(
-      padding: EdgeInsets.all(8),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
-                child: Text(heading, style: TextStyle(fontSize: 25)),
-              ),
-            ],
-          ),
-          Expanded(
-            child: new Container(
-              child: (ModuleController().getSelectedModules().length == 0)
-                  ? Center(child: Text("Du hast zurzeit keine Module geplant!"))
-                  : GridView.count(
-                      primary: false,
-                      crossAxisCount: 4,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5,
-                      children: ModuleController().getSelectedModulesWidgets(),
-                    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: 16, top: 16, bottom: 16),
+              child: Text("Deine Module", style: TextStyle(fontSize: 25)),
             ),
+          ],
+        ),
+        Expanded(
+          child: new Container(
+            padding: EdgeInsets.all(8),
+            child: (ModuleController().getSelectedModules().length == 0)
+                ? Center(child: Text("Du hast zurzeit keine Module geplant!"))
+                : GridView.count(
+                    primary: false,
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                    children: ModuleController().getSelectedModulesWidgets(),
+                  ),
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }
@@ -117,7 +115,7 @@ class _StaggeredViewState extends State<StaggeredView> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
-            child: module("Deine Module"),
+            child: module(),
           ),
         ],
         staggeredTiles: [
