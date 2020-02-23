@@ -27,12 +27,16 @@ class DashboardState extends State<Dashboard> {
       body: StaggeredView(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ModuleSelection()));
+          Navigator.pushNamed(context, "/modulSelection")
+              .whenComplete(() => updateView());
         },
         tooltip: 'Modul hinzufügen',
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  updateView() {
+    setState(() {});
   }
 }
