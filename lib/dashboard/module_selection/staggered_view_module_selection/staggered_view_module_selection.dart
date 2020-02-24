@@ -27,23 +27,24 @@ class _StaggeredViewState extends State<StaggeredView> {
   List<Widget> mySemester() {
     List<Widget> list = new List();
     for (int i = 1; i <= 5; i++) {
-      list.add(semester((i).toString() + ". Semester"));
+      list.add(semester(i));
     }
     return list;
   }
 
   List<StaggeredTile> mySemesterTiles(context) {
     List<StaggeredTile> list = new List();
-    double screenHeight = MediaQuery.of(context).size.height;
+    double screenHeight = MediaQuery.of(context).size.height / 2.5;
     for (int i = 1; i <= 5; i++) {
-      list.add(StaggeredTile.extent(2, screenHeight / 2.5));
+      list.add(StaggeredTile.extent(2, screenHeight));
     }
     return list;
   }
 
-  Widget semester(String heading) {
+  Widget semester(int titleIndex) {
+    String title = titleIndex.toString() + ". Semester";
     return Padding(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(3),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -51,7 +52,7 @@ class _StaggeredViewState extends State<StaggeredView> {
             Align(
               alignment: Alignment.topLeft,
               child: Container(
-                child: Text(heading,
+                child: Text(title,
                     style: TextStyle(
                       fontSize: 20,
                       color: Color(0xFF013D62),
