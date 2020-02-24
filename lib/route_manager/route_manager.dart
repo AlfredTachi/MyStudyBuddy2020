@@ -20,6 +20,8 @@ import 'package:MyStudyBuddy2/weather/weather.dart';
 import 'package:MyStudyBuddy2/settings/settings.dart';
 import 'package:flutter/material.dart';
 
+import '../dashboard/module_selection/module_selection.dart';
+
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {

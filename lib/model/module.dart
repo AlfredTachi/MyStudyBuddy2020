@@ -13,10 +13,13 @@ class Module {
   );
 
   Widget module() {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: InkWell(
-        onTap: () {
+    return Container(
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(15.0),
+        ),
+        color: Color(0xFF013D62),
+        onPressed: () {
           if (_isSelected) {
             ///Open Alert Dialog
           } else {
@@ -24,15 +27,9 @@ class Module {
             _isSelected = true;
           }
         },
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: Color(0xFF013D62),
-          ),
-          child: Center(
-              child: Text(title,
-                  style: TextStyle(fontSize: 20, color: Colors.white))),
-        ),
+        child: Center(
+            child: Text(title,
+                style: TextStyle(fontSize: 20, color: Colors.white))),
       ),
     );
   }
