@@ -15,20 +15,20 @@ class Module {
   Widget module() {
     return Padding(
       padding: const EdgeInsets.all(4.0),
-      child: InkWell(
-        onTap: () {
-          if (_isSelected) {
-            ///Open Alert Dialog
-          } else {
-            ModuleController().addModule(this);
-            _isSelected = true;
-          }
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: Color(0xFF013D62),
-          ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: RaisedButton(
+          color: Color(0xFF013D62),
+          onPressed: () {
+            if (_isSelected) {
+              ///Open Alert Dialog
+            } else {
+              ModuleController().addModule(this);
+              _isSelected = true;
+            }
+          },
           child: Center(
               child: Text(title,
                   style: TextStyle(fontSize: 20, color: Colors.white))),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../dashboard/staggered_view_dashboard/staggered_view_dashboard.dart';
 import '../drawer/drawer.dart';
-import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection.dart';
 
 class Dashboard extends StatefulWidget {
   @override
