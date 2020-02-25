@@ -13,23 +13,28 @@ class Module {
   );
 
   Widget module() {
-    return Container(
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(15.0),
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Container(
+        height: 80,
+        width: 80,
+        child: RaisedButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(15.0),
+          ),
+          color: Color(0xFF013D62),
+          onPressed: () {
+            if (_isSelected) {
+              ///Open Alert Dialog
+            } else {
+              ModuleController().addModule(this);
+              _isSelected = true;
+            }
+          },
+          child: Center(
+              child: Text(title,
+                  style: TextStyle(fontSize: 20, color: Colors.white))),
         ),
-        color: Color(0xFF013D62),
-        onPressed: () {
-          if (_isSelected) {
-            ///Open Alert Dialog
-          } else {
-            ModuleController().addModule(this);
-            _isSelected = true;
-          }
-        },
-        child: Center(
-            child: Text(title,
-                style: TextStyle(fontSize: 20, color: Colors.white))),
       ),
     );
   }

@@ -48,32 +48,31 @@ Widget module() {
   return Material(
     elevation: 14.0,
     borderRadius: BorderRadius.circular(24.0),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: 16, top: 16, bottom: 16),
-              child: Text("Deine Module", style: TextStyle(fontSize: 25)),
-            ),
-          ],
-        ),
-        Expanded(
-          child: new Container(
+    child: SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 16, top: 16, bottom: 16),
+                child: Text("Deine Module", style: TextStyle(fontSize: 25)),
+              ),
+            ],
+          ),
+          Container(
+            alignment: Alignment.topLeft,
             padding: EdgeInsets.all(8),
             child: (ModuleController().getSelectedModules().length == 0)
                 ? Center(child: Text("Du hast zurzeit keine Module geplant!"))
-                : GridView.count(
-                    primary: false,
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
+                : Wrap(
+                    direction: Axis.horizontal,
+                    runSpacing: 5,
                     children: ModuleController().getSelectedModulesWidgets(),
                   ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }
