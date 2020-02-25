@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:MyStudyBuddy2/studyprogress/staggered_view_studyprogress/StaggeredView.dart';
+import 'package:MyStudyBuddy2/studyprogress/staggered_view_studyprogress/staggered_view_studyprogress.dart';
 import '../drawer/drawer.dart';
 
 class Studyprogress extends StatefulWidget {

@@ -1,7 +1,11 @@
-import 'package:MyStudyBuddy2/drawer/drawer.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'dart:io';
+
+import 'package:MyStudyBuddy2/drawer/drawer.dart';
 
 class MensaPlan extends StatefulWidget {
   @override
@@ -9,63 +13,79 @@ class MensaPlan extends StatefulWidget {
 }
 
 class MensaPlanState extends State<MensaPlan> {
-  Map<String, double> dataMap = new Map();
+  num _viewIndex = 0;
+  bool _hasLoaded = false;
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS) {
+      return getCupertinoDesign();
+    } else {
+      return getMaterialDesign();
+    }
+  }
+
+  Widget getMaterialDesign() {
     return Scaffold(
-      body: WebViewContainer('https://stw-vp.de/de/mensa-webapp'),
+      appBar: AppBar(
+        title: Text("Mensa Plan"),
+      ),
+      drawer: OwnDrawer(),
+      body: IndexedStack(
+        index: _viewIndex,
+        children: <Widget>[
+          Center(child: CircularProgressIndicator()),
+          WebView(
+            initialUrl: 'https://stw-vp.de/de/mensa-webapp',
+            javascriptMode: JavascriptMode.unrestricted,
+            onPageStarted: checkTimeOut,
+            onPageFinished: pageFinishedLoading,
+          ),
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                  child: Text(
+                    "Es gibt ein Problem bei der Verbindung. Prüfe deine Internetverbindung",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                IconButton(
+                    icon: Icon(Icons.refresh),
+                    onPressed: () {
+                      pageReload();
+                    })
+              ]),
+        ],
+      ),
     );
   }
-}
 
-class _WebViewContainerState extends State<WebViewContainer> {
-  var _url;
-  final _key = UniqueKey();
-  _WebViewContainerState(this._url);
-  num _stackToView = 1;
+  Widget getCupertinoDesign() {
+    return getMaterialDesign();
+  }
 
-  void _handleLoad(String value) {
+  void pageReload() {
     setState(() {
-      _stackToView = 0;
+      Navigator.popAndPushNamed(context, '/mensa_plan');
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Mensa Plan'),
-        ),
-        drawer: OwnDrawer(),
-        body: IndexedStack(
-          index: _stackToView,
-          children: [
-            Column(
-              children: <Widget>[
-                Expanded(
-                    child: WebView(
-                  key: _key,
-                  javascriptMode: JavascriptMode.unrestricted,
-                  initialUrl: _url,
-                  onPageFinished: _handleLoad,
-                )),
-              ],
-            ),
-            Container(
-              color: Colors.white,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            ),
-          ],
-        ));
+  void pageFinishedLoading(String url) {
+    setState(() {
+      _hasLoaded = true;
+      _viewIndex = 1;
+    });
   }
-}
 
-class WebViewContainer extends StatefulWidget {
-  final url;
-  WebViewContainer(this.url);
-  @override
-  createState() => _WebViewContainerState(this.url);
+  void checkTimeOut(String url) async {
+    Future.delayed(Duration(seconds: 10), () {
+      setState(() {
+        if (_hasLoaded == false) {
+          _viewIndex = 2;
+        }
+      });
+    });
+  }
 }
