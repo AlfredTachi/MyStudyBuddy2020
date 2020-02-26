@@ -1,4 +1,4 @@
-import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:MyStudyBuddy2/singleton/module_module_selection_controller.dart';
 import 'package:flutter/material.dart';
 
 class Module {
@@ -9,7 +9,6 @@ class Module {
   Module(
     this.id,
     this.title,
-    // Function myModules
   );
 
   Widget module() {
@@ -23,6 +22,7 @@ class Module {
             borderRadius: new BorderRadius.circular(15.0),
           ),
           color: Color(0xFF013D62),
+          splashColor: Colors.orange,
           onPressed: () {
             if (_isSelected) {
               ///Open Alert Dialog
