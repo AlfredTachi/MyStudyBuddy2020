@@ -1,4 +1,4 @@
-import 'package:MyStudyBuddy2/model/module.dart';
+import 'package:MyStudyBuddy2/model/module_module_selection.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 

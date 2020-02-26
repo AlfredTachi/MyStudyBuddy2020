@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class Module {
   int id;
   String title;
-  bool _isSelected = false;
 
   Module(
     this.id,
