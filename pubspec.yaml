@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter # https://https://flutter.dev/ *** BSD ***
   webview_flutter: ^0.3.19+7 # https://pub.dev/packages/webview_flutter *** BSD ***
   http: ^0.12.0+4 # https://pub.dev/packages/http *** BSD ***
+  html: ^0.14.0+3 # https://pub.dev/packages/html *** MIT ***
   flutter_staggered_grid_view: ^0.3.0 # https://pub.dev/packages/flutter_staggered_grid_view *** MIT ***
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -35,6 +36,8 @@ dependencies:
   percent_indicator: ^2.1.1 #https://pub.dev/packages/percent_indicator *** BSD ***
   flutter_launcher_icons: ^0.7.4 #https://pub.dev/packages/flutter_launcher_icons *** MIT ***
   smooth_star_rating: 1.0.4+2 #https://pub.dev/packages/smooth_star_rating *** MIT ***
+  sqflite: ^1.2.0 # https://pub.dev/packages/sqflite *** MIT ***
+  path: ^1.6.4 # https://pub.dev/packages/path *** BSD ***
 
 flutter_icons:
   android: "launcher_icon" # https://pub.dev/packages/flutter_launcher_icons *** MIT ***

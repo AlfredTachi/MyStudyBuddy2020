@@ -21,4 +21,31 @@ class ExamResult {
     this.numberOfTries = numberOfTries;
     this.date = DateTime.tryParse(date);
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'examNumber' : number,
+      'examName' : name,
+      'term' : term,
+      'grade' : grade,
+      'passed' : passed,
+      'credits' : credits,
+      'note' : note,
+      'numberOfTries' : numberOfTries,
+      'date' : date.toString()
+    };
+  }
+
+  String toString() {
+    return '''
+    examNumber: $number
+    examName: $name
+    grade: $grade
+    passed: $passed
+    credits: $credits
+    note: $note
+    numberOfTries: $numberOfTries
+    date: $date
+    ''';
+  }
 }
