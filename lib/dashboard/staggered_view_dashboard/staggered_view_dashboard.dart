@@ -60,17 +60,22 @@ Widget module() {
               ),
             ],
           ),
-          Container(
-            alignment: Alignment.topLeft,
-            padding: EdgeInsets.all(8),
-            child: (ModuleController().getSelectedModules().length == 0)
-                ? Center(child: Text("Du hast zurzeit keine Module geplant!"))
-                : Wrap(
+          (ModuleController().getSelectedModules().length == 0)
+              ? Center(
+                  child: Text(
+                  "Du hast zurzeit keine Module geplant!",
+                  style: TextStyle(color: Colors.grey[400]),
+                ))
+              : Container(
+                padding: EdgeInsets.only(left: 5, right: 5),
+                alignment: Alignment.topLeft,
+                child: Wrap(
                     direction: Axis.horizontal,
+                    spacing: 0,
                     runSpacing: 5,
                     children: ModuleController().getSelectedModulesWidgets(),
                   ),
-          ),
+              ),
         ],
       ),
     ),
