@@ -21,9 +21,17 @@ Widget persondetails(IconData icon, String infnumber, IconData icontwo,
         child: Row(
           children: <Widget>[
             Expanded(
-                child: ListTile(
-              leading: Icon(icon),
-              title: Text('inf2730'),
+                child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, "/profilePage");
+              },
+              child: ListTile(
+                leading: Icon(icon),
+                title: Text(
+                  'inf2730',
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
+              ),
             )),
             VerticalDivider(),
             Expanded(
@@ -67,15 +75,15 @@ Widget module() {
                   style: TextStyle(color: Colors.grey[400]),
                 ))
               : Container(
-                padding: EdgeInsets.only(left: 5, right: 5),
-                alignment: Alignment.topLeft,
-                child: Wrap(
+                  padding: EdgeInsets.only(left: 5, right: 5),
+                  alignment: Alignment.topLeft,
+                  child: Wrap(
                     direction: Axis.horizontal,
                     spacing: 0,
                     runSpacing: 5,
                     children: ModuleController().getSelectedModulesWidgets(),
                   ),
-              ),
+                ),
         ],
       ),
     ),
