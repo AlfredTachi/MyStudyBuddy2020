@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 
 Material semester(String heading) {
   return Material(
-      color: Colors.white,
       elevation: 2.0,
       shadowColor: Colors.black,
       borderRadius: BorderRadius.circular(12.0),
       child: Padding(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -17,7 +16,10 @@ Material semester(String heading) {
                 alignment: Alignment.topLeft,
                 child: Container(
                   child: Text(heading,
-                      style: TextStyle(fontSize: 20, color: Color(0xFF013D62),)),
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color(0xFF013D62),
+                      )),
                 ),
               ),
               Expanded(
@@ -33,8 +35,9 @@ Material semester(String heading) {
             Expanded(
               child: new Container(
                 child: GridView.count(
+                  padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
                   primary: false,
-                  crossAxisCount: 5,
+                  crossAxisCount: 4,
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 5,
                   children: _StaggeredViewState().myModules(),
@@ -83,16 +86,14 @@ class StaggeredView extends StatefulWidget {
 class _StaggeredViewState extends State<StaggeredView> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: StaggeredGridView.count(
-          padding: EdgeInsets.all(8.0),
-          crossAxisCount: 2,
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5,
-          children: mySemester(),
-          staggeredTiles: mySemesterTiles(context),
-        ),
+    return Scaffold(
+      body: StaggeredGridView.count(
+        padding: EdgeInsets.all(8.0),
+        crossAxisCount: 2,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
+        children: mySemester(),
+        staggeredTiles: mySemesterTiles(context),
       ),
     );
   }
@@ -109,7 +110,7 @@ class _StaggeredViewState extends State<StaggeredView> {
     List<StaggeredTile> list = new List();
     double screenHeight = MediaQuery.of(context).size.height;
     for (int i = 1; i <= 5; i++) {
-      list.add(StaggeredTile.extent(2, screenHeight / 3));
+      list.add(StaggeredTile.extent(2, screenHeight / 2.5));
     }
     return list;
   }

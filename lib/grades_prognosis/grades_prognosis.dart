@@ -4,7 +4,7 @@ import '../drawer/drawer.dart';
 
 Material gradesAverage(IconData icon, String text, double grade) {
   return Material(
-    color: Colors.white,
+
     elevation: 14.0,
     shadowColor: Colors.black,
     borderRadius: BorderRadius.circular(24.0),
@@ -27,7 +27,7 @@ Material gradesAverage(IconData icon, String text, double grade) {
 
 Material bestPossible(String best, IconData icon, double grade) {
   return Material(
-    color: Colors.white,
+
     elevation: 14.0,
     shadowColor: Colors.black,
     borderRadius: BorderRadius.circular(24.0),
@@ -54,7 +54,7 @@ Material bestPossible(String best, IconData icon, double grade) {
 
 Material worstPossible(String worst, IconData icon, double grade) {
   return Material(
-    color: Colors.white,
+
     elevation: 14.0,
     shadowColor: Colors.black,
     borderRadius: BorderRadius.circular(24.0),
@@ -81,7 +81,7 @@ Material worstPossible(String worst, IconData icon, double grade) {
 
 Material openModules(String modules) {
   return Material(
-    color: Colors.white,
+
     elevation: 14.0,
     shadowColor: Colors.black,
     borderRadius: BorderRadius.circular(24.0),
@@ -124,7 +124,7 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
                   gradesAverage(Icons.check, "Notendurchschnitt:", 5.0),
                   bestPossible("Best case:", Icons.thumb_up, 5.0),
                   worstPossible(
-                      "Worse case:", Icons.thumb_down, 5.0),
+                      "Worst case:", Icons.thumb_down, 5.0),
                   openModules("Aktuell geplante Module:")
                 ],
                 staggeredTiles: [

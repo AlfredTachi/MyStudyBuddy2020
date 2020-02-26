@@ -44,7 +44,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
-      return getCupertinoDesign();
+      return getMaterialDesign();
     } else {
       return getMaterialDesign();
     }
@@ -68,84 +68,90 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
         ],
       ),
       drawer: OwnDrawer(),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Container(
-            padding: EdgeInsets.only(top: 20),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                  Colors.blue[800],
-                  Colors.blue[700],
-                  Colors.blue[400],
-                  Colors.blue[200],
-                ])),
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.only(top: 20),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                Color(0xFF013D62),
+                Color(0xBB013D62),
+                Color(0x99013D62)
+              ])),
+          child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height / 5),
-                        child: Column(
-                          children: <Widget>[
-                            (status.isNotEmpty) ? Text(status) : Container(),
-                            Text(
-                              "HS Worms",
-                              style: TextStyle(
-                                fontSize: 50,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text("Zuletzt aktualisiert: " + dateTimeToString()),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                data.temperature.toString() + " °C",
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height / 5),
+                          child: Column(
+                            children: <Widget>[
+                              (status.isNotEmpty) ? Text(status) : Container(),
+                              Text(
+                                "HS Worms",
                                 style: TextStyle(
-                                  fontSize: 44,
+                                  fontSize: 50,
                                   color: Colors.white,
                                 ),
                               ),
-                            ),
-                          ],
+                              Text(
+                                "Zuletzt aktualisiert: " + dateTimeToString(),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  data.temperature.toString() + " °C",
+                                  style: TextStyle(
+                                    fontSize: 44,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Divider(),
-                      MaterialButton(
-                        onPressed: () {
-                          if (animationCtrl.isCompleted) {
-                            showDetails = true;
-                            animationCtrl.reverse();
-                          } else {
-                            showDetails = false;
-                            animationCtrl.forward();
-                          }
-                          setState(() {});
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            AnimatedIcon(
-                              icon: AnimatedIcons.close_menu,
-                              progress: animationCtrl,
-                            ),
-                            Text(
-                              "Show more",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
+                        Divider(),
+                        MaterialButton(
+                          onPressed: () {
+                            if (animationCtrl.isCompleted) {
+                              showDetails = true;
+                              animationCtrl.reverse();
+                            } else {
+                              showDetails = false;
+                              animationCtrl.forward();
+                            }
+                            setState(() {});
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              AnimatedIcon(
+                                icon: AnimatedIcons.close_menu,
+                                progress: animationCtrl,
+                              ),
+                              Text(
+                                "Show more",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Divider(),
-                      (showDetails) ? details() : Container(),
-                    ],
+                        Divider(),
+                        (showDetails) ? details() : Container(),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -161,12 +167,14 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text("Luftdruck: " + data.barometer.round().toString() + " hPa"),
+          Text("Luftdruck: " + data.barometer.round().toString() + " hPa",),
           Text("Luftfeuchtigkeit: " + data.humidity.toString() + " %"),
-          Text("Windgesch.: " + data.windSpeed.toString() + " km/h"),
+          Text("Windgesch.: " +
+              (data.windSpeed / 3.6).round().toString() +
+              " m/s"),
           Text("Windrichtung: " + data.windDir.toString()),
-          Text("UV Strahlung: " + data.uvImpact.toString()),
-          Text("Regen pro mm^2: " + data.rainPerMM.toString()),
+          Text("UV Strahlung: " + data.getUvEvaluation()),
+          Text("Regen: " + data.rainPerMM.toString() + "mm"),
           Text("Sonnenaufgang: " + data.sunRise.toString()),
           Text("Sonnenuntergang: " + data.sunSet.toString()),
         ],
@@ -214,6 +222,22 @@ class WeatherData {
   var rainPerMM;
   var sunRise;
   var sunSet;
+  String uvEvaluation = "";
+
+  String getUvEvaluation() {
+    if (uvImpact <= 2) {
+      uvEvaluation = "Niedrig";
+    } else if (2 < uvImpact && uvImpact <= 5) {
+      uvEvaluation = "Mäßig";
+    } else if (5 < uvImpact && uvImpact <= 7) {
+      uvEvaluation = "Hoch";
+    } else if (7 < uvImpact && uvImpact <= 10) {
+      uvEvaluation = "Sehr hoch";
+    } else if (uvImpact > 10) {
+      uvEvaluation = "Extrem";
+    }
+    return uvEvaluation;
+  }
 
   WeatherData(
       {this.forecast,
