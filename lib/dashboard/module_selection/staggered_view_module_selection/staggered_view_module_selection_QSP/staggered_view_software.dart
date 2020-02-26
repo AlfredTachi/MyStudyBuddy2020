@@ -1,4 +1,4 @@
-import 'package:MyStudyBuddy2/model/module.dart';
+import 'package:MyStudyBuddy2/model/module_module_selection.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +60,7 @@ class _StaggeredViewState extends State<StaggeredViewSoftware> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
-                    child: Text("Software-Konstruktion",
+                    child: Text("Software Engineering\nand Development",
                         style: TextStyle(fontSize: 25)),
                   ),
                 ],

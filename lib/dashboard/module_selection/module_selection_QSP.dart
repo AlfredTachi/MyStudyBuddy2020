@@ -28,20 +28,61 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
         currentIndex: _currentIndex,
         items: [
           new BottomNavigationBarItem(
-            icon: Image.asset('assets/icons/QSP/Cloud_Icon.png', height: 30, width: 30),
-            title: Text('Cloud und Internet', style: TextStyle(fontSize: 12)),
+            icon: _currentIndex == 0
+                ? ImageIcon(AssetImage("assets/icons/QSP/Cloud_Icon.png"),
+                    size: 30, color: setBottomNavigationBarIconSelectedColor())
+                : ImageIcon(AssetImage("assets/icons/QSP/Cloud_Icon.png"),
+                    size: 30, color: setBottomNavigationBarIconColor()),
+            title: Text('Security and Network', style: TextStyle(fontSize: 12)),
           ),
           new BottomNavigationBarItem(
-            icon: Image.asset('assets/icons/QSP/Medieninformatik_Icon.png', height: 30, width: 30),
-            title: Text('Medieninformatik', style: TextStyle(fontSize: 12)),
+            icon: _currentIndex == 1
+                ? ImageIcon(
+                    AssetImage("assets/icons/QSP/Medieninformatik_Icon.png"),
+                    size: 30,
+                    color: setBottomNavigationBarIconSelectedColor())
+                : ImageIcon(
+                    AssetImage("assets/icons/QSP/Medieninformatik_Icon.png"),
+                    size: 30,
+                    color: setBottomNavigationBarIconColor()),
+            title: Text('Visual Computing', style: TextStyle(fontSize: 12)),
           ),
           new BottomNavigationBarItem(
-            icon: Image.asset('assets/icons/QSP/Software_Icon.png', height: 30, width: 30),
-            title: Text('Software-Konstruktion', style: TextStyle(fontSize: 12)),
+            icon: _currentIndex == 2
+                ? ImageIcon(AssetImage("assets/icons/QSP/Software_Icon.png"),
+                    size: 30, color: setBottomNavigationBarIconSelectedColor())
+                : ImageIcon(AssetImage("assets/icons/QSP/Software_Icon.png"),
+                    size: 30, color: setBottomNavigationBarIconColor()),
+            title: Column(children: [
+              Text('Software Engineering', style: TextStyle(fontSize: 12)),
+              Center(child: Text('and Development', style: TextStyle(fontSize: 12)))
+            ]),
           ),
         ],
       ),
     );
+  }
+
+  Color setBottomNavigationBarIconSelectedColor() {
+    var brightness = Theme.of(context).brightness;
+    Color color;
+    if (brightness == Brightness.dark) {
+      color = Colors.greenAccent;
+    } else if (brightness != Brightness.dark) {
+      color = Colors.orange;
+    }
+    return color;
+  }
+
+  Color setBottomNavigationBarIconColor() {
+    var brightness = Theme.of(context).brightness;
+    Color color;
+    if (brightness == Brightness.dark) {
+      color = Colors.white;
+    } else if (brightness != Brightness.dark) {
+      color = Colors.black;
+    }
+    return color;
   }
 
   void onTabTapped(int index) {

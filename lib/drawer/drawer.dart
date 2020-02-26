@@ -1,3 +1,5 @@
+
+import 'package:MyStudyBuddy2/qsp_info/qsp_info_icons.dart';
 import 'package:flutter/material.dart';
 
 class OwnDrawer extends StatefulWidget {
@@ -15,17 +17,22 @@ class _OwnDrawerState extends State<OwnDrawer> {
         Container(
           height: MediaQuery.of(context).size.height / 7,
           child: DrawerHeader(
-            child: Text('ToDo Icon,Name',
-                style: TextStyle(
-                  fontSize: 24,
-                )),
+            child: Row(
+              children: <Widget>[
+                ImageIcon(
+                  AssetImage("assets/icons/app_icon/transparent_app_icon.png"),
+                  size: 50,
+                ),
+                Text("My Study Buddy 2"),
+              ],
+            ),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: <Color>[Colors.orange, Colors.orangeAccent]),
             ),
           ),
         ),
-        ListTile(   
+        ListTile(
           leading: Icon(Icons.home),
           title: Text('Übersicht'),
           onTap: () {
@@ -34,13 +41,13 @@ class _OwnDrawerState extends State<OwnDrawer> {
         ),
         ListTile(
           leading: Icon(Icons.check_box),
-          title: Text('Semsterverlauf'),
+          title: Text('Studienverlauf'),
           onTap: () {
             Navigator.pushNamed(context, '/studyprogress');
           },
         ),
         ListTile(
-          leading: Icon(Icons.exposure),
+          leading: Icon(QSPInfoIcons.calculator),
           title: Text('Noten Rechner'),
           onTap: () {
             Navigator.pushNamed(context, '/grades_prognosis');
@@ -50,7 +57,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.chrome_reader_mode),
           title: Text('Modulhandbuch'),
           onTap: () {
-            // Navigator.pushNamed(context, '/todo');
+            Navigator.pushNamed(context, '/modulhandbuch');
           },
         ),
         ListTile(
@@ -81,11 +88,18 @@ class _OwnDrawerState extends State<OwnDrawer> {
             Navigator.pushNamed(context, '/weather');
           },
         ),
-                ListTile(
+        ListTile(
           leading: Icon(Icons.local_library),
           title: Text('Study Quiz'),
           onTap: () {
             Navigator.pushNamed(context, '/quiz');
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.rate_review),
+          title: Text('Evaluation'),
+          onTap: () {
+            Navigator.pushNamed(context, '/profList');
           },
         ),
         ListTile(

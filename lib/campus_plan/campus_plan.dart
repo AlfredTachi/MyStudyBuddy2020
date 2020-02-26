@@ -16,10 +16,10 @@ class CampusPlanState extends State<CampusPlan> {
       ),
       drawer: OwnDrawer(),
       body: PhotoView(
-        imageProvider: AssetImage("assets/images/campusplan.jpg"
+        imageProvider: AssetImage("assets/images/campusplan_hoch.jpg"
         ),
         minScale: PhotoViewComputedScale.contained*0.5,      //image can be scaled down to 50% of screenwidth
-        maxScale: PhotoViewComputedScale.covered*4,         //image can be scaled up to 400% of screenheight
+        maxScale: PhotoViewComputedScale.covered*2,         //image can be scaled up to 400% of screenheight
        
       )
 
