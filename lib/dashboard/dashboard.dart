@@ -17,7 +17,7 @@ class DashboardState extends State<Dashboard> {
           IconButton(
             icon: Icon(Icons.person),
             onPressed: () {
-              ///TODO Profilseite anzeigen
+              Navigator.of(context).pushNamed("/profilePage");
             },
           )
         ],
