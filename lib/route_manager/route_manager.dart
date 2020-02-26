@@ -1,6 +1,7 @@
 import 'package:MyStudyBuddy2/campus_plan/campus_plan.dart';
 import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection.dart';
+import 'package:MyStudyBuddy2/dashboard/profile_page/profile_page.dart';
 import 'package:MyStudyBuddy2/evaluation/evaluation.dart';
 import 'package:MyStudyBuddy2/evaluation/module_list.dart';
 import 'package:MyStudyBuddy2/evaluation/prof_list.dart';
@@ -27,6 +28,8 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => Dashboard());
+      case '/profilePage':
+        return MaterialPageRoute(builder: (_) => ProfilePage());
       case '/modulSelection':
         return MaterialPageRoute(builder: (_) => ModuleSelection());
       case '/studyprogress':
