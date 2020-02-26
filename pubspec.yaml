@@ -35,6 +35,8 @@ dependencies:
   percent_indicator: ^2.1.1 #https://pub.dev/packages/percent_indicator *** BSD ***
   flutter_launcher_icons: ^0.7.4 #https://pub.dev/packages/flutter_launcher_icons *** MIT ***
   smooth_star_rating: 1.0.4+2 #https://pub.dev/packages/smooth_star_rating *** MIT ***
+  flutter_custom_dialog: ^1.0.16 #https://pub.dev/packages/flutter_custom_dialog
+  get: ^1.10.5 #https://pub.dev/packages/get
   shared_preferences: ^0.5.6+2 #https://pub.dev/packages/shared_preferences *** BSD ***
 
 flutter_icons:
