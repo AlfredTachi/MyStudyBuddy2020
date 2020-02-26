@@ -103,8 +103,7 @@ class ProgressBarState extends State<ProgressBar>
       fit: BoxFit.cover,
       child: Text(
         creditPoints.toString() + "/" + maxCreditPoints.toString() + " CP",
-        style: TextStyle(
-            fontSize: 28, fontWeight: FontWeight.w800),
+        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
       ),
     );
   }
@@ -126,9 +125,7 @@ class ProgressBarState extends State<ProgressBar>
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-          margin: EdgeInsets.all(30),
-          child: progressView()),
+      child: Container(margin: EdgeInsets.all(30), child: progressView()),
     );
   }
 }

@@ -1,29 +1,22 @@
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 
 class Module {
-  int _id;
-  String _title;
+  int id;
+  String title;
 
   Module(
-    this._id,
-    this._title,
+    this.id,
+    this.title,
     // Function myModules
-    );
+  );
 
-  set title(String title) {
-    _title = title;
-  }
-
-  int get id => _id;
-
-  String get title => _title;
-
-  Material module() {
-    return Material(
-        color: Color(0xFF013D62),
-        elevation: 3.0,
-        shadowColor: Colors.black,
-        borderRadius: BorderRadius.circular(12.0),
+  Widget module() {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Container(
+        height: 80,
+        width: 80,
         child: Padding(
           padding: EdgeInsets.all(12),
           child: Column(
@@ -42,7 +35,6 @@ class Module {
               ]),
             ],
           ),
-        ));
+        )));
   }
-
 }

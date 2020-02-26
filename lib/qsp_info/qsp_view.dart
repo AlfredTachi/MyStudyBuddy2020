@@ -88,14 +88,14 @@ Widget qspdetails(
   );
 }
 
-class StaggeredView extends StatefulWidget {
+class QSPView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _StaggeredViewState();
+    return _QSPViewState();
   }
 }
 
-class _StaggeredViewState extends State<StaggeredView> {
+class _QSPViewState extends State<QSPView> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

@@ -1,4 +1,4 @@
-import 'package:MyStudyBuddy2/model/module.dart';
+import 'package:MyStudyBuddy2/model/module_module_selection.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +57,7 @@ class _StaggeredViewState extends State<StaggeredViewCloud> {
                   children: <Widget>[
                     Padding(
                     padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
-                    child: Text("Cloud und Internet",
+                    child: Text("Security and Network",
                         style: TextStyle(fontSize: 25)),
                     ),],
                 ),
