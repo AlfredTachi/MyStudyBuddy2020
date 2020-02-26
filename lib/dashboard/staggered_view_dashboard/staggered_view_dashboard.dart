@@ -37,7 +37,7 @@ Widget module() {
                         style: TextStyle(color: Colors.grey[400]),
                       ))))
               : Container(
-                  padding: EdgeInsets.only(left: 5, right: 5),
+                  padding: EdgeInsets.only(left: 18, right: 18),
                   alignment: Alignment.topLeft,
                   child: Wrap(
                     direction: Axis.horizontal,
