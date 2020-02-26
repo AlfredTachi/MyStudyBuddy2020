@@ -46,7 +46,7 @@ class ProfilePageState extends State<ProfilePage> {
             Expanded(
               flex: 4,
               child: Container(
-                child: Image.asset("assets/icons/app_icon/app_icon.png"),
+                child: Image.asset("assets/icons/app_icon/transparent_app_icon.png"),
               ),
             ),
             Expanded(
@@ -123,7 +123,7 @@ class ProfilePageState extends State<ProfilePage> {
         decoration: InputDecoration(
             fillColor: Colors.white.withAlpha(40),
             filled: true,
-            hintStyle: TextStyle(color: Colors.grey),
+            hintStyle: TextStyle(color: Colors.black45),
             hintText: _hintText,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(25),
