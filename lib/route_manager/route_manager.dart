@@ -11,7 +11,7 @@ import 'package:MyStudyBuddy2/study_quiz/quiz_start.dart';
 import 'package:MyStudyBuddy2/studyprogress/studyprogress.dart';
 import 'package:MyStudyBuddy2/grades_prognosis/grades_prognosis.dart';
 import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
-import 'package:MyStudyBuddy2/modulhandbuch/modulhandbuch.dart';
+import 'package:MyStudyBuddy2/modulhandbook/modulhandbook.dart';
 import 'package:MyStudyBuddy2/support/faq.dart';
 import 'package:MyStudyBuddy2/support/mail_support.dart';
 import 'package:MyStudyBuddy2/support/moral_support.dart';
