@@ -17,7 +17,7 @@ class ProgressPainter extends CustomPainter {
   getPaint(Color color) {
     return Paint()
       ..color = color
-      ..strokeCap = StrokeCap.round
+      ..strokeCap = StrokeCap.square
       ..style = PaintingStyle.stroke
       ..strokeWidth = circleWidth;
   }
@@ -32,8 +32,8 @@ class ProgressPainter extends CustomPainter {
 
     canvas.drawCircle(center, radius, defaultCirclePaint);
 
-    double arcAngle = 2 * pi * (compltetedPercentage / 100);
-    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), -pi / 2,
+    double arcAngle = 2 * pi * (compltetedPercentage / maxCreditPoints);
+    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), -pi / 2.1,
         arcAngle, false, progressCirclePaint);
   }
 
@@ -43,34 +43,46 @@ class ProgressPainter extends CustomPainter {
   }
 }
 
+int creditPoints;
+int maxCreditPoints;
+
 class ProgressBar extends StatefulWidget {
+  final int progressAnimationDuration;
+
+  ProgressBar(
+    int cpIn,
+    int maxCpIn, {
+    this.progressAnimationDuration = 1000,
+    Key key,
+  }) {
+    creditPoints = cpIn;
+    maxCreditPoints = maxCpIn;
+  }
+
   @override
   State<StatefulWidget> createState() => ProgressBarState();
 }
 
 class ProgressBarState extends State<ProgressBar>
     with SingleTickerProviderStateMixin {
-  double _percentage;
-  double _nextPercentage;
   AnimationController _progressAnimationController;
 
   @override
   initState() {
     super.initState();
-    _percentage = 0;
-    _nextPercentage = 0;
     initAnimationsController();
   }
 
   initAnimationsController() {
     _progressAnimationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: widget.progressAnimationDuration),
     )..addListener(
         () {
           setState(() {
-            _percentage = lerpDouble(_percentage, _nextPercentage,
-                _progressAnimationController.value);
+            creditPoints = lerpDouble(creditPoints, maxCreditPoints,
+                    _progressAnimationController.value)
+                .round();
           });
         },
       );
@@ -78,21 +90,21 @@ class ProgressBarState extends State<ProgressBar>
 
   publishProgress() {
     setState(() {
-      _percentage = _nextPercentage;
-      _nextPercentage += 10;
-      if (_nextPercentage > 100.0) {
-        _percentage = 0.0;
-        _nextPercentage = 0.0;
+      creditPoints += 6;
+      if (creditPoints >= maxCreditPoints) {
+        creditPoints = maxCreditPoints;
       }
       _progressAnimationController.forward(from: 0.0);
     });
   }
 
   getProgressText() {
-    return Text(
-      "${_nextPercentage.toInt()}",
-      style: TextStyle(
-          fontSize: 32, fontWeight: FontWeight.w800, color: Colors.green),
+    return FittedBox(
+      fit: BoxFit.cover,
+      child: Text(
+        creditPoints.toString() + "/" + maxCreditPoints.toString() + " CP",
+        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+      ),
     );
   }
 
@@ -102,9 +114,9 @@ class ProgressBarState extends State<ProgressBar>
         child: getProgressText(),
       ),
       foregroundPainter: ProgressPainter(
-        defaultCircleColor: Colors.amber,
-        percentageCompletedCircleColor: Colors.green,
-        compltetedPercentage: _percentage,
+        defaultCircleColor: Colors.grey,
+        percentageCompletedCircleColor: Colors.orange,
+        compltetedPercentage: double.tryParse(creditPoints.toString()),
         circleWidth: 20,
       ),
     );
@@ -113,10 +125,7 @@ class ProgressBarState extends State<ProgressBar>
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-          padding: EdgeInsets.all(10),
-          margin: EdgeInsets.all(30),
-          child: progressView()),
+      child: Container(margin: EdgeInsets.all(30), child: progressView()),
     );
   }
 }

@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/dashboard/module_selection/staggered_view_module_selection/staggered_view_module_selection.dart';
+import 'package:flutter_custom_dialog/flutter_custom_dialog.dart';
 
 class ModuleSelection extends StatefulWidget {
   @override
@@ -8,12 +10,20 @@ class ModuleSelection extends StatefulWidget {
 
 class ModuleSelectionState extends State<ModuleSelection> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Modulauswahl"),
-      ),
-      body:StaggeredView()
-    );
+  void initState() {
+    
+    super.initState();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    YYDialog.init(context);
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Modulauswahl"),
+        ),
+        body: StaggeredView());
+  }
+
+  
 }
