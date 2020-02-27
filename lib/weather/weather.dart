@@ -14,8 +14,6 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   AnimationController animationCtrl;
   bool showDetails = false;
   String status = "";
-  Color backgroundColor = Colors.blue[700];
-  List<Color> gradientColors = List<Color>();
 
   @override
   void initState() {
@@ -24,12 +22,6 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
       vsync: this,
       duration: Duration(milliseconds: 500),
     );
-    gradientColors = [
-      Colors.blue[800],
-      Colors.blue[700],
-      Colors.blue[400],
-      Colors.blue[200],
-    ];
     animationCtrl.animateTo(1);
     fetchData();
   }
@@ -52,7 +44,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
-      return getCupertinoDesign();
+      return getMaterialDesign();
     } else {
       return getMaterialDesign();
     }
@@ -63,30 +55,9 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
     return Container();
   }
 
-  void _checkIfDarkModeEnabled() {
-    final ThemeData theme = Theme.of(context);
-    if (theme.brightness == MediaQuery.of(context).platformBrightness) {
-      backgroundColor = Colors.blue[700];
-      gradientColors = [
-        Colors.blue[800],
-        Colors.blue[700],
-        Colors.blue[400],
-        Colors.blue[200],
-      ];
-    } else {
-      backgroundColor = Colors.grey[700];
-      gradientColors = [
-        Colors.grey[800],
-        Colors.grey[600],
-      ];
-    }
-  }
-
   Widget getMaterialDesign() {
-    _checkIfDarkModeEnabled();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: backgroundColor,
         title: Text("Wetter"),
         actions: <Widget>[
           IconButton(
@@ -106,7 +77,11 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: gradientColors)),
+                  colors: [
+                Color(0xFF013D62),
+                Color(0xBB013D62),
+                Color(0x99013D62)
+              ])),
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -128,8 +103,12 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
                                   color: Colors.white,
                                 ),
                               ),
-                              Text("Zuletzt aktualisiert: " +
-                                  dateTimeToString()),
+                              Text(
+                                "Zuletzt aktualisiert: " + dateTimeToString(),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
@@ -188,12 +167,14 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text("Luftdruck: " + data.barometer.round().toString() + " hPa"),
+          Text("Luftdruck: " + data.barometer.round().toString() + " hPa",),
           Text("Luftfeuchtigkeit: " + data.humidity.toString() + " %"),
-          Text("Windgesch.: " + (data.windSpeed / 3.6).round().toString() + " m/s"),
+          Text("Windgesch.: " +
+              (data.windSpeed / 3.6).round().toString() +
+              " m/s"),
           Text("Windrichtung: " + data.windDir.toString()),
-          Text("UV Strahlung: " + data.uvImpact.toString()),
-          Text("Regen pro mm: " + data.rainPerMM.toString()),
+          Text("UV Strahlung: " + data.getUvEvaluation()),
+          Text("Regen: " + data.rainPerMM.toString() + "mm"),
           Text("Sonnenaufgang: " + data.sunRise.toString()),
           Text("Sonnenuntergang: " + data.sunSet.toString()),
         ],
@@ -241,6 +222,22 @@ class WeatherData {
   var rainPerMM;
   var sunRise;
   var sunSet;
+  String uvEvaluation = "";
+
+  String getUvEvaluation() {
+    if (uvImpact <= 2) {
+      uvEvaluation = "Niedrig";
+    } else if (2 < uvImpact && uvImpact <= 5) {
+      uvEvaluation = "Mäßig";
+    } else if (5 < uvImpact && uvImpact <= 7) {
+      uvEvaluation = "Hoch";
+    } else if (7 < uvImpact && uvImpact <= 10) {
+      uvEvaluation = "Sehr hoch";
+    } else if (uvImpact > 10) {
+      uvEvaluation = "Extrem";
+    }
+    return uvEvaluation;
+  }
 
   WeatherData(
       {this.forecast,

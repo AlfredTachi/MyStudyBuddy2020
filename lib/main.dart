@@ -2,6 +2,7 @@ import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import './route_manager/route_manager.dart';
@@ -27,6 +28,7 @@ class MaterialAppWithTheme extends StatelessWidget {
       DeviceOrientation.portraitUp,
     ]);
     return MaterialApp(
+        navigatorKey: Get.key,
         initialRoute: '/',
         onGenerateRoute: RouteGenerator.generateRoute,
         debugShowCheckedModeBanner: true,

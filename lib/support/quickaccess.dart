@@ -6,7 +6,7 @@ class Quickaccess extends StatefulWidget {
   QuickaccessState createState() => QuickaccessState();
 }
 
-List<Link> links = [
+List<Widget> links = [
   Link(
       child: Text('HS Worms Website', textAlign: TextAlign.center),
       url: 'https://www.hs-worms.de/'),
@@ -20,12 +20,18 @@ List<Link> links = [
       child: Text('Webmailer', textAlign: TextAlign.center),
       url: 'https://webmailer2.hs-worms.de/roundcube/'),
   Link(
-      child: Text('Stuedierndenvertretungen', textAlign: TextAlign.center),
-      url:'https://www.hs-worms.de/hochschule/hochschule-worms/gremien/studierendenvertretungen/'),
+      child: Text('Studierendenvertretungen', textAlign: TextAlign.center),
+      url:
+          'https://www.hs-worms.de/hochschule/hochschule-worms/gremien/studierendenvertretungen/'),
   Link(
       child: Text('Fachschaft Informatik', textAlign: TextAlign.center),
       url: 'https://fsinf.hs-worms.de/cms/'),
+  Text('Moralische Unterstützung', textAlign: TextAlign.center),
 ];
+
+void goToMoralSupport(BuildContext context) {
+  Navigator.of(context).pushNamed("/supportMain/quickAccess/moralSupport");
+}
 
 class QuickaccessState extends State<Quickaccess> {
   @override
@@ -39,20 +45,52 @@ class QuickaccessState extends State<Quickaccess> {
           ),
         ),
         body: ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: links.length,
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) => Container(
-              width: MediaQuery.of(context).size.width,
-              child: Card(
-                margin:
-                    new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-                elevation: 8.0,
-                child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    leading: links[index]),
-              )),
-        ));
+            scrollDirection: Axis.vertical,
+            itemCount: links.length,
+            shrinkWrap: true,
+            itemBuilder: (BuildContext context, int index) {
+              if (index != 6) {
+                return Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      margin: new EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 6.0),
+                      elevation: 8.0,
+                      child: ListTile(
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                          leading: links[index]),
+                    ));
+              } else if (links[index].runtimeType == Text) {
+                return Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: GestureDetector(
+                      onTap: () {
+                        goToMoralSupport(context);
+                      },
+                      child: Card(
+                        margin: new EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 6.0),
+                        elevation: 8.0,
+                        child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 10.0),
+                            leading: links[index]),
+                      ),
+                    ));
+              } else {
+                return Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      margin: new EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 6.0),
+                      elevation: 8.0,
+                      child: ListTile(
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                          leading: links[index]),
+                    ));
+              }
+            }));
   }
 }

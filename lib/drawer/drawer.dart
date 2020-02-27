@@ -1,4 +1,5 @@
-import 'package:MyStudyBuddy2/qsp_info/q_s_p_info_icons_icons.dart';
+
+import 'package:MyStudyBuddy2/qsp_info/qsp_info_icons.dart';
 import 'package:flutter/material.dart';
 
 class OwnDrawer extends StatefulWidget {
@@ -40,7 +41,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
         ),
         ListTile(
           leading: Icon(Icons.check_box),
-          title: Text('Semsterverlauf'),
+          title: Text('Studienverlauf'),
           onTap: () {
             Navigator.pushNamed(context, '/studyprogress');
           },
