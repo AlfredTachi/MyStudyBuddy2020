@@ -1,10 +1,10 @@
 import 'package:MyStudyBuddy2/link/link.dart';
 import 'package:MyStudyBuddy2/qsp_info/qsp_info_icons.dart';
+import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class QSPInfo extends StatefulWidget {
-
   QSPInfo();
 
   @override
@@ -26,7 +26,6 @@ class QSPInfoState extends State<QSPInfo> {
                   "Software Engineering and Development (SED)",
                   "Die Module dieses Qualifikationsschwerpunkts vertiefen klassische Informatik-Themen," +
                       "die auf die professionelle Konstruktion komplexer Software-Anwendungen vorbereiten.",
-                  context,
                   3 / 5,
                   "3/5",
                   "Für mehr Infos hier klicken",
@@ -36,7 +35,6 @@ class QSPInfoState extends State<QSPInfo> {
                   "Visual Computing (VC)",
                   "Die Medieninformatik konzentriert sich auf die Teile der Informatik und ihres Umfelds," +
                       "die in direktem Kontakt zu Benutzer/innen, also zu Menschen stehen.",
-                  context,
                   2 / 5,
                   "2/5",
                   "Für mehr Infos hier klicken",
@@ -47,7 +45,6 @@ class QSPInfoState extends State<QSPInfo> {
                   "Im Qualifikationsschwerpunkt „Cloud und Internet“ dreht es sich verstärkt um Themen der Infrastruktur, " +
                       "d.h. insbesondere Rechnersysteme und Netzwerke,die zur Bereitstellung der heutigen netzwerkbasierten" +
                       "Services erforderlich sind.",
-                  context,
                   5 / 5,
                   "5/5",
                   "Für mehr Infos hier klicken",
@@ -59,11 +56,10 @@ class QSPInfoState extends State<QSPInfo> {
 
   Widget qspdetails(
     IconData icon,
-    String qsptitle,
-    String qspinfo,
-    BuildContext context,
-    double percent,
-    String text,
+    String qspTitle,
+    String qspInfo,
+    double progressBarPercent,
+    String progressBarText,
     String urltitle,
     String url,
   ) {
@@ -84,7 +80,7 @@ class QSPInfoState extends State<QSPInfo> {
                     Icon(icon, size: 40),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text(qsptitle,
+                      child: Text(qspTitle,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 14)),
                     ),
@@ -98,7 +94,7 @@ class QSPInfoState extends State<QSPInfo> {
                 children: <Widget>[
                   Flexible(
                       child: Text(
-                    qspinfo,
+                    qspInfo,
                     style: TextStyle(fontSize: 15),
                   )),
                 ],
@@ -107,15 +103,44 @@ class QSPInfoState extends State<QSPInfo> {
             Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Link(
-                        child: Text(
-                          urltitle,
-                          style:
-                              TextStyle(color: Colors.blue[700], fontSize: 14),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 30),
+                          child: Link(
+                              child: Text(
+                                urltitle,
+                                style: TextStyle(
+                                    color: Colors.blue[700], fontSize: 14),
+                              ),
+                              url: url),
                         ),
-                        url: url),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: RaisedButton(
+                              color: Colors.orange,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                bottomLeft: Radius.circular(20),
+                              )),
+                              elevation: 5,
+                              onPressed: () {
+                                ProfileController().getQSPController().text =
+                                    qspTitle;
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("QSP planen"),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -127,8 +152,8 @@ class QSPInfoState extends State<QSPInfo> {
                           child: LinearPercentIndicator(
                             width: MediaQuery.of(context).size.width - 50,
                             lineHeight: 20.0,
-                            percent: percent,
-                            center: FittedBox(child: Text(text)),
+                            percent: progressBarPercent,
+                            center: FittedBox(child: Text(progressBarText)),
                             linearStrokeCap: LinearStrokeCap.roundAll,
                             progressColor: Colors.amber,
                           ),

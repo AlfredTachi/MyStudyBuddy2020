@@ -145,7 +145,7 @@ class ProfilePageState extends State<ProfilePage> {
                                   readOnly: true,
                                   keyboardType: TextInputType.number,
                                   controller: ProfileController().getQSPController(),
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: Colors.white, fontSize: 18),
                                   decoration: InputDecoration(
                                       fillColor: Colors.white.withAlpha(40),
                                       filled: true,
