@@ -31,7 +31,7 @@ class _StaggeredViewState extends State<StaggeredView> {
   Widget semester(int titleIndex) {
     String title = titleIndex.toString() + ". Semester";
     return Padding(
-      padding: const EdgeInsets.only(top: 5, bottom: 0, left: 3, right: 3),
+      padding: const EdgeInsets.only(top: 5, bottom: 5, left: 3, right: 3),
       child: Material(
         elevation: 15,
         borderRadius: BorderRadius.circular(15.0),
@@ -61,10 +61,12 @@ class _StaggeredViewState extends State<StaggeredView> {
                       )),
                 ),
               ]),
-              Wrap(
-                direction: Axis.horizontal,
-                runSpacing: 5,
-                children: ModuleController().getAllModulesWidgets(),
+              Center(
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  runSpacing: 5,
+                  children: ModuleController().getAllModulesWidgets(),
+                ),
               ),
             ],
           ),

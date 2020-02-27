@@ -28,25 +28,9 @@ class Module {
                     ),
                   ),
                 ]),
-            child: Padding(
-              padding: EdgeInsets.all(12),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Row(children: <Widget>[
-                    Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        child: Center(
-                          child: Text(title,
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white)),
-                        ),
-                      ),
-                    ),
-                  ]),
-                ],
-              ),
+            child: Center(
+              child: Text(title,
+                  style: TextStyle(fontSize: 20, color: Colors.white)),
             )));
   }
 }
