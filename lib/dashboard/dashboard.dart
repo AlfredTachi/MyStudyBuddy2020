@@ -95,15 +95,17 @@ class DashboardState extends State<Dashboard> {
                                                   color: Colors.black45),
                                             ))))
                                     : Container(
-                                        padding:
-                                            EdgeInsets.only(left: 18, right: 18),
+                                        padding: EdgeInsets.only(
+                                            left: 5, right: 5),
                                         alignment: Alignment.topLeft,
-                                        child: Wrap(
-                                          direction: Axis.horizontal,
-                                          spacing: 0,
-                                          runSpacing: 5,
-                                          children: ModuleController()
-                                              .getSelectedModulesWidgets(),
+                                        child: Center(
+                                          child: Wrap(
+                                            direction: Axis.horizontal,
+                                            spacing: 0,
+                                            runSpacing: 5,
+                                            children: ModuleController()
+                                                .getSelectedModulesWidgets(),
+                                          ),
                                         ),
                                       ),
                               ],
