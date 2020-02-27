@@ -81,7 +81,7 @@ class ProfilePageState extends State<ProfilePage> {
                                     left: 20, right: 20, bottom: 5),
                                 child: TextField(
                                   controller: ProfileController().getInfNumberController(),
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: Colors.white, fontSize: 18),
                                   decoration: InputDecoration(
                                       fillColor: Colors.white.withAlpha(40),
                                       filled: true,
@@ -111,7 +111,7 @@ class ProfilePageState extends State<ProfilePage> {
                                 child: TextField(
                                   keyboardType: TextInputType.number,
                                   controller: ProfileController().getMatrikelController(),
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: Colors.white, fontSize: 18),
                                   decoration: InputDecoration(
                                       fillColor: Colors.white.withAlpha(40),
                                       filled: true,
@@ -139,13 +139,15 @@ class ProfilePageState extends State<ProfilePage> {
                                 padding: const EdgeInsets.only(
                                     left: 20, right: 20, bottom: 5),
                                 child: TextField(
+                                  maxLines: 2,
                                   onTap: () {
                                     Navigator.of(context).pushNamed("/qspinfo");
                                   },
                                   readOnly: true,
                                   keyboardType: TextInputType.number,
                                   controller: ProfileController().getQSPController(),
-                                  style: TextStyle(color: Colors.white, fontSize: 18),
+                                  style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
                                   decoration: InputDecoration(
                                       fillColor: Colors.white.withAlpha(40),
                                       filled: true,
