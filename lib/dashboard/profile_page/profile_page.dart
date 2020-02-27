@@ -46,7 +46,8 @@ class ProfilePageState extends State<ProfilePage> {
             Expanded(
               flex: 4,
               child: Container(
-                child: Image.asset("assets/icons/app_icon/app_icon.png"),
+                child: Image.asset(
+                    "assets/icons/app_icon/transparent_app_icon.png"),
               ),
             ),
             Expanded(
@@ -74,10 +75,100 @@ class ProfilePageState extends State<ProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              generateInputField(_infCtrl, "Inf Nummer"),
-                              generateInputField(
-                                  _matrikelCtrl, "Matrikel Nummer"),
-                              generateInputField(_qspCtrl, "QSP"),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 5),
+                                child: TextField(
+                                  controller: _infCtrl,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                      fillColor: Colors.white.withAlpha(40),
+                                      filled: true,
+                                      hintStyle:
+                                          TextStyle(color: Colors.black45),
+                                      hintText: "Inf Nummer",
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 1),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 2),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 1),
+                                      )),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 5),
+                                child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  controller: _matrikelCtrl,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                      fillColor: Colors.white.withAlpha(40),
+                                      filled: true,
+                                      hintStyle:
+                                          TextStyle(color: Colors.black45),
+                                      hintText: "Matrikel Nummer",
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 1),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 2),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 1),
+                                      )),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 5),
+                                child: TextField(
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed("/qspinfo");
+                                  },
+                                  readOnly: true,
+                                  keyboardType: TextInputType.number,
+                                  controller: _qspCtrl,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                      fillColor: Colors.white.withAlpha(40),
+                                      filled: true,
+                                      hintStyle:
+                                          TextStyle(color: Colors.black45, fontSize: 16),
+                                      hintText:
+                                          "Klick mich um ein QSP zu wählen!",
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 1),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 2),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 1),
+                                      )),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -109,34 +200,6 @@ class ProfilePageState extends State<ProfilePage> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget generateInputField(TextEditingController _ctrl, String _hintText) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
-      child: TextField(
-        keyboardType: (_ctrl == _matrikelCtrl) ? TextInputType.number : null,
-        controller: _ctrl,
-        style: TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-            fillColor: Colors.white.withAlpha(40),
-            filled: true,
-            hintStyle: TextStyle(color: Colors.grey),
-            hintText: _hintText,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25),
-              borderSide: BorderSide(color: Colors.white, width: 1),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25),
-              borderSide: BorderSide(color: Colors.white, width: 2),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25),
-              borderSide: BorderSide(color: Colors.white, width: 1),
-            )),
       ),
     );
   }

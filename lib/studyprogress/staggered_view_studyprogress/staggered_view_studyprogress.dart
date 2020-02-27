@@ -61,10 +61,12 @@ class _StaggeredViewState extends State<StaggeredView> {
                       )),
                 ),
               ]),
-              Wrap(
-                direction: Axis.horizontal,
-                runSpacing: 5,
-                children: ModuleController().getAllModulesWidgets(),
+              Center(
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  runSpacing: 5,
+                  children: ModuleController().getAllModulesWidgets(),
+                ),
               ),
             ],
           ),
