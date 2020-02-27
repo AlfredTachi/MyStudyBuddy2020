@@ -64,45 +64,50 @@ class DashboardState extends State<Dashboard> {
                         flex: 3,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 30),
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 15, top: 5, bottom: 15),
-                                    child: Text(
-                                      "Deine Module",
-                                      style: TextStyle(
-                                          fontSize: 25, color: Colors.black54),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              (ModuleController().getSelectedModules().length ==
-                                      0)
-                                  ? Container(
-                                      child: Align(
-                                          heightFactor: 10,
-                                          child: FittedBox(
-                                              child: Text(
-                                            "Du hast zurzeit keine Module geplant!",
-                                            style: TextStyle(
-                                                color: Colors.black45),
-                                          ))))
-                                  : Container(
-                                      padding:
-                                          EdgeInsets.only(left: 5, right: 5),
-                                      alignment: Alignment.topLeft,
-                                      child: Wrap(
-                                        direction: Axis.horizontal,
-                                        spacing: 0,
-                                        runSpacing: 5,
-                                        children: ModuleController()
-                                            .getSelectedModulesWidgets(),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 15, top: 5, bottom: 15),
+                                      child: Text(
+                                        "Deine Module",
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            color: Colors.black54),
                                       ),
                                     ),
-                            ],
+                                  ],
+                                ),
+                                (ModuleController()
+                                            .getSelectedModules()
+                                            .length ==
+                                        0)
+                                    ? Container(
+                                        child: Align(
+                                            heightFactor: 10,
+                                            child: FittedBox(
+                                                child: Text(
+                                              "Du hast zurzeit keine Module geplant!",
+                                              style: TextStyle(
+                                                  color: Colors.black45),
+                                            ))))
+                                    : Container(
+                                        padding:
+                                            EdgeInsets.only(left: 5, right: 5),
+                                        alignment: Alignment.topLeft,
+                                        child: Wrap(
+                                          direction: Axis.horizontal,
+                                          spacing: 0,
+                                          runSpacing: 5,
+                                          children: ModuleController()
+                                              .getSelectedModulesWidgets(),
+                                        ),
+                                      ),
+                              ],
+                            ),
                           ),
                         ))
                   ],
