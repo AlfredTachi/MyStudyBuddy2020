@@ -1,12 +1,10 @@
-import 'package:MyStudyBuddy2/model/module.dart';
+import 'package:MyStudyBuddy2/model/module_module_selection.dart';
 import 'package:flutter/cupertino.dart';
 
 class ModuleController {
   static final ModuleController _instance = ModuleController._internal();
   static List<Module> _selectedModules = new List<Module>();
   static List<Module> _allModules = _generateModules();
-  static Function closeDialog;
-
 
   ModuleController._internal();
 
@@ -47,5 +45,4 @@ class ModuleController {
     }
     return _modules;
   }
-
 }
