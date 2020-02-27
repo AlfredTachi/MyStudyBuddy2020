@@ -1,6 +1,7 @@
 import 'package:MyStudyBuddy2/drawer/drawer.dart';
 import 'package:MyStudyBuddy2/evaluation/module_list.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfList extends StatefulWidget{
   @override
