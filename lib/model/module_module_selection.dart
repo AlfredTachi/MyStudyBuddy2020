@@ -1,15 +1,14 @@
-import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:MyStudyBuddy2/singleton/module_module_selection_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Module {
   int id;
   String title;
   bool _isSelected = false;
-
   Module(
     this.id,
     this.title,
-    // Function myModules
   );
 
   Widget module() {
@@ -23,12 +22,49 @@ class Module {
             borderRadius: new BorderRadius.circular(15.0),
           ),
           color: Color(0xFF013D62),
+          splashColor: Colors.orange,
           onPressed: () {
             if (_isSelected) {
-              ///Open Alert Dialog
+              Get.dialog(AlertDialog(
+                  contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                  content: SingleChildScrollView(
+                      child: ListBody(children: <Widget>[
+                    Text(
+                      'Modulname',
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    FlatButton(
+                        child: Text("Modul Informationen"), onPressed: () {}),
+                    FlatButton(
+                      child: Text("Note Eintragen"),
+                      onPressed: () {},
+                    )
+                  ]))));
             } else {
-              ModuleController().addModule(this);
-              _isSelected = true;
+              Get.dialog(AlertDialog(
+                  contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                  content: SingleChildScrollView(
+                    child: ListBody(
+                      children: <Widget>[
+                        Text(
+                          'Modulname',
+                          style: TextStyle(fontSize: 25),
+                        ),
+                        FlatButton(
+                            child: Text("Modul Informationen"),
+                            onPressed: () {}),
+                        FlatButton(
+                            child: Text("Note Eintragen"), onPressed: () {}),
+                        FlatButton(
+                            child: Text("Modul Wählen"),
+                            onPressed: () {
+                              ModuleController().addModule(this);
+                              _isSelected = true;
+                              Get.back();
+                            })
+                      ],
+                    ),
+                  )));
             }
           },
           child: Center(
