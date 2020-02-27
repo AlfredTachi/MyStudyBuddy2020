@@ -109,10 +109,12 @@ class ProfilePageState extends State<ProfilePage> {
                                 padding: const EdgeInsets.only(
                                     left: 20, right: 20, bottom: 5),
                                 child: TextField(
+                                  maxLength: 6,
                                   keyboardType: TextInputType.number,
                                   controller: ProfileController().getMatrikelController(),
                                   style: TextStyle(color: Colors.white, fontSize: 18),
                                   decoration: InputDecoration(
+                                    counterText: "",
                                       fillColor: Colors.white.withAlpha(40),
                                       filled: true,
                                       hintStyle:
