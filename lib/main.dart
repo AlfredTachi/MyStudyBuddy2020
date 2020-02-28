@@ -17,13 +17,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    getModulesFromFile();
     try {
-      getExamResultsFromLSFServer("", "");
+      getModulesFromFile();
     } catch (err) {
       print("err");
     }
-    testDatabase();
+
     return ChangeNotifierProvider<ThemeChanger>(
         create: (_) => ThemeChanger(baselight()),
         child: MaterialAppWithTheme());
@@ -47,21 +46,4 @@ class MaterialAppWithTheme extends StatelessWidget {
           body: Dashboard(),
         ));
   }
-}
-
-void testDatabase() async {
-  final db = DBProvider.db;
-
-  final modules = await db.getAllModules();
-  print(modules.toString());
-  final examResults = await db.getAllExamResults();
-  print(examResults.toString());
-  final skModule = await db.getModule(111);
-  print(skModule.toString());
-  final skResult = await db.getExamResult(111);
-  print(skResult.toString());
-  final nonExistingModule = await db.getModule(6000);
-  print(nonExistingModule.toString());
-  final nonExistingExamResult = await db.getExamResult(6000);
-  print(nonExistingExamResult.toString());
 }

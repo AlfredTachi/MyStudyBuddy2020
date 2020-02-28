@@ -64,6 +64,8 @@ class ExamResult {
     ''';
 }
 
+
+
 Future<void> getExamResultsFromLSFServer(String userName, String password) async {
   try {
     final result = await InternetAddress.lookup('lsf.hs-worms.de');
@@ -77,9 +79,7 @@ Future<void> getExamResultsFromLSFServer(String userName, String password) async
   }
 }
 
-void _fetchDataFromLSFServer(String userName, String userPassword) async {
-  // TODO: Implement and call LSF login screen
-
+Future<bool> _fetchDataFromLSFServer(String userName, String userPassword) async {
   Response postResponse;
   var client = Client();
   final db = DBProvider.db;
@@ -100,6 +100,8 @@ void _fetchDataFromLSFServer(String userName, String userPassword) async {
       rethrow;
     }
   }
+
+
   try {
     if (!postResponse.headers.keys.first.contains('location')) {
       print(postResponse.headers.keys.first);
@@ -152,9 +154,10 @@ void _fetchDataFromLSFServer(String userName, String userPassword) async {
       db.newExamResult(result);
       trimmedGradeLines.removeRange(0, 9);
     }
+    return true;
   } catch (err) {
     print(err);
-    return err;
+    throw err;
   }
 }
 
