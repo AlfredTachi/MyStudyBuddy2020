@@ -73,7 +73,7 @@ class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              title: Text("Profile"),
+              title: Text("Mein Profil"),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.home),

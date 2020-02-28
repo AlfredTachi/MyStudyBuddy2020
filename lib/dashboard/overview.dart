@@ -15,10 +15,10 @@ class OverviewState extends State<Overview> {
           pinned: false,
           floating: true,
           centerTitle: true,
-          expandedHeight: 150.0,
+          expandedHeight: 200.0,
           flexibleSpace: FlexibleSpaceBar(
             background: FittedBox(
-              fit: BoxFit.contain,
+              fit: BoxFit.fill,
               child: Image.asset(
                 'assets/icons/app_icon/app_icon.png',
               ),
