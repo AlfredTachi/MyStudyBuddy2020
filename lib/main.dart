@@ -1,4 +1,5 @@
 import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
+import 'package:MyStudyBuddy2/dashboard/new_dashboard.dart';
 import 'package:MyStudyBuddy2/exam_results/exam_result.dart';
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/theme/theme.dart';
@@ -44,7 +45,7 @@ class MaterialAppWithTheme extends StatelessWidget {
         debugShowCheckedModeBanner: true,
         theme: theme.getTheme(),
         home: Scaffold(
-          body: Dashboard(),
+          body: Overview(),
         ));
   }
 }
