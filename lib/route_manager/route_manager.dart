@@ -40,11 +40,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ModuleSelectionWPF());
       case '/studyprogress':
         return MaterialPageRoute(builder: (_) => Studyprogress());
-      case '/mensa_plan':
+      case '/mensaPlan':
         return MaterialPageRoute(builder: (_) => MensaPlan());
       case '/weather':
         return MaterialPageRoute(builder: (_) => Weather());
-      case '/modulhandbuch':
+      case '/moduleHandbook':
         return MaterialPageRoute(builder: (_) => ModuleHandbooks());
       case '/supportMain':
         return MaterialPageRoute(builder: (_) => Support());
@@ -58,7 +58,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => CampusPlan());
       case '/settings':
         return MaterialPageRoute(builder: (_) => Settings());
-      case '/grades_prognosis':
+      case '/gradesPrognosis':
         return MaterialPageRoute(builder: (_) => GradesPrognosis());
       case '/planer':
         return MaterialPageRoute(builder: (_) => Planer());
