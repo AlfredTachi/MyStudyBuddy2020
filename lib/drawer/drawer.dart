@@ -57,7 +57,7 @@ class _OwnDrawerState extends State<OwnDrawer> {
           leading: Icon(Icons.chrome_reader_mode),
           title: Text('Modulhandbuch'),
           onTap: () {
-            Navigator.pushNamed(context, '/modulhandbuch');
+            Navigator.pushNamed(context, '/modulhandbook');
           },
         ),
         ListTile(
