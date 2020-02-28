@@ -1,7 +1,6 @@
 import 'package:MyStudyBuddy2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../drawer/drawer.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -41,7 +40,6 @@ class _SettingsState extends State<Settings> {
 
     return Scaffold(
         appBar: AppBar(title: Text("Einstellungen")),
-        drawer: OwnDrawer(),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

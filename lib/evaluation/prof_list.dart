@@ -1,4 +1,3 @@
-import 'package:MyStudyBuddy2/drawer/drawer.dart';
 import 'package:MyStudyBuddy2/evaluation/module_list.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +28,6 @@ class ProfListState extends State<ProfList>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Professoren")),
-      drawer: OwnDrawer(),
       body: 
       new ListView.builder(     
         itemCount: listeProffs.length,

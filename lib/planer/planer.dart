@@ -1,4 +1,3 @@
-import 'package:MyStudyBuddy2/drawer/drawer.dart';
 import 'package:MyStudyBuddy2/planer/planer_list.dart';
 import 'package:MyStudyBuddy2/planer/upcoming_events.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +36,6 @@ TabController _tabController;
     return Scaffold(
       appBar: AppBar(title:Text('Termin Planer'),
       bottom: TabBar(controller:_tabController ,tabs:myTabs)),
-      drawer: OwnDrawer(),
       body:TabBarView(
         controller: _tabController,
         children: <Widget>[
@@ -48,32 +46,3 @@ TabController _tabController;
 
     );
   }}
-
-// }
-// final makeBody = Container(
-//       child: ListView.builder(
-//         scrollDirection: Axis.vertical,
-//         shrinkWrap: true,
-//         itemCount: 10,
-//         itemBuilder: (BuildContext context, int index) {
-//           return makeCard;
-//         },
-//       ),
-//     );
-//     final makeCard = Card(
-//       elevation: 8.0,
-//       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-//       child: Container(
-//         decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
-//         child: makeListTile,
-//       ),
-//     );
-
-    // final makeListTile = ListTile(
-
-    //     contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-    //     leading: Container(
-    //       child:Text('test')
-    //     ),
-    //     trailing: Icon(Icons.favorite),
-    //     );

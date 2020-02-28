@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/studyprogress/staggered_view_studyprogress/staggered_view_studyprogress.dart';
-import '../drawer/drawer.dart';
 
 class Studyprogress extends StatefulWidget {
   @override
@@ -14,7 +13,6 @@ class StudyprogressState extends State<Studyprogress> {
       appBar: AppBar(
         title: Text("Studienverlauf"),
       ),
-      drawer: OwnDrawer(),
       body:StaggeredView()
     );
   }

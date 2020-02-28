@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-import '../drawer/drawer.dart';
 
 class CampusPlan extends StatefulWidget {
   @override
@@ -14,7 +13,6 @@ class CampusPlanState extends State<CampusPlan> {
       appBar: AppBar(
         title: Text("Campusplan"),
       ),
-      drawer: OwnDrawer(),
       body: PhotoView(
         imageProvider: AssetImage("assets/images/campusplan_hoch.jpg"
         ),
