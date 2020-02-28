@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:MyStudyBuddy2/exam_results/exam_result.dart';
-import 'package:MyStudyBuddy2/modules/module.dart';
+import 'package:MyStudyBuddy2/model/module.dart';
 
 class DBProvider {
   DBProvider._();
@@ -29,8 +29,8 @@ class DBProvider {
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
       await db.execute('''CREATE TABLE Exams (
-        number INTEGER PRIMARY KEY,
-        name TEXT,
+        id INTEGER PRIMARY KEY,
+        title TEXT,
         term TEXT,
         grade REAL,
         passed TEXT,
@@ -41,8 +41,8 @@ class DBProvider {
       ''');
       await db.execute('''
       CREATE TABLE Modules (
-        number INTEGER PRIMARY KEY,
-        name TEXT
+        id INTEGER PRIMARY KEY,
+        title TEXT
       )
       ''');
     });
@@ -64,15 +64,15 @@ class DBProvider {
 
   // READ
 
-  getModule(int number) async {
+  getModule(int id) async {
     final db = await database;
-    var result = await db.query("Modules", where: "number = ?", whereArgs: [number]);
+    var result = await db.query("Modules", where: "id = ?", whereArgs: [id]);
     return result.isNotEmpty ? Module.fromMap(result.first) : null;
   }
 
-  getExamResult(int number) async {
+  getExamResult(int id) async {
     final db = await database;
-    var result = await db.query("Exams", where: "number = ?", whereArgs: [number]);
+    var result = await db.query("Exams", where: "id = ?", whereArgs: [id]);
     return result.isNotEmpty ? ExamResult.fromMap(result.first) : null;
   }
 
@@ -108,21 +108,21 @@ class DBProvider {
 
   updateModule(Module newModule) async {
     final db = await database;
-    var result = await db.update("Modules", newModule.toMap(), where: "number = ?", whereArgs: [newModule.number]);
+    var result = await db.update("Modules", newModule.toMap(), where: "id = ?", whereArgs: [newModule.id]);
     return result;
   }
 
   updateExamResult(ExamResult newExamResult) async {
     final db = await database;
-    var result = await db.update("Exams", newExamResult.toMap(), where: "number = ?", whereArgs: [newExamResult.number]);
+    var result = await db.update("Exams", newExamResult.toMap(), where: "id = ?", whereArgs: [newExamResult.id]);
     return result;
   }
 
   // DELETE
 
-  deleteModule(int number) async {
+  deleteModule(int id) async {
     final db = await database;
-    db.delete("Modules", where: "number = ?", whereArgs: [number]);
+    db.delete("Modules", where: "id = ?", whereArgs: [id]);
   }
 
   deleteAllModules() async {
@@ -130,9 +130,9 @@ class DBProvider {
     db.rawDelete("Delete * from Module");
   }
 
-  deleteExamResult(int number) async {
+  deleteExamResult(int id) async {
     final db = await database;
-    db.delete("Exams", where: "number = ?", whereArgs: [number]);
+    db.delete("Exams", where: "id = ?", whereArgs: [id]);
   }
 
   deleteAllExamResults() async {

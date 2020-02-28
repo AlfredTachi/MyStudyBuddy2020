@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import './route_manager/route_manager.dart';
-import 'package:MyStudyBuddy2/modules/module.dart';
+import 'package:MyStudyBuddy2/model/module.dart';
 
 void main() {
   runApp(new MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     getModulesFromFile();
     try {
-      getExamResultsFromLSFServer("", "");
+      getExamResultsFromLSFServer("inf2795", "Oggersheim97");
     } catch (err) {
       print("err");
     }
