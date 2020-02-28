@@ -1,5 +1,5 @@
+import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -7,14 +7,15 @@ class ProfilePage extends StatefulWidget {
 }
 
 class ProfilePageState extends State<ProfilePage> {
-  //Controller
-  TextEditingController _infCtrl = TextEditingController();
-  TextEditingController _matrikelCtrl = TextEditingController();
-  TextEditingController _qspCtrl = TextEditingController();
 
   @override
   void initState() {
-    loadData();
+    try{
+      ProfileController().loadData();
+    }catch(ex){
+      print("Failed to load shared preference with following error: \n" + ex);
+    }
+    ProfileController().loadData();
     super.initState();
   }
 
@@ -79,8 +80,8 @@ class ProfilePageState extends State<ProfilePage> {
                                 padding: const EdgeInsets.only(
                                     left: 20, right: 20, bottom: 5),
                                 child: TextField(
-                                  controller: _infCtrl,
-                                  style: TextStyle(color: Colors.white),
+                                  controller: ProfileController().getInfNumberController(),
+                                  style: TextStyle(color: Colors.white, fontSize: 18),
                                   decoration: InputDecoration(
                                       fillColor: Colors.white.withAlpha(40),
                                       filled: true,
@@ -108,10 +109,12 @@ class ProfilePageState extends State<ProfilePage> {
                                 padding: const EdgeInsets.only(
                                     left: 20, right: 20, bottom: 5),
                                 child: TextField(
+                                  maxLength: 6,
                                   keyboardType: TextInputType.number,
-                                  controller: _matrikelCtrl,
-                                  style: TextStyle(color: Colors.white),
+                                  controller: ProfileController().getMatrikelController(),
+                                  style: TextStyle(color: Colors.white, fontSize: 18),
                                   decoration: InputDecoration(
+                                    counterText: "",
                                       fillColor: Colors.white.withAlpha(40),
                                       filled: true,
                                       hintStyle:
@@ -138,13 +141,15 @@ class ProfilePageState extends State<ProfilePage> {
                                 padding: const EdgeInsets.only(
                                     left: 20, right: 20, bottom: 5),
                                 child: TextField(
+                                  maxLines: null,
                                   onTap: () {
                                     Navigator.of(context).pushNamed("/qspinfo");
                                   },
                                   readOnly: true,
                                   keyboardType: TextInputType.number,
-                                  controller: _qspCtrl,
-                                  style: TextStyle(color: Colors.white),
+                                  controller: ProfileController().getQSPController(),
+                                  style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
                                   decoration: InputDecoration(
                                       fillColor: Colors.white.withAlpha(40),
                                       filled: true,
@@ -190,7 +195,7 @@ class ProfilePageState extends State<ProfilePage> {
                                   TextStyle(fontSize: 24, color: Colors.white),
                             ),
                             onPressed: () {
-                              saveData();
+                              ProfileController().saveData();
                             }),
                       ),
                     )
@@ -202,19 +207,5 @@ class ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
-  }
-
-  void saveData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("infNummer", _infCtrl.text);
-    prefs.setString("matrikelNummer", _matrikelCtrl.text);
-    prefs.setString("qsp", _qspCtrl.text);
-  }
-
-  void loadData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _infCtrl.text = prefs.getString("infNummer");
-    _matrikelCtrl.text = prefs.getString("matrikelNummer");
-    _qspCtrl.text = prefs.getString("qsp");
   }
 }
