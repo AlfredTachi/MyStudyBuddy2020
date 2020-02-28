@@ -1,3 +1,11 @@
+import 'dart:io';
+import 'dart:async';
+
+import 'package:MyStudyBuddy2/local_database/local_database.dart';
+import 'package:http/http.dart';
+import 'package:html/parser.dart' show parse;
+import 'package:html/dom.dart';
+
 class ExamResult {
   int number;
   String name;
@@ -7,18 +15,168 @@ class ExamResult {
   double credits;
   String note;
   int numberOfTries;
-  DateTime date;
+  String date;
 
-  ExamResult(int number, String name, String term, double grade, String passed,
-      double credits, String note, int numberOfTries, String date) {
-    this.number = number;
-    this.name = name;
-    this.term = term;
-    this.grade = grade;
-    this.passed = passed;
-    this.credits = credits;
-    this.note = note;
-    this.numberOfTries = numberOfTries;
-    this.date = DateTime.tryParse(date);
+  ExamResult(
+      {this.number,
+      this.name,
+      this.term,
+      this.grade,
+      this.passed,
+      this.credits,
+      this.note,
+      this.numberOfTries,
+      this.date});
+
+  factory ExamResult.fromMap(Map<String, dynamic> map) => new ExamResult(
+        number: map["number"],
+        name: map["name"],
+        term: map["term"],
+        grade: map["grade"],
+        passed: map["passed"],
+        credits: map["credits"],
+        note: map["note"],
+        numberOfTries: map["number_of_tries"],
+        date: map["date"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        'number': number,
+        'name': name,
+        'term': term,
+        'grade': grade,
+        'passed': passed,
+        'credits': credits,
+        'note': note,
+        'numberOfTries': numberOfTries,
+        'date': date
+      };
+
+  String toString() => '''
+    number: $number
+    name: $name
+    grade: $grade
+    passed: $passed
+    credits: $credits
+    note: $note
+    numberOfTries: $numberOfTries
+    date: $date
+    ''';
+}
+
+Future<void> getExamResultsFromLSFServer(String userName, String password) async {
+  try {
+    final result = await InternetAddress.lookup('lsf.hs-worms.de');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      // connected
+      _fetchDataFromLSFServer(userName, password);
+    }
+  } catch (err) {
+    // not connected
+    rethrow;
   }
+}
+
+void _fetchDataFromLSFServer(String userName, String userPassword) async {
+  // TODO: Implement and call LSF login screen
+
+  Response postResponse;
+  var client = Client();
+  final db = DBProvider.db;
+
+  try {
+    postResponse = await client.post(
+        'https://lsf.hs-worms.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal&asdf=$userName&fdsa=$userPassword');
+  } catch (err) {
+    if (err.message.contains("Failed host lookup")) {
+      print("SocketException: No internet connction");
+      throw SocketException("No internet connection");
+    } else if (err.osError.message.contains("timed out")) {
+      print("OSError: Connection to " + err.address.host + " timed out");
+      throw TimeoutException(
+          "Connection to " + err.address.host + " timed out");
+    } else {
+      print(err);
+      rethrow;
+    }
+  }
+  try {
+    if (!postResponse.headers.keys.first.contains('location')) {
+      print(postResponse.headers.keys.first);
+      throw Exception("Invalid login data");
+    }
+    final homeScreenResponse =
+        await client.get(postResponse.headers.values.first);
+    final examAdministrationResponse = await client.get(_choseLink(
+        homeScreenResponse, "li > a.auflistung", "Prüfungsverwaltung"));
+    final examExtractResponse = await client.get(_choseLink(
+        examAdministrationResponse, "li > a.auflistung", "Notenspiegel"));
+    final degreeResponse = await client.get(_choseLink(examExtractResponse,
+        "li > a.regular", "Abschluss 05 Bachelor of Science"));
+
+    var degreeDocument = parse(degreeResponse.body);
+    List<Element> degreeLinks =
+        degreeDocument.querySelectorAll("li.treelist > a");
+
+    List<Map<String, dynamic>> degreeMap = [];
+    for (var link in degreeLinks) {
+      degreeMap.add(
+          {"title": link.attributes["title"], "href": link.attributes["href"]});
+    }
+
+    Map<String, dynamic> chosenLinkMap = degreeMap[degreeMap.indexWhere(
+        (link) => link.containsValue(
+            "Leistungen für Angewandte Informatik  (PO-Version 2018)  anzeigen"))];
+    Response gradesResponse = await client.get(chosenLinkMap["href"]);
+    var gradesDocument = parse(gradesResponse.body);
+
+    List<Element> gradeLines =
+        gradesDocument.querySelectorAll('td[class*="tabelle1"]');
+    var trimmedGradeLines = List<String>();
+
+    for (var line in gradeLines) {
+      trimmedGradeLines.add(line.innerHtml.trim());
+    }
+
+    for (var i = 0; i < gradeLines.length / 9; i++) {
+      ExamResult result = ExamResult(
+          number: int.tryParse(trimmedGradeLines[0]),
+          name: trimmedGradeLines[1],
+          term: trimmedGradeLines[2],
+          grade: double.tryParse(trimmedGradeLines[3].replaceAll(',', '.')),
+          passed: trimmedGradeLines[4],
+          credits: double.tryParse(trimmedGradeLines[5].replaceAll(',', '.')),
+          note: trimmedGradeLines[6],
+          numberOfTries: int.tryParse(trimmedGradeLines[7]),
+          date: trimmedGradeLines[8]);
+      db.newExamResult(result);
+      trimmedGradeLines.removeRange(0, 9);
+    }
+  } catch (err) {
+    print(err);
+    return err;
+  }
+}
+
+String _choseLink(Response response, String querySelector, String string) {
+  var document = parse(response.body);
+
+  List<Element> links = document.querySelectorAll(querySelector);
+
+  List<Map<String, dynamic>> linkMap = _createList(links);
+
+  Map<String, dynamic> linkChosenMap =
+      linkMap[linkMap.indexWhere((link) => link.containsValue(string))];
+  return linkChosenMap["href"];
+}
+
+List<Map<String, dynamic>> _createList(List<Element> links) {
+  List<Map<String, dynamic>> linkMap = [];
+  for (var link in links) {
+    linkMap.add({
+      'title': link.text,
+      'href': link.attributes['href'],
+    });
+  }
+  return linkMap;
 }
