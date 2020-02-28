@@ -1,4 +1,4 @@
-import 'package:MyStudyBuddy2/model/module_studyprogress.dart';
+import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:flutter/cupertino.dart';
 
 class ModuleController {
@@ -36,6 +36,10 @@ class ModuleController {
   //Setter
   void addModule(Module _module) {
     _selectedModules.add(_module);
+  }
+
+  void removeModule(Module _module) {
+    _selectedModules.remove(_module);
   }
 
   static List<Module> _generateModules() {
