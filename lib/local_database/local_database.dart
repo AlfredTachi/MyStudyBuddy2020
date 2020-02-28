@@ -81,6 +81,9 @@ class DBProvider {
     var result = await db.query('Modules');
     List<Map<String, dynamic>> resultList = result.isNotEmpty ? result.toList(): null;
     var list = List<Module>();
+    if (resultList == null) {
+      return null;
+    }
     for (var map in resultList) {
       list.add(Module.fromMap(map));
     }
@@ -92,6 +95,9 @@ class DBProvider {
     var result = await db.query('Exams');
     List<Map<String, dynamic>> resultList = result.isNotEmpty ? result.toList(): null;
     var list = List<ExamResult>();
+    if (resultList == null) {
+      return null;
+    }
     for (var map in resultList) {
       list.add(ExamResult.fromMap(map));
     }
