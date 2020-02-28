@@ -1,4 +1,4 @@
-import 'package:MyStudyBuddy2/singleton/module_module_selection_controller.dart';
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 
 class StaggeredViewMedia extends StatefulWidget {
