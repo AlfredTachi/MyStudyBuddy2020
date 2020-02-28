@@ -12,15 +12,19 @@ class OverviewState extends State<Overview> {
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
-          pinned: false,
+          pinned: true,
           floating: true,
           centerTitle: true,
+          title: Text(
+            "My Study Buddy",
+            style: TextStyle(color: Colors.black),
+          ),
           expandedHeight: 200.0,
           flexibleSpace: FlexibleSpaceBar(
             background: FittedBox(
               fit: BoxFit.fill,
               child: Image.asset(
-                'assets/icons/app_icon/app_icon.png',
+                'assets/images/menu_picture.jpg',
               ),
             ),
           ),

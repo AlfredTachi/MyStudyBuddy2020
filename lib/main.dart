@@ -45,7 +45,7 @@ class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
     try {
       getExamResultsFromLSFServer("", "");
     } catch (err) {
-      print("err");
+      print(err);
     }
   }
 
