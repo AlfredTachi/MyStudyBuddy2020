@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     getModulesFromFile();
     try {
-      getExamResultsFromLSFServer("inf2795", "Oggersheim97");
+      getExamResultsFromLSFServer("", "");
     } catch (err) {
       print("err");
     }
