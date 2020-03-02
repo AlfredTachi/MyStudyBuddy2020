@@ -59,7 +59,7 @@ class Module {
                     content: SingleChildScrollView(
                         child: ListBody(children: <Widget>[
                       Text(
-                        'Modulname',
+                        this.title,
                         style: TextStyle(fontSize: 25),
                       ),
                       FlatButton(
@@ -87,7 +87,7 @@ class Module {
                       child: ListBody(
                         children: <Widget>[
                           Text(
-                            'Modulname',
+                            this.title,
                             style: TextStyle(fontSize: 25),
                           ),
                           FlatButton(

@@ -1,5 +1,4 @@
 import 'package:MyStudyBuddy2/model/module.dart';
-import 'package:MyStudyBuddy2/singleton/information_tile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
