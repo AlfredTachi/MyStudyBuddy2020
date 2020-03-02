@@ -1,8 +1,6 @@
-import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/studyprogress/staggered_view_studyprogress/staggered_view_studyprogress.dart';
 import 'package:MyStudyBuddy2/exam_results/exam_result.dart';
-import 'dart:io';
 
 class Studyprogress extends StatefulWidget {
   @override
@@ -132,7 +130,6 @@ class StudyprogressState extends State<Studyprogress> {
               },
             ),
           ],
-<<<<<<< HEAD
         );
       },
     );
@@ -160,32 +157,4 @@ class StudyprogressState extends State<Studyprogress> {
     );
     Scaffold.of(scaffoldContext).showSnackBar(snackBar);
   }
-=======
-        ),
-        actions: <Widget>[
-          FlatButton(
-            child: Text("Abbrechen"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          FlatButton(
-            child: Text("Daten holen"),
-            onPressed: () async {
-              try {
-                final db = DBProvider.db;
-                await getExamResultsFromLSFServer(userName, userPassword);
-                final grades = await db.getAllExamGrades();
-                print(grades);
-              } catch (err) {
-                print("err");
-              }
-              Navigator.of(context).pop();
-            },
-          )
-        ],
-      );
-    },
-  );
->>>>>>> development
 }
