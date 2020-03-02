@@ -81,7 +81,7 @@ class DBProvider {
 
   // READ
 
-  getModule(int id) async {
+  Future<Module> getModule(int id) async {
     final db = await database;
     try {
       var result = await db.query("Modules", where: "id = ?", whereArgs: [id]);
@@ -92,7 +92,7 @@ class DBProvider {
     }
   }
 
-  getExamResult(int id) async {
+  Future<ExamResult> getExamResult(int id) async {
     final db = await database;
     try {
       var result = await db.query("Exams", where: "id = ?", whereArgs: [id]);
@@ -103,7 +103,7 @@ class DBProvider {
     }
   }
 
-  getAllModules() async {
+  Future<List<Module>> getAllModules() async {
     final db = await database;
     try {
       var result = await db.query('Modules');
@@ -123,7 +123,7 @@ class DBProvider {
     }
   }
 
-  getAllExamResults() async {
+  Future<List<ExamResult>> getAllExamResults() async {
     final db = await database;
     try {
       var result = await db.query('Exams');
@@ -143,7 +143,7 @@ class DBProvider {
     }
   }
 
-  getAllExamGrades() async {
+  Future<List<double>> getAllExamGrades() async {
     final db = await database;
     try {
       var result = await db.query('Exams', columns: ["grade"]);
@@ -157,6 +157,8 @@ class DBProvider {
       }
       return gradeList;
     } catch (err) {
+      print(err);
+      rethrow;
     }
   }
 
