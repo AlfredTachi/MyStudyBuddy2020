@@ -52,28 +52,35 @@ class Module {
               Get.toNamed("/modulSelectionWPF");
             } else {
               if (_isSelected) {
-                Get.dialog(AlertDialog(
+                Get.dialog(
+                  AlertDialog(
                     contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
                     content: SingleChildScrollView(
-                        child: ListBody(children: <Widget>[
-                      Text(
-                        'Modulname',
-                        style: TextStyle(fontSize: 25),
+                      child: ListBody(
+                        children: <Widget>[
+                          Text(
+                            'Modulname',
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          FlatButton(
+                              child: Text("Modul Informationen"),
+                              onPressed: () {}),
+                          FlatButton(
+                            child: Text("Note Eintragen"),
+                            onPressed: () {},
+                          ),
+                          FlatButton(
+                              child: Text("Modul Abwählen"),
+                              onPressed: () {
+                                ModuleController().removeSelectedModule(this);
+                                _isSelected = false;
+                                Get.back();
+                              })
+                        ],
                       ),
-                      FlatButton(
-                          child: Text("Modul Informationen"), onPressed: () {}),
-                      FlatButton(
-                        child: Text("Note Eintragen"),
-                        onPressed: () {},
-                      ),
-                      FlatButton(
-                          child: Text("Modul Abwählen"),
-                          onPressed: () {
-                            ModuleController().removeSelectedModule(this);
-                            _isSelected = false;
-                            Get.back();
-                          })
-                    ]))));
+                    ),
+                  ),
+                );
               } else {
                 Get.dialog(
                   AlertDialog(
@@ -91,12 +98,13 @@ class Module {
                           FlatButton(
                               child: Text("Note Eintragen"), onPressed: () {}),
                           FlatButton(
-                              child: Text("Modul Wählen"),
-                              onPressed: () {
-                                ModuleController().addSelectedModule(this);
-                                _isSelected = true;
-                                Get.back();
-                              })
+                            child: Text("Modul Wählen"),
+                            onPressed: () {
+                              ModuleController().addSelectedModule(this);
+                              _isSelected = true;
+                              Get.back();
+                            },
+                          )
                         ],
                       ),
                     ),
