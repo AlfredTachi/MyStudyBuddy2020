@@ -117,12 +117,16 @@ class StudyprogressState extends State<Studyprogress> {
                       Scaffold.of(scaffoldContext).hideCurrentSnackBar();
                       success = null;
                       createSnackBarWithReloadButton(
-                          "Timeout! Prüfe deine Internetverbindung!");
+                          "Timeout! Prüfe deine Internetverbindung!",
+                          name,
+                          password);
                       break;
                     default:
                       success = null;
                       createSnackBarWithReloadButton(
-                          "Ein unbekannter Fehler ist aufgetreten!");
+                          "Ein unbekannter Fehler ist aufgetreten!",
+                          name,
+                          password);
                   }
                 } catch (err) {
                   print(err);
