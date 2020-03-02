@@ -68,7 +68,7 @@ class Module {
                       FlatButton(
                           child: Text("Modul Abwählen"),
                           onPressed: () {
-                            ModuleController().removeModule(this);
+                            ModuleController().removeSelectedModule(this);
                             _isSelected = false;
                             Get.back();
                           })
@@ -91,7 +91,7 @@ class Module {
                           FlatButton(
                               child: Text("Modul Wählen"),
                               onPressed: () {
-                                ModuleController().addModule(this);
+                                ModuleController().addSelectedModule(this);
                                 _isSelected = true;
                                 Get.back();
                               })

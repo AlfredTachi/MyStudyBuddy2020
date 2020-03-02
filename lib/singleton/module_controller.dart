@@ -1,10 +1,11 @@
+import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:flutter/cupertino.dart';
 
 class ModuleController {
   static final ModuleController _instance = ModuleController._internal();
   static List<Module> _selectedModules = new List<Module>();
-  static List<Module> _allModules = _generateModules();
+  static List<Module> _allModules = new List<Module>();
 
   ModuleController._internal();
 
@@ -25,6 +26,26 @@ class ModuleController {
   }
 
   //Returns all Widgets from _allModules
+  List<Widget> getAllSemesterModulesWidgets(int index) {
+    List<Widget> _widgets = new List<Widget>();
+    List<Module> _modules = new List<Module>();
+    int moduleIndex = 1;
+    String _moduleIndex = "";
+    for (var i = 0; i <= 2; i++) {
+      _moduleIndex = moduleIndex.toString() + index.toString() + i.toString();
+      _modules = ModuleController()
+          .getAllModules()
+          .where((test) => test.id == int.parse(_moduleIndex))
+          .toList();
+      for (var i = 0; i < _modules.length; i++) {
+        _widgets.add(_modules[i].module());
+      }
+    }
+
+    return _widgets;
+  }
+
+  //Returns all Widgets from _allModules
   List<Widget> getAllModulesWidgets() {
     List<Widget> _widgets = new List<Widget>();
     for (int i = 0; i < _allModules.length; i++) {
@@ -34,19 +55,20 @@ class ModuleController {
   }
 
   //Setter
-  void addModule(Module _module) {
-    _selectedModules.add(_module);
+
+  void addToAllModules(Module _module) {
+    _allModules.add(_module);
   }
 
-  void removeModule(Module _module) {
+  void removeFromAllModule(Module _module) {
     _selectedModules.remove(_module);
   }
 
-  static List<Module> _generateModules() {
-    List<Module> _modules = new List<Module>();
-    for (int i = 1; i <= 7; i++) {
-      _modules.add(Module(id: i, title: (i.toString() + ". M").toString()));
-    }
-    return _modules;
+  void addSelectedModule(Module _module) {
+    _selectedModules.add(_module);
+  }
+
+  void removeSelectedModule(Module _module) {
+    _selectedModules.remove(_module);
   }
 }

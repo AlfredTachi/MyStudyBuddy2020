@@ -10,6 +10,7 @@ class TileController {
   static final TileController _instance = TileController._internal();
 
   final List<_Tile> _tiles = [
+    _Tile(Icon(Icons.check_box), "Dashboard", "/dashboard"),
     _Tile(Icon(Icons.check_box), "Studienverlauf", "/studyprogress"),
     _Tile(Icon(QSPInfoIcons.calculator), "Notenrechner", "/gradesPrognosis"),
     _Tile(Icon(Icons.chrome_reader_mode), "Modulhandbuch", "/moduleHandbook"),

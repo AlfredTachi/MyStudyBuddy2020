@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -115,8 +117,10 @@ class DBProvider {
       }
       for (var map in resultList) {
         list.add(Module.fromMap(map));
+        ModuleController().addToAllModules(Module.fromMap(map));
       }
       return list;
+      
     } catch (err) {
       print(err);
       rethrow;
