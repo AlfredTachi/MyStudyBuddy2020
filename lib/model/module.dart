@@ -1,4 +1,5 @@
 import 'package:MyStudyBuddy2/exam_results/add_grade.dart';
+import 'package:MyStudyBuddy2/model/module_informations.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,9 @@ class Module {
                         style: TextStyle(fontSize: 25),
                       ),
                       FlatButton(
-                          child: Text("Modul Informationen"), onPressed: () {}),
+                          child: Text("Modul Informationen"), onPressed: () {
+                            moduleInforations(this);
+                          }),
                       FlatButton(
                         child: Text("Note Eintragen"),
                         onPressed: () {
@@ -89,7 +92,9 @@ class Module {
                           ),
                           FlatButton(
                               child: Text("Modul Informationen"),
-                              onPressed: () {}),
+                              onPressed: () {
+                                moduleInforations(this);
+                              }),
                           FlatButton(
                               child: Text("Note Eintragen"), onPressed: () {
                                 addGrade(this);
@@ -148,3 +153,4 @@ Future<void> getModulesFromFile() async {
     db.newModule(module);
   }
 }
+
