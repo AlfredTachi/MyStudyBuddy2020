@@ -10,10 +10,12 @@ import 'dart:async';
 class Module {
   int id;
   String title;
+  String shortTitle = "";
   bool _isSelected = false;
   Module({
     this.id,
     this.title,
+    this.shortTitle,
   });
 
   factory Module.fromMap(Map<String, dynamic> map) => Module(
@@ -104,12 +106,24 @@ class Module {
             }
           },
           child: Center(
-              child: Text(title,
+              child: Text(setShortName(title),
                   style: TextStyle(fontSize: 20, color: Colors.white))),
         ),
       ),
     );
   }
+}
+
+setShortName(String title) {
+  String _shortTitle = "";
+  List<String> splitTitle = title.split(" ");
+  print(splitTitle);
+  for (var i = 0; i < splitTitle.length; i++) {
+    _shortTitle += splitTitle[i][0];
+  }
+  print(_shortTitle);
+  Module().shortTitle = _shortTitle;
+  return _shortTitle;
 }
 
 Future<void> getModulesFromFile() async {
