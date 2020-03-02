@@ -25,9 +25,6 @@ class MensaPlanState extends State<MensaPlan> {
 
   Widget getMaterialDesign() {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Mensa Plan"),
-      ),
       body: IndexedStack(
         index: _viewIndex,
         children: <Widget>[
