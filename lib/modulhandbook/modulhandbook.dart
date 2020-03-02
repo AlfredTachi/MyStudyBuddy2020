@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
-import 'package:MyStudyBuddy2/drawer/drawer.dart';
 
 
 class ModuleHandbooks extends StatefulWidget {
@@ -29,7 +28,6 @@ class ModuleHandbooksState extends State<ModuleHandbooks> {
       appBar: AppBar(
        title: Text("Modulhandbuch"),
       ),
-      drawer: OwnDrawer(),
       body: IndexedStack(
         index: _viewIndex,
         children: <Widget>[

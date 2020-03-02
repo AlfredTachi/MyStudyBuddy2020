@@ -1,4 +1,3 @@
-import 'package:MyStudyBuddy2/drawer/drawer.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +35,6 @@ class EvaluationState extends State<Evaluation> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('Evaluation')),
-        drawer: OwnDrawer(),
         body: ListView.builder(
             scrollDirection: Axis.vertical,
             itemCount: evaluationQuestions.length,

@@ -1,8 +1,6 @@
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/studyprogress/staggered_view_studyprogress/staggered_view_studyprogress.dart';
-import 'package:path/path.dart';
-import '../drawer/drawer.dart';
 import 'package:MyStudyBuddy2/exam_results/exam_result.dart';
 
 class Studyprogress extends StatefulWidget {
@@ -19,12 +17,11 @@ class StudyprogressState extends State<Studyprogress> {
           actions: <Widget>[
             IconButton(
                 icon: Icon(Icons.cloud_download),
-                onPressed: () async {
-                  await _downloadLSFData(context);
-                }),
+                onPressed: () {
+                  _downloadLSFData(context);
+                })
           ],
         ),
-        drawer: OwnDrawer(),
         body: StaggeredView());
   }
 }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:MyStudyBuddy2/drawer/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
@@ -67,7 +66,6 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
               })
         ],
       ),
-      drawer: OwnDrawer(),
       body: Center(
         child: Container(
           padding: EdgeInsets.only(top: 20),
