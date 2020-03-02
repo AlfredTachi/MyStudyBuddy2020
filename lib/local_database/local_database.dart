@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:MyStudyBuddy2/exam_results/exam_result.dart';
-import 'package:MyStudyBuddy2/modules/module.dart';
+import 'package:MyStudyBuddy2/model/module.dart';
 
 class DBProvider {
   DBProvider._();
@@ -26,11 +26,12 @@ class DBProvider {
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "MSBDB.db");
-    return await openDatabase(path, version: 1, onOpen: (db) {},
-        onCreate: (Database db, int version) async {
-      await db.execute('''CREATE TABLE Exams (
-        number INTEGER PRIMARY KEY,
-        name TEXT,
+    try {
+      return await openDatabase(path, version: 1, onOpen: (db) {},
+          onCreate: (Database db, int version) async {
+        await db.execute('''CREATE TABLE Exams (
+        id INTEGER PRIMARY KEY,
+        title TEXT,
         term TEXT,
         grade REAL,
         passed TEXT,
@@ -39,104 +40,213 @@ class DBProvider {
         numberOfTries INTEGER,
         date TEXT)
       ''');
-      await db.execute('''
+        await db.execute('''
       CREATE TABLE Modules (
-        number INTEGER PRIMARY KEY,
-        name TEXT
+        id INTEGER PRIMARY KEY,
+        title TEXT
       )
       ''');
-    });
+      });
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 
   // CREATE
 
   newModule(Module newModule) async {
     final db = await database;
-    var result = await db.insert("Modules", newModule.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
-    return result;
+    try {
+      var result = await db.insert("Modules", newModule.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+      return result;
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 
   newExamResult(ExamResult newExamResult) async {
     final db = await database;
-    var result = await db.insert("Exams", newExamResult.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
-    return result;
+    try {
+      var result = await db.insert("Exams", newExamResult.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+      return result;
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 
   // READ
 
-  getModule(int number) async {
+  getModule(int id) async {
     final db = await database;
-    var result = await db.query("Modules", where: "number = ?", whereArgs: [number]);
-    return result.isNotEmpty ? Module.fromMap(result.first) : null;
+    try {
+      var result = await db.query("Modules", where: "id = ?", whereArgs: [id]);
+      return result.isNotEmpty ? Module.fromMap(result.first) : null;
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 
-  getExamResult(int number) async {
+  getExamResult(int id) async {
     final db = await database;
-    var result = await db.query("Exams", where: "number = ?", whereArgs: [number]);
-    return result.isNotEmpty ? ExamResult.fromMap(result.first) : null;
+    try {
+      var result = await db.query("Exams", where: "id = ?", whereArgs: [id]);
+      return result.isNotEmpty ? ExamResult.fromMap(result.first) : null;
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 
   getAllModules() async {
     final db = await database;
-    var result = await db.query('Modules');
-    List<Map<String, dynamic>> resultList = result.isNotEmpty ? result.toList(): null;
-    var list = List<Module>();
-    if (resultList == null) {
-      return null;
+    try {
+      var result = await db.query('Modules');
+      List<Map<String, dynamic>> resultList =
+          result.isNotEmpty ? result.toList() : null;
+      var list = List<Module>();
+      if (resultList == null) {
+        return null;
+      }
+      for (var map in resultList) {
+        list.add(Module.fromMap(map));
+      }
+      return list;
+    } catch (err) {
+      print(err);
+      rethrow;
     }
-    for (var map in resultList) {
-      list.add(Module.fromMap(map));
-    }
-    return list;
   }
 
   getAllExamResults() async {
     final db = await database;
-    var result = await db.query('Exams');
-    List<Map<String, dynamic>> resultList = result.isNotEmpty ? result.toList(): null;
-    var list = List<ExamResult>();
-    if (resultList == null) {
-      return null;
+    try {
+      var result = await db.query('Exams');
+      List<Map<String, dynamic>> resultList =
+          result.isNotEmpty ? result.toList() : null;
+      var list = List<ExamResult>();
+      if (resultList == null) {
+        return null;
+      }
+      for (var map in resultList) {
+        list.add(ExamResult.fromMap(map));
+      }
+      return list;
+    } catch (err) {
+      print(err);
+      rethrow;
     }
-    for (var map in resultList) {
-      list.add(ExamResult.fromMap(map));
+  }
+
+  getAllExamGrades() async {
+    final db = await database;
+    try {
+      var result = await db.query('Exams', columns: ["grade"]);
+      var gradeQueryList = result.toList();
+      if (gradeQueryList.isEmpty) {
+        return null;
+      }
+      var gradeList = List<double>();
+      for (var grade in gradeQueryList) {
+        gradeList.add(grade.values.first);
+      }
+      return gradeList;
+    } catch (err) {
     }
-    return list;
   }
 
   // UPDATE
 
   updateModule(Module newModule) async {
     final db = await database;
-    var result = await db.update("Modules", newModule.toMap(), where: "number = ?", whereArgs: [newModule.number]);
-    return result;
+    try {
+      var result = await db.update("Modules", newModule.toMap(),
+          where: "id = ?", whereArgs: [newModule.id]);
+      return result;
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 
   updateExamResult(ExamResult newExamResult) async {
     final db = await database;
-    var result = await db.update("Exams", newExamResult.toMap(), where: "number = ?", whereArgs: [newExamResult.number]);
-    return result;
+    try {
+      var result = await db.update("Exams", newExamResult.toMap(),
+          where: "id = ?", whereArgs: [newExamResult.id]);
+      return result;
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 
   // DELETE
 
-  deleteModule(int number) async {
+  deleteModule(int id) async {
     final db = await database;
-    db.delete("Modules", where: "number = ?", whereArgs: [number]);
+    try {
+      db.delete("Modules", where: "id = ?", whereArgs: [id]);
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 
   deleteAllModules() async {
     final db = await database;
-    db.rawDelete("Delete * from Module");
+    try {
+      db.rawDelete("Delete * from Module");
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 
-  deleteExamResult(int number) async {
+  deleteExamResult(int id) async {
     final db = await database;
-    db.delete("Exams", where: "number = ?", whereArgs: [number]);
+    try {
+      db.delete("Exams", where: "id = ?", whereArgs: [id]);
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 
   deleteAllExamResults() async {
     final db = await database;
-    db.rawDelete("Delete * from Exams");
+    try {
+      db.rawDelete("Delete * from Exams");
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
+  }
+
+  Future<bool> examsAvailable() async {
+    final db = await database;
+    try {
+      var result = await db.query('Exams');
+      return result.isNotEmpty;
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
+  }
+
+  Future<bool> modulesAvailable() async {
+    final db = await database;
+    try {
+      var result = await db.query('Modules');
+      return result.isNotEmpty;
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
   }
 }

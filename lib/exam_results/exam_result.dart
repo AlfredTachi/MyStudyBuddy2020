@@ -7,8 +7,8 @@ import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart';
 
 class ExamResult {
-  int number;
-  String name;
+  int id;
+  String title;
   String term;
   double grade;
   String passed;
@@ -18,8 +18,8 @@ class ExamResult {
   String date;
 
   ExamResult(
-      {this.number,
-      this.name,
+      {this.id,
+      this.title,
       this.term,
       this.grade,
       this.passed,
@@ -29,8 +29,8 @@ class ExamResult {
       this.date});
 
   factory ExamResult.fromMap(Map<String, dynamic> map) => new ExamResult(
-        number: map["number"],
-        name: map["name"],
+        id: map["id"],
+        title: map["title"],
         term: map["term"],
         grade: map["grade"],
         passed: map["passed"],
@@ -41,8 +41,8 @@ class ExamResult {
       );
 
   Map<String, dynamic> toMap() => {
-        'number': number,
-        'name': name,
+        'id': id,
+        'title': title,
         'term': term,
         'grade': grade,
         'passed': passed,
@@ -53,8 +53,8 @@ class ExamResult {
       };
 
   String toString() => '''
-    number: $number
-    name: $name
+    id: $id
+    title: $title
     grade: $grade
     passed: $passed
     credits: $credits
@@ -140,8 +140,8 @@ void _fetchDataFromLSFServer(String userName, String userPassword) async {
 
     for (var i = 0; i < gradeLines.length / 9; i++) {
       ExamResult result = ExamResult(
-          number: int.tryParse(trimmedGradeLines[0]),
-          name: trimmedGradeLines[1],
+          id: int.tryParse(trimmedGradeLines[0]),
+          title: trimmedGradeLines[1],
           term: trimmedGradeLines[2],
           grade: double.tryParse(trimmedGradeLines[3].replaceAll(',', '.')),
           passed: trimmedGradeLines[4],

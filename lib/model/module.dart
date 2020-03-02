@@ -1,15 +1,36 @@
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/services.dart';
+import 'package:html/dom.dart' as html;
+import 'package:html/parser.dart';
+import 'dart:async';
 
 class Module {
   int id;
   String title;
   bool _isSelected = false;
-  Module(
+  Module({
     this.id,
     this.title,
+  });
+
+  factory Module.fromMap(Map<String, dynamic> map) => Module(
+    id: map["id"],
+    title: map["title"],
   );
+
+  Map<String, dynamic> toMap() => {
+    "id" : id,
+    "title" : title,
+  };
+
+  String toString() =>
+  '''
+  id: $id
+  title: $title
+  ''';
 
   Widget module() {
     return Padding(
@@ -86,5 +107,29 @@ class Module {
         ),
       ),
     );
+  }
+}
+
+Future<void> getModulesFromFile() async {
+  final db = DBProvider.db;
+  var contents = await rootBundle.loadString("assets/modulhandbuch.html");
+
+  var moduleHandbook = parse(contents);
+  List<html.Element> modulesElementList = moduleHandbook.querySelectorAll("h4");
+  List<Module> moduleList = List<Module>();
+  for (var module in modulesElementList) {
+    if (module.innerHtml.isEmpty) {
+      continue;
+    }
+    final splitModule = module.innerHtml.split(":");
+    final intRegex = RegExp(r'[^0-9]', multiLine: false);
+    var moduleNumber = splitModule[0].replaceAll(intRegex, '');
+    final modulesMap = Map<String, dynamic>();
+    modulesMap["id"] = int.tryParse(moduleNumber);
+    modulesMap["title"] = splitModule[1].trim();
+    moduleList.add(Module.fromMap(modulesMap));
+  }
+  for (var module in moduleList) {
+    db.newModule(module);
   }
 }
