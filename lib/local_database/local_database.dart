@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
-import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -105,26 +104,31 @@ class DBProvider {
     }
   }
 
-  Future<List<Module>> getAllModules() async {
+  Future<void> getAllModules() async {
     final db = await database;
+
+    List<Map<String, dynamic>> result = await db.query('Modules');
+    List<Map<String, dynamic>> resultList = new List<Map<String, dynamic>>();
+    List<Module> list = List<Module>();
+
     try {
-      var result = await db.query('Modules');
-      List<Map<String, dynamic>> resultList =
-          result.isNotEmpty ? result.toList() : null;
-      var list = List<Module>();
-      if (resultList == null) {
+      //Check if db is empty
+      if (result.isNotEmpty) {
+        resultList = result.toList();
+      } else {
         return null;
       }
-      for (var map in resultList) {
-        list.add(Module.fromMap(map));
+
+      ModuleController().resetAllModules();
+
+      for (Map<String, dynamic> map in resultList) {
         ModuleController().addToAllModules(Module.fromMap(map));
       }
-      return list;
-      
     } catch (err) {
       print(err);
-      rethrow;
     }
+
+    return list;
   }
 
   Future<List<ExamResult>> getAllExamResults() async {

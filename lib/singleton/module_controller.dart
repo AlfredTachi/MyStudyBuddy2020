@@ -1,4 +1,3 @@
-import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -31,7 +30,7 @@ class ModuleController {
     List<Module> _modules = new List<Module>();
     int moduleIndex = 1;
     String _moduleIndex = "";
-    for (var i = 0; i <= 2; i++) {
+    for (var i = 0; i <= 5; i++) {
       _moduleIndex = moduleIndex.toString() + index.toString() + i.toString();
       _modules = ModuleController()
           .getAllModules()
@@ -58,6 +57,10 @@ class ModuleController {
 
   void addToAllModules(Module _module) {
     _allModules.add(_module);
+  }
+
+  void resetAllModules() {
+    _allModules = new List<Module>();
   }
 
   void removeFromAllModule(Module _module) {

@@ -1,6 +1,5 @@
 import 'package:MyStudyBuddy2/dashboard/progress_bar/progress_bar.dart';
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
-import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
