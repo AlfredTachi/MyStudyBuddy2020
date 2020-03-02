@@ -83,7 +83,7 @@ Future<void> _downloadLSFData(BuildContext context) {
             child: Text("Daten holen"),
             onPressed: () async {
               try {
-                final db = await DBProvider.db;
+                final db = DBProvider.db;
                 await getExamResultsFromLSFServer(userName, userPassword);
                 final grades = await db.getAllExamGrades();
                 print(grades);
