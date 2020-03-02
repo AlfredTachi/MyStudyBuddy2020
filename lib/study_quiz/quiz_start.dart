@@ -1,4 +1,3 @@
-import 'package:MyStudyBuddy2/drawer/drawer.dart';
 import 'package:MyStudyBuddy2/study_quiz/scrum_quiz.dart';
 import 'package:MyStudyBuddy2/study_quiz/study_quiz.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,6 @@ class QuizStartState extends State<QuizStart>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Study Quiz')),
-      drawer: OwnDrawer(),
       body: new Container(
           margin: const EdgeInsets.all(15.0),
        child: new Column(

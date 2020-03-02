@@ -38,10 +38,14 @@ class ModuleController {
     _selectedModules.add(_module);
   }
 
+  void removeModule(Module _module) {
+    _selectedModules.remove(_module);
+  }
+
   static List<Module> _generateModules() {
     List<Module> _modules = new List<Module>();
     for (int i = 1; i <= 7; i++) {
-      _modules.add(Module(i, (i.toString() + ". M").toString()));
+      _modules.add(Module(id: i, title: (i.toString() + ". M").toString()));
     }
     return _modules;
   }

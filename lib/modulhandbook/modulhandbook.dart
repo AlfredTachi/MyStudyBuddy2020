@@ -1,16 +1,16 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
 
-class MensaPlan extends StatefulWidget {
+
+class ModuleHandbooks extends StatefulWidget {
   @override
-  MensaPlanState createState() => MensaPlanState();
+  State<StatefulWidget> createState() => ModuleHandbooksState();
 }
 
-class MensaPlanState extends State<MensaPlan> {
+class ModuleHandbooksState extends State<ModuleHandbooks> {
   num _viewIndex = 0;
   bool _hasLoaded = false;
 
@@ -26,14 +26,14 @@ class MensaPlanState extends State<MensaPlan> {
   Widget getMaterialDesign() {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Mensa Plan"),
+       title: Text("Modulhandbuch"),
       ),
       body: IndexedStack(
         index: _viewIndex,
         children: <Widget>[
           Center(child: CircularProgressIndicator()),
           WebView(
-            initialUrl: 'https://stw-vp.de/de/mensa-webapp',
+            initialUrl: 'https://hswocloud.hs-worms.de/hswocloud/index.php/s/9j6tyjaazmFKnNC',
             javascriptMode: JavascriptMode.unrestricted,
             onPageStarted: checkTimeOut,
             onPageFinished: pageFinishedLoading,
@@ -65,7 +65,7 @@ class MensaPlanState extends State<MensaPlan> {
 
   void pageReload() {
     setState(() {
-      Navigator.popAndPushNamed(context, '/mensa_plan');
+      Navigator.popAndPushNamed(context, '/modulhandbook');
     });
   }
 
