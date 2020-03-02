@@ -1,5 +1,6 @@
 import 'package:MyStudyBuddy2/singleton/tile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 
 class Overview extends StatefulWidget {
   @override
@@ -7,23 +8,7 @@ class Overview extends StatefulWidget {
 }
 
 class OverviewState extends State<Overview> {
-  Image _myImage;
-
-  @override
-  void initState() {
-    super.initState();
-    _myImage = Image.asset(
-      "assets/images/header_3_klein.png",
-      gaplessPlayback: true,
-    );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    precacheImage(_myImage.image, context);
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -36,8 +21,10 @@ class OverviewState extends State<Overview> {
           flexibleSpace: FlexibleSpaceBar(
             background: FittedBox(
               fit: BoxFit.fill,
-              child: Image(
-                image: _myImage.image,
+              child:
+              Image(
+                image: AssetImage('assets/images/header_3_klein.png'),
+                gaplessPlayback: true,
               ),
             ),
           ),
