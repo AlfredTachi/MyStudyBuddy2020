@@ -1,7 +1,6 @@
 import 'package:MyStudyBuddy2/dashboard/progress_bar/progress_bar.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
-import '../drawer/drawer.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -34,7 +33,6 @@ class DashboardState extends State<Dashboard> {
         tooltip: 'Modul hinzufügen',
         child: Icon(Icons.add),
       ),
-      drawer: OwnDrawer(),
       body: SafeArea(
         child: Column(
           children: <Widget>[

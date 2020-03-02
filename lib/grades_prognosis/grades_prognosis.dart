@@ -1,6 +1,5 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
-import '../drawer/drawer.dart';
 
 Material gradesAverage(IconData icon, String text, double grade) {
   return Material(
@@ -115,7 +114,6 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
     return 
         Scaffold(
             appBar: AppBar(title: Text('Notenübersicht')),
-            drawer: OwnDrawer(),
             body: StaggeredGridView.count(
                 crossAxisCount: 2,
                 crossAxisSpacing: 5,
