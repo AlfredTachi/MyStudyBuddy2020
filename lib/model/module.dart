@@ -17,17 +17,16 @@ class Module {
   });
 
   factory Module.fromMap(Map<String, dynamic> map) => Module(
-    id: map["id"],
-    title: map["title"],
-  );
+        id: map["id"],
+        title: map["title"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "id" : id,
-    "title" : title,
-  };
+        "id": id,
+        "title": title,
+      };
 
-  String toString() =>
-  '''
+  String toString() => '''
   id: $id
   title: $title
   ''';
@@ -74,7 +73,8 @@ class Module {
                           })
                     ]))));
               } else {
-                Get.dialog(AlertDialog(
+                Get.dialog(
+                  AlertDialog(
                     contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
                     content: SingleChildScrollView(
                       child: ListBody(
@@ -97,7 +97,9 @@ class Module {
                               })
                         ],
                       ),
-                    )));
+                    ),
+                  ),
+                );
               }
             }
           },
