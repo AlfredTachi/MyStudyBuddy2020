@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/exam_results/add_grade.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class Module {
   int id;
   String title;
   bool _isSelected = false;
+  double _grade;
   Module({
     this.id,
     this.title,
@@ -63,7 +65,9 @@ class Module {
                           child: Text("Modul Informationen"), onPressed: () {}),
                       FlatButton(
                         child: Text("Note Eintragen"),
-                        onPressed: () {},
+                        onPressed: () {
+                          addGrade(this);
+                        },
                       ),
                       FlatButton(
                           child: Text("Modul Abwählen"),
@@ -87,7 +91,9 @@ class Module {
                               child: Text("Modul Informationen"),
                               onPressed: () {}),
                           FlatButton(
-                              child: Text("Note Eintragen"), onPressed: () {}),
+                              child: Text("Note Eintragen"), onPressed: () {
+                                addGrade(this);
+                              }),
                           FlatButton(
                               child: Text("Modul Wählen"),
                               onPressed: () {
@@ -108,7 +114,16 @@ class Module {
       ),
     );
   }
+  //getter
+double getGrade()=> _grade;
+
+  //setter
+void setGrade(double newGrade){
+  _grade = newGrade;
 }
+
+}
+
 
 Future<void> getModulesFromFile() async {
   final db = DBProvider.db;
