@@ -7,6 +7,23 @@ class Overview extends StatefulWidget {
 }
 
 class OverviewState extends State<Overview> {
+  Image _myImage;
+
+  @override
+  void initState() {
+    super.initState();
+    _myImage = Image.asset(
+      "assets/images/header_3_klein.png",
+      gaplessPlayback: true,
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(_myImage.image, context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -15,16 +32,12 @@ class OverviewState extends State<Overview> {
           pinned: true,
           floating: true,
           centerTitle: true,
-          title: Text(
-            "My Study Buddy",
-            style: TextStyle(color: Colors.black),
-          ),
           expandedHeight: 200.0,
           flexibleSpace: FlexibleSpaceBar(
             background: FittedBox(
               fit: BoxFit.fill,
-              child: Image.asset(
-                'assets/images/menu_picture.jpg',
+              child: Image(
+                image: _myImage.image,
               ),
             ),
           ),
