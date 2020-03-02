@@ -64,49 +64,39 @@ class ExamResult {
     ''';
 }
 
-
-
-Future<void> getExamResultsFromLSFServer(String userName, String password) async {
-  try {
-    final result = await InternetAddress.lookup('lsf.hs-worms.de');
-    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-      // connected
-      _fetchDataFromLSFServer(userName, password);
-    }
-  } catch (err) {
-    // not connected
-    rethrow;
-  }
-}
-
-Future<bool> _fetchDataFromLSFServer(String userName, String userPassword) async {
+// 0 = success
+// 1 = wrong login data
+// 2 = no internet connection
+// 3 = time out
+// 9 = unknown error
+Future<int> getExamResultsFromLSFServer(String userName, String userPassword) async {
+  final DBProvider db = DBProvider.db;
   Response postResponse;
-  var client = Client();
-  final db = DBProvider.db;
+  Client client = Client();
 
   try {
     postResponse = await client.post(
         'https://lsf.hs-worms.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal&asdf=$userName&fdsa=$userPassword');
+    
+    if (!postResponse.headers.keys.first.contains('location')) {
+      print(postResponse.headers.keys.first);
+      return 1;
+    }
   } catch (err) {
     if (err.message.contains("Failed host lookup")) {
       print("SocketException: No internet connction");
-      throw SocketException("No internet connection");
+      return 2;
     } else if (err.osError.message.contains("timed out")) {
       print("OSError: Connection to " + err.address.host + " timed out");
-      throw TimeoutException(
-          "Connection to " + err.address.host + " timed out");
+      return 3;
     } else {
       print(err);
-      rethrow;
+      return 9;
     }
   }
 
 
   try {
-    if (!postResponse.headers.keys.first.contains('location')) {
-      print(postResponse.headers.keys.first);
-      throw Exception("Invalid login data");
-    }
     final homeScreenResponse =
         await client.get(postResponse.headers.values.first);
     final examAdministrationResponse = await client.get(_choseLink(
@@ -154,10 +144,10 @@ Future<bool> _fetchDataFromLSFServer(String userName, String userPassword) async
       db.newExamResult(result);
       trimmedGradeLines.removeRange(0, 9);
     }
-    return true;
+    return 0;
   } catch (err) {
     print(err);
-    throw err;
+    return 9;
   }
 }
 
