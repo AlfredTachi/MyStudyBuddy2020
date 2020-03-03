@@ -1,3 +1,5 @@
+import 'package:MyStudyBuddy2/exam_results/add_grade.dart';
+import 'package:MyStudyBuddy2/model/module_informations.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ class Module {
   String title;
   String shortTitle = "";
   bool _isSelected = false;
+  double _grade;
   Module({
     this.id,
     this.title,
@@ -52,35 +55,28 @@ class Module {
               Get.toNamed("/modulSelectionWPF");
             } else {
               if (_isSelected) {
-                Get.dialog(
-                  AlertDialog(
-                    contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                    content: SingleChildScrollView(
-                      child: ListBody(
-                        children: <Widget>[
-                          Text(
-                            'Modulname',
-                            style: TextStyle(fontSize: 25),
-                          ),
-                          FlatButton(
-                              child: Text("Modul Informationen"),
-                              onPressed: () {}),
-                          FlatButton(
-                            child: Text("Note Eintragen"),
-                            onPressed: () {},
-                          ),
-                          FlatButton(
-                              child: Text("Modul Abwählen"),
-                              onPressed: () {
-                                ModuleController().removeSelectedModule(this);
-                                _isSelected = false;
-                                Get.back();
-                              })
-                        ],
+                Get.dialog(AlertDialog(
+                  contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                  content: SingleChildScrollView(
+                    child: ListBody(children: <Widget>[
+                      Text(
+                        this.title,
+                        style: TextStyle(fontSize: 25),
                       ),
-                    ),
+                      FlatButton(
+                          child: Text("Modul Informationen"),
+                          onPressed: () {
+                            moduleInforations(this);
+                          }),
+                      FlatButton(
+                        child: Text("Note Eintragen"),
+                        onPressed: () {
+                          addGrade(this);
+                        },
+                      ),
+                    ]),
                   ),
-                );
+                ));
               } else {
                 Get.dialog(
                   AlertDialog(
@@ -89,14 +85,19 @@ class Module {
                       child: ListBody(
                         children: <Widget>[
                           Text(
-                            'Modulname',
+                            this.title,
                             style: TextStyle(fontSize: 25),
                           ),
                           FlatButton(
                               child: Text("Modul Informationen"),
-                              onPressed: () {}),
+                              onPressed: () {
+                                moduleInforations(this);
+                              }),
                           FlatButton(
-                              child: Text("Note Eintragen"), onPressed: () {}),
+                              child: Text("Note Eintragen"),
+                              onPressed: () {
+                                addGrade(this);
+                              }),
                           FlatButton(
                             child: Text("Modul Wählen"),
                             onPressed: () {
@@ -119,6 +120,14 @@ class Module {
         ),
       ),
     );
+  }
+
+  //getter
+  double getGrade() => _grade;
+
+  //setter
+  void setGrade(double newGrade) {
+    _grade = newGrade;
   }
 }
 
