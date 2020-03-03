@@ -1,6 +1,8 @@
 import 'package:MyStudyBuddy2/campus_plan/campus_plan.dart';
 import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection.dart';
+import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection_QSP.dart';
+import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection_WPF.dart';
 import 'package:MyStudyBuddy2/dashboard/profile_page/profile_page.dart';
 import 'package:MyStudyBuddy2/evaluation/evaluation.dart';
 import 'package:MyStudyBuddy2/evaluation/module_list.dart';
@@ -26,19 +28,23 @@ import '../dashboard/module_selection/module_selection.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/':
+      case '/dashboard':
         return MaterialPageRoute(builder: (_) => Dashboard());
       case '/profilePage':
         return MaterialPageRoute(builder: (_) => ProfilePage());
       case '/modulSelection':
         return MaterialPageRoute(builder: (_) => ModuleSelection());
+      case '/modulSelectionQSP':
+        return MaterialPageRoute(builder: (_) => ModuleSelectionQSP());
+      case '/modulSelectionWPF':
+        return MaterialPageRoute(builder: (_) => ModuleSelectionWPF());
       case '/studyprogress':
         return MaterialPageRoute(builder: (_) => Studyprogress());
-      case '/mensa_plan':
+      case '/mensaPlan':
         return MaterialPageRoute(builder: (_) => MensaPlan());
       case '/weather':
         return MaterialPageRoute(builder: (_) => Weather());
-      case '/modulhandbuch':
+      case '/moduleHandbook':
         return MaterialPageRoute(builder: (_) => ModuleHandbooks());
       case '/supportMain':
         return MaterialPageRoute(builder: (_) => Support());
@@ -52,7 +58,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => CampusPlan());
       case '/settings':
         return MaterialPageRoute(builder: (_) => Settings());
-      case '/grades_prognosis':
+      case '/gradesPrognosis':
         return MaterialPageRoute(builder: (_) => GradesPrognosis());
       case '/planer':
         return MaterialPageRoute(builder: (_) => Planer());

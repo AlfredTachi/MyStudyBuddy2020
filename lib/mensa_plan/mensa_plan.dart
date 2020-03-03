@@ -5,8 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
 
-import 'package:MyStudyBuddy2/drawer/drawer.dart';
-
 class MensaPlan extends StatefulWidget {
   @override
   MensaPlanState createState() => MensaPlanState();
@@ -30,7 +28,6 @@ class MensaPlanState extends State<MensaPlan> {
       appBar: AppBar(
         title: Text("Mensa Plan"),
       ),
-      drawer: OwnDrawer(),
       body: IndexedStack(
         index: _viewIndex,
         children: <Widget>[

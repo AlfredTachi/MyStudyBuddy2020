@@ -1,4 +1,5 @@
-import 'package:MyStudyBuddy2/singleton/module_studyprogress_controller.dart';
+import 'package:MyStudyBuddy2/local_database/local_database.dart';
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 
 class StaggeredView extends StatefulWidget {
@@ -22,7 +23,7 @@ class _StaggeredViewState extends State<StaggeredView> {
 
   List<Widget> generateSemesterTiles() {
     List<Widget> _semesterTiles = new List<Widget>();
-    for (int i = 1; i <= 5; i++) {
+    for (int i = 1; i <= 7; i++) {
       _semesterTiles.add(semester(i));
     }
     return _semesterTiles;
@@ -31,7 +32,7 @@ class _StaggeredViewState extends State<StaggeredView> {
   Widget semester(int titleIndex) {
     String title = titleIndex.toString() + ". Semester";
     return Padding(
-      padding: const EdgeInsets.only(top: 5, bottom: 0, left: 3, right: 3),
+      padding: const EdgeInsets.only(top: 5, bottom: 5, left: 3, right: 3),
       child: Material(
         elevation: 15,
         borderRadius: BorderRadius.circular(15.0),
@@ -61,10 +62,20 @@ class _StaggeredViewState extends State<StaggeredView> {
                       )),
                 ),
               ]),
-              Wrap(
-                direction: Axis.horizontal,
-                runSpacing: 5,
-                children: ModuleController().getAllModulesWidgets(),
+              FutureBuilder(
+                future: DBProvider.db.getAllModules(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return new Center(
+                        child: Wrap(
+                      direction: Axis.horizontal,
+                      runSpacing: 5,
+                      children: ModuleController().getAllSemesterModulesWidgets(titleIndex),
+                    ));
+                  } else {
+                    return new Text("Loading...");
+                  }
+                },
               ),
             ],
           ),

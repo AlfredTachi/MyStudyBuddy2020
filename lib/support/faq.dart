@@ -70,6 +70,32 @@ class FAQState extends State<FAQ> {
               )
             ],
           ),
+          ExpansionTile(
+            title: Text('An- und Abmeldung von Prüfungen'),
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 17, right: 17),
+                child: Text(
+                  "Frist für die Anmeldung / Abmeldung ist im Sommersemester der 15.06 und im Wintersemester der 15.12."+
+                  " Prüfungen werden im LSF an- und abgemeldet.",
+                  textAlign: TextAlign.start, style: new TextStyle(fontSize: 16),
+                ),
+              )
+            ],
+          ),
+          ExpansionTile(
+            title: Text('Wann und wo findet die Klausureinsicht statt?'),
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 17, right: 17),
+                child: Text(
+                  "Im Sommersemester an acht Terminen im April jeweils Dienstags und Donnerstag von 11:00 - 12:00 Uhr in Raum N 313 (neben dem Fachbereichsdekanat).\n"+
+                  "\nIm Wintersemester an acht Terminen zwischen 15. Oktober und 15. November jeweils Dienstags und Donnerstags von 11:00 - 12:00 Uhr in Raum N 313 (neben dem Fachbereichsdekanat).",
+                  textAlign: TextAlign.start, style: new TextStyle(fontSize: 16),
+                ),
+              )
+            ],
+          ),
         ]),
       ),
     );
