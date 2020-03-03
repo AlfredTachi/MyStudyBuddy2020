@@ -25,33 +25,35 @@ class MensaPlanState extends State<MensaPlan> {
 
   Widget getMaterialDesign() {
     return Scaffold(
-      body: IndexedStack(
-        index: _viewIndex,
-        children: <Widget>[
-          Center(child: CircularProgressIndicator()),
-          WebView(
-            initialUrl: 'https://stw-vp.de/de/mensa-webapp',
-            javascriptMode: JavascriptMode.unrestricted,
-            onPageStarted: checkTimeOut,
-            onPageFinished: pageFinishedLoading,
-          ),
-          Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                  child: Text(
-                    "Es gibt ein Problem bei der Verbindung. Prüfe deine Internetverbindung",
-                    textAlign: TextAlign.center,
+      body: SafeArea(
+        child: IndexedStack(
+          index: _viewIndex,
+          children: <Widget>[
+            Center(child: CircularProgressIndicator()),
+            WebView(
+              initialUrl: 'https://stw-vp.de/de/mensa-webapp',
+              javascriptMode: JavascriptMode.unrestricted,
+              onPageStarted: checkTimeOut,
+              onPageFinished: pageFinishedLoading,
+            ),
+            Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                    child: Text(
+                      "Es gibt ein Problem bei der Verbindung. Prüfe deine Internetverbindung",
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-                IconButton(
-                    icon: Icon(Icons.refresh),
-                    onPressed: () {
-                      pageReload();
-                    })
-              ]),
-        ],
+                  IconButton(
+                      icon: Icon(Icons.refresh),
+                      onPressed: () {
+                        pageReload();
+                      })
+                ]),
+          ],
+        ),
       ),
     );
   }
