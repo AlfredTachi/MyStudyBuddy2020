@@ -63,7 +63,7 @@ class _StaggeredViewState extends State<StaggeredView> {
                 ),
               ]),
               FutureBuilder(
-                future: DBProvider.db.getAllModules(),
+                future: DBProvider.db.readAllModules(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return new Center(
