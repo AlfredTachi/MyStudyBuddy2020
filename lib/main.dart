@@ -1,6 +1,4 @@
-import 'package:MyStudyBuddy2/dashboard/profile_page/profile_page.dart';
-import 'package:MyStudyBuddy2/exam_results/exam_result.dart';
-import 'package:MyStudyBuddy2/local_database/local_database.dart';
+import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
 import 'package:MyStudyBuddy2/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -72,11 +70,11 @@ class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              title: Text("Mein Profil"),
+              title: Text("Mein Studium"),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              title: Text("Mein Studium"),
+              title: Text("Übersicht"),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.restaurant),
@@ -91,7 +89,7 @@ class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
   Widget getCorrectPage(int _index) {
     switch (_index) {
       case 0:
-        return ProfilePage();
+        return Dashboard();
       case 1:
         return Overview();
       case 2:
