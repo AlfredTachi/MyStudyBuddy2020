@@ -44,6 +44,8 @@ dependencies:
   path: ^1.6.4 # https://pub.dev/packages/path *** BSD ***
   path_provider: ^1.6.1 # https://pub.dev/packages/path_provider *** BSD ***
 
+  auto_size_text: ^2.1.0 #https://pub.dev/packages/auto_size_text *** MIT **
+
 flutter_icons:
   android: "launcher_icon" # https://pub.dev/packages/flutter_launcher_icons *** MIT ***
   ios: true

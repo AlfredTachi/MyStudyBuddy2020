@@ -1,7 +1,7 @@
 [
     {
-        "1":"",
-		"2":"",
+        "1":"Was versteht manunter dem Begriff `Quasiparallelität‘?",
+		"2":"Was versteht manunter dem Begriff `Spooling‘?",
 		"3":"",
 		"4":"",
 		"5":"",
@@ -13,10 +13,10 @@
     },
     {
         "1": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "falsche blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "b": "falsche blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "c": "Durch das schnelle Wechseln von Prozesse, durch die CPU, entsteht der Eindruck einer prallelen Prozessverarbeitung",
+            "d": "falsche blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
 		"2": {
             "a": "",
@@ -74,7 +74,7 @@
         }
     },
     {
-        "1":"",
+        "1":"Durch das schnelle Wechseln von Prozesse, durch die CPU, entsteht der Eindruck einer prallelen Prozessverarbeitung",
 		"2":"",
 		"3":"",
 		"4":"",

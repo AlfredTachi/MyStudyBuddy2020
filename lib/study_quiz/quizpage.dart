@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:MyStudyBuddy2/study_quiz/resultpage.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class Getjson extends StatelessWidget {
@@ -18,7 +19,7 @@ class Getjson extends StatelessWidget {
       case "1. Semester":
         return assettoload = "assets/1Sem.json";
       case "2. Semester":
-        return assettoload = "assets/python.json";
+        return assettoload = "assets/2Sem.json";
       case "3. Semester":
         return assettoload = "assets/java.json";
       case "4. Semester":
@@ -85,7 +86,6 @@ class _QuizpageState extends State<Quizpage> {
     "c": Colors.orangeAccent[100],
     "d": Colors.orangeAccent[100],
   };
-  
 
   // overriding the initstate function to start timer as this screen is created
   @override
@@ -101,7 +101,6 @@ class _QuizpageState extends State<Quizpage> {
       super.setState(fn);
     }
   }
-
 
   bool canceltimer = false;
   void starttimer() async {
@@ -120,9 +119,9 @@ class _QuizpageState extends State<Quizpage> {
       });
     });
   }
-  
+
   void nextquestion() {
-    var randomArray = [1,3,7,9,4,5,6,10,8,2];
+    var randomArray = [9, 3, 7, 1, 4, 5, 6, 10, 8, 2];
     canceltimer = false;
     timer = 30;
     setState(() {
@@ -134,28 +133,20 @@ class _QuizpageState extends State<Quizpage> {
           builder: (context) => Resultpage(marks: marks),
         ));
       }
-      btncolor["a"] = Colors.orangeAccent[100];
-      btncolor["b"] = Colors.orangeAccent[100];
-      btncolor["c"] = Colors.orangeAccent[100];
-      btncolor["d"] = Colors.orangeAccent[100];
+      btncolor["a"] = Colors.orangeAccent[200];
+      btncolor["b"] = Colors.orangeAccent[200];
+      btncolor["c"] = Colors.orangeAccent[200];
+      btncolor["d"] = Colors.orangeAccent[200];
     });
     starttimer();
   }
 
   void checkanswer(String k) {
-    // in the previous version this was
-    // mydata[2]["1"] == mydata[1]["1"][k]
-    // which i forgot to change
-    // so nake sure that this is now corrected
     if (mydata[2][i.toString()] == mydata[1][i.toString()][k]) {
-      // just a print sattement to check the correct working
-      // debugPrint(mydata[2][i.toString()] + " is equal to " + mydata[1][i.toString()][k]);
       marks = marks + 1;
       // changing the color variable to be green
       colortoshow = right;
     } else {
-      // just a print sattement to check the correct working
-      // debugPrint(mydata[2]["1"] + " is equal to " + mydata[1]["1"][k]);
       colortoshow = wrong;
     }
     setState(() {
@@ -176,14 +167,12 @@ class _QuizpageState extends State<Quizpage> {
       ),
       child: MaterialButton(
         onPressed: () => checkanswer(k),
-        child: Text(
+        child: AutoSizeText(
           mydata[1][i.toString()][k],
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16.0,
-          ),
-          maxLines: 1,
-        ),
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Colors.white,
+            )),
         color: btncolor[k],
         splashColor: Colors.orangeAccent,
         highlightColor: Colors.orangeAccent,
@@ -219,6 +208,7 @@ class _QuizpageState extends State<Quizpage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  mydata[1][i.toString()][1],
                   choicebutton('a'),
                   choicebutton('b'),
                   choicebutton('c'),

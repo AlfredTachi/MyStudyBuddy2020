@@ -1,88 +1,84 @@
 [
     {
-        "1":"Frage 1",
-		"2":"",
-		"3":"",
-		"4":"",
-		"5":"",
-		"6":"",
-		"7":"",
-		"8":"",
-		"9":"",
-		"10":""
+        "1":"Was beschreibt am besten einen Prozess im Sinne von Computer-Betriebssystemen?",
+		"2":"Der Körper hat eine eigene Sprache. Welche der folgenden Körperausdrücke kennzeichnet eher einen Blauen?",
+		"3":"Der Grüne verhält sich u.a. tendenziell in Konflikten:Richtig:",
+		"4":"Erfolgs-Analysen zeigen nachstehendes Ergebnis",
+		"5":"Mit Hilfe der Methodenkompetenz stelle ich überwiegend ...",
+		"6":"Was sind Schwächen?",
+		"7":"Welche Aussagen macht das Gelassenheits-Gebet?",
+		"8":"Wenn mir Feedback nicht gefällt, dann:",
+		"9":"Der Dateiname '...' (3 Punkte) darf für selbst erstellte Dateien oder Verzeichnisse verwendet werden.",
+		"10":"Üblicherweise ist bei UNIX-Dateisystemen Groß- und Kleinschreibung von Dateinamen relevant, d.h. 'Datei' und 'datei' sind unterschiedliche Namen."
     },
     {
         "1": {
-            "a": "a",
-            "b": "b",
-            "c": "c",
-            "d": "d"
+            "a": "Ein Prozess ist ein Programm, das ausgeführt wird.",
+            "b": "Ein Programm ist ein Prozess, der ausgeführt wird",
+            "c": "Ein Prozess ist dasselbe wie ein Programm.",
+            "d": "Jedes auf der Festplatte gespeicherte Programm ist ein Prozess."
         },
 		"2": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Starke Mimik und Gestik",
+            "b": "Energische und entschlossene Körperhaltung",
+            "c": "eher steif",
+            "d": "Ruhige und freundliche Mimik und Körperhaltung"
         },
 		"3": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Analysierend, Flucht auf die Sachebene",
+            "b": "Ruhig, stabilisierend, kompromissbereit",
+            "c": "Ausweichend, geschwätzig, ablenkend",
+            "d": "Analysierend, Flucht auf die Sachebene"
         },
 		"4": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Verzicht auf Risiken ist erfolgreich",
+            "b": "Schwächen sollten akzeptiert werden",
+            "c": "Nicht-Stärken behindern den Erfolg",
+            "d": "Einsatz von Stärken ist erfolgsrelevant"
         },
 		"5": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Wie-Fragen",
+            "b": "Wozu-Fragen",
+            "c": "Wieso-Fragen",
+            "d": "Warum-Fragen"
         },
 		"6": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Eine schwache Kondition",
+            "b": "Schwaches Durchsetzungsvermögen",
+            "c": "Übertriebene Stärken",
+            "d": "Übertriebener Egoismus"
         },
 		"7": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Es empfiehlt, Schwächen zu akzeptieren",
+            "b": "Es empfiehlt Nicht-Stärken und Schwächen zu unterscheiden",
+            "c": "Es empfiehlt Nicht-Stärken auszubauen",
+            "d": "Es wendet sich nur an fromme Menschen"
         },
 		"8": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "bedanke ich mich dennoch beim anderen",
+            "b": "sage ich es dem anderen",
+            "c": "versuche ich den anderen davon zu überzeugen, dass sein Feedback falsch ist",
+            "d": "schätze ich mich wohl grundsätzlich falsch ein"
         },
 		"9": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "wahr",
+            "b": "falsch"
         },
 		"10": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "wahr",
+            "b": "falsch"
         }
     },
     {
-        "1":"a",
-		"2":"",
-		"3":"",
-		"4":"",
-		"5":"",
-		"6":"",
-		"7":"",
-		"8":"",
-		"9":"",
-		"10":""
+        "1":"Ein Prozess ist ein Programm, das ausgeführt wird.",
+		"2":"eher steif",
+		"3":"Ruhig, stabilisierend, kompromissbereit",
+		"4":"Einsatz von Stärken ist erfolgsrelevant",
+		"5":"Wie-Fragen",
+		"6":"Übertriebene Stärken",
+		"7":"Es empfiehlt Nicht-Stärken und Schwächen zu unterscheiden",
+		"8":"bedanke ich mich dennoch beim anderen",
+		"9":"wahr",
+		"10":"wahr"
     }
 ]
