@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../local_database/local_database.dart';
 import '../singleton/module_controller.dart';
-import '../singleton/module_controller.dart';
 
 class Dashboard extends StatefulWidget {
   @override
