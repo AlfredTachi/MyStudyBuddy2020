@@ -15,7 +15,13 @@ class QuizStartState extends State<QuizStart>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Study Quiz')),
+      appBar: AppBar(
+        title: Text('Study Quiz'),
+        leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+        onPressed: () => Navigator.pushNamed(context, '/')
+        ),
+      ),
       body: new Container(
           margin: const EdgeInsets.all(15.0),
        child: new Column(
