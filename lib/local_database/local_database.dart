@@ -111,6 +111,16 @@ class DBProvider {
     }
   }
 
+  updateGradeManually(Module module) async {
+    var databaseConnection = await database;
+    String query =
+        'UPDATE Exams SET grade=\'${module.getGrade()}\' WHERE id=\'${module.id}\'';
+
+    await databaseConnection.transaction((transaction) async {
+      return await transaction.rawQuery(query);
+    });
+  }
+
   // DELETE
 
   deleteModule(int id) async {

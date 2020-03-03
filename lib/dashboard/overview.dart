@@ -1,5 +1,6 @@
 import 'package:MyStudyBuddy2/singleton/tile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 
 class Overview extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class Overview extends StatefulWidget {
 }
 
 class OverviewState extends State<Overview> {
+  
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -15,16 +17,14 @@ class OverviewState extends State<Overview> {
           pinned: true,
           floating: true,
           centerTitle: true,
-          title: Text(
-            "My Study Buddy",
-            style: TextStyle(color: Colors.black),
-          ),
           expandedHeight: 200.0,
           flexibleSpace: FlexibleSpaceBar(
             background: FittedBox(
               fit: BoxFit.fill,
-              child: Image.asset(
-                'assets/images/menu_picture.jpg',
+              child:
+              Image(
+                image: AssetImage('assets/images/header_3_klein.png'),
+                gaplessPlayback: true,
               ),
             ),
           ),
