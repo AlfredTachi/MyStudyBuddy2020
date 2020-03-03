@@ -72,7 +72,7 @@ flutter:
       - assets/icons/QSP/Software_Icon.png
       - assets/icons/QSP/Medieninformatik_Icon.png
       - assets/icons/QSP/Cloud_Icon.png
-      - assets/modulhandbuch.html
+      - assets/modules.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

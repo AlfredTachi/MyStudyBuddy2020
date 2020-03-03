@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -56,7 +57,25 @@ class ModuleController {
   //Setter
 
   void addToAllModules(Module _module) {
-    _allModules.add(_module);
+    int index = _allModules.indexWhere((module) => module.id == _module.id);
+
+    if (index != -1) {
+      Module module = Module(
+          _module.id,
+          _module.code,
+          _module.title,
+          _allModules[index].grade,
+          _allModules[index].isDone,
+          _allModules[index].isSelected,
+          _module.qsp,
+          _module.cp,
+          _module.semester);
+      _allModules[index] = module;
+      DBProvider.db.updateModule(_allModules[index]);
+    } else {
+      _allModules.add(_module);
+      DBProvider.db.createModule(_module);
+    }
   }
 
   void resetAllModules() {
@@ -65,6 +84,7 @@ class ModuleController {
 
   void removeFromAllModule(Module _module) {
     _selectedModules.remove(_module);
+    DBProvider.db.deleteModule(_module.id);
   }
 
   void addSelectedModule(Module _module) {

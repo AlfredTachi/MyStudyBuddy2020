@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/studyprogress/staggered_view_studyprogress/staggered_view_studyprogress.dart';
-import 'package:MyStudyBuddy2/exam_results/exam_result.dart';
+import 'package:MyStudyBuddy2/model/module.dart';
 
 class Studyprogress extends StatefulWidget {
   @override
