@@ -2,6 +2,10 @@ import 'package:MyStudyBuddy2/dashboard/progress_bar/progress_bar.dart';
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:flutter/material.dart';
 
+import '../local_database/local_database.dart';
+import '../singleton/module_controller.dart';
+import '../singleton/module_controller.dart';
+
 class Dashboard extends StatefulWidget {
   @override
   DashboardState createState() => DashboardState();
@@ -83,31 +87,33 @@ class DashboardState extends State<Dashboard> {
                                 alignment: Alignment.topLeft,
                                 child: Center(
                                   child: FutureBuilder(
-                                    future: getFutureData(),
+                                    future: DBProvider.db.readAllModules(),
                                     builder: (BuildContext context,
                                         AsyncSnapshot snapshot) {
-                                      // if (snapshot.hasData) {
-                                      //   return Center(
-                                      //     child: Wrap(
-                                      //         direction: Axis.horizontal,
-                                      //         spacing: 0,
-                                      //         runSpacing: 5,
-                                      //         children: getFutureData()),
-                                      //   );
-                                      // } else {
-                                      return Center(
-                                        child: Align(
-                                          heightFactor: 10,
-                                          child: FittedBox(
-                                            child: Text(
-                                              "Du hast zurzeit keine Module geplant!",
-                                              style: TextStyle(
-                                                  color: Colors.black45),
+                                      if (snapshot.hasData) {
+                                        return Center(
+                                          child: Wrap(
+                                            direction: Axis.horizontal,
+                                            spacing: 0,
+                                            runSpacing: 5,
+                                            children: ModuleController()
+                                                .getAllSelectedModulesWidgets(),
+                                          ),
+                                        );
+                                      } else {
+                                        return Center(
+                                          child: Align(
+                                            heightFactor: 10,
+                                            child: FittedBox(
+                                              child: Text(
+                                                "Du hast zurzeit keine Module geplant!",
+                                                style: TextStyle(
+                                                    color: Colors.black45),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      );
-                                      // }
+                                        );
+                                      }
                                     },
                                   ),
                                 ),
