@@ -19,7 +19,7 @@ class OverviewState extends State<Overview> {
             background: FittedBox(
               fit: BoxFit.fill,
               child: Image.asset(
-                'assets/images/menu_picture.jpg',
+                'assets/images/header.png',
               ),
             ),
           ),
