@@ -19,7 +19,7 @@ class QuizStartState extends State<QuizStart>{
         title: Text('Study Quiz'),
         leading: IconButton(
         icon: Icon(Icons.arrow_back),
-        onPressed: () => Navigator.pushNamed(context, '/')
+        onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/',(Route<dynamic> route) => false)
         ),
       ),
       body: new Container(
