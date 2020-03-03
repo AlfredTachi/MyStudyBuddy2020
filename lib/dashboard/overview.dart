@@ -8,7 +8,6 @@ class Overview extends StatefulWidget {
 }
 
 class OverviewState extends State<Overview> {
-  
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -16,15 +15,12 @@ class OverviewState extends State<Overview> {
         SliverAppBar(
           pinned: true,
           floating: true,
-          centerTitle: true,
           expandedHeight: 200.0,
           flexibleSpace: FlexibleSpaceBar(
             background: FittedBox(
               fit: BoxFit.fill,
-              child:
-              Image(
-                image: AssetImage('assets/images/header_3_klein.png'),
-                gaplessPlayback: true,
+              child: Image.asset(
+                'assets/images/header.png',
               ),
             ),
           ),
