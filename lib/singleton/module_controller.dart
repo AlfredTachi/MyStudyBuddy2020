@@ -3,9 +3,6 @@ import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../local_database/local_database.dart';
-import '../local_database/local_database.dart';
-import '../local_database/local_database.dart';
-import '../local_database/local_database.dart';
 
 class ModuleController {
   static final ModuleController _instance = ModuleController._internal();
