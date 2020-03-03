@@ -2,7 +2,7 @@
   {
     "id": 111,
     "code": "SMK",
-    "name": "Selbst- und Methodenkompetenz",
+    "title": "Selbst- und Methodenkompetenz",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -13,7 +13,7 @@
   {
     "id": 112,
     "code": "EINF",
-    "name": "Einführung in die Informatik",
+    "title": "Einführung in die Informatik",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -24,7 +24,7 @@
   {
     "id": 113,
     "code": "HWK",
-    "name": "Hardware-Konzepte",
+    "title": "Hardware-Konzepte",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -35,7 +35,7 @@
   {
     "id": 114,
     "code": "PROG1",
-    "name": "Prozedurale Programmierung",
+    "title": "Prozedurale Programmierung",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -46,7 +46,7 @@
   {
     "id": 115,
     "code": "DMA",
-    "name": "Diskrete Mathematik",
+    "title": "Diskrete Mathematik",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -57,7 +57,7 @@
   {
     "id": 121,
     "code": "BS",
-    "name": "Betriebssysteme",
+    "title": "Betriebssysteme",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -68,7 +68,7 @@
   {
     "id": 122,
     "code": "DB",
-    "name": "Datenbanken",
+    "title": "Datenbanken",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -79,7 +79,7 @@
   {
     "id": 123,
     "code": "NET",
-    "name": "Netzwerke",
+    "title": "Netzwerke",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -90,7 +90,7 @@
   {
     "id": 124,
     "code": "PROG2",
-    "name": "Objektorientierte Programmierung",
+    "title": "Objektorientierte Programmierung",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -101,7 +101,7 @@
   {
     "id": 125,
     "code": "STAT",
-    "name": "Statistik",
+    "title": "Statistik",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -112,7 +112,7 @@
   {
     "id": 131,
     "code": "SWQ",
-    "name": "Softwarequalität",
+    "title": "Softwarequalität",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -123,7 +123,7 @@
   {
     "id": 132,
     "code": "WEB",
-    "name": "Webentwicklung",
+    "title": "Webentwicklung",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -134,7 +134,7 @@
   {
     "id": 133,
     "code": "SE",
-    "name": "Software Engineering",
+    "title": "Software Engineering",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -145,7 +145,7 @@
   {
     "id": 141,
     "code": "WA",
-    "name": "Wissenschaftliches Arbeiten",
+    "title": "Wissenschaftliches Arbeiten",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -156,7 +156,7 @@
   {
     "id": 142,
     "code": "REQ",
-    "name": "Requirements Engineering",
+    "title": "Requirements Engineering",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -167,7 +167,7 @@
   {
     "id": 151,
     "code": "CSA",
-    "name": "Client/Server-Anwendungen",
+    "title": "Client/Server-Anwendungen",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -178,7 +178,7 @@
   {
     "id": 152,
     "code": "UX",
-    "name": "User Experience",
+    "title": "User Experience",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -189,7 +189,7 @@
   {
     "id": 161,
     "code": "TOP",
-    "name": "Projektmanagement und Teamorientiertes Projekt",
+    "title": "Projektmanagement und Teamorientiertes Projekt",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -200,7 +200,7 @@
   {
     "id": 171,
     "code": "PS",
-    "name": "Praxissemester",
+    "title": "Praxissemester",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -211,7 +211,7 @@
   {
     "id": 172,
     "code": "AS",
-    "name": "Auslandssemester",
+    "title": "Auslandssemester",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -222,7 +222,7 @@
   {
     "id": 173,
     "code": "BA",
-    "name": "Bachelorarbeit",
+    "title": "Bachelorarbeit",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -233,7 +233,7 @@
   {
     "id": 301,
     "code": "CC",
-    "name": "Cloud Computing",
+    "title": "Cloud Computing",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -244,7 +244,7 @@
   {
     "id": 302,
     "code": "NWS",
-    "name": "Network Security",
+    "title": "Network Security",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -255,7 +255,7 @@
   {
     "id": 303,
     "code": "NWT",
-    "name": "Network Technologies",
+    "title": "Network Technologies",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -266,7 +266,7 @@
   {
     "id": 304,
     "code": "SKRI",
-    "name": "Skript-Programmierung",
+    "title": "Skript-Programmierung",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -277,7 +277,7 @@
   {
     "id": 305,
     "code": "KRY",
-    "name": "Kryptographie",
+    "title": "Kryptographie",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -288,7 +288,7 @@
   {
     "id": 306,
     "code": "SYS",
-    "name": "Systemadministration",
+    "title": "Systemadministration",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -299,7 +299,7 @@
   {
     "id": 307,
     "code": "STO",
-    "name": "Storage Management",
+    "title": "Storage Management",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -310,7 +310,7 @@
   {
     "id": 401,
     "code": "VRAR",
-    "name": "Virtuelle und erweiterte Realität",
+    "title": "Virtuelle und erweiterte Realität",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -321,7 +321,7 @@
   {
     "id": 402,
     "code": "AVP",
-    "name": "Audiovisuelle Produktion",
+    "title": "Audiovisuelle Produktion",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -332,7 +332,7 @@
   {
     "id": 403,
     "code": "3DM",
-    "name": "3D-Modellierung",
+    "title": "3D-Modellierung",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -343,7 +343,7 @@
   {
     "id": 404,
     "code": "CG",
-    "name": "Computergrafik",
+    "title": "Computergrafik",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -354,7 +354,7 @@
   {
     "id": 405,
     "code": "MG",
-    "name": "Mediengestaltung",
+    "title": "Mediengestaltung",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -365,7 +365,7 @@
   {
     "id": 406,
     "code": "BV",
-    "name": "Bildverarbeitung",
+    "title": "Bildverarbeitung",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -376,7 +376,7 @@
   {
     "id": 407,
     "code": "EdS",
-    "name": "Entwicklung digitaler Sprachassistententen",
+    "title": "Entwicklung digitaler Sprachassistententen",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -387,7 +387,7 @@
   {
     "id": 501,
     "code": "ALGO",
-    "name": "Algorithmen und Datenstrukturen",
+    "title": "Algorithmen und Datenstrukturen",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -398,7 +398,7 @@
   {
     "id": 502,
     "code": "EMA",
-    "name": "Entwicklung mobiler Anwendungen",
+    "title": "Entwicklung mobiler Anwendungen",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -409,7 +409,7 @@
   {
     "id": 503,
     "code": "KONZ",
-    "name": "Fortgeschrittene Programmierkonzepte",
+    "title": "Fortgeschrittene Programmierkonzepte",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -420,7 +420,7 @@
   {
     "id": 504,
     "code": "TINF",
-    "name": "Theoretische Informatik",
+    "title": "Theoretische Informatik",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -431,7 +431,7 @@
   {
     "id": 505,
     "code": "GUI",
-    "name": "Programmieren Graphischer Oberflächen",
+    "title": "Programmieren Graphischer Oberflächen",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -442,7 +442,7 @@
   {
     "id": 506,
     "code": "SWA",
-    "name": "Software Architektur",
+    "title": "Software Architektur",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -453,7 +453,7 @@
   {
     "id": 201,
     "code": "ITR",
-    "name": "IT-Recht",
+    "title": "IT-Recht",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -464,7 +464,7 @@
   {
     "id": 202,
     "code": "KIS",
-    "name": "Klinische Informationssysteme",
+    "title": "Klinische Informationssysteme",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -475,7 +475,7 @@
   {
     "id": 203,
     "code": "PPA1",
-    "name": "Praktische Projektarbeit I",
+    "title": "Praktische Projektarbeit I",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -486,7 +486,7 @@
   {
     "id": 204,
     "code": "PPA2",
-    "name": "Praktische Projektarbeit II",
+    "title": "Praktische Projektarbeit II",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -497,7 +497,7 @@
   {
     "id": 205,
     "code": "FS",
-    "name": "Fremdsprache",
+    "title": "Fremdsprache",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -508,7 +508,7 @@
   {
     "id": 206,
     "code": "GPM",
-    "name": "Geschäftsprozessmanagement",
+    "title": "Geschäftsprozessmanagement",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -519,7 +519,7 @@
   {
     "id": 207,
     "code": "EZS",
-    "name": "Echtzeitsysteme",
+    "title": "Echtzeitsysteme",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -530,7 +530,7 @@
   {
     "id": 208,
     "code": "ME",
-    "name": "Mustererkennung",
+    "title": "Mustererkennung",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -541,7 +541,7 @@
   {
     "id": 209,
     "code": "LA",
-    "name": "Lineare Algebra",
+    "title": "Lineare Algebra",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -552,7 +552,7 @@
   {
     "id": 210,
     "code": "SOA",
-    "name": "SOA/Web-Services",
+    "title": "SOA/Web-Services",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -563,7 +563,7 @@
   {
     "id": 211,
     "code": "STO",
-    "name": "Storage Management",
+    "title": "Storage Management",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -574,7 +574,7 @@
   {
     "id": 212,
     "code": "PERF",
-    "name": "Network Performance",
+    "title": "Network Performance",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -585,7 +585,7 @@
   {
     "id": 213,
     "code": "ABWL",
-    "name": "Einführung in die ABWL",
+    "title": "Einführung in die ABWL",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -596,7 +596,7 @@
   {
     "id": 214,
     "code": "DUG",
-    "name": "Digitalisierung und Gesellschaft ",
+    "title": "Digitalisierung und Gesellschaft ",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -607,7 +607,7 @@
   {
     "id": 215,
     "code": "ML",
-    "name": "Machine Learning",
+    "title": "Machine Learning",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -618,7 +618,7 @@
   {
     "id": 216,
     "code": "GM",
-    "name": "Gründungsmanagement",
+    "title": "Gründungsmanagement",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -629,7 +629,7 @@
   {
     "id": 217,
     "code": "DITV",
-    "name": "Digitale Innovation in Tourismus und Verkehr – Bewertung und zukünftige Anwendungen",
+    "title": "Digitale Innovation in Tourismus und Verkehr – Bewertung und zukünftige Anwendungen",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -640,7 +640,7 @@
   {
     "id": 218,
     "code": "MAS",
-    "name": "Management Skills",
+    "title": "Management Skills",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -651,7 +651,7 @@
   {
     "id": 131,
     "code": "SWQ",
-    "name": "Softwarequalität",
+    "title": "Softwarequalität",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -662,7 +662,7 @@
   {
     "id": 143,
     "code": "PP1",
-    "name": "Praktische Projektarbeit I",
+    "title": "Praktische Projektarbeit I",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -673,7 +673,7 @@
   {
     "id": 153,
     "code": "PP2",
-    "name": "Praktische Projektarbeit II",
+    "title": "Praktische Projektarbeit II",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -684,7 +684,7 @@
   {
     "id": 601,
     "code": "PRA1",
-    "name": "Praxismodul I",
+    "title": "Praxismodul I",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -695,7 +695,7 @@
   {
     "id": 602,
     "code": "PRA2",
-    "name": "Praxismodul II",
+    "title": "Praxismodul II",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -706,7 +706,7 @@
   {
     "id": 603,
     "code": "PRA3",
-    "name": "Praxismodul III",
+    "title": "Praxismodul III",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -717,7 +717,7 @@
   {
     "id": 604,
     "code": "PRA4",
-    "name": "Praxismodul IV",
+    "title": "Praxismodul IV",
     "grade": null,
     "isDone": false,
     "isSelected": false,
@@ -728,7 +728,7 @@
   {
     "id": 605,
     "code": "PRA5",
-    "name": "Praxismodul V",
+    "title": "Praxismodul V",
     "grade": null,
     "isDone": false,
     "isSelected": false,
