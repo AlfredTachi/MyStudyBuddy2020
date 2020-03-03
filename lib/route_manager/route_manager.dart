@@ -9,7 +9,7 @@ import 'package:MyStudyBuddy2/evaluation/module_list.dart';
 import 'package:MyStudyBuddy2/evaluation/prof_list.dart';
 import 'package:MyStudyBuddy2/planer/planer.dart';
 import 'package:MyStudyBuddy2/qsp_info/qsp_info.dart';
-import 'package:MyStudyBuddy2/study_quiz/quiz_start.dart';
+import 'package:MyStudyBuddy2/study_quiz/home.dart';
 import 'package:MyStudyBuddy2/studyprogress/studyprogress.dart';
 import 'package:MyStudyBuddy2/grades_prognosis/grades_prognosis.dart';
 import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
@@ -65,7 +65,7 @@ class RouteGenerator {
       case '/qspinfo':
         return MaterialPageRoute(builder: (_) => QSPInfo());
       case '/quiz':
-        return MaterialPageRoute(builder: (_) => QuizStart());
+        return MaterialPageRoute(builder: (_) => Homepage());
       case '/profList':
         return MaterialPageRoute(builder: (_) => ProfList());
       case '/ModuleList':
