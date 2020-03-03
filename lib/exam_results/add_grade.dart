@@ -38,6 +38,7 @@ Future<Widget> addGrade(Module module) async {
                   } else
                     update(double.parse(grade), module);
                     disposeData();
+                    Get.back();
                 },
                 child: Text("Speichern"))
           ],
