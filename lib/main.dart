@@ -53,7 +53,6 @@ class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
           onTap: (_index) {
             setState(() {
               _currentIndex = _index;
-              print(_currentIndex);
             });
           },
           items: [

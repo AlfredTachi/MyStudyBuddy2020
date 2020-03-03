@@ -92,7 +92,6 @@ class DBProvider {
         return null;
       }
 
-      ModuleController().resetAllModules();
 
       for (Map<String, dynamic> map in resultList) {
         ModuleController().addToAllModules(Module.fromMap(map));
