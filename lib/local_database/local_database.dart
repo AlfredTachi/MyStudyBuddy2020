@@ -40,6 +40,11 @@ class DBProvider {
         cp REAL,
         semester INTEGER)
       ''');
+        try {
+          getModulesFromFile();
+        } catch (err) {
+          print(err);
+        }
       });
     } catch (err) {
       print(err);
@@ -66,8 +71,7 @@ class DBProvider {
     List<Map<String, dynamic>> result;
 
     try {
-      result =
-          await db.query("Modules", where: "id = ?", whereArgs: [id]);
+      result = await db.query("Modules", where: "id = ?", whereArgs: [id]);
     } catch (err) {
       print(err);
     }
@@ -149,6 +153,6 @@ class DBProvider {
     } catch (err) {
       print(err);
     }
-      return result.isNotEmpty;
+    return result.isNotEmpty;
   }
 }

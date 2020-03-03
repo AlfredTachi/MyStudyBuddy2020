@@ -37,15 +37,15 @@ class Module {
       map["isSelected"] = true;
     }
     return Module(
-      map["id"],
-      map["code"],
-      map["title"],
-      map["grade"],
-      map["isDone"],
-      map["isSelected"],
-      map["qsp"],
-      map["cp"],
-      map["semester"]);
+        map["id"],
+        map["code"],
+        map["title"],
+        map["grade"],
+        map["isDone"],
+        map["isSelected"],
+        map["qsp"],
+        map["cp"],
+        map["semester"]);
   }
 
   Map<String, dynamic> toMap() => {
@@ -169,22 +169,22 @@ class Module {
 
 Future<void> getModulesFromFile() async {
   String contents = await rootBundle.loadString("assets/modules.json");
-  ModuleController mc = ModuleController();
 
   List<dynamic> json = jsonDecode(contents);
   for (var moduleMap in json) {
-    mc.addToAllModules(Module.fromMap(moduleMap));
+    ModuleController().addToAllModules(Module.fromMap(moduleMap));
   }
 }
 
-Future<int> getExamResultsFromLSFServer(String userName, String userPassword) async {
+Future<int> getExamResultsFromLSFServer(
+    String userName, String userPassword) async {
   http.Response postResponse;
   http.Client client = http.Client();
 
   try {
     postResponse = await client.post(
         'https://lsf.hs-worms.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal&asdf=$userName&fdsa=$userPassword');
-    
+
     if (!postResponse.headers.keys.first.contains('location')) {
       print(postResponse.headers.keys.first);
       return 1;
@@ -201,7 +201,6 @@ Future<int> getExamResultsFromLSFServer(String userName, String userPassword) as
       return 9;
     }
   }
-
 
   try {
     final homeScreenResponse =
@@ -238,13 +237,20 @@ Future<int> getExamResultsFromLSFServer(String userName, String userPassword) as
     }
 
     for (var i = 0; i < gradeLines.length / 9; i++) {
-      ModuleController mc = ModuleController();
-      int index = mc.getAllModules().indexWhere((module) => module.id == int.tryParse(trimmedGradeLines[0]));
-      double _grade = double.tryParse(trimmedGradeLines[3].replaceAll(',', '.'));
+      if (trimmedGradeLines[0] == "1") {
+        trimmedGradeLines.removeRange(0, 9);
+        continue;
+      }
+      List<Module> allModuleList = ModuleController().getAllModules();
+      int index = allModuleList.indexWhere(
+          (module) => module.id == int.tryParse(trimmedGradeLines[0]));
+      double _grade =
+          double.tryParse(trimmedGradeLines[3].replaceAll(',', '.'));
       bool _passed;
 
       if (index == -1) {
-        index = mc.getAllModules().indexWhere((module) => module.title.contains(trimmedGradeLines[1]));
+        index = ModuleController().getAllModules().indexWhere(
+            (module) => module.title.contains(trimmedGradeLines[1]));
       }
 
       if (_grade >= 1.0 && _grade <= 4.0) {
@@ -254,18 +260,17 @@ Future<int> getExamResultsFromLSFServer(String userName, String userPassword) as
       }
 
       Module result = Module(
-        mc.getAllModules()[index].id,
-        mc.getAllModules()[index].code,
-        mc.getAllModules()[index].title,
-        _grade,
-        _passed,
-        mc.getAllModules()[index].isSelected,
-        mc.getAllModules()[index].qsp,
-        mc.getAllModules()[index].cp,
-        mc.getAllModules()[index].semester
-      );
+          ModuleController().getAllModules()[index].id,
+          ModuleController().getAllModules()[index].code,
+          ModuleController().getAllModules()[index].title,
+          _grade,
+          _passed,
+          ModuleController().getAllModules()[index].isSelected,
+          ModuleController().getAllModules()[index].qsp,
+          ModuleController().getAllModules()[index].cp,
+          ModuleController().getAllModules()[index].semester);
 
-      mc.addToAllModules(result);
+      ModuleController().addToAllModules(result);
 
       trimmedGradeLines.removeRange(0, 9);
     }

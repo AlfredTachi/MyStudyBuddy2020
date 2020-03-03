@@ -37,17 +37,6 @@ class MaterialAppWithTheme extends StatefulWidget {
 
 class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
   @override
-  void initState() {
-    super.initState();
-    getModulesFromFile();
-    try {
-      getModulesFromFile();
-    } catch (err) {
-      print(err);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeChanger>(context);
 
