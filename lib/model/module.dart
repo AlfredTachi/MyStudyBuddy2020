@@ -1,3 +1,5 @@
+import 'package:MyStudyBuddy2/exam_results/add_grade.dart';
+import 'package:MyStudyBuddy2/model/module_informations.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:flutter/material.dart';
@@ -10,24 +12,26 @@ import 'dart:async';
 class Module {
   int id;
   String title;
+  String shortTitle = "";
   bool _isSelected = false;
+  double _grade;
   Module({
     this.id,
     this.title,
+    this.shortTitle,
   });
 
   factory Module.fromMap(Map<String, dynamic> map) => Module(
-    id: map["id"],
-    title: map["title"],
-  );
+        id: map["id"],
+        title: map["title"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "id" : id,
-    "title" : title,
-  };
+        "id": id,
+        "title": title,
+      };
 
-  String toString() =>
-  '''
+  String toString() => '''
   id: $id
   title: $title
   ''';
@@ -52,62 +56,91 @@ class Module {
             } else {
               if (_isSelected) {
                 Get.dialog(AlertDialog(
-                    contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                    content: SingleChildScrollView(
-                        child: ListBody(children: <Widget>[
+                  contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                  content: SingleChildScrollView(
+                    child: ListBody(children: <Widget>[
                       Text(
-                        'Modulname',
+                        this.title,
                         style: TextStyle(fontSize: 25),
                       ),
                       FlatButton(
-                          child: Text("Modul Informationen"), onPressed: () {}),
+                          child: Text("Modul Informationen"),
+                          onPressed: () {
+                            moduleInforations(this);
+                          }),
                       FlatButton(
                         child: Text("Note Eintragen"),
-                        onPressed: () {},
+                        onPressed: () {
+                          addGrade(this);
+                        },
                       ),
-                      FlatButton(
-                          child: Text("Modul Abwählen"),
-                          onPressed: () {
-                            ModuleController().removeModule(this);
-                            _isSelected = false;
-                            Get.back();
-                          })
-                    ]))));
+                    ]),
+                  ),
+                ));
               } else {
-                Get.dialog(AlertDialog(
+                Get.dialog(
+                  AlertDialog(
                     contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
                     content: SingleChildScrollView(
                       child: ListBody(
                         children: <Widget>[
                           Text(
-                            'Modulname',
+                            this.title,
                             style: TextStyle(fontSize: 25),
                           ),
                           FlatButton(
                               child: Text("Modul Informationen"),
-                              onPressed: () {}),
-                          FlatButton(
-                              child: Text("Note Eintragen"), onPressed: () {}),
-                          FlatButton(
-                              child: Text("Modul Wählen"),
                               onPressed: () {
-                                ModuleController().addModule(this);
-                                _isSelected = true;
-                                Get.back();
-                              })
+                                moduleInforations(this);
+                              }),
+                          FlatButton(
+                              child: Text("Note Eintragen"),
+                              onPressed: () {
+                                addGrade(this);
+                              }),
+                          FlatButton(
+                            child: Text("Modul Wählen"),
+                            onPressed: () {
+                              ModuleController().addSelectedModule(this);
+                              _isSelected = true;
+                              Get.back();
+                            },
+                          )
                         ],
                       ),
-                    )));
+                    ),
+                  ),
+                );
               }
             }
           },
           child: Center(
-              child: Text(title,
+              child: Text(setShortName(title),
                   style: TextStyle(fontSize: 20, color: Colors.white))),
         ),
       ),
     );
   }
+
+  //getter
+  double getGrade() => _grade;
+
+  //setter
+  void setGrade(double newGrade) {
+    _grade = newGrade;
+  }
+}
+
+setShortName(String title) {
+  String _shortTitle = "";
+  List<String> splitTitle = title.split(" ");
+  print(splitTitle);
+  for (var i = 0; i < splitTitle.length; i++) {
+    _shortTitle += splitTitle[i][0];
+  }
+  print(_shortTitle);
+  Module().shortTitle = _shortTitle;
+  return _shortTitle;
 }
 
 Future<void> getModulesFromFile() async {

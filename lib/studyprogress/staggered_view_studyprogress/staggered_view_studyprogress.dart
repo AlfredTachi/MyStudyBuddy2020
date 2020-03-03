@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class _StaggeredViewState extends State<StaggeredView> {
 
   List<Widget> generateSemesterTiles() {
     List<Widget> _semesterTiles = new List<Widget>();
-    for (int i = 1; i <= 5; i++) {
+    for (int i = 1; i <= 7; i++) {
       _semesterTiles.add(semester(i));
     }
     return _semesterTiles;
@@ -61,12 +62,20 @@ class _StaggeredViewState extends State<StaggeredView> {
                       )),
                 ),
               ]),
-              Center(
-                child: Wrap(
-                  direction: Axis.horizontal,
-                  runSpacing: 5,
-                  children: ModuleController().getAllModulesWidgets(),
-                ),
+              FutureBuilder(
+                future: DBProvider.db.getAllModules(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return new Center(
+                        child: Wrap(
+                      direction: Axis.horizontal,
+                      runSpacing: 5,
+                      children: ModuleController().getAllSemesterModulesWidgets(titleIndex),
+                    ));
+                  } else {
+                    return new Text("Loading...");
+                  }
+                },
               ),
             ],
           ),

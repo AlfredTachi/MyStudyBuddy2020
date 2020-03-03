@@ -28,7 +28,7 @@ import '../dashboard/module_selection/module_selection.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/':
+      case '/dashboard':
         return MaterialPageRoute(builder: (_) => Dashboard());
       case '/profilePage':
         return MaterialPageRoute(builder: (_) => ProfilePage());
