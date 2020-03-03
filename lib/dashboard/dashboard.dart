@@ -129,7 +129,7 @@ class DashboardState extends State<Dashboard> {
 
   getFutureData() async {
     ///TODO Dashboard fixen
-    var module = await DBProvider.db.getModule(151);
+    var module = await DBProvider.db.readModule(151);
     String title = module.title;
     return title;
   }
