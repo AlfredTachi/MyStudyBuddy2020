@@ -1,4 +1,3 @@
-import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -62,21 +61,13 @@ class _StaggeredViewState extends State<StaggeredView> {
                       )),
                 ),
               ]),
-              FutureBuilder(
-                future: DBProvider.db.readAllModules(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return new Center(
-                        child: Wrap(
-                      direction: Axis.horizontal,
-                      runSpacing: 5,
-                      children: ModuleController().getAllSemesterModulesWidgets(titleIndex),
-                    ));
-                  } else {
-                    return new Text("Loading...");
-                  }
-                },
-              ),
+              Center(
+                  child: Wrap(
+                direction: Axis.horizontal,
+                runSpacing: 5,
+                children:
+                    ModuleController().getAllSemesterModulesWidgets(titleIndex),
+              )),
             ],
           ),
         ),

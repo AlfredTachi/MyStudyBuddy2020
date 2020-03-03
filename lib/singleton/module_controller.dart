@@ -29,17 +29,12 @@ class ModuleController {
   List<Widget> getAllSemesterModulesWidgets(int index) {
     List<Widget> _widgets = new List<Widget>();
     List<Module> _modules = new List<Module>();
-    int moduleIndex = 1;
-    String _moduleIndex = "";
-    for (var i = 0; i <= 5; i++) {
-      _moduleIndex = moduleIndex.toString() + index.toString() + i.toString();
-      _modules = ModuleController()
-          .getAllModules()
-          .where((test) => test.id == int.parse(_moduleIndex))
-          .toList();
-      for (var i = 0; i < _modules.length; i++) {
-        _widgets.add(_modules[i].module());
-      }
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.semester == index)
+        .toList();
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
     }
 
     return _widgets;
@@ -76,10 +71,6 @@ class ModuleController {
       _allModules.add(_module);
       DBProvider.db.createModule(_module);
     }
-  }
-
-  void resetAllModules() {
-    _allModules = new List<Module>();
   }
 
   void removeFromAllModule(Module _module) {
