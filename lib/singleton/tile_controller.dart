@@ -17,7 +17,7 @@ class TileController {
     _Tile(Icon(Icons.calendar_today), "LSF Frontend", "/planer"),
     _Tile(Icon(Icons.wb_sunny), "Wetter", "/weather"),
     _Tile(Icon(Icons.local_library), "Studi Quiz", "/quiz"),
-    _Tile(Icon(Icons.rate_review), "Evaluation", "/evaluation"),
+    // _Tile(Icon(Icons.rate_review), "Evaluation", "/evaluation"),
     _Tile(Icon(Icons.help), "Hilfe", "/supportMain"),
   ];
 
