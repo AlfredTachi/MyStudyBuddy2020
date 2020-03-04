@@ -11,7 +11,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class DashboardState extends State<Dashboard> {
-  int _creditPoints = 0;
+  int _creditPoints = 40;
   int _maxCreditPoints = 210;
 
   @override
@@ -71,7 +71,7 @@ class DashboardState extends State<Dashboard> {
                                     padding: EdgeInsets.only(
                                         left: 15, top: 5, bottom: 15),
                                     child: Text(
-                                      "Deine Module",
+                                      "Meine Module",
                                       style: TextStyle(
                                           fontSize: 25, color: Colors.black54),
                                     ),
@@ -102,7 +102,7 @@ class DashboardState extends State<Dashboard> {
                                             heightFactor: 10,
                                             child: FittedBox(
                                               child: Text(
-                                                "Du hast zurzeit keine Module geplant!",
+                                                "Es sind zurzeit keine Module geplant!",
                                                 style: TextStyle(
                                                     color: Colors.black45),
                                               ),
