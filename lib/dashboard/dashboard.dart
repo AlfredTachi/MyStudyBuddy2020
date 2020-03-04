@@ -17,17 +17,6 @@ class DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Mein Studium"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.person),
-            onPressed: () {
-              Navigator.of(context).pushNamed("/profilePage");
-            },
-          )
-        ],
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, "/modulSelection")
@@ -39,6 +28,14 @@ class DashboardState extends State<Dashboard> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: Icon(Icons.person),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("/profilePage");
+                  },
+                )),
             Expanded(
               flex: 4,
               child: Container(
