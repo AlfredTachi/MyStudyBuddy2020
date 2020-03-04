@@ -14,6 +14,7 @@ class Dashboard extends StatefulWidget {
 class DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
+    double spacing = MediaQuery.of(context).size.width / 4.3;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF013D62),
@@ -42,7 +43,8 @@ class DashboardState extends State<Dashboard> {
             Expanded(
               flex: 4,
               child: Container(
-                padding: EdgeInsets.only(bottom: 10, right: 80, left: 80),
+                padding:
+                    EdgeInsets.only(bottom: 10, right: spacing, left: spacing),
                 child: LiquidCircularProgressIndicator(
                   value: ProfileController().getEarnedCP() /
                       ProfileController().getMaxCP(), // Defaults to 0.5.
