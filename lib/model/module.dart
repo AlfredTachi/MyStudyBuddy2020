@@ -199,7 +199,7 @@ class Module {
                               fit: BoxFit.contain,
                               child: Text(grade.toString(),
                                   style: TextStyle(
-                                      fontSize: 10, color: Colors.white)),
+                                      fontSize: 10, color: Colors.lightGreen)),
                             )),
                       ),
                     )
