@@ -724,5 +724,27 @@
     "qsp": "dual",
     "cp": 6,
     "semester": null
+  },
+  {
+    "id": 10001,
+    "code": "QSP",
+    "title": "Qualifikationsschwerpunkt",
+    "grade": null,
+    "isDone": false,
+    "isSelected": false,
+    "qsp": "QSPLA",
+    "cp": 6,
+    "semester": null
+  },
+  {
+    "id": 10002,
+    "code": "WPF",
+    "title": "Wahlpflichtfach",
+    "grade": null,
+    "isDone": false,
+    "isSelected": false,
+    "qsp": "WPLA",
+    "cp": 6,
+    "semester": null
   }
  ]
