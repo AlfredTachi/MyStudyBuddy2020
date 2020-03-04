@@ -13,6 +13,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   AnimationController animationCtrl;
   bool showDetails = false;
   String status = "";
+  String showMore = "Details zeigen";
 
   @override
   void initState() {
@@ -55,104 +56,130 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   }
 
   Widget getMaterialDesign() {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Wetter"),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.refresh),
-              onPressed: () {
-                fetchData();
-              })
-        ],
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Color(0xFF013D62), Color(0xBB013D62), Color(0x99013D62)],
+        ),
       ),
-      body: Center(
-        child: Container(
-          padding: EdgeInsets.only(top: 20),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                Color(0xFF013D62),
-                Color(0xBB013D62),
-                Color(0x99013D62)
-              ])),
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height / 5),
-                          child: Column(
-                            children: <Widget>[
-                              (status.isNotEmpty) ? Text(status) : Container(),
-                              Text(
-                                "HS Worms",
-                                style: TextStyle(
-                                  fontSize: 50,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                "Zuletzt aktualisiert: " + dateTimeToString(),
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  data.temperature.toString() + " °C",
-                                  style: TextStyle(
-                                    fontSize: 44,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: Center(
+            child: Container(
+              padding: EdgeInsets.only(top: 20),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                    Color(0xFF013D62),
+                    Color(0xBB013D62),
+                    Color(0x99013D62)
+                  ])),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: OutlineButton(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 3, bottom: 3),
+                            child: Icon(
+                              Icons.arrow_back,
+                              size: 36,
+                            ),
                           ),
-                        ),
-                        Divider(),
-                        MaterialButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(15),
+                            bottomRight: Radius.circular(15),
+                          )),
                           onPressed: () {
-                            if (animationCtrl.isCompleted) {
-                              showDetails = true;
-                              animationCtrl.reverse();
-                            } else {
-                              showDetails = false;
-                              animationCtrl.forward();
-                            }
-                            setState(() {});
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              AnimatedIcon(
-                                icon: AnimatedIcons.close_menu,
-                                progress: animationCtrl,
-                              ),
-                              Text(
-                                "Show more",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Divider(),
-                        (showDetails) ? details() : Container(),
-                      ],
+                            Navigator.of(context).pop();
+                          }),
                     ),
-                  ),
+                    Container(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height / 5),
+                              child: Column(
+                                children: <Widget>[
+                                  (status.isNotEmpty)
+                                      ? Text(status)
+                                      : Container(),
+                                  Text(
+                                    "HS Worms",
+                                    style: TextStyle(
+                                      fontSize: 50,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Zuletzt aktualisiert: " +
+                                        dateTimeToString(),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      data.temperature.toString() + " °C",
+                                      style: TextStyle(
+                                        fontSize: 44,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Divider(),
+                            MaterialButton(
+                              onPressed: () {
+                                if (animationCtrl.isCompleted) {
+                                  showMore = "Details verstecken";
+                                  showDetails = true;
+                                  animationCtrl.reverse();
+                                } else {
+                                  showMore = "Details zeigen";
+                                  showDetails = false;
+                                  animationCtrl.forward();
+                                }
+                                setState(() {});
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  AnimatedIcon(
+                                    icon: AnimatedIcons.close_menu,
+                                    progress: animationCtrl,
+                                  ),
+                                  Text(
+                                    showMore,
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Divider(),
+                            (showDetails) ? details() : Container(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
@@ -165,16 +192,38 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text("Luftdruck: " + data.barometer.round().toString() + " hPa",),
-          Text("Luftfeuchtigkeit: " + data.humidity.toString() + " %"),
-          Text("Windgesch.: " +
-              (data.windSpeed / 3.6).round().toString() +
-              " m/s"),
-          Text("Windrichtung: " + data.windDir.toString()),
-          Text("UV Strahlung: " + data.getUvEvaluation()),
-          Text("Regen: " + data.rainPerMM.toString() + "mm"),
-          Text("Sonnenaufgang: " + data.sunRise.toString()),
-          Text("Sonnenuntergang: " + data.sunSet.toString()),
+          Text(
+            "Luftdruck: " + data.barometer.round().toString() + " hPa",
+            style: TextStyle(color: Colors.white),
+          ),
+          Text(
+            "Luftfeuchtigkeit: " + data.humidity.toString() + " %",
+            style: TextStyle(color: Colors.white),
+          ),
+          Text(
+            "Windgesch.: " + (data.windSpeed / 3.6).round().toString() + " m/s",
+            style: TextStyle(color: Colors.white),
+          ),
+          Text(
+            "Windrichtung: " + data.windDir.toString(),
+            style: TextStyle(color: Colors.white),
+          ),
+          Text(
+            "UV Strahlung: " + data.getUvEvaluation(),
+            style: TextStyle(color: Colors.white),
+          ),
+          Text(
+            "Regen: " + data.rainPerMM.toString() + "mm",
+            style: TextStyle(color: Colors.white),
+          ),
+          Text(
+            "Sonnenaufgang: " + data.sunRise.toString(),
+            style: TextStyle(color: Colors.white),
+          ),
+          Text(
+            "Sonnenuntergang: " + data.sunSet.toString(),
+            style: TextStyle(color: Colors.white),
+          ),
         ],
       );
     } catch (ex) {
