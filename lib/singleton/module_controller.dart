@@ -19,15 +19,6 @@ class ModuleController {
   List<Module> getSelectedModules() => _selectedModules;
   List<Module> getAllModules() => _allModules;
 
-  //Returns all Widgets from _selectedModules
-  /*List<Widget> getSelectedModulesWidgets() {
-    List<Widget> _widgets = new List<Widget>();
-    for (int i = 0; i < _selectedModules.length; i++) {
-      _widgets.add(_selectedModules[i].module());
-    }
-    return _widgets;
-  }*/
-
   //Returns all selected Widgets
   List<Widget> getAllSelectedModulesWidgets() {
     List<Widget> _widgets = new List<Widget>();
@@ -40,6 +31,46 @@ class ModuleController {
       _widgets.add(_modules[i].module());
     }
     print(_widgets);
+    return _widgets;
+  }
+
+    //Returns QSP Widgets
+  List<Widget> getQSPModulesWidgets(String title) {
+    List<Widget> _widgets = new List<Widget>();
+    List<Module> _modules = new List<Module>();
+    if (title == "Security and Network") {
+      _modules = ModuleController()
+          .getAllModules()
+          .where((test) => test.qsp.contains("SN") && test.isDone == false)
+          .toList();
+    } else if (title == "Visual Computing") {
+      _modules = ModuleController()
+          .getAllModules()
+          .where((test) => test.qsp.contains("VC") && test.isDone == false)
+          .toList();
+    } else if (title == "Software Engineering and Development") {
+      _modules = ModuleController()
+          .getAllModules()
+          .where((test) => test.qsp.contains("SED") && test.isDone == false)
+          .toList();
+    }
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
+    }
+    return _widgets;
+  }
+
+  //Returns QSP Widgets
+  List<Widget> getWPFModulesWidgets() {
+    List<Widget> _widgets = new List<Widget>();
+    List<Module> _modules = new List<Module>();
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.qsp.contains("WPF") && test.isDone == false)
+        .toList();
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
+    }
     return _widgets;
   }
 
@@ -108,8 +139,9 @@ class ModuleController {
     DBProvider.db.updateModule(_module);
   }
 
-  void setModuleDone(Module _module) {
+  void setModuleGrade(Module _module, double grade) {
     _module.setIsDone(true);
+    _module.setGrade(grade);
     DBProvider.db.updateModule(_module);
   }
 

@@ -87,9 +87,9 @@ class Module {
           color: Color(0xFF013D62),
           splashColor: Colors.orange,
           onPressed: () {
-            if (title == "6. M") {
+            if (title == "QSP") {
               Get.toNamed("/modulSelectionQSP");
-            } else if (title == "7. M") {
+            } else if (title == "WPF") {
               Get.toNamed("/modulSelectionWPF");
             } else {
               if (isSelected) {
