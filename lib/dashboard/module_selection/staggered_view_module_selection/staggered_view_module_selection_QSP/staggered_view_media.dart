@@ -20,19 +20,19 @@ class _StaggeredViewState extends State<StaggeredViewMedia> {
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+                    padding: EdgeInsets.only(left: 8, top: 8),
                     child: Text("Visual Computing",
                         style: TextStyle(fontSize: 25)),
                   ),
                 ],
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                padding: EdgeInsets.only(top: 8),
                 child: Center(
                   child: Wrap(
                     direction: Axis.horizontal,
                     runSpacing: 5,
-                    children: ModuleController().getAllModulesWidgets(),
+                    children: ModuleController().getQSPModulesWidgets("Visual Computing"),
                   ),
                 ),
               ),
