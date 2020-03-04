@@ -24,13 +24,17 @@ class DashboardState extends State<Dashboard> {
         tooltip: 'Modul hinzufügen',
         child: Icon(Icons.add),
       ),
+      backgroundColor: Colors.grey[50],
       body: SafeArea(
         child: Column(
           children: <Widget>[
             Align(
                 alignment: Alignment.topRight,
                 child: IconButton(
-                  icon: Icon(Icons.person),
+                  icon: Icon(
+                    Icons.person,
+                    color: Color(0xCC013D62),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pushNamed("/profilePage");
                   },
@@ -51,7 +55,12 @@ class DashboardState extends State<Dashboard> {
                   borderWidth: 5.0,
                   direction: Axis
                       .vertical, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.vertical.
-                  center: Text(ProfileController().getProgressText(), style: TextStyle(color: Colors.blueGrey[900], fontWeight: FontWeight.bold),),
+                  center: Text(
+                    ProfileController().getProgressText(),
+                    style: TextStyle(
+                        color: Colors.blueGrey[900],
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),
