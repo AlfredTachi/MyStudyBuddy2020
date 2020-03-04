@@ -22,7 +22,7 @@ class _StaggeredViewState extends State<StaggeredView> {
 
   List<Widget> generateSemesterTiles() {
     List<Widget> _semesterTiles = new List<Widget>();
-    for (int i = 1; i <= 5; i++) {
+    for (int i = 1; i <= 7; i++) {
       _semesterTiles.add(semester(i));
     }
     return _semesterTiles;

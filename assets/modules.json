@@ -734,10 +734,54 @@
     "isSelected": false,
     "qsp": "QSPLA",
     "cp": 6,
-    "semester": null
+    "semester": 3
   },
   {
     "id": 10002,
+    "code": "QSP",
+    "title": "Qualifikationsschwerpunkt",
+    "grade": null,
+    "isDone": false,
+    "isSelected": false,
+    "qsp": "QSPLA",
+    "cp": 6,
+    "semester": 4
+  },
+  {
+    "id": 10003,
+    "code": "QSP",
+    "title": "Qualifikationsschwerpunkt",
+    "grade": null,
+    "isDone": false,
+    "isSelected": false,
+    "qsp": "QSPLA",
+    "cp": 6,
+    "semester": 4
+  },
+  {
+    "id": 10004,
+    "code": "QSP",
+    "title": "Qualifikationsschwerpunkt",
+    "grade": null,
+    "isDone": false,
+    "isSelected": false,
+    "qsp": "QSPLA",
+    "cp": 6,
+    "semester": 5
+  },
+  {
+    "id": 10005,
+    "code": "QSP",
+    "title": "Qualifikationsschwerpunkt",
+    "grade": null,
+    "isDone": false,
+    "isSelected": false,
+    "qsp": "QSPLA",
+    "cp": 6,
+    "semester": 5
+  },
+  {
+    "id": 10006,
     "code": "WPF",
     "title": "Wahlpflichtfach",
     "grade": null,
@@ -745,6 +789,28 @@
     "isSelected": false,
     "qsp": "WPLA",
     "cp": 6,
-    "semester": null
+    "semester": 3
+  },
+  {
+    "id": 10007,
+    "code": "WPF",
+    "title": "Wahlpflichtfach",
+    "grade": null,
+    "isDone": false,
+    "isSelected": false,
+    "qsp": "WPLA",
+    "cp": 6,
+    "semester": 4
+  },
+  {
+    "id": 10008,
+    "code": "WPF",
+    "title": "Wahlpflichtfach",
+    "grade": null,
+    "isDone": false,
+    "isSelected": false,
+    "qsp": "WPLA",
+    "cp": 6,
+    "semester": 5
   }
  ]
