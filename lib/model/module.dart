@@ -9,6 +9,8 @@ import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' as dom;
 
+import '../singleton/module_controller.dart';
+
 class Module {
   int id;
   String code;
@@ -110,6 +112,13 @@ class Module {
                           addGrade(this);
                         },
                       ),
+                      FlatButton(
+                        child: Text("Modul abwählen"),
+                        onPressed: () {
+                          ModuleController().setModuleSelected(this, false);
+                          Get.back();
+                        },
+                      ),
                     ]),
                   ),
                 ));
@@ -137,8 +146,7 @@ class Module {
                           FlatButton(
                             child: Text("Modul Wählen"),
                             onPressed: () {
-                              ModuleController().addSelectedModule(this);
-                              isSelected = true;
+                              ModuleController().setModuleSelected(this, true);
                               Get.back();
                             },
                           )
@@ -150,9 +158,54 @@ class Module {
               }
             }
           },
-          child: Center(
-              child: Text(code,
-                  style: TextStyle(fontSize: 20, color: Colors.white))),
+          child: Column(
+            children: <Widget>[
+              grade != null
+                  ? Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 24),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text(code,
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white)),
+                            )),
+                      ),
+                    )
+                  : Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 4),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text(code,
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white)),
+                            )),
+                      ),
+                    ),
+              grade != null
+                  ? Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text(grade.toString(),
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.white)),
+                            )),
+                      ),
+                    )
+                  : Container(),
+            ],
+          ),
         ),
       ),
     );
@@ -161,9 +214,21 @@ class Module {
   //getter
   double getGrade() => grade;
 
+  bool getIsDone() => isDone;
+
+  bool getIsSelected() => isSelected;
+
   //setter
   void setGrade(double newGrade) {
     grade = newGrade;
+  }
+
+  void setIsDone(bool _isDone) {
+    isDone = _isDone;
+  }
+
+  void setIsSelected(bool _isSelected) {
+    isSelected = _isSelected;
   }
 }
 

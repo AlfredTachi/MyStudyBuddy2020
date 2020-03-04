@@ -38,6 +38,7 @@ Future<Widget> addGrade(Module module) async {
                   } else
                     update(double.parse(grade), module);
                     disposeData();
+                    Get.back();
                 },
                 child: Text("Speichern"))
           ],
@@ -46,6 +47,6 @@ Future<Widget> addGrade(Module module) async {
 }
 
 void update(double grade, Module module) {
-  module.grade = grade;
+  module.setGrade(grade);
   DBProvider.db.updateModule(module);
 }

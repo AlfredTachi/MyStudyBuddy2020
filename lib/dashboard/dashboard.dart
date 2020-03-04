@@ -1,6 +1,10 @@
-import 'package:MyStudyBuddy2/dashboard/progress_bar/progress_bar.dart';
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
+import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+
+import '../local_database/local_database.dart';
+import '../singleton/module_controller.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -8,24 +12,11 @@ class Dashboard extends StatefulWidget {
 }
 
 class DashboardState extends State<Dashboard> {
-  int _creditPoints = 0;
-  int _maxCreditPoints = 210;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Mein Studium"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.person),
-            onPressed: () {
-              Navigator.of(context).pushNamed("/profilePage");
-            },
-          )
-        ],
-      ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFF013D62),
         onPressed: () {
           Navigator.pushNamed(context, "/modulSelection")
               .whenComplete(() => updateView());
@@ -33,13 +24,44 @@ class DashboardState extends State<Dashboard> {
         tooltip: 'Modul hinzufügen',
         child: Icon(Icons.add),
       ),
+      backgroundColor: Colors.grey[50],
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.person,
+                    color: Color(0xCC013D62),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("/profilePage");
+                  },
+                )),
             Expanded(
               flex: 4,
               child: Container(
-                child: ProgressBar(_creditPoints, _maxCreditPoints),
+                padding: EdgeInsets.only(bottom: 10, right: 80, left: 80),
+                child: LiquidCircularProgressIndicator(
+                  value: ProfileController().getEarnedCP() /
+                      ProfileController().getMaxCP(), // Defaults to 0.5.
+                  valueColor: AlwaysStoppedAnimation(
+                    Color(0xAA013D62),
+                  ), // Defaults to the current Theme's accentColor.
+                  backgroundColor: Colors
+                      .white, // Defaults to the current Theme's backgroundColor.
+                  borderColor: Color(0xCC013D62),
+                  borderWidth: 5.0,
+                  direction: Axis
+                      .vertical, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.vertical.
+                  center: Text(
+                    ProfileController().getProgressText(),
+                    style: TextStyle(
+                        color: Colors.blueGrey[900],
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ),
             Expanded(
@@ -71,7 +93,7 @@ class DashboardState extends State<Dashboard> {
                                     padding: EdgeInsets.only(
                                         left: 15, top: 5, bottom: 15),
                                     child: Text(
-                                      "Deine Module",
+                                      "Meine Module",
                                       style: TextStyle(
                                           fontSize: 25, color: Colors.black54),
                                     ),

@@ -65,7 +65,7 @@ class _StaggeredViewState extends State<StaggeredView> {
                 child: Wrap(
                   direction: Axis.horizontal,
                   runSpacing: 5,
-                  children: ModuleController().getAllModulesWidgets(),
+                  children: ModuleController().getOnlyNotDoneSemesterModulesWidgets(titleIndex),
                 ),
               ),
             ],
