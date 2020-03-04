@@ -125,7 +125,7 @@ class ProgressBarState extends State<ProgressBar>
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(margin: EdgeInsets.all(30), child: progressView()),
+      child: Container(margin: EdgeInsets.all(10), child: progressView()),
     );
   }
 }
