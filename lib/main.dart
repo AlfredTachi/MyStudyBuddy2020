@@ -1,4 +1,5 @@
 import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
+import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
 import 'package:MyStudyBuddy2/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import './route_manager/route_manager.dart';
-import 'package:MyStudyBuddy2/model/module.dart';
 
 import 'dashboard/overview.dart';
 
@@ -38,6 +38,7 @@ class MaterialAppWithTheme extends StatefulWidget {
 class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
   @override
   Widget build(BuildContext context) {
+    DBProvider.db.initDB();
     final theme = Provider.of<ThemeChanger>(context);
 
     return MaterialApp(

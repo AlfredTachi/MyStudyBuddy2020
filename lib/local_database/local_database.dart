@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:convert';
 
-import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:MyStudyBuddy2/model/module.dart';
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 
 class DBProvider {
   DBProvider._();
@@ -15,11 +17,6 @@ class DBProvider {
   static Database _database;
 
   Future<Database> get database async {
-    if (_database != null) {
-      return _database;
-    }
-
-    _database = await initDB();
     return _database;
   }
 
@@ -27,9 +24,12 @@ class DBProvider {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "MSBDB.db");
     try {
-      return await openDatabase(path, version: 1, onOpen: (db) {},
-          onCreate: (Database db, int version) async {
-        await db.execute('''CREATE TABLE Modules (
+      _database = await openDatabase(
+        path,
+        version: 1,
+        onOpen: (db) {},
+        onCreate: (Database db, int version) async {
+          await db.execute('''CREATE TABLE Modules (
         id INTEGER PRIMARY KEY,
         code TEXT,
         title TEXT,
@@ -37,28 +37,35 @@ class DBProvider {
         isDone INTEGER,
         isSelected INTEGER,
         qsp TEXT,
-        cp REAL,
+        cp INTEGER,
         semester INTEGER)
       ''');
-        try {
-          getModulesFromFile();
-        } catch (err) {
-          print(err);
-        }
-      });
+          try {
+            String contents =
+                await rootBundle.loadString("assets/modules.json");
+            List<dynamic> json = jsonDecode(contents);
+
+            for (var moduleMap in json) {
+              db.insert("Modules", Module.fromMap(moduleMap).toMap());
+            }
+          } catch (err) {
+            print(err);
+          }
+        },
+      );
     } catch (err) {
       print(err);
     }
+    ModuleController().setModulesFromDatabase();
   }
 
   // CREATE
 
-  createModule(Module newModule) async {
+  Future<void> createModule(Module newModule) async {
     final Database db = await database;
     try {
-      int result = await db.insert("Modules", newModule.toMap(),
+      await db.insert("Modules", newModule.toMap(),
           conflictAlgorithm: ConflictAlgorithm.replace);
-      return result;
     } catch (err) {
       print(err);
     }
@@ -68,68 +75,58 @@ class DBProvider {
 
   Future<Module> readModule(int id) async {
     final Database db = await database;
-    List<Map<String, dynamic>> result;
+    List<Map<String, dynamic>> maps;
 
     try {
-      result = await db.query("Modules", where: "id = ?", whereArgs: [id]);
+      maps = await db.query("Modules", where: "id = ?", whereArgs: [id]);
     } catch (err) {
       print(err);
     }
-    return result.isNotEmpty ? Module.fromMap(result.first) : null;
+    return Module.fromMap(maps[0]);
   }
 
-  Future<void> readAllModules() async {
+  Future<List<Module>> readAllModules() async {
     final Database db = await database;
-
-    List<Map<String, dynamic>> result = await db.query('Modules');
-    List<Map<String, dynamic>> resultList = new List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> maps;
 
     try {
-      //Check if db is empty
-      if (result.isNotEmpty) {
-        resultList = result.toList();
-      } else {
-        return null;
-      }
-
-
-      for (Map<String, dynamic> map in resultList) {
-        ModuleController().addToAllModules(Module.fromMap(map));
-      }
+      maps = await db.query('Modules');
     } catch (err) {
       print(err);
     }
+
+    return List.generate(maps.length, (i) {
+      return Module.fromMap(maps[i]);
+    });
   }
 
   // UPDATE
 
-  updateModule(Module newModule) async {
+  Future<void> updateModule(Module newModule) async {
     final Database db = await database;
+
     try {
-      int result = await db.update("Modules", newModule.toMap(),
-          where: "id = ?", whereArgs: [newModule.id]);
-      return result;
+      await db.update(
+        "Modules",
+        newModule.toMap(),
+        where: "id = ?",
+        whereArgs: [newModule.id],
+      );
     } catch (err) {
       print(err);
     }
   }
 
-  updateGradeManually(Module module) async {
-    var databaseConnection = await database;
-    String query =
-        'UPDATE Modules SET grade=\'${module.getGrade()}\' WHERE id=\'${module.id}\'';
-
-    await databaseConnection.transaction((transaction) async {
-      return await transaction.rawQuery(query);
-    });
-  }
-
   // DELETE
 
-  deleteModule(int id) async {
+  Future<void> deleteModule(int id) async {
     final Database db = await database;
     try {
-      db.delete("Modules", where: "id = ?", whereArgs: [id]);
+      await db.delete(
+        "Module",
+        where: "id = ?",
+        whereArgs: [id],
+      );
     } catch (err) {
       print(err);
     }
@@ -138,7 +135,7 @@ class DBProvider {
   deleteAllModules() async {
     final Database db = await database;
     try {
-      db.rawDelete("Delete * from Module");
+      await db.delete("Module");
     } catch (err) {
       print(err);
     }
@@ -146,12 +143,13 @@ class DBProvider {
 
   Future<bool> modulesAvailable() async {
     final Database db = await database;
-    List<Map<String, dynamic>> result;
+    List<Map<String, dynamic>> maps;
+
     try {
-      result = await db.query('Modules');
+      maps = await db.query('Modules');
     } catch (err) {
       print(err);
     }
-    return result.isNotEmpty;
+    return maps.isNotEmpty;
   }
 }

@@ -3,9 +3,7 @@ import 'package:MyStudyBuddy2/model/module_informations.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/services.dart';
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' show parse;
@@ -26,23 +24,25 @@ class Module {
       this.isSelected, this.qsp, this.cp, this.semester);
 
   factory Module.fromMap(Map<String, dynamic> map) {
+    bool _isDone;
+    bool _isSelected;
     if (map["isDone"] == 0 || map["isDone"] == false) {
-      map["isDone"] = false;
+      _isDone = false;
     } else {
-      map["isDone"] = true;
+      _isDone = true;
     }
     if (map["isSelected"] == 0 || map["isSelected"] == false) {
-      map["isSelected"] = false;
+      _isSelected = false;
     } else {
-      map["isSelected"] = true;
+      _isSelected = true;
     }
     return Module(
         map["id"],
         map["code"],
         map["title"],
         map["grade"],
-        map["isDone"],
-        map["isSelected"],
+        _isDone,
+        _isSelected,
         map["qsp"],
         map["cp"],
         map["semester"]);
@@ -167,15 +167,6 @@ class Module {
   }
 }
 
-Future<void> getModulesFromFile() async {
-  String contents = await rootBundle.loadString("assets/modules.json");
-
-  List<dynamic> json = jsonDecode(contents);
-  for (var moduleMap in json) {
-    ModuleController().addToAllModules(Module.fromMap(moduleMap));
-  }
-}
-
 Future<int> getExamResultsFromLSFServer(
     String userName, String userPassword) async {
   http.Response postResponse;
@@ -252,10 +243,12 @@ Future<int> getExamResultsFromLSFServer(
         index = ModuleController().getAllModules().indexWhere(
             (module) => module.title.contains(trimmedGradeLines[1]));
       }
-
-      if (_grade >= 1.0 && _grade <= 4.0) {
+      if (_grade == null) {
+        _grade = 0.0;
+      } else if (_grade >= 1.0 && _grade <= 4.0) {
         _passed = true;
       } else {
+        _grade = 5.0;
         _passed = false;
       }
 

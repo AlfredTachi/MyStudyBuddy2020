@@ -4,12 +4,13 @@ import 'package:flutter/cupertino.dart';
 
 class ModuleController {
   static final ModuleController _instance = ModuleController._internal();
-  static List<Module> _selectedModules = new List<Module>();
-  static List<Module> _allModules = new List<Module>();
+
+  factory ModuleController() => _instance;
 
   ModuleController._internal();
 
-  factory ModuleController() => _instance;
+  List<Module> _selectedModules;
+  List<Module> _allModules;
 
   //Getter
 
@@ -51,9 +52,19 @@ class ModuleController {
 
   //Setter
 
+  void setModulesFromDatabase() async {
+    _allModules = await DBProvider.db.readAllModules();
+  }
+
   void addToAllModules(Module _module) {
-    _allModules.add(_module);
-    DBProvider.db.createModule(_module);
+    int index = _allModules.indexWhere((module) => module.id == _module.id);
+    if (index == -1) {
+      _allModules.add(_module);
+      DBProvider.db.createModule(_module);
+    } else {
+      _allModules[index] = _module;
+      DBProvider.db.updateModule(_module);
+    }
   }
 
   void removeFromAllModule(Module _module) {

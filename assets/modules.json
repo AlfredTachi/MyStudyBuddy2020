@@ -649,17 +649,6 @@
     "semester": null
   },
   {
-    "id": 131,
-    "code": "SWQ",
-    "title": "Softwarequalität",
-    "grade": null,
-    "isDone": false,
-    "isSelected": false,
-    "qsp": "WPF",
-    "cp": 6,
-    "semester": null
-  },
-  {
     "id": 143,
     "code": "PP1",
     "title": "Praktische Projektarbeit I",

@@ -82,7 +82,7 @@ class DashboardState extends State<Dashboard> {
                                 padding: EdgeInsets.only(left: 5, right: 5),
                                 alignment: Alignment.topLeft,
                                 child: Center(
-                                  child: FutureBuilder(
+/*                                   child: FutureBuilder(
                                     future: getFutureData(),
                                     builder: (BuildContext context,
                                         AsyncSnapshot snapshot) {
@@ -94,21 +94,22 @@ class DashboardState extends State<Dashboard> {
                                       //         runSpacing: 5,
                                       //         children: getFutureData()),
                                       //   );
-                                      // } else {
-                                      return Center(
-                                        child: Align(
-                                          heightFactor: 10,
-                                          child: FittedBox(
-                                            child: Text(
-                                              "Du hast zurzeit keine Module geplant!",
-                                              style: TextStyle(
-                                                  color: Colors.black45),
-                                            ),
-                                          ),
+                                      // } else { 
+                                      return */
+                                  child: Center(
+                                    child: Align(
+                                      heightFactor: 10,
+                                      child: FittedBox(
+                                        child: Text(
+                                          "Du hast zurzeit keine Module geplant!",
+                                          style:
+                                              TextStyle(color: Colors.black45),
                                         ),
-                                      );
-                                      // }
-                                    },
+                                      ),
+                                    ),
+                                    //);
+                                    // }
+                                    // },
                                   ),
                                 ),
                               ),
