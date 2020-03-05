@@ -54,15 +54,16 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
                         ],
                       )),
                   child: Center(
-                    child: Row(
+                    child: Column(
                       children: <Widget>[
+                        
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: const EdgeInsets.only(top:10.0),
                           child: Text("Worst Case:"),
                         ),
                         Text(worstCase().toString()),
                         Padding(
-                          padding: const EdgeInsets.only(left: 80),
+                          padding: const EdgeInsets.only(top: 20),
                           child: Text("Best Case:"),
                         ),
                         Text(bestCase().toString())

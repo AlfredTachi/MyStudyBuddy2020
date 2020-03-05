@@ -3,6 +3,7 @@ import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../local_database/local_database.dart';
+import '../model/module.dart';
 
 class ModuleController {
   static final ModuleController _instance = ModuleController._internal();
@@ -11,7 +12,8 @@ class ModuleController {
 
   ModuleController._internal();
 
-  List<Module> _selectedModules;
+  List<Module> _selectedModules = new List<Module>();
+  Module _replacedModules;
   List<Module> _allModules;
 
   //Getter
@@ -156,6 +158,18 @@ class ModuleController {
     return _modules;
   }
 
+  void replacePlaceholder(Module _module) {
+    _replacedModules.id = _module.id;
+    _replacedModules.title = _module.title;
+    _replacedModules.code = _module.code;
+    _replacedModules.grade = _module.grade;
+    _replacedModules.isDone = _module.isDone;
+    _replacedModules.isSelected = _module.isSelected;
+    _replacedModules.qsp = _module.qsp;
+    _replacedModules.cp = _module.cp;
+    updateModule(_replacedModules);
+  }
+
   //Setter
 
   void setModulesFromDatabase() async {
@@ -181,6 +195,18 @@ class ModuleController {
     int index = _allModules.indexWhere((module) => module.id == _module.id);
     _allModules[index] = _module;
     DBProvider.db.updateModule(_allModules[index]);
+  }
+
+  void addReplacedModule(Module _module) {
+    _replacedModules = _module;
+  }
+
+  void removeReplacedModule(Module _module) {
+    _replacedModules = _module;
+  }
+
+  void addSelectedModule(Module _module) {
+    _selectedModules.add(_module);
   }
 
   void removeSelectedModule(Module _module) {
