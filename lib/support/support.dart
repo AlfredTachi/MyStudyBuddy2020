@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mailer/flutter_mailer.dart';
 
 class Support extends StatefulWidget {
   @override
@@ -8,6 +9,10 @@ class Support extends StatefulWidget {
 class SupportState extends State<Support> {
   @override
   Widget build(BuildContext context) {
+    final MailOptions mailOptions = MailOptions(
+      subject: 'Support My Study Buddy',
+      recipients: ['inf2671@hs-worms.de'],
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text("Hilfe"),
@@ -28,12 +33,13 @@ class SupportState extends State<Support> {
           },
         ),
         ListTile(
-          leading: Icon(Icons.mail),
-          title: Text('E-Mail Support'),
-          onTap: () {
-            Navigator.pushNamed(context, '/supportMain/mailSupport');
-          },
-        ),
+            leading: Icon(Icons.mail),
+            title: Text('E-Mail Support'),
+            onTap: () async {
+              try {
+                await FlutterMailer.send(mailOptions);
+              } catch (error) {}
+            }),
       ]),
     );
   }
