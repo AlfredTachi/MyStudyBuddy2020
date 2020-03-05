@@ -108,8 +108,10 @@ class Module {
                         child: Text("Modul abwählen"),
                         onPressed: () {
                           this.isSelected = false;
-                          if(this.qsp.contains("SN") || this.qsp.contains("VC") || this.qsp.contains("SED") || this.qsp.contains("WPF"))
-                          {
+                          if (this.qsp.contains("SN") ||
+                              this.qsp.contains("VC") ||
+                              this.qsp.contains("SED") ||
+                              this.qsp.contains("WPF")) {
                             ModuleController().replacePlaceholder(this);
                           }
                           ModuleController().removeSelectedModule(this);
@@ -145,8 +147,10 @@ class Module {
                             child: Text("Modul Wählen"),
                             onPressed: () {
                               this.isSelected = true;
-                              if(this.qsp.contains("SN") || this.qsp.contains("VC") || this.qsp.contains("SED") || this.qsp.contains("WPF"))
-                              {
+                              if (this.qsp.contains("SN") ||
+                                  this.qsp.contains("VC") ||
+                                  this.qsp.contains("SED") ||
+                                  this.qsp.contains("WPF")) {
                                 ModuleController().replacePlaceholder(this);
                               }
                               ModuleController().addSelectedModule(this);

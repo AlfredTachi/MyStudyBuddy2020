@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 Future<Widget> addGrade(Module module) async {
-
   TextEditingController _gradeCtrl = TextEditingController();
-  void disposeData() async{
-     _gradeCtrl.text ="";
+  void disposeData() async {
+    _gradeCtrl.text = "";
   }
+
   String grade;
   return Get.dialog(
     AlertDialog(
@@ -34,11 +34,11 @@ Future<Widget> addGrade(Module module) async {
                   if (double.parse(grade) > 4.0) {
                     Get.snackbar(
                         "Fehler", "Korrekte Note (bis 4.0) eintragen.");
-                        disposeData();
+                    disposeData();
                   } else
                     update(double.parse(grade), module);
-                    disposeData();
-                    Get.back();
+                  disposeData();
+                  Get.back();
                 },
                 child: Text("Speichern"))
           ],
@@ -49,5 +49,7 @@ Future<Widget> addGrade(Module module) async {
 void update(double grade, Module module) {
   module.grade = grade;
   module.isDone = true;
+  module.isSelected = false;
+  ModuleController().removeSelectedModule(module);
   ModuleController().updateModule(module);
 }

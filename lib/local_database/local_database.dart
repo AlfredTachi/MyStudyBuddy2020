@@ -100,6 +100,21 @@ class DBProvider {
     });
   }
 
+  Future<List<Module>> readSelectedModules() async {
+    final Database db = await database;
+    List<Map<String, dynamic>> maps;
+
+    try {
+      maps = await db.query("Modules", where: "isSelected = ?", whereArgs: [1]);
+    } catch (err) {
+      print(err);
+    }
+
+    return List.generate(maps.length, (i) {
+      return Module.fromMap(maps[i]);
+    });
+  }
+
   // UPDATE
 
   Future<void> updateModule(Module newModule) async {

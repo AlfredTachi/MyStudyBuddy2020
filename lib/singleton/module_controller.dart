@@ -32,7 +32,6 @@ class ModuleController {
     for (var i = 0; i < _modules.length; i++) {
       _widgets.add(_modules[i].module());
     }
-    print(_widgets);
     return _widgets;
   }
 
@@ -174,6 +173,7 @@ class ModuleController {
 
   void setModulesFromDatabase() async {
     _allModules = await DBProvider.db.readAllModules();
+    _selectedModules = await DBProvider.db.readSelectedModules();
   }
 
   void addToAllModules(Module _module) {
