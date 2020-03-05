@@ -23,13 +23,13 @@ class _ResultpageState extends State<Resultpage> {
   void initState(){
     if(marks < 3){
       image = images[2];
-      message = "Versuchs nochmal..\n" + "Dein Score $marks";
+      message = "Versuchs nochmal.\n" + "Dein Score $marks";
     }else if(marks < 6){
       image = images[1];
-      message = "Das geht noch besser..\n" + "Dein Score $marks";
+      message = "Das geht noch besser...\n" + "Dein Score $marks";
     }else{
       image = images[0];
-      message = "Sehr gut..\n" + "Dein Score $marks";
+      message = "Sehr gut :)\n" + "Dein Score $marks";
     }
     super.initState();
   }
@@ -77,6 +77,7 @@ class _ResultpageState extends State<Resultpage> {
                         style: TextStyle(
                           fontSize: 18.0,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     )
                     ),

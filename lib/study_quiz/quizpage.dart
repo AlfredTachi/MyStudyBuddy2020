@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:math';
 import 'package:MyStudyBuddy2/study_quiz/resultpage.dart';
@@ -88,23 +89,23 @@ class _QuizpageState extends State<Quizpage> {
     "d": Colors.orangeAccent[200],
   };
   var randomArray;
-  
-  void randArray(){
+
+  void randArray() {
     var distinctIds = [];
     var rand = new Random();
-    for(int i = 0; ;) {
-       distinctIds.add(rand.nextInt(10));
-         randomArray = distinctIds.toSet().toList();
-         if(randomArray.length < 10){
-           continue;
-         }else{
-           break;
-         }
-       }
+    for (int i = 0;;) {
+      distinctIds.add(rand.nextInt(10));
+      randomArray = distinctIds.toSet().toList();
+      if (randomArray.length < 10) {
+        continue;
+      } else {
+        break;
+      }
+    }
     i = randomArray[0];
-     print(randomArray);
-
+    print(randomArray);
   }
+
   // overriding the initstate function to start timer as this screen is created
   @override
   void initState() {
@@ -139,9 +140,7 @@ class _QuizpageState extends State<Quizpage> {
     });
   }
 
-
   void nextquestion() {
-    //var randomArray = [9, 3, 7, 1, 4, 5, 6, 10, 8, 2];
     canceltimer = false;
     timer = 30;
     setState(() {
@@ -178,6 +177,15 @@ class _QuizpageState extends State<Quizpage> {
     Timer(Duration(seconds: 1), nextquestion);
   }
 
+  generateButtons() {
+    var mydatatemp = mydata[1][i.toString()];
+    print(mydatatemp.length);
+    var keys = ['a', 'b', 'c', 'd'];
+    for (int k = 0; k < mydatatemp.length; k++) {
+      choicebutton(keys[k]);
+    }
+  }
+
   Widget choicebutton(String k) {
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -190,9 +198,7 @@ class _QuizpageState extends State<Quizpage> {
             style: TextStyle(
               fontSize: 16.0,
               color: Colors.white,
-            ),
-             maxLines: 3,
-            ),
+            )),
         color: btncolor[k],
         splashColor: Colors.orangeAccent,
         highlightColor: Colors.orangeAccent,
@@ -206,19 +212,21 @@ class _QuizpageState extends State<Quizpage> {
 
   @override
   Widget build(BuildContext context) {
+    var mydatatemp = mydata[1][i.toString()];
+    var keys = ['a', 'b', 'c', 'd'];
     return WillPopScope(
-           onWillPop: () {
+      onWillPop: () {
         return showDialog(
             context: context,
             builder: (context) => AlertDialog(
                   title: Text(
-                    "Quiz Abbruch",
+                    "Quiz abbrechen?",
                   ),
-                  content: Text("Bist du dir sicher, dass du das Quiz abbrechen möchtest?"),
+                  content: Text("Bist du dir sicher?"),
                   actions: <Widget>[
                     FlatButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacementNamed('/quiz');
+                        Navigator.of(context).pushNamedAndRemoveUntil('/quiz', ModalRoute.withName('/'));
                       },
                       child: Text(
                         'Ja',
@@ -235,7 +243,7 @@ class _QuizpageState extends State<Quizpage> {
                   ],
                 ));
       },
-          child: Scaffold(
+      child: Scaffold(
         body: Column(
           children: <Widget>[
             Expanded(
@@ -245,7 +253,11 @@ class _QuizpageState extends State<Quizpage> {
                 alignment: Alignment.bottomLeft,
                 child: Row(
                   children: <Widget>[
-                    Text("Frage: "+j.toString()+"/"+randomArray.length.toString(),
+                    Text(
+                      "Frage: " +
+                          j.toString() +
+                          "/" +
+                          randomArray.length.toString(),
                       style: TextStyle(
                         fontSize: 16.0,
                       ),
@@ -272,11 +284,9 @@ class _QuizpageState extends State<Quizpage> {
               child: Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    choicebutton('a'),
-                    choicebutton('b'),
-                    choicebutton('c'),
-                    choicebutton('d'),
+                  children: [
+                    for (int k = 0; k < mydatatemp.length; k++)
+                      choicebutton(keys[k]),
                   ],
                 ),
               ),

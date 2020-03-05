@@ -1,5 +1,6 @@
 [
     {
+		"0":"Üblicherweise ist bei UNIX-Dateisystemen Groß- und Kleinschreibung von Dateinamen relevant, d.h. 'Datei' und 'datei' sind unterschiedliche Namen.",
         "1":"Was beschreibt am besten einen Prozess im Sinne von Computer-Betriebssystemen?",
 		"2":"Der Körper hat eine eigene Sprache. Welche der folgenden Körperausdrücke kennzeichnet eher einen Blauen?",
 		"3":"Der Grüne verhält sich u.a. tendenziell in Konflikten:Richtig:",
@@ -8,10 +9,15 @@
 		"6":"Was sind Schwächen?",
 		"7":"Welche Aussagen macht das Gelassenheits-Gebet?",
 		"8":"Wenn mir Feedback nicht gefällt, dann:",
-		"9":"Der Dateiname '...' (3 Punkte) darf für selbst erstellte Dateien oder Verzeichnisse verwendet werden.",
-		"0":"Üblicherweise ist bei UNIX-Dateisystemen Groß- und Kleinschreibung von Dateinamen relevant, d.h. 'Datei' und 'datei' sind unterschiedliche Namen."
+		"9":"Der Dateiname '...' (3 Punkte) darf für selbst erstellte Dateien oder Verzeichnisse verwendet werden."
+		
     },
     {
+		
+		"0": {
+            "a": "wahr",
+            "b": "falsch"
+        },
         "1": {
             "a": "Ein Prozess ist ein Programm, das ausgeführt wird.",
             "b": "Ein Programm ist ein Prozess, der ausgeführt wird",
@@ -62,18 +68,11 @@
         },
 		"9": {
             "a": "wahr",
-            "b": "falsch",
-			"c":"",
-			"d":""
-        },
-		"0": {
-            "a": "wahr",
-            "b": "falsch",
-			"c":"",
-			"d":""
+            "b": "falsch"
         }
     },
     {
+		"0":"wahr",
         "1":"Ein Prozess ist ein Programm, das ausgeführt wird.",
 		"2":"eher steif",
 		"3":"Ruhig, stabilisierend, kompromissbereit",
@@ -82,7 +81,6 @@
 		"6":"Übertriebene Stärken",
 		"7":"Es empfiehlt Nicht-Stärken und Schwächen zu unterscheiden",
 		"8":"bedanke ich mich dennoch beim anderen",
-		"9":"wahr",
-		"0":"wahr"
+		"9":"wahr"
     }
 ]
