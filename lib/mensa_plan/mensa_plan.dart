@@ -11,8 +11,7 @@ class MensaPlan extends StatefulWidget {
 }
 
 class MensaPlanState extends State<MensaPlan> {
-  num _viewIndex = 0;
-  bool _hasLoaded = false;
+  get http => null;
 
   @override
   Widget build(BuildContext context) {
@@ -24,65 +23,41 @@ class MensaPlanState extends State<MensaPlan> {
   }
 
   Widget getMaterialDesign() {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Mensa Plan"),
-      ),
-      body: IndexedStack(
-        index: _viewIndex,
-        children: <Widget>[
-          Center(child: CircularProgressIndicator()),
-          WebView(
-            initialUrl: 'https://stw-vp.de/de/mensa-webapp',
-            javascriptMode: JavascriptMode.unrestricted,
-            onPageStarted: checkTimeOut,
-            onPageFinished: pageFinishedLoading,
-          ),
-          Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                  child: Text(
-                    "Es gibt ein Problem bei der Verbindung. Prüfe deine Internetverbindung",
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                IconButton(
-                    icon: Icon(Icons.refresh),
-                    onPressed: () {
-                      pageReload();
-                    })
-              ]),
-        ],
-      ),
+    return SafeArea(
+      child: Scaffold(
+          body: FutureBuilder(
+              future: loadPage(),
+              builder: (BuildContext context, AsyncSnapshot snap) {
+                if (snap.connectionState == ConnectionState.done) {
+                  return WebView(
+                    initialUrl: 'https://stw-vp.de/de/mensa-webapp',
+                    javascriptMode: JavascriptMode.unrestricted,
+                  );
+                } else if (snap.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding:
+                              EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                          child: Text(
+                            "Es gibt ein Problem bei der Verbindung. Prüfe deine Internetverbindung",
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ]);
+                }
+              })),
     );
+  }
+
+  Future<void> loadPage() async {
+    await http.get('https://stw-vp.de/de/mensa-webapp');
   }
 
   Widget getCupertinoDesign() {
     return getMaterialDesign();
-  }
-
-  void pageReload() {
-    setState(() {
-      Navigator.popAndPushNamed(context, '/mensa_plan');
-    });
-  }
-
-  void pageFinishedLoading(String url) {
-    setState(() {
-      _hasLoaded = true;
-      _viewIndex = 1;
-    });
-  }
-
-  void checkTimeOut(String url) async {
-    Future.delayed(Duration(seconds: 10), () {
-      setState(() {
-        if (_hasLoaded == false) {
-          _viewIndex = 2;
-        }
-      });
-    });
   }
 }

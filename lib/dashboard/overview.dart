@@ -14,17 +14,12 @@ class OverviewState extends State<Overview> {
         SliverAppBar(
           pinned: true,
           floating: true,
-          centerTitle: true,
-          title: Text(
-            "My Study Buddy",
-            style: TextStyle(color: Colors.black),
-          ),
           expandedHeight: 200.0,
           flexibleSpace: FlexibleSpaceBar(
             background: FittedBox(
               fit: BoxFit.fill,
               child: Image.asset(
-                'assets/images/menu_picture.jpg',
+                'assets/images/header.png',
               ),
             ),
           ),

@@ -1,6 +1,8 @@
-import 'package:MyStudyBuddy2/dashboard/progress_bar/progress_bar.dart';
-import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:MyStudyBuddy2/local_database/local_database.dart';
+import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+import '../local_database/local_database.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -8,42 +10,60 @@ class Dashboard extends StatefulWidget {
 }
 
 class DashboardState extends State<Dashboard> {
-  int _creditPoints = 0;
-  int _maxCreditPoints = 210;
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Übersicht"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.person),
-            onPressed: () {
-              Navigator.of(context).pushNamed("/profilePage");
-            },
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, "/modulSelection")
-              .whenComplete(() => updateView());
-        },
-        tooltip: 'Modul hinzufügen',
-        child: Icon(Icons.add),
-      ),
-      body: SafeArea(
-        child: Column(
+    double spacing = MediaQuery.of(context).size.width / 1.8;
+    return SafeArea(
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF013D62),
+          onPressed: () {
+            Navigator.pushNamed(context, "/modulSelection")
+                .whenComplete(() => updateView());
+          },
+          tooltip: 'Modul hinzufügen',
+          child: Icon(Icons.add),
+        ),
+        body: Column(
           children: <Widget>[
-            Expanded(
-              flex: 4,
-              child: Container(
-                child: ProgressBar(_creditPoints, _maxCreditPoints),
+            Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.person,
+                    color: Color(0xCC013D62),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("/profilePage");
+                  },
+                )),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(
+                  height: spacing,
+                  width: spacing,
+                  child: LiquidCircularProgressIndicator(
+                    value: ProfileController().getEarnedCP() /
+                        ProfileController().getMaxCP(),
+                    valueColor: AlwaysStoppedAnimation(
+                      Color(0xAA013D62),
+                    ),
+                    backgroundColor: Colors.white,
+                    borderColor: Color(0xCC013D62),
+                    borderWidth: 5.0,
+                    direction: Axis.vertical,
+                    center: Text(
+                      ProfileController().getProgressText(),
+                      style: TextStyle(
+                          color: Colors.blueGrey[900],
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
               ),
             ),
             Expanded(
-              flex: 6,
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius:
@@ -56,61 +76,61 @@ class DashboardState extends State<Dashboard> {
                         Colors.deepOrange,
                       ],
                     )),
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                        flex: 3,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 30),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 15, top: 5, bottom: 15),
-                                      child: Text(
-                                        "Deine Module",
-                                        style: TextStyle(
-                                            fontSize: 25,
-                                            color: Colors.black54),
-                                      ),
-                                    ),
-                                  ],
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(left: 15, top: 5, bottom: 15),
+                              child: Text(
+                                "Meine Module",
+                                style: TextStyle(
+                                    fontSize: 25, color: Colors.black54),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 5, right: 5),
+                          alignment: Alignment.topLeft,
+                          child: Center(
+/*                                   child: FutureBuilder(
+                                      future: getFutureData(),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot snapshot) {
+                                        // if (snapshot.hasData) {
+                                        //   return Center(
+                                        //     child: Wrap(
+                                        //         direction: Axis.horizontal,
+                                        //         spacing: 0,
+                                        //         runSpacing: 5,
+                                        //         children: getFutureData()),
+                                        //   );
+                                        // } else { 
+                                        return */
+                            child: Center(
+                              child: Align(
+                                heightFactor: 5,
+                                child: FittedBox(
+                                  child: Text(
+                                    "Du hast zurzeit keine Module geplant!",
+                                    style: TextStyle(color: Colors.black45),
+                                  ),
                                 ),
-                                (ModuleController()
-                                            .getSelectedModules()
-                                            .length ==
-                                        0)
-                                    ? Container(
-                                        child: Align(
-                                            heightFactor: 10,
-                                            child: FittedBox(
-                                                child: Text(
-                                              "Du hast zurzeit keine Module geplant!",
-                                              style: TextStyle(
-                                                  color: Colors.black45),
-                                            ))))
-                                    : Container(
-                                        padding: EdgeInsets.only(
-                                            left: 5, right: 5),
-                                        alignment: Alignment.topLeft,
-                                        child: Center(
-                                          child: Wrap(
-                                            direction: Axis.horizontal,
-                                            spacing: 0,
-                                            runSpacing: 5,
-                                            children: ModuleController()
-                                                .getSelectedModulesWidgets(),
-                                          ),
-                                        ),
-                                      ),
-                              ],
+                              ),
+                              //);
+                              // }
+                              // },
                             ),
                           ),
-                        ))
-                  ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -118,6 +138,13 @@ class DashboardState extends State<Dashboard> {
         ),
       ),
     );
+  }
+
+  getFutureData() async {
+    ///TODO Dashboard fixen
+    var module = await DBProvider.db.readModule(151);
+    String title = module.title;
+    return title;
   }
 
   updateView() {
