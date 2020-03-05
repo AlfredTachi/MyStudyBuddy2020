@@ -48,6 +48,7 @@ Future<Widget> addGrade(Module module) async {
 }
 
 void update(double grade, Module module) {
-  ModuleController().setModuleGrade(module, grade);
-  DBProvider.db.updateModule(module);
+  module.grade = grade;
+  module.isDone = true;
+  ModuleController().updateModule(module);
 }
