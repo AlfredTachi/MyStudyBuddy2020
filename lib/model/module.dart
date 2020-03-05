@@ -10,6 +10,9 @@ import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' as dom;
 
 import '../singleton/module_controller.dart';
+import '../singleton/module_controller.dart';
+import '../singleton/module_controller.dart';
+import '../singleton/module_controller.dart';
 
 class Module {
   int id;
@@ -38,16 +41,8 @@ class Module {
     } else {
       _isSelected = true;
     }
-    return Module(
-        map["id"],
-        map["code"],
-        map["title"],
-        map["grade"],
-        _isDone,
-        _isSelected,
-        map["qsp"],
-        map["cp"],
-        map["semester"]);
+    return Module(map["id"], map["code"], map["title"], map["grade"], _isDone,
+        _isSelected, map["qsp"], map["cp"], map["semester"]);
   }
 
   Map<String, dynamic> toMap() => {
@@ -88,13 +83,15 @@ class Module {
           splashColor: Colors.orange,
           onPressed: () {
             if (code == "QSP") {
+              ModuleController().addReplacedModule(this);
               Get.toNamed("/modulSelectionQSP");
             } else if (code == "WPF") {
+              ModuleController().addReplacedModule(this);
               Get.toNamed("/modulSelectionWPF");
             } else {
               if (isSelected) {
                 Get.dialog(AlertDialog(
-                  contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                  contentPadding: EdgeInsets.all(8),
                   content: SingleChildScrollView(
                     child: ListBody(children: <Widget>[
                       Text(
@@ -104,7 +101,7 @@ class Module {
                       FlatButton(
                           child: Text("Modul Informationen"),
                           onPressed: () {
-                            moduleInforations(this);
+                            moduleInformations(this);
                           }),
                       FlatButton(
                         child: Text("Note Eintragen"),
@@ -116,6 +113,11 @@ class Module {
                         child: Text("Modul abwählen"),
                         onPressed: () {
                           this.isSelected = false;
+                          if(this.qsp.contains("SN") || this.qsp.contains("VC") || this.qsp.contains("SED") || this.qsp.contains("WPF"))
+                          {
+                            ModuleController().replacePlaceholder(this);
+                          }
+                          ModuleController().removeSelectedModule(this);
                           ModuleController().updateModule(this);
                           Get.back();
                         },
@@ -126,7 +128,7 @@ class Module {
               } else {
                 Get.dialog(
                   AlertDialog(
-                    contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                    contentPadding: EdgeInsets.all(8),
                     content: SingleChildScrollView(
                       child: ListBody(
                         children: <Widget>[
@@ -137,7 +139,7 @@ class Module {
                           FlatButton(
                               child: Text("Modul Informationen"),
                               onPressed: () {
-                                moduleInforations(this);
+                                moduleInformations(this);
                               }),
                           FlatButton(
                               child: Text("Note Eintragen"),
@@ -148,6 +150,11 @@ class Module {
                             child: Text("Modul Wählen"),
                             onPressed: () {
                               this.isSelected = true;
+                              if(this.qsp.contains("SN") || this.qsp.contains("VC") || this.qsp.contains("SED") || this.qsp.contains("WPF"))
+                              {
+                                ModuleController().replacePlaceholder(this);
+                              }
+                              ModuleController().addSelectedModule(this);
                               ModuleController().updateModule(this);
                               Get.back();
                             },
