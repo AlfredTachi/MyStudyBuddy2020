@@ -1,7 +1,7 @@
 [
     {
-		"0":"",
-        "1":"",
+		"0":"Welcher der folgenden Grundsätze ist keiner der sieben Grundsätze der Dialoggestaltung nach DIN EN ISO 9241-110 (früher ISO 9241-10)",
+        "1":"Welche der folgenden Möglichkeiten gehört nicht zu den 8 Fallacies verteilter Systeme",
 		"2":"",
 		"3":"",
 		"4":"",
@@ -14,16 +14,16 @@
     {
 		
 		"0": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Steuerbarkeit",
+            "b": "Atomarität",
+            "c": "Lernförderlichkeit",
+            "d": "Fehlertoleranz"
         },
         "1": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Das Netzwerk arbeitet zuverlässig",
+            "b": "Die Bandbreite ist unbegrenzt",
+            "c": "Es gibt nur einen Administrator",
+            "d": "Die Latenzzeit ist immer größer 0"
         },
 		"2": {
             "a": "",
@@ -75,8 +75,8 @@
         }
     },
     {
-		"0":"",
-        "1":"",
+		"0":"Atomarität",
+        "1":"Die Latenzzeit ist immer größer 0",
 		"2":"",
 		"3":"",
 		"4":"",
@@ -87,8 +87,8 @@
 		"9":""
     },
     {
-		"0":"",
-        "1":"",
+		"0":"UX",
+        "1":"CSA",
 		"2":"",
 		"3":"",
 		"4":"",

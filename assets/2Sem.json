@@ -29,10 +29,10 @@
             "b": "falsch"
         },
 		"3": {
-            "a": "Atomarity,Continuity,Isometric,Durability",
-            "b": "Atomarity,Consistency,Isometric,Durability",
-            "c": "Atomarity,Continuity,Isolation,Durability",
-            "d": "Atomarity,Consistency,Isolation,Durability"
+            "a": "Atomarity, Continuity, Isometric, Durability",
+            "b": "Atomarity, Consistency, Isometric, Durability",
+            "c": "Atomarity, Continuity, Isolation, Durability",
+            "d": "Atomarity, Consistency, Isolation, Durability"
         },
 		"4": {
             "a": "wahr",
