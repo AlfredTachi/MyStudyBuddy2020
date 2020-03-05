@@ -18,6 +18,10 @@ class ProfileController {
   int _earnedCreditPoints = 0;
   int _maxCreditPoints = 210;
 
+  int _sed = 0;
+  int _vc = 0;
+  int _nc = 0;
+
   //Getters
   TextEditingController getInfNumberController() => _infCtrl;
   TextEditingController getMatrikelController() => _matrikelCtrl;
@@ -26,12 +30,31 @@ class ProfileController {
   int getEarnedCP() => _earnedCreditPoints;
   int getMaxCP() => _maxCreditPoints;
 
+  int getSED() => _sed;
+  int getVC() => _vc;
+  int getNC() => _nc;
+
   String getProgressText() {
-    return _earnedCreditPoints.toString() + " / " + _maxCreditPoints.toString() + " CP";
+    return _earnedCreditPoints.toString() +
+        " / " +
+        _maxCreditPoints.toString() +
+        " CP";
   }
 
-  void setEarnedCP(int _cp){
+  void setEarnedCP(int _cp) {
     _earnedCreditPoints = _cp;
+  }
+
+  void setSED(int _val) {
+    _sed = _val;
+  }
+
+  void setVC(int _val) {
+    _vc = _val;
+  }
+
+  void setNC(int _val) {
+    _nc = _val;
   }
 
   void saveData() async {
