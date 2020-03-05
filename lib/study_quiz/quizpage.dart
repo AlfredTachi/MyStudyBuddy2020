@@ -206,68 +206,98 @@ class _QuizpageState extends State<Quizpage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: EdgeInsets.all(15.0),
-              alignment: Alignment.bottomLeft,
-              child: Row(
-                children: <Widget>[
-                  Text("Frage: "+j.toString()+"/"+randomArray.length.toString(),
+    return WillPopScope(
+           onWillPop: () {
+        return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(
+                    "Quiz Abbruch",
+                  ),
+                  content: Text("Bist du dir sicher, dass du das Quiz abbrechen möchtest?"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed('/quiz');
+                      },
+                      child: Text(
+                        'Ja',
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        'Nein',
+                      ),
+                    )
+                  ],
+                ));
+      },
+          child: Scaffold(
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 3,
+              child: Container(
+                padding: EdgeInsets.all(15.0),
+                alignment: Alignment.bottomLeft,
+                child: Row(
+                  children: <Widget>[
+                    Text("Frage: "+j.toString()+"/"+randomArray.length.toString(),
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Container(
+                padding: EdgeInsets.all(15.0),
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  mydata[0][i.toString()],
+                  style: TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 6,
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    choicebutton('a'),
+                    choicebutton('b'),
+                    choicebutton('c'),
+                    choicebutton('d'),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                alignment: Alignment.topCenter,
+                child: Center(
+                  child: Text(
+                    showtimer,
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 35.0,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: EdgeInsets.all(15.0),
-              alignment: Alignment.bottomLeft,
-              child: Text(
-                mydata[0][i.toString()],
-                style: TextStyle(
-                  fontSize: 16.0,
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 6,
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  choicebutton('a'),
-                  choicebutton('b'),
-                  choicebutton('c'),
-                  choicebutton('d'),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              alignment: Alignment.topCenter,
-              child: Center(
-                child: Text(
-                  showtimer,
-                  style: TextStyle(
-                    fontSize: 35.0,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
