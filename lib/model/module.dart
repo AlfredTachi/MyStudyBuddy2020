@@ -9,8 +9,6 @@ import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' as dom;
 
-import '../singleton/module_controller.dart';
-
 class Module {
   int id;
   String code;
@@ -110,8 +108,10 @@ class Module {
                         child: Text("Modul abwählen"),
                         onPressed: () {
                           this.isSelected = false;
-                          if(this.qsp.contains("SN") || this.qsp.contains("VC") || this.qsp.contains("SED") || this.qsp.contains("WPF"))
-                          {
+                          if (this.qsp.contains("SN") ||
+                              this.qsp.contains("VC") ||
+                              this.qsp.contains("SED") ||
+                              this.qsp.contains("WPF")) {
                             ModuleController().replacePlaceholder(this);
                           }
                           ModuleController().removeSelectedModule(this);
@@ -147,8 +147,10 @@ class Module {
                             child: Text("Modul Wählen"),
                             onPressed: () {
                               this.isSelected = true;
-                              if(this.qsp.contains("SN") || this.qsp.contains("VC") || this.qsp.contains("SED") || this.qsp.contains("WPF"))
-                              {
+                              if (this.qsp.contains("SN") ||
+                                  this.qsp.contains("VC") ||
+                                  this.qsp.contains("SED") ||
+                                  this.qsp.contains("WPF")) {
                                 ModuleController().replacePlaceholder(this);
                               }
                               ModuleController().addSelectedModule(this);

@@ -15,7 +15,7 @@ class ProfileController {
   TextEditingController _matrikelCtrl = TextEditingController();
   TextEditingController _qspCtrl = TextEditingController();
 
-  int _earnedCreditPoints = 20;
+  int _earnedCreditPoints = 0;
   int _maxCreditPoints = 210;
 
   //Getters
@@ -30,9 +30,8 @@ class ProfileController {
     return _earnedCreditPoints.toString() + " / " + _maxCreditPoints.toString() + " CP";
   }
 
-  //Setter
-  void addEarnedCP(int _cp) {
-    _earnedCreditPoints += _cp;
+  void setEarnedCP(int _cp){
+    _earnedCreditPoints = _cp;
   }
 
   void saveData() async {
