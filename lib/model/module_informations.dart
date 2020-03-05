@@ -2,9 +2,9 @@ import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Future<Widget> moduleInforations(Module module) async {
+Future<Widget> moduleInformations(Module module) async {
   return Get.dialog(AlertDialog(
-      contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+      contentPadding: EdgeInsets.all(8),
       title: Text(""),
       content: Column(children:infomationTile(module))));
 }
