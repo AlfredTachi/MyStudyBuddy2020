@@ -3,7 +3,7 @@
 		"0":"Üblicherweise ist bei UNIX-Dateisystemen Groß- und Kleinschreibung von Dateinamen relevant, d.h. 'Datei' und 'datei' sind unterschiedliche Namen.",
         "1":"Was beschreibt am besten einen Prozess im Sinne von Computer-Betriebssystemen?",
 		"2":"Der Körper hat eine eigene Sprache. Welche der folgenden Körperausdrücke kennzeichnet eher einen Blauen?",
-		"3":"Der Grüne verhält sich u.a. tendenziell in Konflikten:Richtig:",
+		"3":"Der Grüne verhält sich u.a. tendenziell in Konflikten:",
 		"4":"Erfolgs-Analysen zeigen nachstehendes Ergebnis",
 		"5":"Mit Hilfe der Methodenkompetenz stelle ich überwiegend ...",
 		"6":"Was sind Schwächen?",
@@ -82,5 +82,17 @@
 		"7":"Es empfiehlt Nicht-Stärken und Schwächen zu unterscheiden",
 		"8":"bedanke ich mich dennoch beim anderen",
 		"9":"wahr"
+    },
+    {
+		"0":"EInf",
+        "1":"EInf",
+		"2":"SMK",
+		"3":"SMK",
+		"4":"SMK",
+		"5":"SMK",
+		"6":"SMK",
+		"7":"SMK",
+		"8":"SMK",
+		"9":"EInf"
     }
 ]

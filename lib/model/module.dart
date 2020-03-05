@@ -10,9 +10,6 @@ import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' as dom;
 
 import '../singleton/module_controller.dart';
-import '../singleton/module_controller.dart';
-import '../singleton/module_controller.dart';
-import '../singleton/module_controller.dart';
 
 class Module {
   int id;
