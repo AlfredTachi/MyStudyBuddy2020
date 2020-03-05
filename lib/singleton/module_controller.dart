@@ -145,17 +145,6 @@ class ModuleController {
     DBProvider.db.deleteModule(_module.id);
   }
 
-/*   void setModuleSelected(Module _module, bool isSelected) {
-    _module.setIsSelected(isSelected);
-    DBProvider.db.updateModule(_module);
-  }
-
-  void setModuleGrade(Module _module, double grade) {
-    _module.setIsDone(true);
-    _module.setGrade(grade);
-    DBProvider.db.updateModule(_module);
-  } */
-
   void updateModule(Module _module) {
     int index = _allModules.indexWhere((module) => module.id == _module.id);
     _allModules[index] = _module;
