@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'package:MyStudyBuddy2/link/link.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
 
 class Weather extends StatefulWidget {
   @override
@@ -43,145 +43,160 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
-      return getMaterialDesign();
-    } else {
-      return getMaterialDesign();
-    }
-  }
-
-  Widget getCupertinoDesign() {
-    ///TODO implement IOS Design
-    return Container();
+    return getMaterialDesign();
   }
 
   Widget getMaterialDesign() {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color(0xFF013D62), Color(0xBB013D62), Color(0x99013D62)],
-        ),
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFF013D62),
+        onPressed: () {
+          fetchData();
+        },
+        tooltip: 'Aktualisieren',
+        child: Icon(Icons.refresh),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Center(
-            child: Container(
-              padding: EdgeInsets.only(top: 20),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                    Color(0xFF013D62),
-                    Color(0xBB013D62),
-                    Color(0x99013D62)
-                  ])),
-              child: SingleChildScrollView(
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: OutlineButton(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 3, bottom: 3),
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Colors.black,
+                            size: 36,
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        )),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        }),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: FlatButton(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 3, bottom: 3),
+                        child: Icon(Icons.info_outline,
+                            size: 28, color: Colors.black),
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                      )),
+                      onPressed: () {
+                        return showDialog(
+                          context: context,
+                          child: SimpleDialog(
+                            contentPadding: EdgeInsets.all(25),
+                            title: FittedBox(
+                                child: Text("Informationen zu den Daten")),
+                            children: <Widget>[
+                              Text("Die Daten werden bereitgestellt vom TOP Wetter Team WWW und der Hochschule Worms. " +
+                                  "Weitere Informationen finden Sie auf der Wetter Seite der HS Worms."),
+                              Padding(
+                                padding: EdgeInsets.only(top: 20),
+                                child: Link(
+                                    child: Text(
+                                      "Hier geht es zur Website!",
+                                      style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          color: Colors.blue),
+                                    ),
+                                    url: "http://wetter.hs-worms.de/"),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: <Widget>[
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: OutlineButton(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 3, bottom: 3),
-                            child: Icon(
-                              Icons.arrow_back,
-                              size: 36,
-                            ),
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                          )),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          }),
+                    Text(
+                      "Hs Worms",
+                      style:
+                          TextStyle(fontSize: 42, fontWeight: FontWeight.w100),
                     ),
-                    Container(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(
-                                  top: MediaQuery.of(context).size.height / 5),
-                              child: Column(
-                                children: <Widget>[
-                                  (status.isNotEmpty)
-                                      ? Text(status)
-                                      : Container(),
-                                  Text(
-                                    "HS Worms",
-                                    style: TextStyle(
-                                      fontSize: 50,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Zuletzt aktualisiert: " +
-                                        dateTimeToString(),
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      data.temperature.toString() + " °C",
-                                      style: TextStyle(
-                                        fontSize: 44,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Divider(),
-                            MaterialButton(
-                              onPressed: () {
-                                if (animationCtrl.isCompleted) {
-                                  showMore = "Details verstecken";
-                                  showDetails = true;
-                                  animationCtrl.reverse();
-                                } else {
-                                  showMore = "Details zeigen";
-                                  showDetails = false;
-                                  animationCtrl.forward();
-                                }
-                                setState(() {});
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  AnimatedIcon(
-                                    icon: AnimatedIcons.close_menu,
-                                    progress: animationCtrl,
-                                  ),
-                                  Text(
-                                    showMore,
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Divider(),
-                            (showDetails) ? details() : Container(),
-                          ],
-                        ),
-                      ),
+                    Text(
+                      dateTimeToString(),
+                      style: TextStyle(color: Colors.black45),
                     ),
+                    Text(
+                      data.temperature.toString() + " °C",
+                      style:
+                          TextStyle(fontSize: 46, fontWeight: FontWeight.bold),
+                    )
                   ],
                 ),
               ),
             ),
-          ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(30)),
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        Colors.orange,
+                        Colors.deepOrange,
+                      ],
+                    )),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(left: 15, top: 5, bottom: 15),
+                              child: Text(
+                                "Details",
+                                style: TextStyle(
+                                    fontSize: 25, color: Colors.black),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 5, right: 5),
+                          alignment: Alignment.topLeft,
+                          child: Center(
+                            child: Align(
+                              child: FittedBox(child: details()),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
