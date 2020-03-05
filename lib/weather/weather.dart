@@ -56,15 +56,22 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
         tooltip: 'Aktualisieren',
         child: Icon(Icons.refresh),
       ),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: OutlineButton(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/weather.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: OutlineButton(
                         child: Padding(
                           padding: const EdgeInsets.only(top: 3, bottom: 3),
                           child: Icon(
@@ -74,172 +81,178 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
                           ),
                         ),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(15),
-                          bottomRight: Radius.circular(15),
-                        )),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(15),
+                            bottomRight: Radius.circular(15),
+                          ),
+                        ),
                         onPressed: () {
                           Navigator.of(context).pop();
-                        }),
-                  ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: FlatButton(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 3, bottom: 3),
-                        child: Icon(Icons.info_outline,
-                            size: 28, color: Colors.black),
+                        },
                       ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      )),
-                      onPressed: () {
-                        return showDialog(
-                          context: context,
-                          child: SimpleDialog(
-                            contentPadding: EdgeInsets.all(25),
-                            title: FittedBox(
-                                child: Text("Informationen zu den Daten")),
-                            children: <Widget>[
-                              Text("Die Daten werden bereitgestellt vom TOP Wetter Team WWW und der Hochschule Worms. " +
-                                  "Weitere Informationen finden Sie auf der Wetter Seite der HS Worms."),
-                              Padding(
-                                padding: EdgeInsets.only(top: 20),
-                                child: Link(
-                                    child: Text(
-                                      "Hier geht es zur Website!",
-                                      style: TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          color: Colors.blue),
-                                    ),
-                                    url: "http://wetter.hs-worms.de/"),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
                     ),
                   ),
-                ),
-              ],
-            ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      "Hs Worms",
-                      style:
-                          TextStyle(fontSize: 42, fontWeight: FontWeight.w100),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: OutlineButton(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 3, bottom: 3),
+                          child: Icon(
+                            Icons.info_outline,
+                            color: Colors.black,
+                            size: 36,
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        )),
+                        onPressed: () {
+                          return showDialog(
+                            context: context,
+                            child: SimpleDialog(
+                              contentPadding: EdgeInsets.all(25),
+                              title: FittedBox(
+                                  child: Text("Informationen zu den Daten")),
+                              children: <Widget>[
+                                Text("Die Daten werden bereitgestellt vom TOP Wetter Team WWW und der Hochschule Worms. " +
+                                    "Weitere Informationen finden Sie auf der Wetter Seite der HS Worms."),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 20),
+                                  child: Link(
+                                      child: Text(
+                                        "Hier geht es zur Website!",
+                                        style: TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            color: Colors.blue),
+                                      ),
+                                      url: "http://wetter.hs-worms.de/"),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                    Text(
-                      dateTimeToString(),
-                      style: TextStyle(color: Colors.black45),
-                    ),
-                    Text(
-                      data.temperature.toString() + " °C",
-                      style:
-                          TextStyle(fontSize: 46, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(30)),
-                    gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [
-                        Colors.orange,
-                        Colors.deepOrange,
-                      ],
-                    )),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 30),
-                  child: SingleChildScrollView(
+              Expanded(
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Padding(
-                              padding:
-                                  EdgeInsets.only(left: 15, top: 5, bottom: 15),
-                              child: Text(
-                                "Details",
-                                style: TextStyle(
-                                    fontSize: 25, color: Colors.black),
-                              ),
-                            ),
-                          ],
+                        Text(
+                          "Hs Worms",
+                          style: TextStyle(
+                              fontSize: 42, fontWeight: FontWeight.w100),
                         ),
-                        Container(
-                          padding: EdgeInsets.only(left: 5, right: 5),
-                          alignment: Alignment.topLeft,
-                          child: Center(
-                            child: Align(
-                              child: FittedBox(child: details()),
-                            ),
-                          ),
+                        Text(
+                          dateTimeToString(),
+                          style: TextStyle(color: Colors.black45),
                         ),
+                        Text(
+                          data.temperature.toString() + " °C",
+                          style: TextStyle(
+                              fontSize: 46, fontWeight: FontWeight.bold),
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                flex: 2,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(30),
+                    ),
+                    color: Colors.white.withOpacity(0.5),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 5, right: 5),
+                    child: Center(
+                      child: details(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
+  TextStyle detailTextStyle() {
+    return TextStyle(
+      color: Colors.black,
+      fontSize: 24,
+    );
+  }
+
   Widget details() {
     try {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Luftdruck: " + data.barometer.round().toString() + " hPa",
-            style: TextStyle(color: Colors.white),
-          ),
-          Text(
-            "Luftfeuchtigkeit: " + data.humidity.toString() + " %",
-            style: TextStyle(color: Colors.white),
-          ),
-          Text(
-            "Windgesch.: " + (data.windSpeed / 3.6).round().toString() + " m/s",
-            style: TextStyle(color: Colors.white),
-          ),
-          Text(
-            "Windrichtung: " + data.windDir.toString(),
-            style: TextStyle(color: Colors.white),
-          ),
-          Text(
-            "UV Strahlung: " + data.getUvEvaluation(),
-            style: TextStyle(color: Colors.white),
-          ),
-          Text(
-            "Regen: " + data.rainPerMM.toString() + "mm",
-            style: TextStyle(color: Colors.white),
-          ),
-          Text(
-            "Sonnenaufgang: " + data.sunRise.toString(),
-            style: TextStyle(color: Colors.white),
-          ),
-          Text(
-            "Sonnenuntergang: " + data.sunSet.toString(),
-            style: TextStyle(color: Colors.white),
-          ),
-        ],
+      return SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            FittedBox(
+              child: Text(
+                "Luftdruck: " + data.barometer.round().toString() + " hPa",
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Luftfeuchtigkeit: " + data.humidity.toString() + " %",
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Windgesch.: " +
+                    (data.windSpeed / 3.6).round().toString() +
+                    " m/s",
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Windrichtung: " + data.windDir.toString(),
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "UV Strahlung: " + data.getUvEvaluation(),
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Regen: " + data.rainPerMM.toString() + "mm",
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Sonnenaufgang: " + data.sunRise.toString(),
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Sonnenuntergang: " + data.sunSet.toString(),
+                style: detailTextStyle(),
+              ),
+            ),
+          ],
+        ),
       );
     } catch (ex) {
       return Text("Fehler beim abrufen der Daten!");
