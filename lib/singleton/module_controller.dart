@@ -34,6 +34,36 @@ class ModuleController {
     return _widgets;
   }
 
+//Get all Grades
+
+  List<double> getAllDoneGrades() {
+    List<double> _grades = new List<double>();
+    List<Module> _modules = new List<Module>();
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.isDone == true)
+        .toList();
+    
+    for (var i = 0; i < _modules.length; i++) {
+      _grades.add(_modules[i].grade);
+    }
+    
+    return _grades;
+  }
+  List<String> getAllDoneModulesNames(){
+    List<String> _names = new List<String>();
+    List<Module> _modules = new List<Module>();
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.isDone == true)
+        .toList();
+  for (var i = 0; i < _modules.length; i++) {
+      _names.add(_modules[i].title);
+    }
+    return _names;
+  }
+
+
     //Returns QSP Widgets
   List<Widget> getQSPModulesWidgets(String title) {
     List<Widget> _widgets = new List<Widget>();
