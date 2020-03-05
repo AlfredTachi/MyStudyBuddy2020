@@ -80,15 +80,15 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
     double temp1;
     List<double> allGrades = new List<double>();
     allGrades = ModuleController().getAllDoneGrades();
-    
 
     try {
       temp = allGrades.reduce((a, b) => a + b);
       temp1 = temp / allGrades.length;
+      myAverage = double.parse(temp1.toStringAsFixed(2));
     } catch (err) {
       print(err);
     }
-    myAverage = double.parse(temp1.toStringAsFixed(2));
+
     return myAverage;
   }
 
@@ -100,16 +100,18 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
     double temp;
     double selectedModuleAverage;
     try {
-      selectedModules = ModuleController().getAllSelectedModulesWidgets().length;
-      
+      selectedModules =
+          ModuleController().getAllSelectedModulesWidgets().length;
+      selectedModuleAverage = selectedModules * 1 / selectedModules;
+
+      temp = ((average() * allGrades.length) +
+              (selectedModuleAverage * selectedModules)) /
+          (allGrades.length + selectedModules);
+      myBestCase = double.parse(temp.toStringAsFixed(2));
     } catch (err) {
       print(err);
     }
-    selectedModuleAverage = selectedModules * 1 /selectedModules;
 
-
-    temp = ((average()* allGrades.length)+ (selectedModuleAverage * selectedModules))/(allGrades.length+selectedModules);
-   myBestCase = double.parse(temp.toStringAsFixed(2));
     return myBestCase;
   }
 
@@ -121,13 +123,17 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
     allGrades = ModuleController().getAllDoneGrades();
     double selectedModuleAverage;
     try {
-      selectedModules = ModuleController().getAllSelectedModulesWidgets().length;
+      selectedModules =
+          ModuleController().getAllSelectedModulesWidgets().length;
+      selectedModuleAverage = selectedModules * 4 / selectedModules;
+      temp = ((average() * allGrades.length) +
+              (selectedModuleAverage * selectedModules)) /
+          (allGrades.length + selectedModules);
+      myWorstCase = double.parse(temp.toStringAsFixed(2));
     } catch (err) {
       print(err);
     }
-    selectedModuleAverage = selectedModules * 4 /selectedModules;
-    temp = ((average()* allGrades.length)+ (selectedModuleAverage * selectedModules))/(allGrades.length+selectedModules);
-myWorstCase = double.parse(temp.toStringAsFixed(2));
+
     return myWorstCase;
   }
 }

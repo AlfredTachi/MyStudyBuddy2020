@@ -1,6 +1,5 @@
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 
 class GradesList extends StatefulWidget {
   @override
