@@ -1,5 +1,6 @@
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
+import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../local_database/local_database.dart';
@@ -35,7 +36,6 @@ class ModuleController {
     return _widgets;
   }
 
-
 //Get all Grades
 
   List<double> getAllDoneGrades() {
@@ -45,26 +45,35 @@ class ModuleController {
         .getAllModules()
         .where((test) => test.isDone == true)
         .toList();
-    
+
     for (var i = 0; i < _modules.length; i++) {
       _grades.add(_modules[i].grade);
     }
-    
+
     return _grades;
   }
-  List<String> getAllDoneModulesNames(){
+
+  List<Module> getAllDoneModules() {
+    List<Module> _modules = new List<Module>();
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.isDone == true)
+        .toList();
+    return _modules;
+  }
+
+  List<String> getAllDoneModulesNames() {
     List<String> _names = new List<String>();
     List<Module> _modules = new List<Module>();
     _modules = ModuleController()
         .getAllModules()
         .where((test) => test.isDone == true)
         .toList();
-  for (var i = 0; i < _modules.length; i++) {
+    for (var i = 0; i < _modules.length; i++) {
       _names.add(_modules[i].title);
     }
     return _names;
   }
-
 
   //Returns QSP Widgets
 
@@ -157,6 +166,17 @@ class ModuleController {
     return _modules;
   }
 
+  int sumAllCP() {
+    List<Module> _modules = getAllDoneModules();
+    int sum = 0;
+    for (int i = 0; i < _modules.length; i++) {
+      if (_modules[i].getGrade() != 0.0) {
+        sum += _modules[i].cp;
+      }
+    }
+    return sum;
+  }
+
   void replacePlaceholder(Module _module) {
     _replacedModules.id = _module.id;
     _replacedModules.title = _module.title;
@@ -174,6 +194,7 @@ class ModuleController {
   void setModulesFromDatabase() async {
     _allModules = await DBProvider.db.readAllModules();
     _selectedModules = await DBProvider.db.readSelectedModules();
+    ProfileController().setEarnedCP(sumAllCP());
   }
 
   void addToAllModules(Module _module) {
