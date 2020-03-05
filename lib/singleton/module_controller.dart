@@ -34,6 +34,7 @@ class ModuleController {
     return _widgets;
   }
 
+
 //Get all Grades
 
   List<double> getAllDoneGrades() {
@@ -64,7 +65,8 @@ class ModuleController {
   }
 
 
-    //Returns QSP Widgets
+  //Returns QSP Widgets
+
   List<Widget> getQSPModulesWidgets(String title) {
     List<Widget> _widgets = new List<Widget>();
     List<Module> _modules = new List<Module>();
@@ -143,6 +145,17 @@ class ModuleController {
     return _widgets;
   }
 
+  //Returns modules that are done
+  List<Module> getDoneSemesterModules() {
+    List<Module> _modules = new List<Module>();
+
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.isDone == true)
+        .toList();
+    return _modules;
+  }
+
   //Setter
 
   void setModulesFromDatabase() async {
@@ -164,15 +177,10 @@ class ModuleController {
     DBProvider.db.deleteModule(_module.id);
   }
 
-  void setModuleSelected(Module _module, bool isSelected) {
-    _module.setIsSelected(isSelected);
-    DBProvider.db.updateModule(_module);
-  }
-
-  void setModuleGrade(Module _module, double grade) {
-    _module.setIsDone(true);
-    _module.setGrade(grade);
-    DBProvider.db.updateModule(_module);
+  void updateModule(Module _module) {
+    int index = _allModules.indexWhere((module) => module.id == _module.id);
+    _allModules[index] = _module;
+    DBProvider.db.updateModule(_allModules[index]);
   }
 
   void removeSelectedModule(Module _module) {
