@@ -7,6 +7,7 @@ import 'package:MyStudyBuddy2/dashboard/profile_page/profile_page.dart';
 import 'package:MyStudyBuddy2/evaluation/evaluation.dart';
 import 'package:MyStudyBuddy2/evaluation/module_list.dart';
 import 'package:MyStudyBuddy2/evaluation/prof_list.dart';
+import 'package:MyStudyBuddy2/grades_prognosis/grades_list.dart';
 import 'package:MyStudyBuddy2/planer/planer.dart';
 import 'package:MyStudyBuddy2/qsp_info/qsp_info.dart';
 import 'package:MyStudyBuddy2/study_quiz/home.dart';
@@ -74,6 +75,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Evaluation());
       case '/supportMain/quickAccess/moralSupport':
         return MaterialPageRoute(builder: (_) => MoralSupport());
+      case '/gradesList':
+        return MaterialPageRoute(builder: (_) => GradesList());
       default:
         return _errorRoute();
     }

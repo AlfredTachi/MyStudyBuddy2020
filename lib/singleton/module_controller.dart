@@ -2,44 +2,103 @@ import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../local_database/local_database.dart';
+
 class ModuleController {
   static final ModuleController _instance = ModuleController._internal();
-  static List<Module> _selectedModules = new List<Module>();
-  static List<Module> _allModules = new List<Module>();
+
+  factory ModuleController() => _instance;
 
   ModuleController._internal();
 
-  factory ModuleController() => _instance;
+  List<Module> _selectedModules;
+  List<Module> _allModules;
 
   //Getter
 
   List<Module> getSelectedModules() => _selectedModules;
   List<Module> getAllModules() => _allModules;
 
-  //Returns all Widgets from _selectedModules
-  List<Widget> getSelectedModulesWidgets() {
+  //Returns all selected Widgets
+  List<Widget> getAllSelectedModulesWidgets() {
     List<Widget> _widgets = new List<Widget>();
-    for (int i = 0; i < _selectedModules.length; i++) {
-      _widgets.add(_selectedModules[i].module());
+    List<Module> _modules = new List<Module>();
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.isSelected == true)
+        .toList();
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
+    }
+    print(_widgets);
+    return _widgets;
+  }
+
+  //Returns QSP Widgets
+  List<Widget> getQSPModulesWidgets(String title) {
+    List<Widget> _widgets = new List<Widget>();
+    List<Module> _modules = new List<Module>();
+    if (title == "Security and Network") {
+      _modules = ModuleController()
+          .getAllModules()
+          .where((test) => test.qsp.contains("SN") && test.isDone == false)
+          .toList();
+    } else if (title == "Visual Computing") {
+      _modules = ModuleController()
+          .getAllModules()
+          .where((test) => test.qsp.contains("VC") && test.isDone == false)
+          .toList();
+    } else if (title == "Software Engineering and Development") {
+      _modules = ModuleController()
+          .getAllModules()
+          .where((test) => test.qsp.contains("SED") && test.isDone == false)
+          .toList();
+    }
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
     }
     return _widgets;
   }
 
-  //Returns all Widgets from _allModules
+  //Returns QSP Widgets
+  List<Widget> getWPFModulesWidgets() {
+    List<Widget> _widgets = new List<Widget>();
+    List<Module> _modules = new List<Module>();
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.qsp.contains("WPF") && test.isDone == false)
+        .toList();
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
+    }
+    return _widgets;
+  }
+
+  //Returns only not done Widgets for all Semester
+  List<Widget> getOnlyNotDoneSemesterModulesWidgets(int index) {
+    List<Widget> _widgets = new List<Widget>();
+    List<Module> _modules = new List<Module>();
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.semester == index && test.isDone == false)
+        .toList();
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
+    }
+
+    return _widgets;
+  }
+
+  //Returns all Widgets for all Semester
   List<Widget> getAllSemesterModulesWidgets(int index) {
     List<Widget> _widgets = new List<Widget>();
     List<Module> _modules = new List<Module>();
-    int moduleIndex = 1;
-    String _moduleIndex = "";
-    for (var i = 0; i <= 5; i++) {
-      _moduleIndex = moduleIndex.toString() + index.toString() + i.toString();
-      _modules = ModuleController()
-          .getAllModules()
-          .where((test) => test.id == int.parse(_moduleIndex))
-          .toList();
-      for (var i = 0; i < _modules.length; i++) {
-        _widgets.add(_modules[i].module());
-      }
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.semester == index)
+        .toList();
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
     }
 
     return _widgets;
@@ -54,41 +113,42 @@ class ModuleController {
     return _widgets;
   }
 
+  //Returns modules that are done
+  List<Module> getDoneSemesterModules() {
+    List<Module> _modules = new List<Module>();
+
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.isDone == true)
+        .toList();
+    return _modules;
+  }
+
   //Setter
+
+  void setModulesFromDatabase() async {
+    _allModules = await DBProvider.db.readAllModules();
+  }
 
   void addToAllModules(Module _module) {
     int index = _allModules.indexWhere((module) => module.id == _module.id);
-
-    if (index != -1) {
-      Module module = Module(
-          _module.id,
-          _module.code,
-          _module.title,
-          _allModules[index].grade,
-          _allModules[index].isDone,
-          _allModules[index].isSelected,
-          _module.qsp,
-          _module.cp,
-          _module.semester);
-      _allModules[index] = module;
-      DBProvider.db.updateModule(_allModules[index]);
-    } else {
+    if (index == -1) {
       _allModules.add(_module);
       DBProvider.db.createModule(_module);
+    } else {
+      _allModules[index] = _module;
+      DBProvider.db.updateModule(_module);
     }
   }
 
-  void resetAllModules() {
-    _allModules = new List<Module>();
-  }
-
   void removeFromAllModule(Module _module) {
-    _selectedModules.remove(_module);
     DBProvider.db.deleteModule(_module.id);
   }
 
-  void addSelectedModule(Module _module) {
-    _selectedModules.add(_module);
+  void updateModule(Module _module) {
+    int index = _allModules.indexWhere((module) => module.id == _module.id);
+    _allModules[index] = _module;
+    DBProvider.db.updateModule(_allModules[index]);
   }
 
   void removeSelectedModule(Module _module) {

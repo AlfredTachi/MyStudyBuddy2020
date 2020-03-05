@@ -1,5 +1,6 @@
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,6 +39,7 @@ Future<Widget> addGrade(Module module) async {
                   } else
                     update(double.parse(grade), module);
                     disposeData();
+                    Get.back();
                 },
                 child: Text("Speichern"))
           ],
@@ -46,6 +48,7 @@ Future<Widget> addGrade(Module module) async {
 }
 
 void update(double grade, Module module) {
-  module.setGrade(grade);
-  DBProvider.db.updateGradeManually(module);
+  module.grade = grade;
+  module.isDone = true;
+  ModuleController().updateModule(module);
 }

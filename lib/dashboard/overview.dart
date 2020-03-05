@@ -1,6 +1,5 @@
 import 'package:MyStudyBuddy2/singleton/tile_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
 
 class Overview extends StatefulWidget {
   @override

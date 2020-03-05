@@ -3,13 +3,13 @@ import 'package:MyStudyBuddy2/model/module_informations.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/services.dart';
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' as dom;
+
+import '../singleton/module_controller.dart';
 
 class Module {
   int id;
@@ -26,26 +26,28 @@ class Module {
       this.isSelected, this.qsp, this.cp, this.semester);
 
   factory Module.fromMap(Map<String, dynamic> map) {
+    bool _isDone;
+    bool _isSelected;
     if (map["isDone"] == 0 || map["isDone"] == false) {
-      map["isDone"] = false;
+      _isDone = false;
     } else {
-      map["isDone"] = true;
+      _isDone = true;
     }
     if (map["isSelected"] == 0 || map["isSelected"] == false) {
-      map["isSelected"] = false;
+      _isSelected = false;
     } else {
-      map["isSelected"] = true;
+      _isSelected = true;
     }
     return Module(
-      map["id"],
-      map["code"],
-      map["title"],
-      map["grade"],
-      map["isDone"],
-      map["isSelected"],
-      map["qsp"],
-      map["cp"],
-      map["semester"]);
+        map["id"],
+        map["code"],
+        map["title"],
+        map["grade"],
+        _isDone,
+        _isSelected,
+        map["qsp"],
+        map["cp"],
+        map["semester"]);
   }
 
   Map<String, dynamic> toMap() => {
@@ -85,9 +87,9 @@ class Module {
           color: Color(0xFF013D62),
           splashColor: Colors.orange,
           onPressed: () {
-            if (title == "6. M") {
+            if (code == "QSP") {
               Get.toNamed("/modulSelectionQSP");
-            } else if (title == "7. M") {
+            } else if (code == "WPF") {
               Get.toNamed("/modulSelectionWPF");
             } else {
               if (isSelected) {
@@ -108,6 +110,14 @@ class Module {
                         child: Text("Note Eintragen"),
                         onPressed: () {
                           addGrade(this);
+                        },
+                      ),
+                      FlatButton(
+                        child: Text("Modul abwählen"),
+                        onPressed: () {
+                          this.isSelected = false;
+                          ModuleController().updateModule(this);
+                          Get.back();
                         },
                       ),
                     ]),
@@ -137,8 +147,8 @@ class Module {
                           FlatButton(
                             child: Text("Modul Wählen"),
                             onPressed: () {
-                              ModuleController().addSelectedModule(this);
-                              isSelected = true;
+                              this.isSelected = true;
+                              ModuleController().updateModule(this);
                               Get.back();
                             },
                           )
@@ -150,9 +160,54 @@ class Module {
               }
             }
           },
-          child: Center(
-              child: Text(code,
-                  style: TextStyle(fontSize: 20, color: Colors.white))),
+          child: Column(
+            children: <Widget>[
+              grade != null
+                  ? Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 24),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text(code,
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white)),
+                            )),
+                      ),
+                    )
+                  : Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 4),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text(code,
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white)),
+                            )),
+                      ),
+                    ),
+              grade != null
+                  ? Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text(grade.toString(),
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.lightGreen)),
+                            )),
+                      ),
+                    )
+                  : Container(),
+            ],
+          ),
         ),
       ),
     );
@@ -161,30 +216,33 @@ class Module {
   //getter
   double getGrade() => grade;
 
+  bool getIsDone() => isDone;
+
+  bool getIsSelected() => isSelected;
+
   //setter
   void setGrade(double newGrade) {
     grade = newGrade;
   }
-}
 
-Future<void> getModulesFromFile() async {
-  String contents = await rootBundle.loadString("assets/modules.json");
-  ModuleController mc = ModuleController();
+  void setIsDone(bool _isDone) {
+    isDone = _isDone;
+  }
 
-  List<dynamic> json = jsonDecode(contents);
-  for (var moduleMap in json) {
-    mc.addToAllModules(Module.fromMap(moduleMap));
+  void setIsSelected(bool _isSelected) {
+    isSelected = _isSelected;
   }
 }
 
-Future<int> getExamResultsFromLSFServer(String userName, String userPassword) async {
+Future<int> getExamResultsFromLSFServer(
+    String userName, String userPassword) async {
   http.Response postResponse;
   http.Client client = http.Client();
 
   try {
     postResponse = await client.post(
         'https://lsf.hs-worms.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal&asdf=$userName&fdsa=$userPassword');
-    
+
     if (!postResponse.headers.keys.first.contains('location')) {
       print(postResponse.headers.keys.first);
       return 1;
@@ -201,7 +259,6 @@ Future<int> getExamResultsFromLSFServer(String userName, String userPassword) as
       return 9;
     }
   }
-
 
   try {
     final homeScreenResponse =
@@ -238,34 +295,42 @@ Future<int> getExamResultsFromLSFServer(String userName, String userPassword) as
     }
 
     for (var i = 0; i < gradeLines.length / 9; i++) {
-      ModuleController mc = ModuleController();
-      int index = mc.getAllModules().indexWhere((module) => module.id == int.tryParse(trimmedGradeLines[0]));
-      double _grade = double.tryParse(trimmedGradeLines[3].replaceAll(',', '.'));
+      if (trimmedGradeLines[0] == "1") {
+        trimmedGradeLines.removeRange(0, 9);
+        continue;
+      }
+      List<Module> allModuleList = ModuleController().getAllModules();
+      int index = allModuleList.indexWhere(
+          (module) => module.id == int.tryParse(trimmedGradeLines[0]));
+      double _grade =
+          double.tryParse(trimmedGradeLines[3].replaceAll(',', '.'));
       bool _passed;
 
       if (index == -1) {
-        index = mc.getAllModules().indexWhere((module) => module.title.contains(trimmedGradeLines[1]));
+        index = ModuleController().getAllModules().indexWhere(
+            (module) => module.title.contains(trimmedGradeLines[1]));
       }
-
-      if (_grade >= 1.0 && _grade <= 4.0) {
+      if (_grade == null) {
+        _grade = 0.0;
+      } else if (_grade >= 1.0 && _grade <= 4.0) {
         _passed = true;
       } else {
+        _grade = 5.0;
         _passed = false;
       }
 
       Module result = Module(
-        mc.getAllModules()[index].id,
-        mc.getAllModules()[index].code,
-        mc.getAllModules()[index].title,
-        _grade,
-        _passed,
-        mc.getAllModules()[index].isSelected,
-        mc.getAllModules()[index].qsp,
-        mc.getAllModules()[index].cp,
-        mc.getAllModules()[index].semester
-      );
+          ModuleController().getAllModules()[index].id,
+          ModuleController().getAllModules()[index].code,
+          ModuleController().getAllModules()[index].title,
+          _grade,
+          _passed,
+          ModuleController().getAllModules()[index].isSelected,
+          ModuleController().getAllModules()[index].qsp,
+          ModuleController().getAllModules()[index].cp,
+          ModuleController().getAllModules()[index].semester);
 
-      mc.addToAllModules(result);
+      ModuleController().addToAllModules(result);
 
       trimmedGradeLines.removeRange(0, 9);
     }
