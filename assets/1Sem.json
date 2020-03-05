@@ -9,7 +9,7 @@
 		"7":"Welche Aussagen macht das Gelassenheits-Gebet?",
 		"8":"Wenn mir Feedback nicht gefällt, dann:",
 		"9":"Der Dateiname '...' (3 Punkte) darf für selbst erstellte Dateien oder Verzeichnisse verwendet werden.",
-		"10":"Üblicherweise ist bei UNIX-Dateisystemen Groß- und Kleinschreibung von Dateinamen relevant, d.h. 'Datei' und 'datei' sind unterschiedliche Namen."
+		"0":"Üblicherweise ist bei UNIX-Dateisystemen Groß- und Kleinschreibung von Dateinamen relevant, d.h. 'Datei' und 'datei' sind unterschiedliche Namen."
     },
     {
         "1": {
@@ -62,11 +62,15 @@
         },
 		"9": {
             "a": "wahr",
-            "b": "falsch"
+            "b": "falsch",
+			"c":"",
+			"d":""
         },
-		"10": {
+		"0": {
             "a": "wahr",
-            "b": "falsch"
+            "b": "falsch",
+			"c":"",
+			"d":""
         }
     },
     {
@@ -79,6 +83,6 @@
 		"7":"Es empfiehlt Nicht-Stärken und Schwächen zu unterscheiden",
 		"8":"bedanke ich mich dennoch beim anderen",
 		"9":"wahr",
-		"10":"wahr"
+		"0":"wahr"
     }
 ]

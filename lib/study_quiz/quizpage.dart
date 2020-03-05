@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:MyStudyBuddy2/study_quiz/resultpage.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -81,15 +82,33 @@ class _QuizpageState extends State<Quizpage> {
   String showtimer = "30";
 
   Map<String, Color> btncolor = {
-    "a": Colors.orangeAccent[100],
-    "b": Colors.orangeAccent[100],
-    "c": Colors.orangeAccent[100],
-    "d": Colors.orangeAccent[100],
+    "a": Colors.orangeAccent[200],
+    "b": Colors.orangeAccent[200],
+    "c": Colors.orangeAccent[200],
+    "d": Colors.orangeAccent[200],
   };
+  var randomArray;
+  
+  void randArray(){
+    var distinctIds = [];
+    var rand = new Random();
+    for(int i = 0; ;) {
+       distinctIds.add(rand.nextInt(10));
+         randomArray = distinctIds.toSet().toList();
+         if(randomArray.length < 10){
+           continue;
+         }else{
+           break;
+         }
+       }
+    i = randomArray[0];
+     print(randomArray);
 
+  }
   // overriding the initstate function to start timer as this screen is created
   @override
   void initState() {
+    randArray();
     starttimer();
     super.initState();
   }
@@ -120,8 +139,9 @@ class _QuizpageState extends State<Quizpage> {
     });
   }
 
+
   void nextquestion() {
-    var randomArray = [9, 3, 7, 1, 4, 5, 6, 10, 8, 2];
+    //var randomArray = [9, 3, 7, 1, 4, 5, 6, 10, 8, 2];
     canceltimer = false;
     timer = 30;
     setState(() {
@@ -154,7 +174,6 @@ class _QuizpageState extends State<Quizpage> {
       btncolor[k] = colortoshow;
       canceltimer = true;
     });
-
     // changed timer duration to 1 second
     Timer(Duration(seconds: 1), nextquestion);
   }
@@ -167,12 +186,13 @@ class _QuizpageState extends State<Quizpage> {
       ),
       child: MaterialButton(
         onPressed: () => checkanswer(k),
-        child: AutoSizeText(
-          mydata[1][i.toString()][k],
+        child: AutoSizeText(mydata[1][i.toString()][k],
             style: TextStyle(
               fontSize: 16.0,
               color: Colors.white,
-            )),
+            ),
+             maxLines: 3,
+            ),
         color: btncolor[k],
         splashColor: Colors.orangeAccent,
         highlightColor: Colors.orangeAccent,
@@ -194,6 +214,22 @@ class _QuizpageState extends State<Quizpage> {
             child: Container(
               padding: EdgeInsets.all(15.0),
               alignment: Alignment.bottomLeft,
+              child: Row(
+                children: <Widget>[
+                  Text("Frage: "+j.toString()+"/"+randomArray.length.toString(),
+                    style: TextStyle(
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Container(
+              padding: EdgeInsets.all(15.0),
+              alignment: Alignment.bottomLeft,
               child: Text(
                 mydata[0][i.toString()],
                 style: TextStyle(
@@ -208,7 +244,6 @@ class _QuizpageState extends State<Quizpage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  mydata[1][i.toString()][1],
                   choicebutton('a'),
                   choicebutton('b'),
                   choicebutton('c'),
