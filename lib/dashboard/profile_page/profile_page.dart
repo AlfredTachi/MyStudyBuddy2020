@@ -7,12 +7,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class ProfilePageState extends State<ProfilePage> {
-
   @override
   void initState() {
-    try{
+    try {
       ProfileController().loadData();
-    }catch(ex){
+    } catch (ex) {
       print("Failed to load shared preference with following error: \n" + ex);
     }
     ProfileController().loadData();
@@ -70,7 +69,7 @@ class ProfilePageState extends State<ProfilePage> {
                     Expanded(
                       flex: 3,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 30),
+                        padding: const EdgeInsets.only(top: 0),
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,10 +77,15 @@ class ProfilePageState extends State<ProfilePage> {
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 5),
+                                    left: 20, right: 20, bottom: 5, top: 50),
                                 child: TextField(
-                                  controller: ProfileController().getInfNumberController(),
-                                  style: TextStyle(color: Colors.white, fontSize: 18),
+                                  onChanged: (_val) {
+                                    ProfileController().saveData();
+                                  },
+                                  controller: ProfileController()
+                                      .getInfNumberController(),
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
                                   decoration: InputDecoration(
                                       fillColor: Colors.white.withAlpha(40),
                                       filled: true,
@@ -109,12 +113,17 @@ class ProfilePageState extends State<ProfilePage> {
                                 padding: const EdgeInsets.only(
                                     left: 20, right: 20, bottom: 5),
                                 child: TextField(
+                                  onChanged: (_val) {
+                                    ProfileController().saveData();
+                                  },
                                   maxLength: 6,
                                   keyboardType: TextInputType.number,
-                                  controller: ProfileController().getMatrikelController(),
-                                  style: TextStyle(color: Colors.white, fontSize: 18),
+                                  controller: ProfileController()
+                                      .getMatrikelController(),
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
                                   decoration: InputDecoration(
-                                    counterText: "",
+                                      counterText: "",
                                       fillColor: Colors.white.withAlpha(40),
                                       filled: true,
                                       hintStyle:
@@ -143,18 +152,23 @@ class ProfilePageState extends State<ProfilePage> {
                                 child: TextField(
                                   maxLines: null,
                                   onTap: () {
-                                    Navigator.of(context).pushNamed("/qspinfo");
+                                    Navigator.of(context)
+                                        .pushNamed("/qspinfo")
+                                        .whenComplete(() {
+                                      ProfileController().saveData();
+                                    });
                                   },
                                   readOnly: true,
                                   keyboardType: TextInputType.number,
-                                  controller: ProfileController().getQSPController(),
+                                  controller:
+                                      ProfileController().getQSPController(),
                                   style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
+                                      color: Colors.white, fontSize: 18),
                                   decoration: InputDecoration(
                                       fillColor: Colors.white.withAlpha(40),
                                       filled: true,
-                                      hintStyle:
-                                          TextStyle(color: Colors.black45, fontSize: 16),
+                                      hintStyle: TextStyle(
+                                          color: Colors.black45, fontSize: 16),
                                       hintText:
                                           "Klick mich um ein QSP zu wählen!",
                                       enabledBorder: OutlineInputBorder(
@@ -179,26 +193,6 @@ class ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: MaterialButton(
-                            height: 70,
-                            minWidth: 150,
-                            color: Colors.blue,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20))),
-                            child: Text(
-                              "Speichern",
-                              style:
-                                  TextStyle(fontSize: 24, color: Colors.white),
-                            ),
-                            onPressed: () {
-                              ProfileController().saveData();
-                            }),
-                      ),
-                    )
                   ],
                 ),
               ),

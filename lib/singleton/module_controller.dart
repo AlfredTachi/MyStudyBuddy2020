@@ -1,26 +1,106 @@
+import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../local_database/local_database.dart';
+
 class ModuleController {
   static final ModuleController _instance = ModuleController._internal();
-  static List<Module> _selectedModules = new List<Module>();
-  static List<Module> _allModules = _generateModules();
+
+  factory ModuleController() => _instance;
 
   ModuleController._internal();
 
-  factory ModuleController() => _instance;
+  List<Module> _selectedModules;
+  List<Module> _allModules;
 
   //Getter
 
   List<Module> getSelectedModules() => _selectedModules;
   List<Module> getAllModules() => _allModules;
 
-  //Returns all Widgets from _selectedModules
-  List<Widget> getSelectedModulesWidgets() {
+  //Returns all selected Widgets
+  List<Widget> getAllSelectedModulesWidgets() {
     List<Widget> _widgets = new List<Widget>();
-    for (int i = 0; i < _selectedModules.length; i++) {
-      _widgets.add(_selectedModules[i].module());
+    List<Module> _modules = new List<Module>();
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.isSelected == true)
+        .toList();
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
     }
+    print(_widgets);
+    return _widgets;
+  }
+
+    //Returns QSP Widgets
+  List<Widget> getQSPModulesWidgets(String title) {
+    List<Widget> _widgets = new List<Widget>();
+    List<Module> _modules = new List<Module>();
+    if (title == "Security and Network") {
+      _modules = ModuleController()
+          .getAllModules()
+          .where((test) => test.qsp.contains("SN") && test.isDone == false)
+          .toList();
+    } else if (title == "Visual Computing") {
+      _modules = ModuleController()
+          .getAllModules()
+          .where((test) => test.qsp.contains("VC") && test.isDone == false)
+          .toList();
+    } else if (title == "Software Engineering and Development") {
+      _modules = ModuleController()
+          .getAllModules()
+          .where((test) => test.qsp.contains("SED") && test.isDone == false)
+          .toList();
+    }
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
+    }
+    return _widgets;
+  }
+
+  //Returns QSP Widgets
+  List<Widget> getWPFModulesWidgets() {
+    List<Widget> _widgets = new List<Widget>();
+    List<Module> _modules = new List<Module>();
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.qsp.contains("WPF") && test.isDone == false)
+        .toList();
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
+    }
+    return _widgets;
+  }
+
+  //Returns only not done Widgets for all Semester
+  List<Widget> getOnlyNotDoneSemesterModulesWidgets(int index) {
+    List<Widget> _widgets = new List<Widget>();
+    List<Module> _modules = new List<Module>();
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.semester == index && test.isDone == false)
+        .toList();
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
+    }
+
+    return _widgets;
+  }
+
+  //Returns all Widgets for all Semester
+  List<Widget> getAllSemesterModulesWidgets(int index) {
+    List<Widget> _widgets = new List<Widget>();
+    List<Module> _modules = new List<Module>();
+    _modules = ModuleController()
+        .getAllModules()
+        .where((test) => test.semester == index)
+        .toList();
+    for (var i = 0; i < _modules.length; i++) {
+      _widgets.add(_modules[i].module());
+    }
+
     return _widgets;
   }
 
@@ -34,19 +114,38 @@ class ModuleController {
   }
 
   //Setter
-  void addModule(Module _module) {
-    _selectedModules.add(_module);
+
+  void setModulesFromDatabase() async {
+    _allModules = await DBProvider.db.readAllModules();
   }
 
-  void removeModule(Module _module) {
-    _selectedModules.remove(_module);
-  }
-
-  static List<Module> _generateModules() {
-    List<Module> _modules = new List<Module>();
-    for (int i = 1; i <= 7; i++) {
-      _modules.add(Module(id: i, title: (i.toString() + ". M").toString()));
+  void addToAllModules(Module _module) {
+    int index = _allModules.indexWhere((module) => module.id == _module.id);
+    if (index == -1) {
+      _allModules.add(_module);
+      DBProvider.db.createModule(_module);
+    } else {
+      _allModules[index] = _module;
+      DBProvider.db.updateModule(_module);
     }
-    return _modules;
+  }
+
+  void removeFromAllModule(Module _module) {
+    DBProvider.db.deleteModule(_module.id);
+  }
+
+  void setModuleSelected(Module _module, bool isSelected) {
+    _module.setIsSelected(isSelected);
+    DBProvider.db.updateModule(_module);
+  }
+
+  void setModuleGrade(Module _module, double grade) {
+    _module.setIsDone(true);
+    _module.setGrade(grade);
+    DBProvider.db.updateModule(_module);
+  }
+
+  void removeSelectedModule(Module _module) {
+    _selectedModules.remove(_module);
   }
 }

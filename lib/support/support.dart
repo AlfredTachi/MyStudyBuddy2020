@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../drawer/drawer.dart';
 
 class Support extends StatefulWidget {
   @override
@@ -13,7 +12,6 @@ class SupportState extends State<Support> {
       appBar: AppBar(
         title: Text("Hilfe"),
       ),
-      drawer: OwnDrawer(),
       body: ListView(padding: EdgeInsets.zero, children: [
         ListTile(
           leading: Icon(Icons.help),

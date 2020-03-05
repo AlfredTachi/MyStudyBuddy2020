@@ -17,22 +17,22 @@ class _StaggeredViewState extends State<StaggeredViewSoftware> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
-                    child: Text("Software Engineering\nand Development",
-                        style: TextStyle(fontSize: 25)),
-                  ),
-                ],
+              FittedBox(
+                fit: BoxFit.cover,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 8, top: 8, right: 20),
+                  child: Text("Software Engineering and Development",
+                      style: TextStyle(fontSize: 25)),
+                ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                padding: EdgeInsets.only(top: 8),
                 child: Center(
                   child: Wrap(
                     direction: Axis.horizontal,
                     runSpacing: 5,
-                    children: ModuleController().getAllModulesWidgets(),
+                    children: ModuleController().getQSPModulesWidgets(
+                        "Software Engineering and Development"),
                   ),
                 ),
               ),

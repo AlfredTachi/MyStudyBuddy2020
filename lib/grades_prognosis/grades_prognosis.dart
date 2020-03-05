@@ -34,15 +34,15 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
                 child: Center(
                   child: Column(children: [
                     Text("Durchschnitt:", style: TextStyle(fontSize: 25)),
-                    FutureBuilder<double>(
-                      future: average(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Text("${snapshot.data.toDouble()}");
-                        } else
-                          return Text('keinen Durchschnitt');
-                      },
-                    )
+                    // FutureBuilder<double>(
+                    //   future: average(),
+                    //   builder: (context, snapshot) {
+                    //     if (snapshot.hasData) {
+                    //       return Text("${snapshot.data.toDouble()}");
+                    //     } else
+                    //       return Text('keinen Durchschnitt');
+                    //   },
+                    // )
                   ]),
                 ),
               )),
@@ -68,12 +68,12 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
                           padding: const EdgeInsets.only(left: 20.0),
                           child: Text("Worst Case:"),
                         ),
-                        Text(worstCase().toString()),
+                        // Text(worstCase().toString()),
                         Padding(
                           padding: const EdgeInsets.only(left: 80),
                           child: Text("Best Case:"),
                         ),
-                        Text(bestCase().toString())
+                        // Text(bestCase().toString())
                       ],
                     ),
                   )),
@@ -82,59 +82,62 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
         ));
   }
 
-  Future<double> average() async {
-    Future<double> myAverage;
-    var examResults = await db.getAllExamResults();
+  // Future<double> average() async {
+  //   Future<double> myAverage;
+  //   var examResults = await db.getAllExamResults();
 
-    myAverage = examResults.map((m) => m['Exams']).reduce((a, b) => a + b) /
-        examResults.length;
+  //   myAverage = examResults.map((m) => m['Exams']).reduce((a, b) => a + b) /
+  //       examResults.length;
 
-    return await myAverage;
-  }
+  //   return await myAverage;
+  // }
 
-  double bestCase() {
-    double myBestCase = 0;
-    double averageNow;
-    int temp;
 
-    if (ModuleController().getSelectedModules().length == null) {
-      temp = 0;
-    } else {
-      temp = ModuleController().getSelectedModules().length;
-    }
+//   double bestCase() {
+//     double myBestCase = 0;
+//     double averageNow;
+//     int temp;
 
-    average().then((val) => setState(() {
-          averageNow = val;
-        }));
-    if (averageNow == null) {
-      myBestCase = 0.0;
-    } else {
-      myBestCase = (averageNow + temp.toDouble()) / (temp + 1);
-    }
+//     if (ModuleController().getSelectedModules().length == null) {
+//       temp = 0;
+//     } else {
+//       temp = ModuleController().getSelectedModules().length;
+//     }
 
-    return myBestCase;
-  }
+//     average().then((val) => setState(() {
+//           averageNow = val;
+//         }));
+//     if (averageNow == null) {
+//       myBestCase = 0.0;
+//     } else {
+//       myBestCase = (averageNow + temp.toDouble()) / (temp + 1);
+//     }
 
-  double worstCase() {
-    double myWorstCase = 0;
+//     return myBestCase;
 
-    double averageNow;
-    int temp;
+//   }
 
-    if (ModuleController().getSelectedModules().length == null) {
-      temp = 0;
-    } else {
-      temp = ModuleController().getSelectedModules().length * 4;
-    }
+//   double worstCase() {
+//     double myWorstCase = 0;
 
-    average().then((val) => setState(() {
-          averageNow = val;
-        }));
-    if (averageNow == null) {
-      myWorstCase = 0.0;
-    } else {
-      myWorstCase = (averageNow + temp.toDouble()) / (temp + 1);
-    }
+//     double averageNow;
+//     int temp;
 
-return myWorstCase;
-}}
+//     if (ModuleController().getSelectedModules().length == null) {
+//       temp = 0;
+//     } else {
+//       temp = ModuleController().getSelectedModules().length * 4;
+//     }
+
+//     average().then((val) => setState(() {
+//           averageNow = val;
+//         }));
+//     if (averageNow == null) {
+//       myWorstCase = 0.0;
+//     } else {
+//       myWorstCase = (averageNow + temp.toDouble()) / (temp + 1);
+//     }
+
+// return myWorstCase;
+// }
+}

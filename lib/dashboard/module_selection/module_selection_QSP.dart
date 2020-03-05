@@ -20,7 +20,7 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("QSP-Auswahl"),
+        title: Text("QSP Auswahl"),
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -54,7 +54,7 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
                 : ImageIcon(AssetImage("assets/icons/QSP/Software_Icon.png"),
                     size: 30, color: setBottomNavigationBarIconColor()),
             title: Column(children: [
-              Text('Software Engineering', style: TextStyle(fontSize: 12)),
+              FittedBox(child: Text('Software Engineering ', style: TextStyle(fontSize: 12))),
               Center(child: Text('and Development', style: TextStyle(fontSize: 12)))
             ]),
           ),

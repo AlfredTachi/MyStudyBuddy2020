@@ -1,4 +1,3 @@
-import 'package:MyStudyBuddy2/drawer/drawer.dart';
 import 'package:MyStudyBuddy2/evaluation/evaluation.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +16,6 @@ class ModuleListState extends State<ModuleList>{
  
     return Scaffold(
       appBar: AppBar(title: Text("Professoren")),
-      drawer: OwnDrawer(),
       body: 
       MaterialButton(
              height: 50.0,

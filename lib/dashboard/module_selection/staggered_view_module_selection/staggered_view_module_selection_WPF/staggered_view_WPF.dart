@@ -12,20 +12,22 @@ class _StaggeredViewState extends State<StaggeredViewWPF> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-            child: Center(
-              child: Wrap(
-                direction: Axis.horizontal,
-                runSpacing: 5,
-                children: ModuleController().getAllModulesWidgets(),
+      body: SingleChildScrollView(
+              child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(top: 8, bottom: 8, left: 8, right: 8),
+              child: Center(
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  runSpacing: 5,
+                  children: ModuleController().getWPFModulesWidgets(),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

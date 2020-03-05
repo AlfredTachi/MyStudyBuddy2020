@@ -1,79 +1,52 @@
-import 'package:MyStudyBuddy2/drawer/drawer.dart';
-import 'package:MyStudyBuddy2/planer/planer_list.dart';
-import 'package:MyStudyBuddy2/planer/upcoming_events.dart';
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
-class Planer extends StatefulWidget{
-  const Planer({ Key key }) : super(key: key);
+class Planer extends StatefulWidget {
+  const Planer({Key key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
-
     return _PlanerState();
   }
 }
 
-class _PlanerState extends State<Planer>with SingleTickerProviderStateMixin{
+class _PlanerState extends State<Planer> with SingleTickerProviderStateMixin {
+  get http => null;
 
-final List<Tab> myTabs = <Tab>[
-    Tab(text: 'Deine Termine'),
-    Tab(text: 'Aktuelles'),
-  ];
-
-TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(vsync: this, length: myTabs.length);
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('LSF Frontend'),
+      ),
+      body: FutureBuilder(
+        future: loadPage(),
+        builder: (BuildContext context, AsyncSnapshot snap) {
+          if (snap.connectionState == ConnectionState.done) {
+            return WebView(
+              initialUrl: 'https://campus.hs-worms.de/apps/WhatsUp/index.html',
+              javascriptMode: JavascriptMode.unrestricted,
+            );
+          } else if (snap.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                  child: Text(
+                    "Es gibt ein Problem bei der Verbindung. Prüfe deine Internetverbindung",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            );
+          }
+        },
+      ),
+    );
   }
 
-  @override
-  void dispose() {
-   _tabController.dispose();
-   super.dispose();
- }
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(title:Text('Termin Planer'),
-      bottom: TabBar(controller:_tabController ,tabs:myTabs)),
-      drawer: OwnDrawer(),
-      body:TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-          PlanerList(),
-          EventList()
-        ],
-      )
-
-    );
-  }}
-
-// }
-// final makeBody = Container(
-//       child: ListView.builder(
-//         scrollDirection: Axis.vertical,
-//         shrinkWrap: true,
-//         itemCount: 10,
-//         itemBuilder: (BuildContext context, int index) {
-//           return makeCard;
-//         },
-//       ),
-//     );
-//     final makeCard = Card(
-//       elevation: 8.0,
-//       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-//       child: Container(
-//         decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
-//         child: makeListTile,
-//       ),
-//     );
-
-    // final makeListTile = ListTile(
-
-    //     contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-    //     leading: Container(
-    //       child:Text('test')
-    //     ),
-    //     trailing: Icon(Icons.favorite),
-    //     );
+  Future<void> loadPage() async {
+    await http.get('https://campus.hs-worms.de/apps/WhatsUp/index.html');
+  }
+}
