@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 import 'package:MyStudyBuddy2/study_quiz/resultpage.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -89,7 +90,7 @@ class _QuizpageState extends State<Quizpage> {
   void randArray() {
     var distinctIds = [];
     var rand = new Random();
-    for (int i = 0;;) {
+    while (true) {
       distinctIds.add(rand.nextInt(10));
       randomArray = distinctIds.toSet().toList();
       if (randomArray.length < 10) {
@@ -133,10 +134,12 @@ class _QuizpageState extends State<Quizpage> {
         }
         showtimer = timer.toString();
       });
-    });
+    }
+    );
   }
 
   void nextquestion() {
+    isChecked = true;
     canceltimer = false;
     timer = 30;
     setState(() {
@@ -155,7 +158,7 @@ class _QuizpageState extends State<Quizpage> {
     });
     starttimer();
   }
-
+ bool isChecked = true;
   void checkanswer(String k) {
     if (mydata[2][i.toString()] == mydata[1][i.toString()][k]) {
       marks = marks + 1;
@@ -164,13 +167,14 @@ class _QuizpageState extends State<Quizpage> {
     } else {
       colortoshow = wrong;
     }
+    isChecked = false;
     setState(() {
       // applying the changed color to the particular button that was selected
       btncolor[k] = colortoshow;
       canceltimer = true;
-    });
+    });  
     // changed timer duration to 1 second
-    Timer(Duration(seconds: 1), nextquestion);
+    Timer(Duration(seconds: 1),nextquestion);
   }
 
   generateButtons() {
@@ -188,7 +192,7 @@ class _QuizpageState extends State<Quizpage> {
         horizontal: 20.0,
       ),
       child: MaterialButton(
-        onPressed: () => checkanswer(k),
+        onPressed: () => isChecked ? checkanswer(k) : isChecked = false,
         child: AutoSizeText(mydata[1][i.toString()][k],
             style: TextStyle(
               fontSize: 16.0,
