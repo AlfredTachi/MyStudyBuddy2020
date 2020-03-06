@@ -318,6 +318,7 @@ Future<int> getExamResultsFromLSFServer(
       }
       if (_grade == null) {
         _grade = 0.0;
+        _passed = false;
       } else if (_grade >= 1.0 && _grade <= 4.0) {
         _passed = true;
       } else {
