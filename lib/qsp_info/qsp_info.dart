@@ -15,6 +15,14 @@ class QSPInfo extends StatefulWidget {
 }
 
 class QSPInfoState extends State<QSPInfo> {
+
+
+  @override
+  void initState() {
+    super.initState();
+    qspModule();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
