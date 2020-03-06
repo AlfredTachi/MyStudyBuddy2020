@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:math';
 import 'package:MyStudyBuddy2/study_quiz/resultpage.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-
 class Getjson extends StatelessWidget {
   // accept the langname as a parameter
 
@@ -23,13 +21,11 @@ class Getjson extends StatelessWidget {
       case "2. Semester":
         return assettoload = "assets/2Sem.json";
       case "3. Semester":
-        return assettoload = "assets/java.json";
+        return assettoload = "assets/3Sem.json";
       case "4. Semester":
-        return assettoload = "assets/js.json";
-      case "5. Semester":
-        return assettoload = "assets/cpp.json";
+        return assettoload = "assets/4Sem.json";
       default:
-        return assettoload = "assets/linux.json";
+        return assettoload = "assets/5Sem.json";
     }
   }
 
@@ -179,7 +175,6 @@ class _QuizpageState extends State<Quizpage> {
 
   generateButtons() {
     var mydatatemp = mydata[1][i.toString()];
-    print(mydatatemp.length);
     var keys = ['a', 'b', 'c', 'd'];
     for (int k = 0; k < mydatatemp.length; k++) {
       choicebutton(keys[k]);
@@ -213,6 +208,7 @@ class _QuizpageState extends State<Quizpage> {
   @override
   Widget build(BuildContext context) {
     var mydatatemp = mydata[1][i.toString()];
+    var mydatatempcategory = mydata[3];
     var keys = ['a', 'b', 'c', 'd'];
     return WillPopScope(
       onWillPop: () {
@@ -253,14 +249,23 @@ class _QuizpageState extends State<Quizpage> {
                 alignment: Alignment.bottomLeft,
                 child: Row(
                   children: <Widget>[
-                    Text(
-                      "Frage: " +
-                          j.toString() +
-                          "/" +
-                          randomArray.length.toString(),
-                      style: TextStyle(
-                        fontSize: 16.0,
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0)
                       ),
+                    Text(
+                      "Frage: " +j.toString()+"/"+randomArray.length.toString(),
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text("    Kategorie: " + mydatatempcategory[i.toString()],
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold
+                      ),
+                      textAlign: TextAlign.right,
                     ),
                   ],
                 ),
@@ -274,7 +279,8 @@ class _QuizpageState extends State<Quizpage> {
                 child: Text(
                   mydata[0][i.toString()],
                   style: TextStyle(
-                    fontSize: 16.0,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500
                   ),
                 ),
               ),
