@@ -15,7 +15,6 @@ class _HomepageState extends State<Homepage> {
     "Mit diesem Quiz könnt ihr euer Wissen aus dem 3. Semster testen.",
     "Mit diesem Quiz könnt ihr euer Wissen aus dem 4. Semster testen.",
     "Mit diesem Quiz könnt ihr euer Wissen aus dem 5. Semster testen.",
-    "Mit diesem Quiz könnt ihr euer Wissen aus dem 6. Semster testen.",
   ];
 
   Widget customcard(String langname,  String des){
@@ -96,9 +95,7 @@ class _HomepageState extends State<Homepage> {
           customcard("2. Semester", des[1]),
           customcard("3. Semester", des[2]),
           customcard("4. Semester", des[3]),
-          customcard("5. Semester", des[4]),
-          customcard("6. Semester", des[5]),
-          
+          customcard("5. Semester", des[4]),          
         ],
       ),
     );
