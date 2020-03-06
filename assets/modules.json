@@ -649,28 +649,6 @@
     "semester": null
   },
   {
-    "id": 143,
-    "code": "PP1",
-    "title": "Praktische Projektarbeit I",
-    "grade": null,
-    "isDone": false,
-    "isSelected": false,
-    "qsp": "WPF",
-    "cp": 6,
-    "semester": null
-  },
-  {
-    "id": 153,
-    "code": "PP2",
-    "title": "Praktische Projektarbeit II",
-    "grade": null,
-    "isDone": false,
-    "isSelected": false,
-    "qsp": "WPF",
-    "cp": 6,
-    "semester": null
-  },
-  {
     "id": 601,
     "code": "PRA1",
     "title": "Praxismodul I",
