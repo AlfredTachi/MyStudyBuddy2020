@@ -47,7 +47,9 @@ class ModuleController {
         .toList();
 
     for (var i = 0; i < _modules.length; i++) {
-      _grades.add(_modules[i].grade);
+      if (_modules[i].grade != 0.0) {
+        _grades.add(_modules[i].grade);
+      }
     }
 
     return _grades;
