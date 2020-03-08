@@ -40,7 +40,7 @@ class _HomepageState extends State<Homepage> {
                   ],
                 )),
             height: MediaQuery.of(context).size.height * 0.2,
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: MediaQuery.of(context).size.width * 0.9,
             child: Column(
               children: <Widget>[
                 Padding(
@@ -81,33 +81,30 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-          child: Scaffold(
+      child: Scaffold(
         body: Column(
           children: <Widget>[
-         
-                        Align(
-                alignment: Alignment.topLeft,
-                child: OutlineButton(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 3, bottom: 3),
-                      child: Icon(
-                        Icons.arrow_back,
-                        size: 36,
-                      ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: OutlineButton(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 3, bottom: 3),
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: 36,
                     ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
-                    )),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    }),
-              ),
-            
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  )),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }),
+            ),
             Expanded(
-              
-                        child: SingleChildScrollView(
+              child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     customcard("1. Semester", des[0]),
