@@ -1,8 +1,7 @@
-import 'package:MyStudyBuddy2/local_database/local_database.dart';
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
-import '../local_database/local_database.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -97,36 +96,28 @@ class DashboardState extends State<Dashboard> {
                         Container(
                           padding: EdgeInsets.only(left: 5, right: 5),
                           alignment: Alignment.topLeft,
-                          child: Center(
-/*                                   child: FutureBuilder(
-                                      future: getFutureData(),
-                                      builder: (BuildContext context,
-                                          AsyncSnapshot snapshot) {
-                                        // if (snapshot.hasData) {
-                                        //   return Center(
-                                        //     child: Wrap(
-                                        //         direction: Axis.horizontal,
-                                        //         spacing: 0,
-                                        //         runSpacing: 5,
-                                        //         children: getFutureData()),
-                                        //   );
-                                        // } else { 
-                                        return */
-                            child: Center(
-                              child: Align(
-                                heightFactor: 5,
-                                child: FittedBox(
-                                  child: Text(
-                                    "Du hast zurzeit keine Module geplant!",
-                                    style: TextStyle(color: Colors.black45),
+                          child: (ModuleController()
+                                      .getSelectedModules()
+                                      .length !=
+                                  0)
+                              ? Center(
+                                  child: Wrap(
+                                      direction: Axis.horizontal,
+                                      spacing: 0,
+                                      runSpacing: 5,
+                                      children: ModuleController().getAllSelectedModulesWidgets()),
+                                )
+                              : Center(
+                                  child: Align(
+                                    heightFactor: 5,
+                                    child: FittedBox(
+                                      child: Text(
+                                        "Du hast zurzeit keine Module geplant!",
+                                        style: TextStyle(color: Colors.black45),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              //);
-                              // }
-                              // },
-                            ),
-                          ),
                         ),
                       ],
                     ),
@@ -138,13 +129,6 @@ class DashboardState extends State<Dashboard> {
         ),
       ),
     );
-  }
-
-  getFutureData() async {
-    ///TODO Dashboard fixen
-    var module = await DBProvider.db.readModule(151);
-    String title = module.title;
-    return title;
   }
 
   updateView() {

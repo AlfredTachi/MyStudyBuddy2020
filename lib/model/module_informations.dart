@@ -16,7 +16,7 @@ List<Widget> infomationTile(Module module) {
     module.title,
     module.getGrade().toString(),
     module.id.toString(),
-    "6"
+    module.cp.toString()
   ];
 
   for (int i = 0; i < title.length; i++) {

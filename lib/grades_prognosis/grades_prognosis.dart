@@ -56,9 +56,8 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        
                         Padding(
-                          padding: const EdgeInsets.only(top:10.0),
+                          padding: const EdgeInsets.only(top: 10.0),
                           child: Text("Worst Case:"),
                         ),
                         Text(worstCase().toString()),
@@ -111,9 +110,12 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
       myBestCase = double.parse(temp.toStringAsFixed(2));
     } catch (err) {
       print(err);
+      return 0.0;
     }
-
-    return myBestCase;
+    if (myBestCase.isNaN) {
+      return 0.0;
+    } else
+      return myBestCase;
   }
 
   double worstCase() {
@@ -133,8 +135,11 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
       myWorstCase = double.parse(temp.toStringAsFixed(2));
     } catch (err) {
       print(err);
+      return 0.0;
     }
-
-    return myWorstCase;
+    if (myWorstCase.isNaN) {
+      return 0.0;
+    } else
+      return myWorstCase;
   }
 }

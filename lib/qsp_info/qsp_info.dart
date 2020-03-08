@@ -1,8 +1,11 @@
 import 'package:MyStudyBuddy2/link/link.dart';
+import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:MyStudyBuddy2/qsp_info/qsp_info_icons.dart';
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:validators/validators.dart';
 
 class QSPInfo extends StatefulWidget {
   QSPInfo();
@@ -12,6 +15,14 @@ class QSPInfo extends StatefulWidget {
 }
 
 class QSPInfoState extends State<QSPInfo> {
+
+
+  @override
+  void initState() {
+    super.initState();
+    qspModule();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +37,8 @@ class QSPInfoState extends State<QSPInfo> {
                   "Software Engineering and Development (SED)",
                   "Die Module dieses Qualifikationsschwerpunkts vertiefen klassische Informatik-Themen," +
                       "die auf die professionelle Konstruktion komplexer Software-Anwendungen vorbereiten.",
-                  3 / 5,
-                  "3/5",
+                  ProfileController().getSED() / 5,
+                  ProfileController().getSED().toString() + "/5",
                   "Für mehr Infos hier klicken",
                   "https://www.hs-worms.de/software-konstruktion/"),
               qspdetails(
@@ -35,8 +46,8 @@ class QSPInfoState extends State<QSPInfo> {
                   "Visual Computing (VC)",
                   "Die Medieninformatik konzentriert sich auf die Teile der Informatik und ihres Umfelds," +
                       "die in direktem Kontakt zu Benutzer/innen, also zu Menschen stehen.",
-                  2 / 5,
-                  "2/5",
+                  ProfileController().getVC() / 5,
+                  ProfileController().getVC().toString() + "/5",
                   "Für mehr Infos hier klicken",
                   "https://www.hs-worms.de/medieninformatik/"),
               qspdetails(
@@ -45,8 +56,8 @@ class QSPInfoState extends State<QSPInfo> {
                   "Im Qualifikationsschwerpunkt „Cloud und Internet“ dreht es sich verstärkt um Themen der Infrastruktur, " +
                       "d.h. insbesondere Rechnersysteme und Netzwerke,die zur Bereitstellung der heutigen netzwerkbasierten" +
                       "Services erforderlich sind.",
-                  5 / 5,
-                  "5/5",
+                  ProfileController().getNC() / 5,
+                  ProfileController().getNC().toString() + "/5",
                   "Für mehr Infos hier klicken",
                   "https://www.hs-worms.de/cloud-internet/")
             ],
@@ -166,5 +177,26 @@ class QSPInfoState extends State<QSPInfo> {
         ),
       ),
     );
+  }
+
+  void qspModule() {
+    int sed = 0;
+    int vc = 0;
+    int nc = 0;
+    List<Module> _modules = ModuleController().getAllDoneModules();
+    for (var i = 0; i < _modules.length; i++) {
+      if (_modules[i].qsp.contains("SED")) {
+        sed++;
+      }
+      if (_modules[i].qsp.contains("VC")) {
+        vc++;
+      }
+      if (_modules[i].qsp.contains("NC")) {
+        nc++;
+      }
+    }
+    ProfileController().setSED(sed);
+    ProfileController().setVC(vc);
+    ProfileController().setNC(nc);
   }
 }
