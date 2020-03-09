@@ -17,7 +17,7 @@ class ProfileController {
   TextEditingController _dualStudyCtrl = TextEditingController();
 
   int _earnedCreditPoints = 0;
-  int _maxCreditPoints = 210;
+  int _maxCreditPoints = 180;
   int _studyTypeIndex = 0;
 
   int _sed = 0;

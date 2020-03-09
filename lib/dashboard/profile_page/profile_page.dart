@@ -9,12 +9,8 @@ class ProfilePage extends StatefulWidget {
 class ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
-    try {
-      ProfileController().loadData();
-    } catch (ex) {
-      print("Failed to load shared preference with following error: \n" + ex);
-    }
     ProfileController().loadData();
+    ProfileController().setStudyType(ProfileController().getStudyTypeIndex());
     super.initState();
   }
 
@@ -255,6 +251,9 @@ class _DualStudyDialogState extends State<_DualStudyDialog> {
   void getCorrectGroupValue() {
     ProfileController().loadData();
     _groupValue = ProfileController().getStudyTypeIndex();
+    if (_groupValue == null) {
+      _groupValue = 0;
+    }
   }
 
   @override
