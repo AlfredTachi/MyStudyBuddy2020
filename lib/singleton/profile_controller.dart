@@ -102,7 +102,7 @@ class ProfileController {
     String semesterAnzahl;
     String cry;
     if(getEarnedCP()<30){
-       cry = "hallo";
+       cry = "Hallo";
      }else{
        cry = "Yeaaah!";
      }
