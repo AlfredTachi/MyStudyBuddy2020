@@ -1,3 +1,4 @@
+import 'package:achievement_view/achievement_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -95,5 +96,40 @@ class ProfileController {
     _qspCtrl.text = prefs.getString("qsp");
     _dualStudyCtrl.text = prefs.getString("studyType");
     _studyTypeIndex = prefs.getInt("studyTypeIndex");
+  }
+
+  void showAchievement(BuildContext context){
+    String semesterAnzahl;
+    String cry;
+    if(getEarnedCP()<30){
+       cry = "hallo";
+     }else{
+       cry = "Yeaaah!";
+     }
+
+     if(getEarnedCP() >=30 && getEarnedCP()<60){
+       semesterAnzahl = "Du bist im 2. Semester";
+     }else if(getEarnedCP() >=60 && getEarnedCP()<90){
+       semesterAnzahl = "Du bist im 3. Semester";
+     }else if(getEarnedCP() >=90 && getEarnedCP()<120){
+       semesterAnzahl = "Du bist im 4. Semester";
+     }else if(getEarnedCP() >=120 && getEarnedCP()<150){
+       semesterAnzahl = "Du bist im 5. Semester";
+     }else if(getEarnedCP() >=150 && getEarnedCP()<180){
+       semesterAnzahl = "Du bist im 6. Semester";
+     }else if(getEarnedCP() >=180){
+       semesterAnzahl = "Du bist im 7. Semester";
+     }else if(getEarnedCP()<30){
+       semesterAnzahl = "Du bist im 1. Semester";
+     }
+
+    AchievementView(
+        context,
+        title: cry,
+        subTitle: semesterAnzahl,
+        listener: (status){
+          print(status);
+        }
+    )..show();
   }
 }
