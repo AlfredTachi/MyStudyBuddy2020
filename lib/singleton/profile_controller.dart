@@ -71,6 +71,14 @@ class ProfileController {
     _nc = _val;
   }
 
+  void adjustMaxCP() {
+    if (_studyTypeIndex == 0) {
+      _maxCreditPoints = 180;
+    } else if (_studyTypeIndex > 0) {
+      _maxCreditPoints = 210;
+    }
+  }
+
   void saveData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("infNummer", _infCtrl.text);

@@ -333,6 +333,7 @@ class _DualStudyDialogState extends State<_DualStudyDialog> {
     setState(() {
       _groupValue = _val;
       ProfileController().setStudyType(_val);
+      ProfileController().adjustMaxCP();
       ProfileController().saveData();
     });
   }
