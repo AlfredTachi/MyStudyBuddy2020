@@ -14,9 +14,11 @@ class ProfileController {
   TextEditingController _infCtrl = TextEditingController();
   TextEditingController _matrikelCtrl = TextEditingController();
   TextEditingController _qspCtrl = TextEditingController();
+  TextEditingController _dualStudyCtrl = TextEditingController();
 
   int _earnedCreditPoints = 0;
-  int _maxCreditPoints = 210;
+  int _maxCreditPoints = 180;
+  int _studyTypeIndex = 0;
 
   int _sed = 0;
   int _vc = 0;
@@ -26,19 +28,31 @@ class ProfileController {
   TextEditingController getInfNumberController() => _infCtrl;
   TextEditingController getMatrikelController() => _matrikelCtrl;
   TextEditingController getQSPController() => _qspCtrl;
+  TextEditingController getDualStudyController() => _dualStudyCtrl;
 
   int getEarnedCP() => _earnedCreditPoints;
   int getMaxCP() => _maxCreditPoints;
+  int getStudyTypeIndex() => _studyTypeIndex;
 
   int getSED() => _sed;
   int getVC() => _vc;
   int getNC() => _nc;
 
-  String getProgressText() {
-    return _earnedCreditPoints.toString() +
-        " / " +
-        _maxCreditPoints.toString() +
-        " CP";
+  String getProgressText() =>
+      _earnedCreditPoints.toString() +
+      " / " +
+      _maxCreditPoints.toString() +
+      " CP";
+
+  void setStudyType(int type) {
+    if (type == 0) {
+      _dualStudyCtrl.text = "Ohne Praxissemester (6. Semester)";
+    } else if (type == 1) {
+      _dualStudyCtrl.text = "Mit Praxissemester (7. Semester)";
+    } else {
+      _dualStudyCtrl.text = "Duales Studium";
+    }
+    _studyTypeIndex = type;
   }
 
   void setEarnedCP(int _cp) {
@@ -57,11 +71,21 @@ class ProfileController {
     _nc = _val;
   }
 
+  void adjustMaxCP() {
+    if (_studyTypeIndex == 0) {
+      _maxCreditPoints = 180;
+    } else if (_studyTypeIndex > 0) {
+      _maxCreditPoints = 210;
+    }
+  }
+
   void saveData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("infNummer", _infCtrl.text);
     prefs.setString("matrikelNummer", _matrikelCtrl.text);
     prefs.setString("qsp", _qspCtrl.text);
+    prefs.setString("studyType", _dualStudyCtrl.text);
+    prefs.setInt("studyTypeIndex", _studyTypeIndex);
   }
 
   void loadData() async {
@@ -69,5 +93,7 @@ class ProfileController {
     _infCtrl.text = prefs.getString("infNummer");
     _matrikelCtrl.text = prefs.getString("matrikelNummer");
     _qspCtrl.text = prefs.getString("qsp");
+    _dualStudyCtrl.text = prefs.getString("studyType");
+    _studyTypeIndex = prefs.getInt("studyTypeIndex");
   }
 }
