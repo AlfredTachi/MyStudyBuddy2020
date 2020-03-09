@@ -10,6 +10,12 @@ class Dashboard extends StatefulWidget {
 
 class DashboardState extends State<Dashboard> {
   @override
+  void initState() {
+    ProfileController().loadData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double spacing = MediaQuery.of(context).size.width / 1.8;
     return SafeArea(
@@ -105,7 +111,8 @@ class DashboardState extends State<Dashboard> {
                                       direction: Axis.horizontal,
                                       spacing: 0,
                                       runSpacing: 5,
-                                      children: ModuleController().getAllSelectedModulesWidgets()),
+                                      children: ModuleController()
+                                          .getAllSelectedModulesWidgets()),
                                 )
                               : Center(
                                   child: Align(

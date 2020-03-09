@@ -31,7 +31,10 @@ class ProfileController {
   TextEditingController getDualStudyController() => _dualStudyCtrl;
 
   int getEarnedCP() => _earnedCreditPoints;
-  int getMaxCP() => _maxCreditPoints;
+  int getMaxCP() {
+    adjustMaxCP();
+    return _maxCreditPoints;
+  }
   int getStudyTypeIndex() => _studyTypeIndex;
 
   int getSED() => _sed;
@@ -86,6 +89,7 @@ class ProfileController {
     prefs.setString("qsp", _qspCtrl.text);
     prefs.setString("studyType", _dualStudyCtrl.text);
     prefs.setInt("studyTypeIndex", _studyTypeIndex);
+    print("Saved!");
   }
 
   void loadData() async {
@@ -95,5 +99,9 @@ class ProfileController {
     _qspCtrl.text = prefs.getString("qsp");
     _dualStudyCtrl.text = prefs.getString("studyType");
     _studyTypeIndex = prefs.getInt("studyTypeIndex");
+    adjustMaxCP();
+    print("Loaded!");
+    print(_dualStudyCtrl.text);
+    print(_studyTypeIndex);
   }
 }
