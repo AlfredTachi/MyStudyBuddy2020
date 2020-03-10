@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/dialogs/module_options_dialog.dart';
 import 'package:MyStudyBuddy2/exam_results/add_grade.dart';
 import 'package:MyStudyBuddy2/model/module_informations.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
@@ -120,100 +121,12 @@ class ModuleState extends State<Module> {
               DBProvider.db.deleteModule(widget.properties.id);
               Get.toNamed("/modulSelectionWPF");
             } else {
-              if (widget.properties.isSelected) {
-                Get.dialog(AlertDialog(
-                  contentPadding: EdgeInsets.all(8),
-                  content: SingleChildScrollView(
-                    child: ListBody(children: <Widget>[
-                      Text(
-                        widget.properties.title,
-                        style: TextStyle(fontSize: 25),
-                      ),
-                      FlatButton(
-                          child: Text("Modul Informationen"),
-                          onPressed: () {
-                            moduleInformations(widget);
-                          }),
-                      FlatButton(
-                        child: Text("Note Eintragen"),
-                        onPressed: () {
-                          addGrade(widget);
-                        },
-                      ),
-                      FlatButton(
-                        child: Text("Modul abwählen"),
-                        onPressed: () {
-                          widget.properties.isSelected = false;
-                          if (widget.properties.qsp.contains("SN") ||
-                              widget.properties.qsp.contains("VC") ||
-                              widget.properties.qsp.contains("SED")) {
-                            ModuleController().replaceQSP(widget);
-                            ModuleController().removeSelectedModule(widget);
-                            ModuleController().removeReplacedQSPModule(widget);
-                            ModuleController().updateModule(widget);
-                          } else if (widget.properties.qsp.contains("WPF")) {
-                            ModuleController().replaceWPF(widget);
-                            ModuleController().removeSelectedModule(widget);
-                            ModuleController().removeReplacedWPFModule(widget);
-                            ModuleController().updateModule(widget);
-                          } else {
-                            ModuleController().removeSelectedModule(widget);
-                            ModuleController().updateModule(widget);
-                          }
-                          Get.back();
-                        },
-                      ),
-                    ]),
-                  ),
-                ));
-              } else {
-                Get.dialog(
-                  AlertDialog(
-                    contentPadding: EdgeInsets.all(8),
-                    content: SingleChildScrollView(
-                      child: ListBody(
-                        children: <Widget>[
-                          Text(
-                            widget.properties.title,
-                            style: TextStyle(fontSize: 25),
-                          ),
-                          FlatButton(
-                              child: Text("Modul Informationen"),
-                              onPressed: () {
-                                moduleInformations(widget);
-                              }),
-                          FlatButton(
-                              child: Text("Note Eintragen"),
-                              onPressed: () {
-                                addGrade(widget);
-                              }),
-                          FlatButton(
-                            child: Text("Modul Wählen"),
-                            onPressed: () {
-                              widget.properties.isSelected = true;
-                              if (widget.properties.qsp.contains("SN") ||
-                                  widget.properties.qsp.contains("VC") ||
-                                  widget.properties.qsp.contains("SED")) {
-                                ModuleController().replaceQSPPlaceholder(widget);
-                                ModuleController().addSelectedModule(widget);
-                                ModuleController().updateModule(widget);
-                              } else if (widget.properties.qsp.contains("WPF")) {
-                                ModuleController().replaceWPFPlaceholder(widget);
-                                ModuleController().addSelectedModule(widget);
-                                ModuleController().updateModule(widget);
-                              } else {
-                                ModuleController().addSelectedModule(widget);
-                                ModuleController().updateModule(widget);
-                              }
-                              Get.back();
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }
+              return showDialog(
+                context: context,
+                child: ModuleOptionsDialog(widget),
+              ).whenComplete(() {
+                setState(() {});
+              });
             }
           },
           child: Column(
