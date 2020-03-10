@@ -11,8 +11,6 @@ import 'package:html/dom.dart' as dom;
 
 import '../local_database/local_database.dart';
 import '../singleton/module_controller.dart';
-import '../singleton/module_controller.dart';
-import '../singleton/module_controller.dart';
 
 class Module {
   int id;
