@@ -14,7 +14,10 @@ class ModuleController {
   ModuleController._internal();
 
   List<Module> _selectedModules = new List<Module>();
-  Module _replacedModules;
+  List<Module> _replacedQSPModules = new List<Module>();
+  Module _backupQSPPlaceHolder;
+  List<Module> _replacedWPFModules = new List<Module>();
+  Module _backupWPFPlaceHolder;
   List<Module> _allModules;
 
   //Getter
@@ -179,18 +182,31 @@ class ModuleController {
     return sum;
   }
 
-  void replacePlaceholder(Module _module) {
-    _replacedModules.id = _module.id;
-    _replacedModules.title = _module.title;
-    _replacedModules.code = _module.code;
-    _replacedModules.grade = _module.grade;
-    _replacedModules.isDone = _module.isDone;
-    _replacedModules.isSelected = _module.isSelected;
-    _replacedModules.qsp = _module.qsp;
-    _replacedModules.cp = _module.cp;
-    updateModule(_replacedModules);
+  void replaceQSPPlaceholder(Module _module) {
+    _module.semester = _backupQSPPlaceHolder.semester;
+    removeFromAllModule(_backupQSPPlaceHolder);
   }
 
+  void replaceQSP(Module _module) {
+    int index = _replacedQSPModules
+        .indexWhere((module) => module.semester == _module.semester);
+    _allModules.add(_replacedQSPModules[index]);
+    DBProvider.db.createModule(_replacedQSPModules[index]);
+    _module.semester = null;
+  }
+
+  void replaceWPFPlaceholder(Module _module) {
+    _module.semester = _backupWPFPlaceHolder.semester;
+    removeFromAllModule(_backupWPFPlaceHolder);
+  }
+
+  void replaceWPF(Module _module) {
+    int index = _replacedWPFModules
+        .indexWhere((module) => module.semester == _module.semester);
+    _allModules.add(_replacedWPFModules[index]);
+    DBProvider.db.createModule(_replacedWPFModules[index]);
+    _module.semester = null;
+  }
   //Setter
 
   void setModulesFromDatabase() async {
@@ -211,6 +227,8 @@ class ModuleController {
   }
 
   void removeFromAllModule(Module _module) {
+    int index = _allModules.indexWhere((module) => module.id == _module.id);
+    _allModules.removeAt(index);
     DBProvider.db.deleteModule(_module.id);
   }
 
@@ -220,12 +238,24 @@ class ModuleController {
     DBProvider.db.updateModule(_allModules[index]);
   }
 
-  void addReplacedModule(Module _module) {
-    _replacedModules = _module;
+  void addReplacedQSPModule(Module _module) {
+    _replacedQSPModules.add(_module);
+    _backupQSPPlaceHolder = _module;
   }
 
-  void removeReplacedModule(Module _module) {
-    _replacedModules = _module;
+  void removeReplacedQSPModule() {
+    _replacedQSPModules = null;
+    _backupQSPPlaceHolder = null;
+  }
+
+  void addReplacedWPFModule(Module _module) {
+    _replacedWPFModules.add(_module);
+    _backupWPFPlaceHolder = _module;
+  }
+
+  void removeReplacedWPFModule() {
+    _replacedWPFModules = null;
+    _backupWPFPlaceHolder = null;
   }
 
   void addSelectedModule(Module _module) {
