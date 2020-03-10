@@ -32,7 +32,6 @@ if (keystorePropertiesFile.exists()) {
 }else{
     println ("File not found")
 }
-
 android {
     compileSdkVersion 28
 
@@ -46,7 +45,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "de.hs_worms.modulmanager"
+        applicationId "com.example.MyStudyBuddy2"
         minSdkVersion 25
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
@@ -62,16 +61,16 @@ android {
            storePassword keystoreProperties['storePassword']
        }
    }
-buildTypes {
-    release {
-        if (keystorePropertiesFile.exists()) {
+    buildTypes {
+        release {
+                 if (keystorePropertiesFile.exists()) {
             signingConfig signingConfigs.release
             println "Signing with key.properties"
         } else {
             println "KeystorePropertiesFile does not exist!"
         }
+        }
     }
-}
 }
 
 flutter {
