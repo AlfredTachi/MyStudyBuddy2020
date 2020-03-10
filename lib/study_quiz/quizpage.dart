@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 import 'package:MyStudyBuddy2/study_quiz/resultpage.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+
 class Getjson extends StatelessWidget {
   // accept the langname as a parameter
 
@@ -88,12 +88,13 @@ class _QuizpageState extends State<Quizpage> {
   var randomArray;
 
   void randArray() {
+    var mydatatemp = mydata[0];
     var distinctIds = [];
     var rand = new Random();
     while (true) {
-      distinctIds.add(rand.nextInt(10));
+      distinctIds.add(rand.nextInt(mydatatemp.length));
       randomArray = distinctIds.toSet().toList();
-      if (randomArray.length < 10) {
+      if (randomArray.length < mydatatemp.length) {
         continue;
       } else {
         break;
@@ -139,11 +140,12 @@ class _QuizpageState extends State<Quizpage> {
   }
 
   void nextquestion() {
+    var mydatatemp = mydata[0];
     isChecked = true;
     canceltimer = false;
     timer = 30;
     setState(() {
-      if (j < 10) {
+      if (j < mydatatemp.length) {
         i = randomArray[j];
         j++;
       } else {
@@ -175,14 +177,6 @@ class _QuizpageState extends State<Quizpage> {
     });  
     // changed timer duration to 1 second
     Timer(Duration(seconds: 1),nextquestion);
-  }
-
-  generateButtons() {
-    var mydatatemp = mydata[1][i.toString()];
-    var keys = ['a', 'b', 'c', 'd'];
-    for (int k = 0; k < mydatatemp.length; k++) {
-      choicebutton(keys[k]);
-    }
   }
 
   Widget choicebutton(String k) {
