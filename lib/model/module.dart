@@ -89,7 +89,7 @@ class Module {
               DBProvider.db.deleteModule(this.id);
               Get.toNamed("/modulSelectionWPF");
             } else {
-              if (isSelected && grade == null) {
+              if (this.isSelected == true && this.grade == null) {
                 Get.dialog(AlertDialog(
                   contentPadding: EdgeInsets.all(8),
                   content: SingleChildScrollView(
@@ -135,7 +135,7 @@ class Module {
                     ]),
                   ),
                 ));
-              } else if (isSelected && grade != null) {
+              } else if (this.isSelected == true && this.grade != null) {
                 Get.dialog(AlertDialog(
                   contentPadding: EdgeInsets.all(8),
                   content: SingleChildScrollView(
@@ -189,7 +189,7 @@ class Module {
                     ]),
                   ),
                 ));
-              } else if (!isSelected && grade != null) {
+              } else if (this.isSelected == false && this.grade != null) {
                 Get.dialog(
                   AlertDialog(
                     contentPadding: EdgeInsets.all(8),
@@ -245,7 +245,7 @@ class Module {
                     ),
                   ),
                 );
-              } else {
+              } else if(this.isSelected == false && this.grade == null){
                 Get.dialog(
                   AlertDialog(
                     contentPadding: EdgeInsets.all(8),
