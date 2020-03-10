@@ -27,7 +27,7 @@ class ModuleProperties {
       this.isSelected, this.qsp, this.cp, this.semester);
 }
 
-class Module extends StatelessWidget {
+class Module extends StatefulWidget {
   final ModuleProperties properties;
   Module(this.properties);
 
@@ -68,177 +68,6 @@ class Module extends StatelessWidget {
         "semester": properties.semester,
       };
 
-  Widget module() {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Container(
-        height: 80,
-        width: 80,
-        child: RaisedButton(
-          shape: RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(15.0),
-          ),
-          color: Color(0xFF013D62),
-          splashColor: Colors.orange,
-          onPressed: () {
-            if (properties.code == "QSP") {
-              ModuleController().addReplacedQSPModule(this);
-              DBProvider.db.deleteModule(properties.id);
-              Get.toNamed("/modulSelectionQSP");
-            } else if (properties.code == "WPF") {
-              ModuleController().addReplacedWPFModule(this);
-              DBProvider.db.deleteModule(properties.id);
-              Get.toNamed("/modulSelectionWPF");
-            } else {
-              if (properties.isSelected) {
-                Get.dialog(AlertDialog(
-                  contentPadding: EdgeInsets.all(8),
-                  content: SingleChildScrollView(
-                    child: ListBody(children: <Widget>[
-                      Text(
-                        properties.title,
-                        style: TextStyle(fontSize: 25),
-                      ),
-                      FlatButton(
-                          child: Text("Modul Informationen"),
-                          onPressed: () {
-                            moduleInformations(this);
-                          }),
-                      FlatButton(
-                        child: Text("Note Eintragen"),
-                        onPressed: () {
-                          addGrade(this);
-                        },
-                      ),
-                      FlatButton(
-                        child: Text("Modul abwählen"),
-                        onPressed: () {
-                          properties.isSelected = false;
-                          if (properties.qsp.contains("SN") ||
-                              properties.qsp.contains("VC") ||
-                              properties.qsp.contains("SED")) {
-                            ModuleController().replaceQSP(this);
-                            ModuleController().removeSelectedModule(this);
-                            ModuleController().removeReplacedQSPModule(this);
-                            ModuleController().updateModule(this);
-                          } else if (properties.qsp.contains("WPF")) {
-                            ModuleController().replaceWPF(this);
-                            ModuleController().removeSelectedModule(this);
-                            ModuleController().removeReplacedWPFModule(this);
-                            ModuleController().updateModule(this);
-                          } else {
-                            ModuleController().removeSelectedModule(this);
-                            ModuleController().updateModule(this);
-                          }
-                          Get.back();
-                        },
-                      ),
-                    ]),
-                  ),
-                ));
-              } else {
-                Get.dialog(
-                  AlertDialog(
-                    contentPadding: EdgeInsets.all(8),
-                    content: SingleChildScrollView(
-                      child: ListBody(
-                        children: <Widget>[
-                          Text(
-                            properties.title,
-                            style: TextStyle(fontSize: 25),
-                          ),
-                          FlatButton(
-                              child: Text("Modul Informationen"),
-                              onPressed: () {
-                                moduleInformations(this);
-                              }),
-                          FlatButton(
-                              child: Text("Note Eintragen"),
-                              onPressed: () {
-                                addGrade(this);
-                              }),
-                          FlatButton(
-                            child: Text("Modul Wählen"),
-                            onPressed: () {
-                              properties.isSelected = true;
-                              if (properties.qsp.contains("SN") ||
-                                  properties.qsp.contains("VC") ||
-                                  properties.qsp.contains("SED")) {
-                                ModuleController().replaceQSPPlaceholder(this);
-                                ModuleController().addSelectedModule(this);
-                                ModuleController().updateModule(this);
-                              } else if (properties.qsp.contains("WPF")) {
-                                ModuleController().replaceWPFPlaceholder(this);
-                                ModuleController().addSelectedModule(this);
-                                ModuleController().updateModule(this);
-                              } else {
-                                ModuleController().addSelectedModule(this);
-                                ModuleController().updateModule(this);
-                              }
-                              Get.back();
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }
-            }
-          },
-          child: Column(
-            children: <Widget>[
-              properties.grade != null
-                  ? Expanded(
-                      flex: 3,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 24),
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text(properties.code,
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.white)),
-                            )),
-                      ),
-                    )
-                  : Expanded(
-                      flex: 3,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 4),
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text(properties.code,
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.white)),
-                            )),
-                      ),
-                    ),
-              properties.grade != null
-                  ? Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text(properties.grade.toString(),
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.lightGreen)),
-                            )),
-                      ),
-                    )
-                  : Container(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   //getter
   double getGrade() => properties.grade;
 
@@ -260,8 +89,184 @@ class Module extends StatelessWidget {
   }
 
   @override
+  State<StatefulWidget> createState() => ModuleState();
+}
+
+class ModuleState extends State<Module> {
+  @override
   Widget build(BuildContext context) {
     return module();
+  }
+
+  Widget module() {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Container(
+        height: 80,
+        width: 80,
+        child: RaisedButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(15.0),
+          ),
+          color: Color(0xFF013D62),
+          splashColor: Colors.orange,
+          onPressed: () {
+            if (widget.properties.code == "QSP") {
+              ModuleController().addReplacedQSPModule(widget);
+              DBProvider.db.deleteModule(widget.properties.id);
+              Get.toNamed("/modulSelectionQSP");
+            } else if (widget.properties.code == "WPF") {
+              ModuleController().addReplacedWPFModule(widget);
+              DBProvider.db.deleteModule(widget.properties.id);
+              Get.toNamed("/modulSelectionWPF");
+            } else {
+              if (widget.properties.isSelected) {
+                Get.dialog(AlertDialog(
+                  contentPadding: EdgeInsets.all(8),
+                  content: SingleChildScrollView(
+                    child: ListBody(children: <Widget>[
+                      Text(
+                        widget.properties.title,
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      FlatButton(
+                          child: Text("Modul Informationen"),
+                          onPressed: () {
+                            moduleInformations(widget);
+                          }),
+                      FlatButton(
+                        child: Text("Note Eintragen"),
+                        onPressed: () {
+                          addGrade(widget);
+                        },
+                      ),
+                      FlatButton(
+                        child: Text("Modul abwählen"),
+                        onPressed: () {
+                          widget.properties.isSelected = false;
+                          if (widget.properties.qsp.contains("SN") ||
+                              widget.properties.qsp.contains("VC") ||
+                              widget.properties.qsp.contains("SED")) {
+                            ModuleController().replaceQSP(widget);
+                            ModuleController().removeSelectedModule(widget);
+                            ModuleController().removeReplacedQSPModule(widget);
+                            ModuleController().updateModule(widget);
+                          } else if (widget.properties.qsp.contains("WPF")) {
+                            ModuleController().replaceWPF(widget);
+                            ModuleController().removeSelectedModule(widget);
+                            ModuleController().removeReplacedWPFModule(widget);
+                            ModuleController().updateModule(widget);
+                          } else {
+                            ModuleController().removeSelectedModule(widget);
+                            ModuleController().updateModule(widget);
+                          }
+                          Get.back();
+                        },
+                      ),
+                    ]),
+                  ),
+                ));
+              } else {
+                Get.dialog(
+                  AlertDialog(
+                    contentPadding: EdgeInsets.all(8),
+                    content: SingleChildScrollView(
+                      child: ListBody(
+                        children: <Widget>[
+                          Text(
+                            widget.properties.title,
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          FlatButton(
+                              child: Text("Modul Informationen"),
+                              onPressed: () {
+                                moduleInformations(widget);
+                              }),
+                          FlatButton(
+                              child: Text("Note Eintragen"),
+                              onPressed: () {
+                                addGrade(widget);
+                              }),
+                          FlatButton(
+                            child: Text("Modul Wählen"),
+                            onPressed: () {
+                              widget.properties.isSelected = true;
+                              if (widget.properties.qsp.contains("SN") ||
+                                  widget.properties.qsp.contains("VC") ||
+                                  widget.properties.qsp.contains("SED")) {
+                                ModuleController().replaceQSPPlaceholder(widget);
+                                ModuleController().addSelectedModule(widget);
+                                ModuleController().updateModule(widget);
+                              } else if (widget.properties.qsp.contains("WPF")) {
+                                ModuleController().replaceWPFPlaceholder(widget);
+                                ModuleController().addSelectedModule(widget);
+                                ModuleController().updateModule(widget);
+                              } else {
+                                ModuleController().addSelectedModule(widget);
+                                ModuleController().updateModule(widget);
+                              }
+                              Get.back();
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }
+            }
+          },
+          child: Column(
+            children: <Widget>[
+              widget.properties.grade != null
+                  ? Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 24),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text(widget.properties.code,
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white)),
+                            )),
+                      ),
+                    )
+                  : Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 4),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text(widget.properties.code,
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white)),
+                            )),
+                      ),
+                    ),
+              widget.properties.grade != null
+                  ? Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text(widget.properties.grade.toString(),
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.lightGreen)),
+                            )),
+                      ),
+                    )
+                  : Container(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

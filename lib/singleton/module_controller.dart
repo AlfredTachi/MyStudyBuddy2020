@@ -34,7 +34,7 @@ class ModuleController {
         .where((test) => test.properties.isSelected == true)
         .toList();
     for (var i = 0; i < _modules.length; i++) {
-      _widgets.add(_modules[i].module());
+      _widgets.add(_modules[i]);
     }
     return _widgets;
   }
@@ -102,7 +102,7 @@ class ModuleController {
           .toList();
     }
     for (var i = 0; i < _modules.length; i++) {
-      _widgets.add(_modules[i].module());
+      _widgets.add(_modules[i]);
     }
     return _widgets;
   }
@@ -116,7 +116,7 @@ class ModuleController {
         .where((test) => test.properties.qsp.contains("WPF") && test.properties.isDone == false)
         .toList();
     for (var i = 0; i < _modules.length; i++) {
-      _widgets.add(_modules[i].module());
+      _widgets.add(_modules[i]);
     }
     return _widgets;
   }
@@ -130,7 +130,7 @@ class ModuleController {
         .where((test) => test.properties.semester == index && test.properties.isDone == false)
         .toList();
     for (var i = 0; i < _modules.length; i++) {
-      _widgets.add(_modules[i].module());
+      _widgets.add(_modules[i]);
     }
 
     return _widgets;
@@ -145,7 +145,7 @@ class ModuleController {
         .where((test) => test.properties.semester == index)
         .toList();
     for (var i = 0; i < _modules.length; i++) {
-      _widgets.add(_modules[i].module());
+      _widgets.add(_modules[i]);
     }
 
     return _widgets;
@@ -155,7 +155,7 @@ class ModuleController {
   List<Widget> getAllModulesWidgets() {
     List<Widget> _widgets = new List<Widget>();
     for (int i = 0; i < _allModules.length; i++) {
-      _widgets.add(_allModules[i].module());
+      _widgets.add(_allModules[i]);
     }
     return _widgets;
   }
