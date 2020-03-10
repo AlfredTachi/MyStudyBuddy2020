@@ -89,7 +89,7 @@ class Module {
               DBProvider.db.deleteModule(this.id);
               Get.toNamed("/modulSelectionWPF");
             } else {
-              if (isSelected) {
+              if (isSelected && grade == null) {
                 Get.dialog(AlertDialog(
                   contentPadding: EdgeInsets.all(8),
                   content: SingleChildScrollView(
@@ -99,12 +99,12 @@ class Module {
                         style: TextStyle(fontSize: 25),
                       ),
                       FlatButton(
-                          child: Text("Modul Informationen"),
+                          child: Text("Modulinformationen"),
                           onPressed: () {
                             moduleInformations(this);
                           }),
                       FlatButton(
-                        child: Text("Note Eintragen"),
+                        child: Text("Note eintragen"),
                         onPressed: () {
                           addGrade(this);
                         },
@@ -135,6 +135,116 @@ class Module {
                     ]),
                   ),
                 ));
+              } else if (isSelected && grade != null) {
+                Get.dialog(AlertDialog(
+                  contentPadding: EdgeInsets.all(8),
+                  content: SingleChildScrollView(
+                    child: ListBody(children: <Widget>[
+                      Text(
+                        this.title,
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      FlatButton(
+                          child: Text("Modulinformationen"),
+                          onPressed: () {
+                            moduleInformations(this);
+                          }),
+                      FlatButton(
+                        child: Text("Note bearbeiten"),
+                        onPressed: () {
+                          addGrade(this);
+                        },
+                      ),
+                      FlatButton(
+                        child: Text("Note löschen"),
+                        onPressed: () {
+                          this.grade = null;
+                          this.isDone = false;
+                          ModuleController().updateModule(this);
+                        },
+                      ),
+                      FlatButton(
+                        child: Text("Modul abwählen"),
+                        onPressed: () {
+                          this.isSelected = false;
+                          if (this.qsp.contains("SN") ||
+                              this.qsp.contains("VC") ||
+                              this.qsp.contains("SED")) {
+                            ModuleController().replaceQSP(this);
+                            ModuleController().removeSelectedModule(this);
+                            ModuleController().removeReplacedQSPModule(this);
+                            ModuleController().updateModule(this);
+                          } else if (this.qsp.contains("WPF")) {
+                            ModuleController().replaceWPF(this);
+                            ModuleController().removeSelectedModule(this);
+                            ModuleController().removeReplacedWPFModule(this);
+                            ModuleController().updateModule(this);
+                          } else {
+                            ModuleController().removeSelectedModule(this);
+                            ModuleController().updateModule(this);
+                          }
+                          Get.back();
+                        },
+                      ),
+                    ]),
+                  ),
+                ));
+              } else if (!isSelected && grade != null) {
+                Get.dialog(
+                  AlertDialog(
+                    contentPadding: EdgeInsets.all(8),
+                    content: SingleChildScrollView(
+                      child: ListBody(
+                        children: <Widget>[
+                          Text(
+                            this.title,
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          FlatButton(
+                              child: Text("Modulinformationen"),
+                              onPressed: () {
+                                moduleInformations(this);
+                              }),
+                          FlatButton(
+                            child: Text("Note bearbeiten"),
+                            onPressed: () {
+                              addGrade(this);
+                            },
+                          ),
+                          FlatButton(
+                            child: Text("Note löschen"),
+                            onPressed: () {
+                              this.grade = null;
+                              this.isDone = false;
+                              ModuleController().updateModule(this);
+                            },
+                          ),
+                          FlatButton(
+                            child: Text("Modul wählen"),
+                            onPressed: () {
+                              this.isSelected = true;
+                              if (this.qsp.contains("SN") ||
+                                  this.qsp.contains("VC") ||
+                                  this.qsp.contains("SED")) {
+                                ModuleController().replaceQSPPlaceholder(this);
+                                ModuleController().addSelectedModule(this);
+                                ModuleController().updateModule(this);
+                              } else if (this.qsp.contains("WPF")) {
+                                ModuleController().replaceWPFPlaceholder(this);
+                                ModuleController().addSelectedModule(this);
+                                ModuleController().updateModule(this);
+                              } else {
+                                ModuleController().addSelectedModule(this);
+                                ModuleController().updateModule(this);
+                              }
+                              Get.back();
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
               } else {
                 Get.dialog(
                   AlertDialog(
@@ -147,17 +257,17 @@ class Module {
                             style: TextStyle(fontSize: 25),
                           ),
                           FlatButton(
-                              child: Text("Modul Informationen"),
+                              child: Text("Modulinformationen"),
                               onPressed: () {
                                 moduleInformations(this);
                               }),
                           FlatButton(
-                              child: Text("Note Eintragen"),
+                              child: Text("Note eintragen"),
                               onPressed: () {
                                 addGrade(this);
                               }),
                           FlatButton(
-                            child: Text("Modul Wählen"),
+                            child: Text("Modul wählen"),
                             onPressed: () {
                               this.isSelected = true;
                               if (this.qsp.contains("SN") ||
