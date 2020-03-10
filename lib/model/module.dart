@@ -12,7 +12,7 @@ import 'package:html/dom.dart' as dom;
 import '../local_database/local_database.dart';
 import '../singleton/module_controller.dart';
 
-class Module {
+class ModuleProperties {
   int id;
   String code;
   String title;
@@ -23,8 +23,13 @@ class Module {
   int cp;
   int semester;
 
-  Module(this.id, this.code, this.title, this.grade, this.isDone,
+  ModuleProperties(this.id, this.code, this.title, this.grade, this.isDone,
       this.isSelected, this.qsp, this.cp, this.semester);
+}
+
+class Module extends StatelessWidget {
+  final ModuleProperties properties;
+  Module(this.properties);
 
   factory Module.fromMap(Map<String, dynamic> map) {
     bool _isDone;
@@ -39,33 +44,29 @@ class Module {
     } else {
       _isSelected = true;
     }
-    return Module(map["id"], map["code"], map["title"], map["grade"], _isDone,
-        _isSelected, map["qsp"], map["cp"], map["semester"]);
+    return Module(ModuleProperties(
+        map["id"],
+        map["code"],
+        map["title"],
+        map["grade"],
+        _isDone,
+        _isSelected,
+        map["qsp"],
+        map["cp"],
+        map["semester"]));
   }
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "code": code,
-        "title": title,
-        "grade": grade,
-        "isDone": isDone,
-        "isSelected": isSelected,
-        "qsp": qsp,
-        "cp": cp,
-        "semester": semester,
+        "id": properties.id,
+        "code": properties.code,
+        "title": properties.title,
+        "grade": properties.grade,
+        "isDone": properties.isDone,
+        "isSelected": properties.isSelected,
+        "qsp": properties.qsp,
+        "cp": properties.cp,
+        "semester": properties.semester,
       };
-
-  String toString() => '''
-  id: $id
-  code: $title
-  title: $title
-  grade: $grade
-  isDone: $isDone
-  isSelected: $isSelected
-  qsp: $qsp
-  cp: $cp
-  semester: $semester
-  ''';
 
   Widget module() {
     return Padding(
@@ -80,22 +81,22 @@ class Module {
           color: Color(0xFF013D62),
           splashColor: Colors.orange,
           onPressed: () {
-            if (code == "QSP") {
+            if (properties.code == "QSP") {
               ModuleController().addReplacedQSPModule(this);
-              DBProvider.db.deleteModule(this.id);
+              DBProvider.db.deleteModule(properties.id);
               Get.toNamed("/modulSelectionQSP");
-            } else if (code == "WPF") {
+            } else if (properties.code == "WPF") {
               ModuleController().addReplacedWPFModule(this);
-              DBProvider.db.deleteModule(this.id);
+              DBProvider.db.deleteModule(properties.id);
               Get.toNamed("/modulSelectionWPF");
             } else {
-              if (isSelected) {
+              if (properties.isSelected) {
                 Get.dialog(AlertDialog(
                   contentPadding: EdgeInsets.all(8),
                   content: SingleChildScrollView(
                     child: ListBody(children: <Widget>[
                       Text(
-                        this.title,
+                        properties.title,
                         style: TextStyle(fontSize: 25),
                       ),
                       FlatButton(
@@ -112,15 +113,15 @@ class Module {
                       FlatButton(
                         child: Text("Modul abwählen"),
                         onPressed: () {
-                          this.isSelected = false;
-                          if (this.qsp.contains("SN") ||
-                              this.qsp.contains("VC") ||
-                              this.qsp.contains("SED")) {
+                          properties.isSelected = false;
+                          if (properties.qsp.contains("SN") ||
+                              properties.qsp.contains("VC") ||
+                              properties.qsp.contains("SED")) {
                             ModuleController().replaceQSP(this);
                             ModuleController().removeSelectedModule(this);
                             ModuleController().removeReplacedQSPModule(this);
                             ModuleController().updateModule(this);
-                          } else if (this.qsp.contains("WPF")) {
+                          } else if (properties.qsp.contains("WPF")) {
                             ModuleController().replaceWPF(this);
                             ModuleController().removeSelectedModule(this);
                             ModuleController().removeReplacedWPFModule(this);
@@ -143,7 +144,7 @@ class Module {
                       child: ListBody(
                         children: <Widget>[
                           Text(
-                            this.title,
+                            properties.title,
                             style: TextStyle(fontSize: 25),
                           ),
                           FlatButton(
@@ -159,14 +160,14 @@ class Module {
                           FlatButton(
                             child: Text("Modul Wählen"),
                             onPressed: () {
-                              this.isSelected = true;
-                              if (this.qsp.contains("SN") ||
-                                  this.qsp.contains("VC") ||
-                                  this.qsp.contains("SED")) {
+                              properties.isSelected = true;
+                              if (properties.qsp.contains("SN") ||
+                                  properties.qsp.contains("VC") ||
+                                  properties.qsp.contains("SED")) {
                                 ModuleController().replaceQSPPlaceholder(this);
                                 ModuleController().addSelectedModule(this);
                                 ModuleController().updateModule(this);
-                              } else if (this.qsp.contains("WPF")) {
+                              } else if (properties.qsp.contains("WPF")) {
                                 ModuleController().replaceWPFPlaceholder(this);
                                 ModuleController().addSelectedModule(this);
                                 ModuleController().updateModule(this);
@@ -187,7 +188,7 @@ class Module {
           },
           child: Column(
             children: <Widget>[
-              grade != null
+              properties.grade != null
                   ? Expanded(
                       flex: 3,
                       child: Padding(
@@ -196,7 +197,7 @@ class Module {
                             alignment: Alignment.center,
                             child: FittedBox(
                               fit: BoxFit.contain,
-                              child: Text(code,
+                              child: Text(properties.code,
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.white)),
                             )),
@@ -210,13 +211,13 @@ class Module {
                             alignment: Alignment.center,
                             child: FittedBox(
                               fit: BoxFit.contain,
-                              child: Text(code,
+                              child: Text(properties.code,
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.white)),
                             )),
                       ),
                     ),
-              grade != null
+              properties.grade != null
                   ? Expanded(
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 8),
@@ -224,7 +225,7 @@ class Module {
                             alignment: Alignment.bottomLeft,
                             child: FittedBox(
                               fit: BoxFit.contain,
-                              child: Text(grade.toString(),
+                              child: Text(properties.grade.toString(),
                                   style: TextStyle(
                                       fontSize: 10, color: Colors.lightGreen)),
                             )),
@@ -239,23 +240,28 @@ class Module {
   }
 
   //getter
-  double getGrade() => grade;
+  double getGrade() => properties.grade;
 
-  bool getIsDone() => isDone;
+  bool getIsDone() => properties.isDone;
 
-  bool getIsSelected() => isSelected;
+  bool getIsSelected() => properties.isSelected;
 
   //setter
   void setGrade(double newGrade) {
-    grade = newGrade;
+    properties.grade = newGrade;
   }
 
   void setIsDone(bool _isDone) {
-    isDone = _isDone;
+    properties.isDone = _isDone;
   }
 
   void setIsSelected(bool _isSelected) {
-    isSelected = _isSelected;
+    properties.isSelected = _isSelected;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return module();
   }
 }
 
@@ -325,15 +331,15 @@ Future<int> getExamResultsFromLSFServer(
         continue;
       }
       List<Module> allModuleList = ModuleController().getAllModules();
-      int index = allModuleList.indexWhere(
-          (module) => module.id == int.tryParse(trimmedGradeLines[0]));
+      int index = allModuleList.indexWhere((module) =>
+          module.properties.id == int.tryParse(trimmedGradeLines[0]));
       double _grade =
           double.tryParse(trimmedGradeLines[3].replaceAll(',', '.'));
       bool _passed;
 
       if (index == -1) {
         index = ModuleController().getAllModules().indexWhere(
-            (module) => module.title.contains(trimmedGradeLines[1]));
+            (module) => module.properties.title.contains(trimmedGradeLines[1]));
       }
       if (_grade == null) {
         _grade = 0.0;
@@ -345,16 +351,18 @@ Future<int> getExamResultsFromLSFServer(
         _passed = false;
       }
 
-      Module result = Module(
-          ModuleController().getAllModules()[index].id,
-          ModuleController().getAllModules()[index].code,
-          ModuleController().getAllModules()[index].title,
+      ModuleProperties _properties = new ModuleProperties(
+          ModuleController().getAllModules()[index].properties.id,
+          ModuleController().getAllModules()[index].properties.code,
+          ModuleController().getAllModules()[index].properties.title,
           _grade,
           _passed,
-          ModuleController().getAllModules()[index].isSelected,
-          ModuleController().getAllModules()[index].qsp,
-          ModuleController().getAllModules()[index].cp,
-          ModuleController().getAllModules()[index].semester);
+          ModuleController().getAllModules()[index].properties.isSelected,
+          ModuleController().getAllModules()[index].properties.qsp,
+          ModuleController().getAllModules()[index].properties.cp,
+          ModuleController().getAllModules()[index].properties.semester);
+
+      Module result = Module(_properties);
 
       ModuleController().addToAllModules(result);
 

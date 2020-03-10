@@ -53,9 +53,9 @@ Future<Widget> addGrade(Module module) async {
 }
 
 void update(double grade, Module module) {
-  module.grade = grade;
-  module.isDone = true;
-  module.isSelected = false;
+  module.properties.grade = grade;
+  module.properties.isDone = true;
+  module.properties.isSelected = false;
   ModuleController().removeSelectedModule(module);
   ModuleController().updateModule(module);
 }

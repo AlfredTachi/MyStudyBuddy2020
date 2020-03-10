@@ -13,10 +13,10 @@ List<Widget> infomationTile(Module module) {
   List<Widget> tiles = List<Widget>();
   List<String> title = ["Modul Name", "Note", "Modul ID", "Credit Points"];
   List<String> subtitle = [
-    module.title,
+    module.properties.title,
     module.getGrade().toString(),
-    module.id.toString(),
-    module.cp.toString()
+    module.properties.id.toString(),
+    module.properties.cp.toString()
   ];
 
   for (int i = 0; i < title.length; i++) {

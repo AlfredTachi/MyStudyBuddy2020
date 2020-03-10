@@ -125,7 +125,7 @@ class DBProvider {
         "Modules",
         newModule.toMap(),
         where: "id = ?",
-        whereArgs: [newModule.id],
+        whereArgs: [newModule.properties.id],
       );
     } catch (err) {
       print(err);

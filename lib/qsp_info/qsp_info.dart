@@ -185,13 +185,13 @@ class QSPInfoState extends State<QSPInfo> {
     int nc = 0;
     List<Module> _modules = ModuleController().getAllDoneModules();
     for (var i = 0; i < _modules.length; i++) {
-      if (_modules[i].qsp.contains("SED")) {
+      if (_modules[i].properties.qsp.contains("SED")) {
         sed++;
       }
-      if (_modules[i].qsp.contains("VC")) {
+      if (_modules[i].properties.qsp.contains("VC")) {
         vc++;
       }
-      if (_modules[i].qsp.contains("NC")) {
+      if (_modules[i].properties.qsp.contains("NC")) {
         nc++;
       }
     }
