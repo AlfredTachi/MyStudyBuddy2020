@@ -120,10 +120,12 @@ class Module {
                               this.qsp.contains("SED")) {
                             ModuleController().replaceQSP(this);
                             ModuleController().removeSelectedModule(this);
+                            ModuleController().removeReplacedQSPModule(this);
                             ModuleController().updateModule(this);
                           } else if (this.qsp.contains("WPF")) {
                             ModuleController().replaceWPF(this);
                             ModuleController().removeSelectedModule(this);
+                            ModuleController().removeReplacedWPFModule(this);
                             ModuleController().updateModule(this);
                           } else {
                             ModuleController().removeSelectedModule(this);

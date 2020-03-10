@@ -243,9 +243,9 @@ class ModuleController {
     _backupQSPPlaceHolder = _module;
   }
 
-  void removeReplacedQSPModule() {
-    _replacedQSPModules = null;
-    _backupQSPPlaceHolder = null;
+  void removeReplacedQSPModule(Module _module) {
+    int index = _allModules.indexWhere((module) => module.semester == _module.semester);
+    _allModules.removeAt(index);
   }
 
   void addReplacedWPFModule(Module _module) {
@@ -253,9 +253,9 @@ class ModuleController {
     _backupWPFPlaceHolder = _module;
   }
 
-  void removeReplacedWPFModule() {
-    _replacedWPFModules = null;
-    _backupWPFPlaceHolder = null;
+  void removeReplacedWPFModule(Module _module) {
+    int index = _allModules.indexWhere((module) => module.semester == _module.semester);
+    _allModules.removeAt(index);
   }
 
   void addSelectedModule(Module _module) {
