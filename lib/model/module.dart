@@ -11,8 +11,6 @@ import 'package:html/dom.dart' as dom;
 
 import '../local_database/local_database.dart';
 import '../singleton/module_controller.dart';
-import '../singleton/module_controller.dart';
-import '../singleton/module_controller.dart';
 
 class Module {
   int id;
@@ -120,10 +118,12 @@ class Module {
                               this.qsp.contains("SED")) {
                             ModuleController().replaceQSP(this);
                             ModuleController().removeSelectedModule(this);
+                            ModuleController().removeReplacedQSPModule(this);
                             ModuleController().updateModule(this);
                           } else if (this.qsp.contains("WPF")) {
                             ModuleController().replaceWPF(this);
                             ModuleController().removeSelectedModule(this);
+                            ModuleController().removeReplacedWPFModule(this);
                             ModuleController().updateModule(this);
                           } else {
                             ModuleController().removeSelectedModule(this);
