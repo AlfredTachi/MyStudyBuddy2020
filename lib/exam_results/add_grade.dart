@@ -23,7 +23,7 @@ Future<Widget> addGrade(Module module) async {
                     grade = _val;
                   },
                   controller: _gradeCtrl,
-                  decoration: InputDecoration(counterText: "",hintText:"Note zwischen 1.0 und 4.0"),
+                  decoration: InputDecoration(counterText: "",hintText:"1.0 bis 4.0"),
                   maxLength: 3,
                   
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -36,13 +36,14 @@ Future<Widget> addGrade(Module module) async {
                 OutlineButton(
                     onPressed: () {
                       if (double.parse(grade) > 4.0) {
+  
                         disposeData();
                       } else if (double.parse(grade) < 1.0) {
                         disposeData();
-                      } else
+                      } else{
                         update(double.parse(grade), module);
                       disposeData();
-                      Get.back();
+                      Get.back();}
                     },
                     child: Text("Speichern"))
               ],
