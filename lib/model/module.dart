@@ -1,6 +1,4 @@
 import 'package:MyStudyBuddy2/dialogs/module_options_dialog.dart';
-import 'package:MyStudyBuddy2/exam_results/add_grade.dart';
-import 'package:MyStudyBuddy2/model/module_informations.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

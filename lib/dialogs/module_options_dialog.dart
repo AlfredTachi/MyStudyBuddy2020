@@ -1,4 +1,4 @@
-import 'package:MyStudyBuddy2/exam_results/add_grade.dart';
+import 'package:MyStudyBuddy2/dialogs/module_add_grade_dialog.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:MyStudyBuddy2/model/module_informations.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
@@ -43,7 +43,10 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
           FlatButton(
             child: Text("Note Eintragen"),
             onPressed: () {
-              addGrade(widget.module);
+              return showDialog(
+                context: context,
+                child: ModuleAddGradeDialog(widget.module),
+              );
             },
           ),
           FlatButton(
