@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 
 import './route_manager/route_manager.dart';
 
@@ -40,7 +41,7 @@ class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
   Widget build(BuildContext context) {
     DBProvider.db.initDB();
     final theme = Provider.of<ThemeChanger>(context);
-    
+    ProfileController().loadData();
 
     return MaterialApp(
       navigatorKey: Get.key,
