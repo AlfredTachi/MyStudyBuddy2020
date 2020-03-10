@@ -40,6 +40,7 @@ class DashboardState extends State<Dashboard> {
                   ),
                   onPressed: () {
                     Navigator.of(context).pushNamed("/profilePage");
+                    ProfileController().showAchievement(context);
                   },
                 )),
             Container(

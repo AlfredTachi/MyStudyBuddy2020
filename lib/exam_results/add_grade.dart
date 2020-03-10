@@ -2,7 +2,6 @@ import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart';
 
 Future<Widget> addGrade(Module module) async {
   TextEditingController _gradeCtrl = TextEditingController();
@@ -24,8 +23,9 @@ Future<Widget> addGrade(Module module) async {
                     grade = _val;
                   },
                   controller: _gradeCtrl,
-                  decoration: InputDecoration(counterText: ""),
+                  decoration: InputDecoration(counterText: "",hintText:"Note zwischen 1.0 und 4.0"),
                   maxLength: 3,
+                  
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
                 ),
                 OutlineButton(
@@ -36,8 +36,8 @@ Future<Widget> addGrade(Module module) async {
                 OutlineButton(
                     onPressed: () {
                       if (double.parse(grade) > 4.0) {
-                        Get.snackbar(
-                            "Fehler", "Korrekte Note (bis 4.0) eintragen.");
+                        disposeData();
+                      } else if (double.parse(grade) < 1.0) {
                         disposeData();
                       } else
                         update(double.parse(grade), module);

@@ -138,7 +138,7 @@ class DBProvider {
     final Database db = await database;
     try {
       await db.delete(
-        "Module",
+        "Modules",
         where: "id = ?",
         whereArgs: [id],
       );
@@ -150,7 +150,7 @@ class DBProvider {
   deleteAllModules() async {
     final Database db = await database;
     try {
-      await db.delete("Module");
+      await db.delete("Modules");
     } catch (err) {
       print(err);
     }
