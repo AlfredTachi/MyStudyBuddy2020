@@ -40,6 +40,7 @@ class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
   Widget build(BuildContext context) {
     DBProvider.db.initDB();
     final theme = Provider.of<ThemeChanger>(context);
+    
 
     return MaterialApp(
       navigatorKey: Get.key,

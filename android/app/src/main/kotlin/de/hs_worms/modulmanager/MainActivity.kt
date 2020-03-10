@@ -1,4 +1,4 @@
-package com.example.MyStudyBuddy2
+package de.hs_worms.modulmanager
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

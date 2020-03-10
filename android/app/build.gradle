@@ -45,7 +45,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.MyStudyBuddy2"
+        applicationId "de.hs_worms.modulmanager"
         minSdkVersion 25
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
@@ -63,7 +63,7 @@ android {
    }
     buildTypes {
         release {
-                 if (keystorePropertiesFile.exists()) {
+            if (keystorePropertiesFile.exists()) {
             signingConfig signingConfigs.release
             println "Signing with key.properties"
         } else {
