@@ -9,6 +9,11 @@ import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' as dom;
 
+import '../local_database/local_database.dart';
+import '../singleton/module_controller.dart';
+import '../singleton/module_controller.dart';
+import '../singleton/module_controller.dart';
+
 class Module {
   int id;
   String code;
@@ -78,10 +83,12 @@ class Module {
           splashColor: Colors.orange,
           onPressed: () {
             if (code == "QSP") {
-              ModuleController().addReplacedModule(this);
+              ModuleController().addReplacedQSPModule(this);
+              DBProvider.db.deleteModule(this.id);
               Get.toNamed("/modulSelectionQSP");
             } else if (code == "WPF") {
-              ModuleController().addReplacedModule(this);
+              ModuleController().addReplacedWPFModule(this);
+              DBProvider.db.deleteModule(this.id);
               Get.toNamed("/modulSelectionWPF");
             } else {
               if (isSelected) {
@@ -110,12 +117,18 @@ class Module {
                           this.isSelected = false;
                           if (this.qsp.contains("SN") ||
                               this.qsp.contains("VC") ||
-                              this.qsp.contains("SED") ||
-                              this.qsp.contains("WPF")) {
-                            ModuleController().replacePlaceholder(this);
+                              this.qsp.contains("SED")) {
+                            ModuleController().replaceQSP(this);
+                            ModuleController().removeSelectedModule(this);
+                            ModuleController().updateModule(this);
+                          } else if (this.qsp.contains("WPF")) {
+                            ModuleController().replaceWPF(this);
+                            ModuleController().removeSelectedModule(this);
+                            ModuleController().updateModule(this);
+                          } else {
+                            ModuleController().removeSelectedModule(this);
+                            ModuleController().updateModule(this);
                           }
-                          ModuleController().removeSelectedModule(this);
-                          ModuleController().updateModule(this);
                           Get.back();
                         },
                       ),
@@ -149,12 +162,18 @@ class Module {
                               this.isSelected = true;
                               if (this.qsp.contains("SN") ||
                                   this.qsp.contains("VC") ||
-                                  this.qsp.contains("SED") ||
-                                  this.qsp.contains("WPF")) {
-                                ModuleController().replacePlaceholder(this);
+                                  this.qsp.contains("SED")) {
+                                ModuleController().replaceQSPPlaceholder(this);
+                                ModuleController().addSelectedModule(this);
+                                ModuleController().updateModule(this);
+                              } else if (this.qsp.contains("WPF")) {
+                                ModuleController().replaceWPFPlaceholder(this);
+                                ModuleController().addSelectedModule(this);
+                                ModuleController().updateModule(this);
+                              } else {
+                                ModuleController().addSelectedModule(this);
+                                ModuleController().updateModule(this);
                               }
-                              ModuleController().addSelectedModule(this);
-                              ModuleController().updateModule(this);
                               Get.back();
                             },
                           )
