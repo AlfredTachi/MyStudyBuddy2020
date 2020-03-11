@@ -178,137 +178,140 @@ class ModuleState extends State<Module> {
       ),
     );
   }
-}
 
-Future<int> getExamResultsFromLSFServer(
-    String userName, String userPassword) async {
-  http.Response postResponse;
-  http.Client client = http.Client();
+  Future<int> getExamResultsFromLSFServer(
+      String userName, String userPassword) async {
+    http.Response postResponse;
+    http.Client client = http.Client();
 
-  try {
-    postResponse = await client.post(
-        'https://lsf.hs-worms.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal&asdf=$userName&fdsa=$userPassword');
+    try {
+      postResponse = await client.post(
+          'https://lsf.hs-worms.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal&asdf=$userName&fdsa=$userPassword');
 
-    if (!postResponse.headers.keys.first.contains('location')) {
-      print(postResponse.headers.keys.first);
-      return 1;
+      if (!postResponse.headers.keys.first.contains('location')) {
+        print(postResponse.headers.keys.first);
+        return 1;
+      }
+    } catch (err) {
+      if (err.message.contains("Failed host lookup")) {
+        print("SocketException: No internet connction");
+        return 2;
+      } else if (err.osError.message.contains("timed out")) {
+        print("OSError: Connection to " + err.address.host + " timed out");
+        return 3;
+      } else {
+        print(err);
+        return 9;
+      }
     }
-  } catch (err) {
-    if (err.message.contains("Failed host lookup")) {
-      print("SocketException: No internet connction");
-      return 2;
-    } else if (err.osError.message.contains("timed out")) {
-      print("OSError: Connection to " + err.address.host + " timed out");
-      return 3;
-    } else {
+
+    try {
+      final homeScreenResponse =
+          await client.get(postResponse.headers.values.first);
+      final examAdministrationResponse = await client.get(_choseLink(
+          homeScreenResponse, "li > a.auflistung", "Prüfungsverwaltung"));
+      final examExtractResponse = await client.get(_choseLink(
+          examAdministrationResponse, "li > a.auflistung", "Notenspiegel"));
+      final degreeResponse = await client.get(_choseLink(examExtractResponse,
+          "li > a.regular", "Abschluss 05 Bachelor of Science"));
+
+      var degreeDocument = parse(degreeResponse.body);
+      List<dom.Element> degreeLinks =
+          degreeDocument.querySelectorAll("li.treelist > a");
+
+      List<Map<String, dynamic>> degreeMap = [];
+      for (var link in degreeLinks) {
+        degreeMap.add({
+          "title": link.attributes["title"],
+          "href": link.attributes["href"]
+        });
+      }
+
+      Map<String, dynamic> chosenLinkMap = degreeMap[degreeMap.indexWhere(
+          (link) => link.containsValue(
+              "Leistungen für Angewandte Informatik  (PO-Version 2018)  anzeigen"))];
+      http.Response gradesResponse = await client.get(chosenLinkMap["href"]);
+      var gradesDocument = parse(gradesResponse.body);
+
+      List<dom.Element> gradeLines =
+          gradesDocument.querySelectorAll('td[class*="tabelle1"]');
+      var trimmedGradeLines = List<String>();
+
+      for (var line in gradeLines) {
+        trimmedGradeLines.add(line.innerHtml.trim());
+      }
+
+      for (var i = 0; i < gradeLines.length / 9; i++) {
+        if (trimmedGradeLines[0] == "1") {
+          trimmedGradeLines.removeRange(0, 9);
+          continue;
+        }
+        List<Module> allModuleList = ModuleController().getAllModules();
+        int index = allModuleList.indexWhere((module) =>
+            module.properties.id == int.tryParse(trimmedGradeLines[0]));
+        double _grade =
+            double.tryParse(trimmedGradeLines[3].replaceAll(',', '.'));
+        bool _passed;
+
+        if (index == -1) {
+          index = ModuleController().getAllModules().indexWhere((module) =>
+              module.properties.title.contains(trimmedGradeLines[1]));
+        }
+        if (_grade == null) {
+          _grade = 0.0;
+          _passed = false;
+        } else if (_grade >= 1.0 && _grade <= 4.0) {
+          _passed = true;
+        } else {
+          _grade = 5.0;
+          _passed = false;
+        }
+
+        ModuleProperties _properties = new ModuleProperties(
+            ModuleController().getAllModules()[index].properties.id,
+            ModuleController().getAllModules()[index].properties.code,
+            ModuleController().getAllModules()[index].properties.title,
+            _grade,
+            _passed,
+            ModuleController().getAllModules()[index].properties.isSelected,
+            ModuleController().getAllModules()[index].properties.qsp,
+            ModuleController().getAllModules()[index].properties.cp,
+            ModuleController().getAllModules()[index].properties.semester);
+
+        Module result = Module(_properties);
+
+        ModuleController().addToAllModules(result);
+
+        trimmedGradeLines.removeRange(0, 9);
+      }
+      return 0;
+    } catch (err) {
       print(err);
       return 9;
     }
   }
 
-  try {
-    final homeScreenResponse =
-        await client.get(postResponse.headers.values.first);
-    final examAdministrationResponse = await client.get(_choseLink(
-        homeScreenResponse, "li > a.auflistung", "Prüfungsverwaltung"));
-    final examExtractResponse = await client.get(_choseLink(
-        examAdministrationResponse, "li > a.auflistung", "Notenspiegel"));
-    final degreeResponse = await client.get(_choseLink(examExtractResponse,
-        "li > a.regular", "Abschluss 05 Bachelor of Science"));
+  String _choseLink(
+      http.Response response, String querySelector, String string) {
+    var document = parse(response.body);
 
-    var degreeDocument = parse(degreeResponse.body);
-    List<dom.Element> degreeLinks =
-        degreeDocument.querySelectorAll("li.treelist > a");
+    List<dom.Element> links = document.querySelectorAll(querySelector);
 
-    List<Map<String, dynamic>> degreeMap = [];
-    for (var link in degreeLinks) {
-      degreeMap.add(
-          {"title": link.attributes["title"], "href": link.attributes["href"]});
-    }
+    List<Map<String, dynamic>> linkMap = _createList(links);
 
-    Map<String, dynamic> chosenLinkMap = degreeMap[degreeMap.indexWhere(
-        (link) => link.containsValue(
-            "Leistungen für Angewandte Informatik  (PO-Version 2018)  anzeigen"))];
-    http.Response gradesResponse = await client.get(chosenLinkMap["href"]);
-    var gradesDocument = parse(gradesResponse.body);
-
-    List<dom.Element> gradeLines =
-        gradesDocument.querySelectorAll('td[class*="tabelle1"]');
-    var trimmedGradeLines = List<String>();
-
-    for (var line in gradeLines) {
-      trimmedGradeLines.add(line.innerHtml.trim());
-    }
-
-    for (var i = 0; i < gradeLines.length / 9; i++) {
-      if (trimmedGradeLines[0] == "1") {
-        trimmedGradeLines.removeRange(0, 9);
-        continue;
-      }
-      List<Module> allModuleList = ModuleController().getAllModules();
-      int index = allModuleList.indexWhere((module) =>
-          module.properties.id == int.tryParse(trimmedGradeLines[0]));
-      double _grade =
-          double.tryParse(trimmedGradeLines[3].replaceAll(',', '.'));
-      bool _passed;
-
-      if (index == -1) {
-        index = ModuleController().getAllModules().indexWhere(
-            (module) => module.properties.title.contains(trimmedGradeLines[1]));
-      }
-      if (_grade == null) {
-        _grade = 0.0;
-        _passed = false;
-      } else if (_grade >= 1.0 && _grade <= 4.0) {
-        _passed = true;
-      } else {
-        _grade = 5.0;
-        _passed = false;
-      }
-
-      ModuleProperties _properties = new ModuleProperties(
-          ModuleController().getAllModules()[index].properties.id,
-          ModuleController().getAllModules()[index].properties.code,
-          ModuleController().getAllModules()[index].properties.title,
-          _grade,
-          _passed,
-          ModuleController().getAllModules()[index].properties.isSelected,
-          ModuleController().getAllModules()[index].properties.qsp,
-          ModuleController().getAllModules()[index].properties.cp,
-          ModuleController().getAllModules()[index].properties.semester);
-
-      Module result = Module(_properties);
-
-      ModuleController().addToAllModules(result);
-
-      trimmedGradeLines.removeRange(0, 9);
-    }
-    return 0;
-  } catch (err) {
-    print(err);
-    return 9;
+    Map<String, dynamic> linkChosenMap =
+        linkMap[linkMap.indexWhere((link) => link.containsValue(string))];
+    return linkChosenMap["href"];
   }
-}
 
-String _choseLink(http.Response response, String querySelector, String string) {
-  var document = parse(response.body);
-
-  List<dom.Element> links = document.querySelectorAll(querySelector);
-
-  List<Map<String, dynamic>> linkMap = _createList(links);
-
-  Map<String, dynamic> linkChosenMap =
-      linkMap[linkMap.indexWhere((link) => link.containsValue(string))];
-  return linkChosenMap["href"];
-}
-
-List<Map<String, dynamic>> _createList(List<dom.Element> links) {
-  List<Map<String, dynamic>> linkMap = [];
-  for (var link in links) {
-    linkMap.add({
-      'title': link.text,
-      'href': link.attributes['href'],
-    });
+  List<Map<String, dynamic>> _createList(List<dom.Element> links) {
+    List<Map<String, dynamic>> linkMap = [];
+    for (var link in links) {
+      linkMap.add({
+        'title': link.text,
+        'href': link.attributes['href'],
+      });
+    }
+    return linkMap;
   }
-  return linkMap;
 }

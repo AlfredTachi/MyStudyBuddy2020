@@ -91,42 +91,54 @@ class StudyprogressState extends State<Studyprogress> {
                 try {
                   Navigator.of(context).pop();
                   createSnackBar("Lädt");
-                  int success =
-                      await getExamResultsFromLSFServer(userName, userPassword);
+                  int success = await ModuleState()
+                      .getExamResultsFromLSFServer(userName, userPassword);
                   switch (success) {
                     case 0:
-                      Scaffold.of(scaffoldContext).hideCurrentSnackBar();
-                      success = null;
-                      createSnackBar("Das Laden der LSF Daten war erfolgreich");
+                      setState(() {
+                        Scaffold.of(scaffoldContext).hideCurrentSnackBar();
+                        success = null;
+                        createSnackBar(
+                            "Das Laden der LSF Daten war erfolgreich");
+                      });
                       break;
                     case 1:
-                      Scaffold.of(scaffoldContext).hideCurrentSnackBar();
-                      success = null;
-                      createSnackBarWithReloadButton(
-                          "Die Logindaten waren leider falsch");
+                      setState(() {
+                        Scaffold.of(scaffoldContext).hideCurrentSnackBar();
+                        success = null;
+                        createSnackBarWithReloadButton(
+                            "Die Logindaten waren leider falsch");
+                      });
                       break;
                     case 2:
-                      Scaffold.of(scaffoldContext).hideCurrentSnackBar();
-                      success = null;
-                      createSnackBarWithReloadButton(
-                          "Das hat leider nicht geklappt. Prüfe deine Internetverbindung!",
-                          userName,
-                          userPassword);
+                      setState(() {
+                        Scaffold.of(scaffoldContext).hideCurrentSnackBar();
+                        success = null;
+                        createSnackBarWithReloadButton(
+                            "Das hat leider nicht geklappt. Prüfe deine Internetverbindung!",
+                            userName,
+                            userPassword);
+                      });
+
                       break;
                     case 3:
-                      Scaffold.of(scaffoldContext).hideCurrentSnackBar();
-                      success = null;
-                      createSnackBarWithReloadButton(
-                          "Timeout! Prüfe deine Internetverbindung!",
-                          userName,
-                          userPassword);
+                      setState(() {
+                        Scaffold.of(scaffoldContext).hideCurrentSnackBar();
+                        success = null;
+                        createSnackBarWithReloadButton(
+                            "Timeout! Prüfe deine Internetverbindung!",
+                            userName,
+                            userPassword);
+                      });
                       break;
                     default:
-                      success = null;
-                      createSnackBarWithReloadButton(
-                          "Ein unbekannter Fehler ist aufgetreten!",
-                          userName,
-                          userPassword);
+                      setState(() {
+                        success = null;
+                        createSnackBarWithReloadButton(
+                            "Ein unbekannter Fehler ist aufgetreten!",
+                            userName,
+                            userPassword);
+                      });
                   }
                 } catch (err) {
                   print(err);
