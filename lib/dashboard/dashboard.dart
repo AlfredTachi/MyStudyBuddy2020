@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 class Dashboard extends StatefulWidget {
+  Dashboard({Key key}) : super(key: key);
+
   @override
-  DashboardState createState() => DashboardState();
+  State<StatefulWidget> createState() => DashboardState();
 }
 
 class DashboardState extends State<Dashboard> {
@@ -17,6 +19,7 @@ class DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    updateView();
     double spacing = MediaQuery.of(context).size.width / 1.8;
     return SafeArea(
       child: Scaffold(
@@ -47,26 +50,9 @@ class DashboardState extends State<Dashboard> {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: SizedBox(
-                  height: spacing,
-                  width: spacing,
-                  child: LiquidCircularProgressIndicator(
-                    value: ProfileController().getEarnedCP() /
-                        ProfileController().getMaxCP(),
-                    valueColor: AlwaysStoppedAnimation(
-                      Color(0xAA013D62),
-                    ),
-                    backgroundColor: Colors.white,
-                    borderColor: Color(0xCC013D62),
-                    borderWidth: 5.0,
-                    direction: Axis.vertical,
-                    center: Text(
-                      ProfileController().getProgressText(),
-                      style: TextStyle(
-                          color: Colors.blueGrey[900],
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
+                    height: spacing,
+                    width: spacing,
+                    child: drawLiquidProgressBar()),
               ),
             ),
             Expanded(
@@ -139,7 +125,25 @@ class DashboardState extends State<Dashboard> {
     );
   }
 
-  updateView() {
+  Widget drawLiquidProgressBar() {
+    return LiquidCircularProgressIndicator(
+      value: ProfileController().getCPForLiquidProgressBar(),
+      valueColor: AlwaysStoppedAnimation(
+        Color(0xAA013D62),
+      ),
+      backgroundColor: Colors.white,
+      borderColor: Color(0xCC013D62),
+      borderWidth: 5.0,
+      direction: Axis.vertical,
+      center: Text(
+        ProfileController().getProgressText(),
+        style:
+            TextStyle(color: Colors.blueGrey[900], fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  void updateView() {
     setState(() {});
   }
 }

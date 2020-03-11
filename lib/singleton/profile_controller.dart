@@ -48,6 +48,10 @@ class ProfileController {
       _maxCreditPoints.toString() +
       " CP";
 
+  double getCPForLiquidProgressBar() {
+    return ProfileController().getEarnedCP() / ProfileController().getMaxCP();
+  }
+
   void setStudyType(int type) {
     if (type == 0) {
       _dualStudyCtrl.text = "Ohne Praxissemester (6. Semester)";
@@ -59,6 +63,10 @@ class ProfileController {
     if (type != null) {
       _studyTypeIndex = type;
     }
+  }
+
+  void addEarnedCP(int _cp) {
+    _earnedCreditPoints += _cp;
   }
 
   void setEarnedCP(int _cp) {
@@ -109,38 +117,35 @@ class ProfileController {
     adjustMaxCP();
   }
 
-  void showAchievement(BuildContext context){
+  void showAchievement(BuildContext context) {
     String semesterAnzahl;
     String cry;
-    if(getEarnedCP()<30){
-       cry = "Hallo";
-     }else{
-       cry = "Yeaaah!";
-     }
+    if (getEarnedCP() < 30) {
+      cry = "Hallo";
+    } else {
+      cry = "Yeaaah!";
+    }
 
-     if(getEarnedCP() >=30 && getEarnedCP()<60){
-       semesterAnzahl = "Du bist im 2. Semester";
-     }else if(getEarnedCP() >=60 && getEarnedCP()<90){
-       semesterAnzahl = "Du bist im 3. Semester";
-     }else if(getEarnedCP() >=90 && getEarnedCP()<120){
-       semesterAnzahl = "Du bist im 4. Semester";
-     }else if(getEarnedCP() >=120 && getEarnedCP()<150){
-       semesterAnzahl = "Du bist im 5. Semester";
-     }else if(getEarnedCP() >=150 && getEarnedCP()<180){
-       semesterAnzahl = "Du bist im 6. Semester";
-     }else if(getEarnedCP() >=180){
-       semesterAnzahl = "Du bist im 7. Semester";
-     }else if(getEarnedCP()<30){
-       semesterAnzahl = "Du bist im 1. Semester";
-     }
+    if (getEarnedCP() >= 30 && getEarnedCP() < 60) {
+      semesterAnzahl = "Du bist im 2. Semester";
+    } else if (getEarnedCP() >= 60 && getEarnedCP() < 90) {
+      semesterAnzahl = "Du bist im 3. Semester";
+    } else if (getEarnedCP() >= 90 && getEarnedCP() < 120) {
+      semesterAnzahl = "Du bist im 4. Semester";
+    } else if (getEarnedCP() >= 120 && getEarnedCP() < 150) {
+      semesterAnzahl = "Du bist im 5. Semester";
+    } else if (getEarnedCP() >= 150 && getEarnedCP() < 180) {
+      semesterAnzahl = "Du bist im 6. Semester";
+    } else if (getEarnedCP() >= 180) {
+      semesterAnzahl = "Du bist im 7. Semester";
+    } else if (getEarnedCP() < 30) {
+      semesterAnzahl = "Du bist im 1. Semester";
+    }
 
-    AchievementView(
-        context,
-        title: cry,
-        subTitle: semesterAnzahl,
-        listener: (status){
-          print(status);
-        }
-    )..show();
+    AchievementView(context, title: cry, subTitle: semesterAnzahl,
+        listener: (status) {
+      print(status);
+    })
+      ..show();
   }
 }

@@ -1,5 +1,7 @@
+import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/dialogs/module_options_dialog.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -122,7 +124,19 @@ class ModuleState extends State<Module> {
                 context: context,
                 child: ModuleOptionsDialog(widget),
               ).whenComplete(() {
-                setState(() {});
+                setState(() {
+                  if (ModuleController().key == null) {
+                    print("Key was null");
+                  } else {
+                    State<StatefulWidget> state =
+                        ModuleController().key.currentState;
+                    state.setState(() {
+                      if (widget.properties.isDone) {
+                        ProfileController().addEarnedCP(widget.properties.cp);
+                      }
+                    });
+                  }
+                });
               });
             }
           },
