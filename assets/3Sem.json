@@ -1,101 +1,88 @@
 [
     {
-		"0":"",
-        "1":"",
-		"2":"",
-		"3":"",
-		"4":"",
-		"5":"",
-		"6":"",
-		"7":"",
-		"8":"",
-		"9":""
+		"0":"Was sind die vier Merkmale guter professioneller Softwareprodukte?",
+        "1":"Was sind die grundlegende Aktivitäten des Softwareprozesses?",
+		"2":"Die zwei Hauptarten von Prozessen sind: Plangesteuerte und agile Prozesse.",
+		"3":"Der agile Prozess ist kein Vorgehensmodell bei Softwareprozessen.",
+		"4":"Wofür steht die Abkürzung HTML?",
+		"5":"Wofür steht die Abkürzung XML?",
+		"6":"Wofür steht die Abkürzung CSS?",
+		"7":"Was ist ein nichtfunktionaler Test?",
+		"8":"Die Methode Happy Path dient zum Entwurf von Tests..."
     },
     {
 		
 		"0": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Wartbarkeit, Verlässlichkeit, Akzeptanz, Effizienz",
+            "b": "Wartbarkeit, Verlässlichkeit, Akzeptanz, Effektivität",
+            "c": "Wartbarkeit, Verlässlichkeit, Atomarität, Effizienz",
+            "d": "Wartbarkeit, Verlässlichkeit, Atomarität, Effektivität"
         },
         "1": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Spezifikation, Entwicklung, Verifikation, Evolution",
+            "b": "Spezifikation, Entwicklung, Validierung, Weiterentwicklung",
+            "c": "Spezifikation, Entwicklung, Validierung, Verifikation",
+            "d": "Spezifikation, Entwicklung, Validierung, Evolution"
         },
 		"2": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "wahr",
+            "b": "falsch"
         },
 		"3": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "wahr",
+            "b": "falsch"
         },
 		"4": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "HyperText Meta Language",
+            "b": "HyperText Makro Language",
+            "c": "HyperText Markup Language",
+            "d": "HyperText Modeling Language"
         },
 		"5": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Extensible Modeling Language",
+            "b": "Extensible Markup Language",
+            "c": "Extended Markup Language",
+            "d": "Extended Modeling Language"
         },
 		"6": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Classified Style Side",
+            "b": "Classified Style Sheets",
+            "c": "Cascading Style Sheets",
+            "d": "Cascading Style Side"
         },
-		"7": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
-        },
+       	"7": {
+            "a": "Ein Test, der nicht funktioniert.",
+            "b": "Ein Test, der ein negatives Verhalten der Funktionalität untersucht.",
+            "c": "Zeit ist leben",
+            "d": "Ein Test, der sich auf andere Qualitätsmerkmale als die Funktionalität bezieht."
+        }, 
 		"8": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
-        },
-		"9": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "der Hauptfunktion",
+            "b": "von Details",
+            "c": "der emotionalen Wirkung der Software",
+            "d": "der Benutzerfreundlichkeit"
         }
     },
     {
-		"0":"",
-        "1":"",
-		"2":"",
-		"3":"",
-		"4":"",
-		"5":"",
-		"6":"",
-		"7":"",
-		"8":"",
-		"9":""
+		"0":"Wartbarkeit, Verlässlichkeit, Akzeptanz, Effizienz",
+        "1":"Spezifikation, Entwicklung, Validierung, Evolution",
+		"2":"wahr",
+		"3":"falsch",
+		"4":"HyperText Markup Language",
+		"5":"Extensible Markup Language",
+		"6":"Cascading Style Sheets",
+		"7":"Ein Test, der sich auf andere Qualitätsmerkmale als die Funktionalität bezieht.",
+		"8":"der Hauptfunktion"
     },
     {
-		"0":"",
-        "1":"",
-		"2":"",
-		"3":"",
-		"4":"",
-		"5":"",
-		"6":"",
-		"7":"",
-		"8":"",
-		"9":""
+		"0":"SE",
+        "1":"SE",
+		"2":"SE",
+		"3":"SE",
+		"4":"WEB",
+		"5":"WEB",
+		"6":"WEB",
+		"7":"SWQ",
+		"8":"SWQ"
     }
 ]
