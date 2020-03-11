@@ -14,30 +14,64 @@ class ModuleInformationDialogState extends State<ModuleInformationDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.all(8),
-      title: Text(""),
-      content: Column(
-        children: infomationTile(widget.module),
-      ),
+      title: Text("Informationen"),
+      content: Wrap(crossAxisAlignment: WrapCrossAlignment.start, children: [
+        Wrap(
+          direction: Axis.vertical,
+          children: <Widget>[
+            Text(
+              "Name",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(widget.module.properties.title)
+          ],
+        ),
+        Divider(),
+        Wrap(
+          direction: Axis.vertical,
+          children: <Widget>[
+            Text(
+              "Modul ID",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(widget.module.properties.id.toString())
+          ],
+        ),
+        Divider(),
+        Wrap(
+          direction: Axis.vertical,
+          children: <Widget>[
+            Text(
+              "Credit Points",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(widget.module.properties.cp.toString())
+          ],
+        ),
+        Divider(),
+        Wrap(
+          direction: Axis.vertical,
+          children: <Widget>[
+            Text(
+              "Note",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(getGradeText())
+          ],
+        ),
+      ]),
     );
   }
-}
 
-List<Widget> infomationTile(Module module) {
-  List<Widget> tiles = List<Widget>();
-  List<String> title = ["Modul Name", "Note", "Modul ID", "Credit Points"];
-  List<String> subtitle = [
-    module.properties.title,
-    module.getGrade().toString(),
-    module.properties.id.toString(),
-    module.properties.cp.toString()
-  ];
-
-  for (int i = 0; i < title.length; i++) {
-    tiles.add(ListTile(
-      title: Text(title[i]),
-      subtitle: Text(subtitle[i]),
-    ));
+  String getGradeText() {
+    String gradeText;
+    if (widget.module.properties.grade == null) {
+      gradeText = "Keine Note vorhanden";
+    } else if (widget.module.properties.grade == 0) {
+      gradeText = "Note ausstehend";
+    } else {
+      gradeText = widget.module.properties.grade.toString();
+    }
+    return gradeText;
   }
-  return tiles;
 }

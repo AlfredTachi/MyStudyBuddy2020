@@ -31,14 +31,23 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
       contentPadding: EdgeInsets.all(8),
       content: SingleChildScrollView(
         child: ListBody(children: <Widget>[
-          Text(
-            widget.module.properties.title,
-            style: TextStyle(fontSize: 25),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                widget.module.properties.title,
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
           FlatButton(
               child: Text("Modul Informationen"),
               onPressed: () {
-                ModuleInformationDialog(widget.module);
+                return showDialog(
+                  context: context,
+                  child: ModuleInformationDialog(widget.module),
+                );
               }),
           FlatButton(
             child: Text("Note Eintragen"),
