@@ -5,7 +5,6 @@ import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:validators/validators.dart';
 
 class QSPInfo extends StatefulWidget {
   QSPInfo();

@@ -1,12 +1,26 @@
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-Future<Widget> moduleInformations(Module module) async {
-  return Get.dialog(AlertDialog(
+class ModuleInformationDialog extends StatefulWidget {
+  final Module module;
+
+  ModuleInformationDialog(this.module);
+
+  @override
+  State<StatefulWidget> createState() => ModuleInformationDialogState();
+}
+
+class ModuleInformationDialogState extends State<ModuleInformationDialog> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
       contentPadding: EdgeInsets.all(8),
       title: Text(""),
-      content: Column(children:infomationTile(module))));
+      content: Column(
+        children: infomationTile(widget.module),
+      ),
+    );
+  }
 }
 
 List<Widget> infomationTile(Module module) {

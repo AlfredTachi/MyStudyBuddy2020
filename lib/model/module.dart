@@ -1,7 +1,6 @@
 import 'package:MyStudyBuddy2/dialogs/module_options_dialog.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'dart:async';
 
 import 'package:http/http.dart' as http;
@@ -109,15 +108,15 @@ class ModuleState extends State<Module> {
           ),
           color: Color(0xFF013D62),
           splashColor: Colors.orange,
-          onPressed: () {
+          onPressed: () async {
             if (widget.properties.code == "QSP") {
               ModuleController().addReplacedQSPModule(widget);
-              DBProvider.db.deleteModule(widget.properties.id);
-              Get.toNamed("/modulSelectionQSP");
+              await DBProvider.db.deleteModule(widget.properties.id);
+              Navigator.of(context).pushNamed("/modulSelectionQSP");
             } else if (widget.properties.code == "WPF") {
               ModuleController().addReplacedWPFModule(widget);
-              DBProvider.db.deleteModule(widget.properties.id);
-              Get.toNamed("/modulSelectionWPF");
+              await DBProvider.db.deleteModule(widget.properties.id);
+              Navigator.of(context).pushNamed("/modulSelectionWPF");
             } else {
               return showDialog(
                 context: context,

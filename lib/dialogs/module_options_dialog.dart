@@ -1,6 +1,6 @@
 import 'package:MyStudyBuddy2/dialogs/module_add_grade_dialog.dart';
+import 'package:MyStudyBuddy2/dialogs/module_informations.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
-import 'package:MyStudyBuddy2/model/module_informations.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +38,7 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
           FlatButton(
               child: Text("Modul Informationen"),
               onPressed: () {
-                moduleInformations(widget.module);
+                ModuleInformationDialog(widget.module);
               }),
           FlatButton(
             child: Text("Note Eintragen"),
