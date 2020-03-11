@@ -5,7 +5,6 @@ import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:validators/validators.dart';
 
 class QSPInfo extends StatefulWidget {
   QSPInfo();
@@ -185,13 +184,13 @@ class QSPInfoState extends State<QSPInfo> {
     int nc = 0;
     List<Module> _modules = ModuleController().getAllDoneModules();
     for (var i = 0; i < _modules.length; i++) {
-      if (_modules[i].qsp.contains("SED")) {
+      if (_modules[i].properties.qsp.contains("SED")) {
         sed++;
       }
-      if (_modules[i].qsp.contains("VC")) {
+      if (_modules[i].properties.qsp.contains("VC")) {
         vc++;
       }
-      if (_modules[i].qsp.contains("NC")) {
+      if (_modules[i].properties.qsp.contains("NC")) {
         nc++;
       }
     }

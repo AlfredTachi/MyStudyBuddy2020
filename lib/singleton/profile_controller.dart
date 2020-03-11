@@ -32,7 +32,10 @@ class ProfileController {
   TextEditingController getDualStudyController() => _dualStudyCtrl;
 
   int getEarnedCP() => _earnedCreditPoints;
-  int getMaxCP() => _maxCreditPoints;
+  int getMaxCP() {
+    return _maxCreditPoints;
+  }
+
   int getStudyTypeIndex() => _studyTypeIndex;
 
   int getSED() => _sed;
@@ -53,7 +56,9 @@ class ProfileController {
     } else {
       _dualStudyCtrl.text = "Duales Studium";
     }
-    _studyTypeIndex = type;
+    if (type != null) {
+      _studyTypeIndex = type;
+    }
   }
 
   void setEarnedCP(int _cp) {
@@ -96,6 +101,12 @@ class ProfileController {
     _qspCtrl.text = prefs.getString("qsp");
     _dualStudyCtrl.text = prefs.getString("studyType");
     _studyTypeIndex = prefs.getInt("studyTypeIndex");
+    if (_studyTypeIndex == null) {
+      _studyTypeIndex = 0;
+      setStudyType(_studyTypeIndex);
+      saveData();
+    }
+    adjustMaxCP();
   }
 
   void showAchievement(BuildContext context){

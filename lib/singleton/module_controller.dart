@@ -14,7 +14,10 @@ class ModuleController {
   ModuleController._internal();
 
   List<Module> _selectedModules = new List<Module>();
-  Module _replacedModules;
+  List<Module> _replacedQSPModules = new List<Module>();
+  Module _backupQSPPlaceHolder;
+  List<Module> _replacedWPFModules = new List<Module>();
+  Module _backupWPFPlaceHolder;
   List<Module> _allModules;
 
   //Getter
@@ -28,10 +31,10 @@ class ModuleController {
     List<Module> _modules = new List<Module>();
     _modules = ModuleController()
         .getAllModules()
-        .where((test) => test.isSelected == true)
+        .where((test) => test.properties.isSelected == true)
         .toList();
     for (var i = 0; i < _modules.length; i++) {
-      _widgets.add(_modules[i].module());
+      _widgets.add(_modules[i]);
     }
     return _widgets;
   }
@@ -43,12 +46,12 @@ class ModuleController {
     List<Module> _modules = new List<Module>();
     _modules = ModuleController()
         .getAllModules()
-        .where((test) => test.isDone == true)
+        .where((test) => test.properties.isDone == true)
         .toList();
 
     for (var i = 0; i < _modules.length; i++) {
-      if (_modules[i].grade != 0.0) {
-        _grades.add(_modules[i].grade);
+      if (_modules[i].properties.grade != 0.0) {
+        _grades.add(_modules[i].properties.grade);
       }
     }
 
@@ -59,7 +62,7 @@ class ModuleController {
     List<Module> _modules = new List<Module>();
     _modules = ModuleController()
         .getAllModules()
-        .where((test) => test.isDone == true)
+        .where((test) => test.properties.isDone == true)
         .toList();
     return _modules;
   }
@@ -69,10 +72,10 @@ class ModuleController {
     List<Module> _modules = new List<Module>();
     _modules = ModuleController()
         .getAllModules()
-        .where((test) => test.isDone == true)
+        .where((test) => test.properties.isDone == true)
         .toList();
     for (var i = 0; i < _modules.length; i++) {
-      _names.add(_modules[i].title);
+      _names.add(_modules[i].properties.title);
     }
     return _names;
   }
@@ -85,21 +88,21 @@ class ModuleController {
     if (title == "Security and Network") {
       _modules = ModuleController()
           .getAllModules()
-          .where((test) => test.qsp.contains("SN") && test.isDone == false)
+          .where((test) => test.properties.qsp.contains("SN") && test.properties.isDone == false)
           .toList();
     } else if (title == "Visual Computing") {
       _modules = ModuleController()
           .getAllModules()
-          .where((test) => test.qsp.contains("VC") && test.isDone == false)
+          .where((test) => test.properties.qsp.contains("VC") && test.properties.isDone == false)
           .toList();
     } else if (title == "Software Engineering and Development") {
       _modules = ModuleController()
           .getAllModules()
-          .where((test) => test.qsp.contains("SED") && test.isDone == false)
+          .where((test) => test.properties.qsp.contains("SED") && test.properties.isDone == false)
           .toList();
     }
     for (var i = 0; i < _modules.length; i++) {
-      _widgets.add(_modules[i].module());
+      _widgets.add(_modules[i]);
     }
     return _widgets;
   }
@@ -110,10 +113,10 @@ class ModuleController {
     List<Module> _modules = new List<Module>();
     _modules = ModuleController()
         .getAllModules()
-        .where((test) => test.qsp.contains("WPF") && test.isDone == false)
+        .where((test) => test.properties.qsp.contains("WPF") && test.properties.isDone == false)
         .toList();
     for (var i = 0; i < _modules.length; i++) {
-      _widgets.add(_modules[i].module());
+      _widgets.add(_modules[i]);
     }
     return _widgets;
   }
@@ -124,10 +127,10 @@ class ModuleController {
     List<Module> _modules = new List<Module>();
     _modules = ModuleController()
         .getAllModules()
-        .where((test) => test.semester == index && test.isDone == false)
+        .where((test) => test.properties.semester == index && test.properties.isDone == false)
         .toList();
     for (var i = 0; i < _modules.length; i++) {
-      _widgets.add(_modules[i].module());
+      _widgets.add(_modules[i]);
     }
 
     return _widgets;
@@ -139,10 +142,10 @@ class ModuleController {
     List<Module> _modules = new List<Module>();
     _modules = ModuleController()
         .getAllModules()
-        .where((test) => test.semester == index)
+        .where((test) => test.properties.semester == index)
         .toList();
     for (var i = 0; i < _modules.length; i++) {
-      _widgets.add(_modules[i].module());
+      _widgets.add(_modules[i]);
     }
 
     return _widgets;
@@ -152,7 +155,7 @@ class ModuleController {
   List<Widget> getAllModulesWidgets() {
     List<Widget> _widgets = new List<Widget>();
     for (int i = 0; i < _allModules.length; i++) {
-      _widgets.add(_allModules[i].module());
+      _widgets.add(_allModules[i]);
     }
     return _widgets;
   }
@@ -163,7 +166,7 @@ class ModuleController {
 
     _modules = ModuleController()
         .getAllModules()
-        .where((test) => test.isDone == true)
+        .where((test) => test.properties.isDone == true)
         .toList();
     return _modules;
   }
@@ -173,24 +176,37 @@ class ModuleController {
     int sum = 0;
     for (int i = 0; i < _modules.length; i++) {
       if (_modules[i].getGrade() != 0.0) {
-        sum += _modules[i].cp;
+        sum += _modules[i].properties.cp;
       }
     }
     return sum;
   }
 
-  void replacePlaceholder(Module _module) {
-    _replacedModules.id = _module.id;
-    _replacedModules.title = _module.title;
-    _replacedModules.code = _module.code;
-    _replacedModules.grade = _module.grade;
-    _replacedModules.isDone = _module.isDone;
-    _replacedModules.isSelected = _module.isSelected;
-    _replacedModules.qsp = _module.qsp;
-    _replacedModules.cp = _module.cp;
-    updateModule(_replacedModules);
+  void replaceQSPPlaceholder(Module _module) {
+    _module.properties.semester = _backupQSPPlaceHolder.properties.semester;
+    removeFromAllModule(_backupQSPPlaceHolder);
   }
 
+  void replaceQSP(Module _module) {
+    int index = _replacedQSPModules
+        .indexWhere((module) => module.properties.semester == _module.properties.semester);
+    _allModules.add(_replacedQSPModules[index]);
+    DBProvider.db.createModule(_replacedQSPModules[index]);
+    _module.properties.semester = null;
+  }
+
+  void replaceWPFPlaceholder(Module _module) {
+    _module.properties.semester = _backupWPFPlaceHolder.properties.semester;
+    removeFromAllModule(_backupWPFPlaceHolder);
+  }
+
+  void replaceWPF(Module _module) {
+    int index = _replacedWPFModules
+        .indexWhere((module) => module.properties.semester == _module.properties.semester);
+    _allModules.add(_replacedWPFModules[index]);
+    DBProvider.db.createModule(_replacedWPFModules[index]);
+    _module.properties.semester = null;
+  }
   //Setter
 
   void setModulesFromDatabase() async {
@@ -200,7 +216,7 @@ class ModuleController {
   }
 
   void addToAllModules(Module _module) {
-    int index = _allModules.indexWhere((module) => module.id == _module.id);
+    int index = _allModules.indexWhere((module) => module.properties.id == _module.properties.id);
     if (index == -1) {
       _allModules.add(_module);
       DBProvider.db.createModule(_module);
@@ -211,21 +227,35 @@ class ModuleController {
   }
 
   void removeFromAllModule(Module _module) {
-    DBProvider.db.deleteModule(_module.id);
+    int index = _allModules.indexWhere((module) => module.properties.id == _module.properties.id);
+    _allModules.removeAt(index);
+    DBProvider.db.deleteModule(_module.properties.id);
   }
 
   void updateModule(Module _module) {
-    int index = _allModules.indexWhere((module) => module.id == _module.id);
+    int index = _allModules.indexWhere((module) => module.properties.id == _module.properties.id);
     _allModules[index] = _module;
     DBProvider.db.updateModule(_allModules[index]);
   }
 
-  void addReplacedModule(Module _module) {
-    _replacedModules = _module;
+  void addReplacedQSPModule(Module _module) {
+    _replacedQSPModules.add(_module);
+    _backupQSPPlaceHolder = _module;
   }
 
-  void removeReplacedModule(Module _module) {
-    _replacedModules = _module;
+  void removeReplacedQSPModule(Module _module) {
+    int index = _allModules.indexWhere((module) => module.properties.semester == _module.properties.semester);
+    _allModules.removeAt(index);
+  }
+
+  void addReplacedWPFModule(Module _module) {
+    _replacedWPFModules.add(_module);
+    _backupWPFPlaceHolder = _module;
+  }
+
+  void removeReplacedWPFModule(Module _module) {
+    int index = _allModules.indexWhere((module) => module.properties.semester == _module.properties.semester);
+    _allModules.removeAt(index);
   }
 
   void addSelectedModule(Module _module) {
