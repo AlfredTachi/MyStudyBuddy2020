@@ -13,47 +13,67 @@ class ModuleAddGradeDialog extends StatefulWidget {
 
 class ModuleAddGradeDialogState extends State<ModuleAddGradeDialog> {
   TextEditingController _gradeCtrl = TextEditingController();
-  String grade;
+  String grade = "";
+  String errorMessage = "";
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Note eintragen!'),
-      content: FractionallySizedBox(
-        heightFactor: 0.55,
-        child: Container(
-          child: Column(
-            children: [
-              TextField(
-                onChanged: (_val) {
-                  grade = _val;
-                },
-                controller: _gradeCtrl,
-                decoration: InputDecoration(
-                    counterText: "", hintText: "Note zwischen 1.0 und 4.0"),
-                maxLength: 3,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-              ),
-              OutlineButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Zurück")),
-              OutlineButton(
-                  onPressed: () {
-                    if (double.parse(grade) > 4.0) {
-                      disposeData();
-                    } else if (double.parse(grade) < 1.0) {
-                      disposeData();
-                    } else
-                      update(double.parse(grade), widget.module);
-                    disposeData();
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Speichern"))
-            ],
+      content: Wrap(
+        children: [
+          TextField(
+            onChanged: (_val) {
+              grade = _val;
+            },
+            controller: _gradeCtrl,
+            decoration: InputDecoration(
+              counterText: "",
+              hintText: "Note zwischen 1.0 und 4.0",
+            ),
+            maxLength: 3,
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
           ),
-        ),
+          (errorMessage.isNotEmpty)
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    errorMessage,
+                    style: TextStyle(color: Colors.red, fontSize: 10),
+                  ),
+                )
+              : Container(),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: OutlineButton(
+              onPressed: () {
+                if (grade.isNotEmpty) {
+                  try {
+                    if (double.tryParse(grade) >= 1.0 &&
+                        double.tryParse(grade) <= 4.0) {
+                      update(double.parse(grade), widget.module);
+                      errorMessage = "";
+                      Navigator.of(context).pop();
+                    } else {
+                      setState(() {
+                        errorMessage =
+                            "Die Eingegebene Note war nicht gültig.\nVersuche es nochmal.";
+                      });
+                    }
+                    _gradeCtrl.text = "";
+                  } catch (ex) {
+                    setState(() {
+                      _gradeCtrl.text = "";
+                      errorMessage = "Ein ungültiges Zeichen wurde verwendet.";
+                      print("Eingabe war nicht korrekt!");
+                    });
+                  }
+                }
+              },
+              child: Text("Speichern"),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -64,9 +84,5 @@ class ModuleAddGradeDialogState extends State<ModuleAddGradeDialog> {
     module.properties.isSelected = false;
     ModuleController().removeSelectedModule(module);
     ModuleController().updateModule(module);
-  }
-
-  void disposeData() async {
-    _gradeCtrl.text = "";
   }
 }
