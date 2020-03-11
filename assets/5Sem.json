@@ -1,8 +1,8 @@
 [
     {
-		"0":"Welcher der folgenden Grundsätze ist keiner der sieben Grundsätze der Dialoggestaltung nach DIN EN ISO 9241-110 (früher ISO 9241-10)",
-        "1":"Welche der folgenden Möglichkeiten gehört nicht zu den 8 Fallacies verteilter Systeme",
-		"2":"",
+		"0":"Welcher der folgenden Grundsätze ist keiner der sieben Grundsätze der Dialoggestaltung nach DIN EN ISO 9241-110 (früher ISO 9241-10)?",
+        "1":"Welche der folgenden Möglichkeiten gehört nicht zu den 8 Fallacies verteilter Systeme?",
+		"2":"Was ist die Millersche Zahl nach George Miller, 1956?",
 		"3":"",
 		"4":"",
 		"5":"",
@@ -26,10 +26,10 @@
             "d": "Die Latenzzeit ist immer größer 0"
         },
 		"2": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "Die Limitierung des Arbeitsgedächntnis auf 7 +- 2 Informationseinheiten",
+            "b": "Die Limitierung des Langzeitgedächtnis auf 10 +- 2 Informationseinheiten",
+            "c": "Die Limitierung des Langzeitgedächtnis auf 7 +- 2 Informationseinheiten",
+            "d": "Die Limitierung des Arbeitsgedächntnis auf 7 +- 2 Informationseinheiten"
         },
 		"3": {
             "a": "",
@@ -77,7 +77,7 @@
     {
 		"0":"Atomarität",
         "1":"Die Latenzzeit ist immer größer 0",
-		"2":"",
+		"2":"Limitierung des Arbeitsgedächntnis auf 7 +- 2 Informationseinheiten",
 		"3":"",
 		"4":"",
 		"5":"",
@@ -89,7 +89,7 @@
     {
 		"0":"UX",
         "1":"CSA",
-		"2":"",
+		"2":"UX",
 		"3":"",
 		"4":"",
 		"5":"",
