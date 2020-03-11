@@ -66,7 +66,7 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
           FlatButton(
             child: Text(_gradeText),
             onPressed: () async {
-              if (widget.module.properties.grade != 0) {
+              if (widget.module.properties.grade != 0 && widget.module.properties.grade != null) {
                 setState(() {
                   widget.module.properties.grade = 0;
                   ModuleController().updateModule(widget.module);
