@@ -32,7 +32,8 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
   }
 
   void _setGradeString() {
-    if (widget.module.properties.grade != 0)
+    if (widget.module.properties.grade != 0 &&
+        widget.module.properties.grade != null)
       _gradeText = "Note löschen";
     else
       _gradeText = "Note eintragen";
