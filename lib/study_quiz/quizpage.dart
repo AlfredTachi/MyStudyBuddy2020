@@ -150,7 +150,7 @@ class _QuizpageState extends State<Quizpage> {
         j++;
       } else {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => Resultpage(marks: marks),
+          builder: (context) => Resultpage(marks: marks, mydatatemp: mydatatemp),
         ));
       }
       btncolor["a"] = Colors.orangeAccent[200];
