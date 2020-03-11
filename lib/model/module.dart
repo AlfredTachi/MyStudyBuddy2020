@@ -128,7 +128,7 @@ class ModuleState extends State<Module> {
           },
           child: Column(
             children: <Widget>[
-              widget.properties.grade != null
+              (widget.properties.grade != null && widget.properties.grade != 0)
                   ? Expanded(
                       flex: 3,
                       child: Padding(
@@ -157,7 +157,7 @@ class ModuleState extends State<Module> {
                             )),
                       ),
                     ),
-              widget.properties.grade != null
+              (widget.properties.grade != null && widget.properties.grade != 0)
                   ? Expanded(
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 8),

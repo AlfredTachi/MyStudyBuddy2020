@@ -14,15 +14,28 @@ class ModuleOptionsDialog extends StatefulWidget {
 }
 
 class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
-  String btnText;
+  String _selectModuleText;
+  String _gradeText;
 
   @override
   void initState() {
     super.initState();
+    _setSelectedModuleText();
+    _setGradeString();
+  }
+
+  void _setSelectedModuleText() {
     if (widget.module.properties.isSelected)
-      btnText = "Modul abwählen";
+      _selectModuleText = "Modul abwählen";
     else
-      btnText = "Modul wählen";
+      _selectModuleText = "Modul wählen";
+  }
+
+  void _setGradeString() {
+    if (widget.module.properties.grade != 0)
+      _gradeText = "Note löschen";
+    else
+      _gradeText = "Note eintragen";
   }
 
   @override
@@ -50,16 +63,28 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
                 );
               }),
           FlatButton(
-            child: Text("Note Eintragen"),
-            onPressed: () {
-              return showDialog(
-                context: context,
-                child: ModuleAddGradeDialog(widget.module),
-              );
+            child: Text(_gradeText),
+            onPressed: () async {
+              if (widget.module.properties.grade != 0) {
+                setState(() {
+                  widget.module.properties.grade = 0;
+                  ModuleController().updateModule(widget.module);
+                  _setGradeString();
+                });
+              } else {
+                return showDialog(
+                  context: context,
+                  child: ModuleAddGradeDialog(widget.module),
+                ).whenComplete(() {
+                  setState(() {
+                    _setGradeString();
+                  });
+                });
+              }
             },
           ),
           FlatButton(
-            child: Text(btnText),
+            child: Text(_selectModuleText),
             onPressed: () {
               if (widget.module.properties.isSelected) {
                 widget.module.properties.isSelected = false;
@@ -67,14 +92,10 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
                     widget.module.properties.qsp.contains("VC") ||
                     widget.module.properties.qsp.contains("SED")) {
                   ModuleController().replaceQSP(widget.module);
-                  ModuleController().removeSelectedModule(widget.module);
-                  ModuleController().removeReplacedQSPModule(widget.module);
-                  ModuleController().updateModule(widget.module);
+                  removeInModuleController(widget.module);
                 } else if (widget.module.properties.qsp.contains("WPF")) {
                   ModuleController().replaceWPF(widget.module);
-                  ModuleController().removeSelectedModule(widget.module);
-                  ModuleController().removeReplacedWPFModule(widget.module);
-                  ModuleController().updateModule(widget.module);
+                  removeInModuleController(widget.module);
                 } else {
                   ModuleController().removeSelectedModule(widget.module);
                   ModuleController().updateModule(widget.module);
@@ -85,16 +106,10 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
                     widget.module.properties.qsp.contains("VC") ||
                     widget.module.properties.qsp.contains("SED")) {
                   ModuleController().replaceQSPPlaceholder(widget.module);
-                  ModuleController().addSelectedModule(widget.module);
-                  ModuleController().updateModule(widget.module);
                 } else if (widget.module.properties.qsp.contains("WPF")) {
                   ModuleController().replaceWPFPlaceholder(widget.module);
-                  ModuleController().addSelectedModule(widget.module);
-                  ModuleController().updateModule(widget.module);
-                } else {
-                  ModuleController().addSelectedModule(widget.module);
-                  ModuleController().updateModule(widget.module);
                 }
+                addInModuleController(widget.module);
               }
               Navigator.of(context).pop();
             },
@@ -102,5 +117,16 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
         ]),
       ),
     );
+  }
+
+  void addInModuleController(Module module) {
+    ModuleController().addSelectedModule(widget.module);
+    ModuleController().updateModule(widget.module);
+  }
+
+  void removeInModuleController(Module module) {
+    ModuleController().removeSelectedModule(widget.module);
+    ModuleController().removeReplacedQSPModule(widget.module);
+    ModuleController().updateModule(widget.module);
   }
 }
