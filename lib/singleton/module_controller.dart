@@ -173,17 +173,6 @@ class ModuleController {
     return _modules;
   }
 
-  int sumAllCP() {
-    List<Module> _modules = getAllDoneModules();
-    int sum = 0;
-    for (int i = 0; i < _modules.length; i++) {
-      if (_modules[i].getGrade() != 0.0) {
-        sum += _modules[i].properties.cp;
-      }
-    }
-    return sum;
-  }
-
   void replaceQSPPlaceholder(Module _module) {
     _module.properties.semester = _backupQSPPlaceHolder.properties.semester;
     removeFromAllModule(_backupQSPPlaceHolder);
@@ -214,7 +203,7 @@ class ModuleController {
   void setModulesFromDatabase() async {
     _allModules = await DBProvider.db.readAllModules();
     _selectedModules = await DBProvider.db.readSelectedModules();
-    ProfileController().setEarnedCP(sumAllCP());
+    ProfileController().sumAllCP();
   }
 
   void addToAllModules(Module _module) {

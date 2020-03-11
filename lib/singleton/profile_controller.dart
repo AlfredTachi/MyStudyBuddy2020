@@ -1,3 +1,5 @@
+import 'package:MyStudyBuddy2/model/module.dart';
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:achievement_view/achievement_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -91,6 +93,17 @@ class ProfileController {
     } else if (_studyTypeIndex > 0) {
       _maxCreditPoints = 210;
     }
+  }
+
+  void sumAllCP() {
+    List<Module> _modules = ModuleController().getAllDoneModules();
+    int sum = 0;
+    for (int i = 0; i < _modules.length; i++) {
+      if (_modules[i].getGrade() != 0.0) {
+        sum += _modules[i].properties.cp;
+      }
+    }
+    setEarnedCP(sum);
   }
 
   void saveData() async {

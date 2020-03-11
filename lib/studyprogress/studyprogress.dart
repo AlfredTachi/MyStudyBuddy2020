@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/studyprogress/staggered_view_studyprogress/staggered_view_studyprogress.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
@@ -140,6 +141,7 @@ class StudyprogressState extends State<Studyprogress> {
                             userPassword);
                       });
                   }
+                  ProfileController().sumAllCP();
                 } catch (err) {
                   print(err);
                 }

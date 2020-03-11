@@ -13,6 +13,7 @@ class Dashboard extends StatefulWidget {
 class DashboardState extends State<Dashboard> {
   @override
   void initState() {
+    ProfileController().sumAllCP();
     ProfileController().loadData();
     super.initState();
   }
