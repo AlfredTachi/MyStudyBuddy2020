@@ -130,11 +130,15 @@ class ModuleState extends State<Module> {
                   } else {
                     State<StatefulWidget> state =
                         ModuleController().key.currentState;
-                    state.setState(() {
-                      if (widget.properties.isDone) {
-                        ProfileController().addEarnedCP(widget.properties.cp);
-                      }
-                    });
+                    try {
+                      state.setState(() {
+                        if (widget.properties.isDone) {
+                          ProfileController().addEarnedCP(widget.properties.cp);
+                        }
+                      });
+                    } catch (ex) {
+                      print("State fehlt! Kein Grund zur Sorge ;)");
+                    }
                   }
                 });
               });
