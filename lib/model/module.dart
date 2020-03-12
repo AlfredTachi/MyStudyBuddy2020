@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/dialogs/module_options_dialog.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
@@ -129,11 +130,19 @@ class ModuleState extends State<Module> {
                   } else {
                     State<StatefulWidget> state =
                         ModuleController().key.currentState;
-                    state.setState(() {
-                      if (widget.properties.isDone) {
-                        ProfileController().addEarnedCP(widget.properties.cp);
+                    if (state != null) {
+                      state.setState(() {
+                        if (widget.properties.isDone) {
+                          ProfileController().addEarnedCP(widget.properties.cp);
+                        }
+                      });
+                      if (ModuleController().key.currentContext != null) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          Achievement().showAchievement(
+                              ModuleController().key.currentContext, 9);
+                        });
                       }
-                    });
+                    }
                   }
                 });
               });

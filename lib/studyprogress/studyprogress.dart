@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/studyprogress/staggered_view_studyprogress/staggered_view_studyprogress.dart';
@@ -22,7 +23,9 @@ class StudyprogressState extends State<Studyprogress> {
               return IconButton(
                   icon: Icon(Icons.cloud_download),
                   onPressed: () {
-                    _downloadLSFData(context);
+                    _downloadLSFData(context).whenComplete(() {
+                      Achievement().showAchievement(context, 8);
+                    });
                   });
             })
           ],

@@ -1,4 +1,4 @@
-import 'package:MyStudyBuddy2/model/achievement.dart';
+import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +21,9 @@ class DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Achievement().showAchievement(context, 0);
+    });
     updateView();
     double spacing = MediaQuery.of(context).size.width / 1.8;
     return SafeArea(
@@ -30,7 +33,6 @@ class DashboardState extends State<Dashboard> {
           onPressed: () {
             Navigator.pushNamed(context, "/modulSelection")
                 .whenComplete(() => updateView());
-                AchievmentsPage("Hier kannst du", "deine Module planen").achievementContext(context);
           },
           tooltip: 'Modul hinzufügen',
           child: Icon(Icons.add),
@@ -46,7 +48,6 @@ class DashboardState extends State<Dashboard> {
                   ),
                   onPressed: () {
                     Navigator.of(context).pushNamed("/profilePage");
-                    AchievmentsPage("hallo", "hier ist Profilseite").achievementContext(context);
                   },
                 )),
             Container(
