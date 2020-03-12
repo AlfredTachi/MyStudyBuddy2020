@@ -164,7 +164,7 @@ class Achievement {
 
     if (_prop.isDone == false) {
       await setAchievementToDone(_prop);
-      print("Zeige!");
+      // print("Zeige!");
       AchievementView(
         context,
         icon: ImageIcon(_prop.icon),
@@ -185,7 +185,7 @@ class Achievement {
     SharedPreferences pref = await SharedPreferences.getInstance();
     _prop.isDone = true;
     pref.setBool(_prop.id.toString(), _prop.isDone);
-    print("Speichern!");
+    // print("Speichern!");
   }
 
   Future<void> loadAchievements() async {
@@ -196,7 +196,7 @@ class Achievement {
               ? false
               : true;
     }
-    print("Laden");
+    // print("Laden");
   }
 }
 
