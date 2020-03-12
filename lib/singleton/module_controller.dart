@@ -1,4 +1,3 @@
-import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
