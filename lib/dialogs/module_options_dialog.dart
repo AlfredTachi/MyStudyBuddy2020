@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/dialogs/module_add_grade_dialog.dart';
 import 'package:MyStudyBuddy2/dialogs/module_informations.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
@@ -25,10 +26,11 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
   }
 
   void _setSelectedModuleText() {
-    if (widget.module.properties.isSelected)
+    if (widget.module.properties.isSelected) {
       _selectModuleText = "Modul abwählen";
-    else
+    } else {
       _selectModuleText = "Modul wählen";
+    }
   }
 
   void _setGradeString() {
@@ -66,7 +68,8 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
           FlatButton(
             child: Text(_gradeText),
             onPressed: () async {
-              if (widget.module.properties.grade != 0 && widget.module.properties.grade != null) {
+              if (widget.module.properties.grade != 0 &&
+                  widget.module.properties.grade != null) {
                 setState(() {
                   widget.module.properties.grade = 0;
                   ModuleController().updateModule(widget.module);
@@ -103,6 +106,12 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
                 }
               } else {
                 widget.module.properties.isSelected = true;
+                if (ModuleController().key.currentContext != null) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    Achievement().showAchievement(
+                        ModuleController().key.currentContext, 9);
+                  });
+                }
                 if (widget.module.properties.qsp.contains("SN") ||
                     widget.module.properties.qsp.contains("VC") ||
                     widget.module.properties.qsp.contains("SED")) {

@@ -102,7 +102,7 @@ class Achievement {
     AchivementProperties(
       id: 3,
       icon: AssetImage("assets/icons/achievement/3.png"),
-      title: "Schwerpunkt Experte",
+      title: "Angehender Informatiker",
       description: "Schließe das dritte Semester ab! (90 CP).",
       isDone: false,
     ),
@@ -163,7 +163,7 @@ class Achievement {
         allAchivements.firstWhere((item) => item.id == id);
 
     if (_prop.isDone == false) {
-      // await setAchievementToDone(_prop);
+      await setAchievementToDone(_prop);
       print("Zeige!");
       AchievementView(
         context,

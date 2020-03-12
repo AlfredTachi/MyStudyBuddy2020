@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -68,6 +69,7 @@ class ProfileController {
 
   void addEarnedCP(int _cp) {
     _earnedCreditPoints += _cp;
+    setAchievements();
   }
 
   void setEarnedCP(int _cp) {
@@ -94,6 +96,30 @@ class ProfileController {
     }
   }
 
+  void setAchievements() {
+    if (_earnedCreditPoints >= 30 && _earnedCreditPoints < 60) {
+      Achievement().showAchievement(ModuleController().key.currentContext, 1);
+    }
+    if (_earnedCreditPoints >= 60 && _earnedCreditPoints < 90) {
+      Achievement().showAchievement(ModuleController().key.currentContext, 2);
+    }
+    if (_earnedCreditPoints >= 90 && _earnedCreditPoints < 120) {
+      Achievement().showAchievement(ModuleController().key.currentContext, 3);
+    }
+    if (_earnedCreditPoints >= 120 && _earnedCreditPoints < 150) {
+      Achievement().showAchievement(ModuleController().key.currentContext, 4);
+    }
+    if (_earnedCreditPoints >= 150 && _earnedCreditPoints < 180) {
+      Achievement().showAchievement(ModuleController().key.currentContext, 5);
+    }
+    if (_earnedCreditPoints >= 180 && _earnedCreditPoints < 210) {
+      Achievement().showAchievement(ModuleController().key.currentContext, 6);
+    }
+    if (_earnedCreditPoints >= 210) {
+      Achievement().showAchievement(ModuleController().key.currentContext, 7);
+    }
+  }
+
   void sumAllCP() {
     List<Module> _modules = ModuleController().getAllDoneModules();
     int sum = 0;
@@ -103,6 +129,7 @@ class ProfileController {
       }
     }
     setEarnedCP(sum);
+    setAchievements();
   }
 
   void saveData() async {

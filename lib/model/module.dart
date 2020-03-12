@@ -136,12 +136,6 @@ class ModuleState extends State<Module> {
                           ProfileController().addEarnedCP(widget.properties.cp);
                         }
                       });
-                      if (ModuleController().key.currentContext != null) {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          Achievement().showAchievement(
-                              ModuleController().key.currentContext, 9);
-                        });
-                      }
                     }
                   }
                 });
