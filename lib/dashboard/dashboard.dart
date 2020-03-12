@@ -1,6 +1,6 @@
-import 'package:MyStudyBuddy2/model/achievement.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
+import 'package:achievement_view/achievement_view.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
@@ -30,7 +30,7 @@ class DashboardState extends State<Dashboard> {
           onPressed: () {
             Navigator.pushNamed(context, "/modulSelection")
                 .whenComplete(() => updateView());
-                AchievmentsPage("Hier kannst du", "deine Module planen").achievementContext(context);
+                AchievementView(context, title: "Plane dein Modul").show();
           },
           tooltip: 'Modul hinzufügen',
           child: Icon(Icons.add),
@@ -46,7 +46,7 @@ class DashboardState extends State<Dashboard> {
                   ),
                   onPressed: () {
                     Navigator.of(context).pushNamed("/profilePage");
-                    AchievmentsPage("hallo", "hier ist Profilseite").achievementContext(context);
+                    AchievementView(context).show();
                   },
                 )),
             Container(
