@@ -20,24 +20,47 @@ class ProfilePageState extends State<ProfilePage> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Align(
-              alignment: Alignment.topLeft,
-              child: OutlineButton(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 3, bottom: 3),
-                    child: Icon(
-                      Icons.arrow_back,
-                      size: 36,
-                    ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: OutlineButton(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 3, bottom: 3),
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: 36,
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        )),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        }),
                   ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(15),
-                    bottomRight: Radius.circular(15),
-                  )),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  }),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: FlatButton(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 3, bottom: 3),
+                          child: ImageIcon(
+                            AssetImage(
+                                "assets/icons/achievement/achievement.png"),
+                            size: 36,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed("/achievement");
+                        }),
+                  ),
+                ),
+              ],
             ),
             Expanded(
               flex: 4,

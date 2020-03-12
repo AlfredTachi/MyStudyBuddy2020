@@ -73,6 +73,7 @@ flutter:
       - assets/
       - assets/images/
       - assets/icons/app_icon/
+      - assets/icons/achievement/
   #   - images/a_dot_ham.jpeg
       - assets/icons/QSP/Software_Icon.png
       - assets/icons/QSP/Medieninformatik_Icon.png

@@ -3,6 +3,7 @@ import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection.dart';
 import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection_QSP.dart';
 import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection_WPF.dart';
+import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/dashboard/profile_page/profile_page.dart';
 import 'package:MyStudyBuddy2/evaluation/evaluation.dart';
 import 'package:MyStudyBuddy2/evaluation/module_list.dart';
@@ -74,6 +75,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => MoralSupport());
       case '/gradesList':
         return MaterialPageRoute(builder: (_) => GradesList());
+      case '/achievement':
+        return MaterialPageRoute(builder: (_) => AchievementPage());
       default:
         return _errorRoute();
     }
