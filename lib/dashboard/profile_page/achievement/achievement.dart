@@ -24,7 +24,7 @@ class AchievementPageState extends State<AchievementPage> {
                 return ListView.builder(
                   itemCount: Achievement().allAchivements.length,
                   itemBuilder: (BuildContext _context, int _index) {
-                    AchivementProperties prop =
+                    AchievementProperties prop =
                         Achievement().allAchivements[_index];
                     return ListTile(
                       trailing: (prop.isDone)
@@ -77,80 +77,80 @@ class Achievement {
   //Instance
   static final Achievement _instance = Achievement._internal();
 
-  List<AchivementProperties> allAchivements = [
-    AchivementProperties(
+  List<AchievementProperties> allAchivements = [
+    AchievementProperties(
       id: 0,
-      icon: AssetImage("assets/icons/achievement/schaf.png"),
+      icon: AssetImage("assets/icons/achievement/mein_studium.png"),
       title: "Mein Studium",
       description: "Besuche zum ersten mal die \"Mein Studium\" Seite.",
       isDone: false,
     ),
-    AchivementProperties(
+    AchievementProperties(
       id: 1,
       icon: AssetImage("assets/icons/achievement/1.png"),
       title: "Ich bin schon fast 12!",
       description: "Schließe das erste Semester ab! (30 CP)",
       isDone: false,
     ),
-    AchivementProperties(
+    AchievementProperties(
       id: 2,
       icon: AssetImage("assets/icons/achievement/2.png"),
       title: "Wie lange noch?",
       description: "Schließe das zweite Semester ab! (60 CP).",
       isDone: false,
     ),
-    AchivementProperties(
+    AchievementProperties(
       id: 3,
       icon: AssetImage("assets/icons/achievement/3.png"),
       title: "Angehender Informatiker",
       description: "Schließe das dritte Semester ab! (90 CP).",
       isDone: false,
     ),
-    AchivementProperties(
+    AchievementProperties(
       id: 4,
       icon: AssetImage("assets/icons/achievement/4.png"),
       title: "Nicht mehr lange!",
       description: "Schließe das vierte Semester ab! (120 CP).",
       isDone: false,
     ),
-    AchivementProperties(
+    AchievementProperties(
       id: 5,
       icon: AssetImage("assets/icons/achievement/5.png"),
       title: "Viel Spaß bei TOP!",
       description: "Schließe das fünfte Semester ab! (150 CP).",
       isDone: false,
     ),
-    AchivementProperties(
+    AchievementProperties(
       id: 6,
       icon: AssetImage("assets/icons/achievement/6.png"),
       title: "Ist das schon das Ende?",
       description: "Schließe das sechste Semester ab! (180 CP).",
       isDone: false,
     ),
-    AchivementProperties(
+    AchievementProperties(
       id: 7,
       icon: AssetImage("assets/icons/achievement/7.png"),
       title: "Wie, ich mache den Master?",
       description: "Schliese das siebte Semester ab! (210 CP).",
       isDone: false,
     ),
-    AchivementProperties(
+    AchievementProperties(
       id: 8,
-      icon: AssetImage("assets/icons/achievement/schaf.png"),
+      icon: AssetImage("assets/icons/achievement/frohes_schaffen.png"),
       title: "Frohes(?) Schaffen",
       description: "Versuche deine Daten aus dem LSF zu ziehen.",
       isDone: false,
     ),
-    AchivementProperties(
+    AchievementProperties(
       id: 9,
-      icon: AssetImage("assets/icons/achievement/schaf.png"),
+      icon: AssetImage("assets/icons/achievement/planer.png"),
       title: "Planer",
       description: "Plane dein erstes Modul ein.",
       isDone: false,
     ),
-    AchivementProperties(
+    AchievementProperties(
       id: 10,
-      icon: AssetImage("assets/icons/achievement/schaf.png"),
+      icon: AssetImage("assets/icons/achievement/hungrig.png"),
       title: "Hungeriger Studi!",
       description: "Öffne den Mensaplan.",
       isDone: false,
@@ -159,7 +159,7 @@ class Achievement {
 
   showAchievement(BuildContext context, int id) async {
     await loadAchievements();
-    AchivementProperties _prop =
+    AchievementProperties _prop =
         allAchivements.firstWhere((item) => item.id == id);
 
     if (_prop.isDone == false) {
@@ -181,7 +181,16 @@ class Achievement {
     }
   }
 
-  Future<void> setAchievementToDone(AchivementProperties _prop) async {
+  Future<void> setAchievementToDoneByID(int id) async {
+    AchievementProperties prop =
+        allAchivements.firstWhere((item) => item.id == id);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    prop.isDone = true;
+    pref.setBool(prop.id.toString(), prop.isDone);
+    // print("Speichern!");
+  }
+
+  Future<void> setAchievementToDone(AchievementProperties _prop) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     _prop.isDone = true;
     pref.setBool(_prop.id.toString(), _prop.isDone);
@@ -200,18 +209,18 @@ class Achievement {
   }
 }
 
-class AchivementProperties {
+class AchievementProperties {
   AssetImage icon;
   String title;
   String description;
   int id;
   bool isDone;
 
-  AchivementProperties(
+  AchievementProperties(
       {this.id, this.icon, this.title, this.description, this.isDone});
 
-  factory AchivementProperties.fromJson(Map<String, dynamic> json) {
-    return AchivementProperties(
+  factory AchievementProperties.fromJson(Map<String, dynamic> json) {
+    return AchievementProperties(
       icon: json["icon"],
       description: json["description"],
       id: json["id"],

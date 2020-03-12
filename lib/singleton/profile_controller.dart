@@ -101,21 +101,42 @@ class ProfileController {
       Achievement().showAchievement(ModuleController().key.currentContext, 1);
     }
     if (_earnedCreditPoints >= 60 && _earnedCreditPoints < 90) {
+      Achievement().setAchievementToDoneByID(1);
       Achievement().showAchievement(ModuleController().key.currentContext, 2);
     }
     if (_earnedCreditPoints >= 90 && _earnedCreditPoints < 120) {
+      Achievement().setAchievementToDoneByID(1);
+      Achievement().setAchievementToDoneByID(2);
       Achievement().showAchievement(ModuleController().key.currentContext, 3);
     }
     if (_earnedCreditPoints >= 120 && _earnedCreditPoints < 150) {
+      Achievement().setAchievementToDoneByID(1);
+      Achievement().setAchievementToDoneByID(2);
+      Achievement().setAchievementToDoneByID(3);
       Achievement().showAchievement(ModuleController().key.currentContext, 4);
     }
     if (_earnedCreditPoints >= 150 && _earnedCreditPoints < 180) {
+      Achievement().setAchievementToDoneByID(1);
+      Achievement().setAchievementToDoneByID(2);
+      Achievement().setAchievementToDoneByID(3);
+      Achievement().setAchievementToDoneByID(4);
       Achievement().showAchievement(ModuleController().key.currentContext, 5);
     }
     if (_earnedCreditPoints >= 180 && _earnedCreditPoints < 210) {
+      Achievement().setAchievementToDoneByID(1);
+      Achievement().setAchievementToDoneByID(2);
+      Achievement().setAchievementToDoneByID(3);
+      Achievement().setAchievementToDoneByID(4);
+      Achievement().setAchievementToDoneByID(5);
       Achievement().showAchievement(ModuleController().key.currentContext, 6);
     }
     if (_earnedCreditPoints >= 210) {
+      Achievement().setAchievementToDoneByID(1);
+      Achievement().setAchievementToDoneByID(2);
+      Achievement().setAchievementToDoneByID(3);
+      Achievement().setAchievementToDoneByID(4);
+      Achievement().setAchievementToDoneByID(5);
+      Achievement().setAchievementToDoneByID(6);
       Achievement().showAchievement(ModuleController().key.currentContext, 7);
     }
   }
