@@ -183,8 +183,13 @@ class ModuleState extends State<Module> {
                             child: FittedBox(
                               fit: BoxFit.contain,
                               child: Text(widget.properties.grade.toString(),
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.lightGreen)),
+                                  style: (widget.properties.grade < 5.0)
+                                      ? TextStyle(
+                                          fontSize: 10,
+                                          color: Colors.lightGreen)
+                                      : TextStyle(
+                                          fontSize: 10,
+                                          color: Colors.red)),
                             )),
                       ),
                     )
@@ -269,6 +274,7 @@ class ModuleState extends State<Module> {
         double _grade =
             double.tryParse(trimmedGradeLines[3].replaceAll(',', '.'));
         bool _passed;
+        bool _selected;
 
         if (index == -1) {
           index = ModuleController().getAllModules().indexWhere((module) =>
@@ -276,11 +282,14 @@ class ModuleState extends State<Module> {
         }
         if (_grade == null) {
           _grade = 0.0;
+          _selected = false;
           _passed = false;
         } else if (_grade >= 1.0 && _grade <= 4.0) {
           _passed = true;
+          _selected = false;
         } else {
           _grade = 5.0;
+          _selected = true;
           _passed = false;
         }
 
@@ -290,7 +299,7 @@ class ModuleState extends State<Module> {
             ModuleController().getAllModules()[index].properties.title,
             _grade,
             _passed,
-            ModuleController().getAllModules()[index].properties.isSelected,
+            _selected,
             ModuleController().getAllModules()[index].properties.qsp,
             ModuleController().getAllModules()[index].properties.cp,
             ModuleController().getAllModules()[index].properties.semester);
