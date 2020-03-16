@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mailer/flutter_mailer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Support extends StatefulWidget {
   @override
@@ -40,6 +41,16 @@ class SupportState extends State<Support> {
                 await FlutterMailer.send(mailOptions);
               } catch (error) {}
             }),
+        ListTile(
+            leading: Icon(Icons.contact_mail),
+            title: Text('Impressum'),
+            onTap: () => launch(
+                "https://www.hs-worms.de/footer/rechtliches/impressum/")),
+        ListTile(
+            leading: Icon(Icons.person_pin),
+            title: Text('Datenschutz'),
+            onTap: () => launch(
+                "https://www.hs-worms.de/footer/rechtliches/datenschutz/")),
       ]),
     );
   }
