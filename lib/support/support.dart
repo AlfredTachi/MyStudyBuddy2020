@@ -45,12 +45,12 @@ class SupportState extends State<Support> {
             leading: Icon(Icons.contact_mail),
             title: Text('Impressum'),
             onTap: () => launch(
-                "https://www.hs-worms.de/footer/rechtliches/impressum/")),
+                "https://atlas.ai.it.hs-worms.de/impressum/")),
         ListTile(
             leading: Icon(Icons.person_pin),
             title: Text('Datenschutz'),
             onTap: () => launch(
-                "https://www.hs-worms.de/footer/rechtliches/datenschutz/")),
+                "https://atlas.ai.it.hs-worms.de/datenschutz/")),
       ]),
     );
   }
