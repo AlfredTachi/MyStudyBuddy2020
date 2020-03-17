@@ -13,35 +13,60 @@ class _PlanerState extends State<Planer> with SingleTickerProviderStateMixin {
   get http => null;
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('LSF Frontend'),
-      ),
-      body: FutureBuilder(
-        future: loadPage(),
-        builder: (BuildContext context, AsyncSnapshot snap) {
-          if (snap.connectionState == ConnectionState.done) {
-            return WebView(
-              initialUrl: 'https://campus.hs-worms.de/apps/WhatsUp/index.html',
-              javascriptMode: JavascriptMode.unrestricted,
-            );
-          } else if (snap.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                  child: Text(
-                    "Es gibt ein Problem bei der Verbindung. Prüfe deine Internetverbindung",
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            );
-          }
-        },
+    return SafeArea(
+          child: Scaffold(
+            backgroundColor: Colors.orangeAccent,
+        body: Column(
+          children: <Widget>[
+              Align(
+                alignment: Alignment.topLeft,
+                child: OutlineButton(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 3, bottom: 3),
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 36,
+                      ),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    )),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+              ),
+            Expanded(
+                        child: FutureBuilder(
+                future: loadPage(),
+                builder: (BuildContext context, AsyncSnapshot snap) {
+                  if (snap.connectionState == ConnectionState.done) {
+                    return WebView(
+                      initialUrl: 'https://campus.hs-worms.de/apps/WhatsUp/index.html',
+                      javascriptMode: JavascriptMode.unrestricted,
+                    );
+                  } else if (snap.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                          child: Text(
+                            "Es gibt ein Problem bei der Verbindung. Prüfe deine Internetverbindung",
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
