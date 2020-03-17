@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
 
-
 class ModuleHandbooks extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ModuleHandbooksState();
@@ -25,7 +24,8 @@ class ModuleHandbooksState extends State<ModuleHandbooks> {
 
   Widget getMaterialDesign() {
     return SafeArea(
-          child: Scaffold(
+      child: Scaffold(
+        backgroundColor: Colors.orangeAccent,
         body: Column(
           children: <Widget>[
             Align(
@@ -48,12 +48,13 @@ class ModuleHandbooksState extends State<ModuleHandbooks> {
                   }),
             ),
             Expanded(
-                        child: IndexedStack(
+              child: IndexedStack(
                 index: _viewIndex,
                 children: <Widget>[
                   Center(child: CircularProgressIndicator()),
                   WebView(
-                    initialUrl: 'https://hswocloud.hs-worms.de/hswocloud/index.php/s/9j6tyjaazmFKnNC',
+                    initialUrl:
+                        'https://hswocloud.hs-worms.de/hswocloud/index.php/s/9j6tyjaazmFKnNC',
                     javascriptMode: JavascriptMode.unrestricted,
                     onPageStarted: checkTimeOut,
                     onPageFinished: pageFinishedLoading,
@@ -62,7 +63,8 @@ class ModuleHandbooksState extends State<ModuleHandbooks> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                          padding:
+                              EdgeInsets.only(left: 20, right: 20, bottom: 20),
                           child: Text(
                             "Es gibt ein Problem bei der Verbindung. Prüfe deine Internetverbindung",
                             textAlign: TextAlign.center,
