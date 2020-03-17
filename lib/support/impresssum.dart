@@ -24,9 +24,6 @@ class ImpressumState extends State<Impressum> {
   Widget getMaterialDesign() {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-
-      ),
         body: FutureBuilder(
           future: loadPage(),
           builder: (BuildContext context, AsyncSnapshot snap) {
