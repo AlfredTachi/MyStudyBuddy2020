@@ -42,15 +42,17 @@ class SupportState extends State<Support> {
               } catch (error) {}
             }),
         ListTile(
-            leading: Icon(Icons.contact_mail),
+            leading: Icon(Icons.info),
             title: Text('Impressum'),
-            onTap: () => launch(
-                "https://atlas.ai.it.hs-worms.de/impressum/")),
+            onTap: () {
+                Navigator.pushNamed(context, '/supportMain/impressum');
+                }),
         ListTile(
-            leading: Icon(Icons.person_pin),
+            leading: Icon(Icons.lock),
             title: Text('Datenschutz'),
-            onTap: () => launch(
-                "https://atlas.ai.it.hs-worms.de/datenschutz/")),
+            onTap: (){
+              Navigator.pushNamed(context, '/supportMain/privacyPolice/privacyPolice');
+            }),
       ]),
     );
   }
