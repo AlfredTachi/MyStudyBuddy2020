@@ -11,7 +11,7 @@ description: A new Flutter project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.0+24
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -45,6 +45,9 @@ dependencies:
   path_provider: ^1.6.1 # https://pub.dev/packages/path_provider *** BSD ***
   liquid_progress_indicator: ^0.3.2 # https://pub.dev/packages/liquid_progress_indicator#-installing-tab- *** MIT ***
 
+  auto_size_text: ^2.1.0 #https://pub.dev/packages/auto_size_text *** MIT **
+  achievement_view: ^0.2.0 #https://pub.dev/packages/achievement_view
+
 flutter_icons:
   android: "launcher_icon" # https://pub.dev/packages/flutter_launcher_icons *** MIT ***
   ios: true
@@ -67,8 +70,10 @@ flutter:
    
   # To add assets to your application, add an assets section, like this:
   assets:
+      - assets/
       - assets/images/
       - assets/icons/app_icon/
+      - assets/icons/achievement/
   #   - images/a_dot_ham.jpeg
       - assets/icons/QSP/Software_Icon.png
       - assets/icons/QSP/Medieninformatik_Icon.png

@@ -1,0 +1,72 @@
+[
+    {
+		"0":"Was bedeutet Pragmatik?",
+        "1":"Was bedeutet Semantik?",
+		"2":"Was bedeutet Syntax ?",
+		"3":"Was zählt zur emprischen Sprache?",
+		"4":"Ein Homonym hat eine Intension und eine Extension, aber mehrere Begriffsworte.",
+		"5":"Ein Homonym hat mehrere Intensionen und Extensionen, aber nur ein Begriffswort.",
+		"6":"Ein Synonym hat mehrere Intensionen und Extensionen, aber nur ein Begriffswort.",
+		"7":"Ein Synonym hat eine Intension und eine Extension, aber mehrere Begriffsworte."
+    },
+    {
+		
+		"0": {
+            "a": "Grammatik + Satzbau",
+            "b": "Inhalt + Bedeutung",
+            "c": "Sinnhaftigkeit + Angemessenheit"
+        },
+        "1": {
+            "a": "Grammatik + Satzbau",
+            "b": "Inhalt + Bedeutung",
+            "c": "Sinnhaftigkeit + Angemessenheit"
+        },
+		"2": {
+            "a": "Grammatik + Satzbau",
+            "b": "Inhalt + Bedeutung",
+            "c": "Sinnhaftigkeit + Angemessenheit"
+        },
+		"3": {
+            "a": "Umgangssprache",
+            "b": "UML",
+            "c": "C++",
+            "d": "Binärcode"
+        },
+		"4": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"5": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"6": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"7": {
+            "a": "wahr",
+            "b": "falsch"
+        }
+    },
+    {
+		"0":"Sinnhaftigkeit + Angemessenheit",
+        "1":"Inhalt + Bedeutung",
+		"2":"Grammatik + Satzbau",
+		"3":"Umgangssprache",
+		"4":"falsch",
+		"5":"wahr",
+		"6":"falsch",
+		"7":"wahr"
+    },
+    {
+		"0":"RE",
+        "1":"RE",
+		"2":"RE",
+		"3":"RE",
+		"4":"RE",
+		"5":"RE",
+		"6":"RE",
+		"7":"RE"
+    }
+]

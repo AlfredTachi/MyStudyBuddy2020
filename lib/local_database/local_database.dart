@@ -100,6 +100,21 @@ class DBProvider {
     });
   }
 
+  Future<List<Module>> readSelectedModules() async {
+    final Database db = await database;
+    List<Map<String, dynamic>> maps;
+
+    try {
+      maps = await db.query("Modules", where: "isSelected = ?", whereArgs: [1]);
+    } catch (err) {
+      print(err);
+    }
+
+    return List.generate(maps.length, (i) {
+      return Module.fromMap(maps[i]);
+    });
+  }
+
   // UPDATE
 
   Future<void> updateModule(Module newModule) async {
@@ -110,7 +125,7 @@ class DBProvider {
         "Modules",
         newModule.toMap(),
         where: "id = ?",
-        whereArgs: [newModule.id],
+        whereArgs: [newModule.properties.id],
       );
     } catch (err) {
       print(err);
@@ -123,7 +138,7 @@ class DBProvider {
     final Database db = await database;
     try {
       await db.delete(
-        "Module",
+        "Modules",
         where: "id = ?",
         whereArgs: [id],
       );
@@ -135,7 +150,7 @@ class DBProvider {
   deleteAllModules() async {
     final Database db = await database;
     try {
-      await db.delete("Module");
+      await db.delete("Modules");
     } catch (err) {
       print(err);
     }

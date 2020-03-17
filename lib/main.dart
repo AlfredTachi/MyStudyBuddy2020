@@ -1,11 +1,13 @@
 import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 
 import './route_manager/route_manager.dart';
 
@@ -36,11 +38,13 @@ class MaterialAppWithTheme extends StatefulWidget {
 }
 
 class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
+  GlobalKey key = new GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     DBProvider.db.initDB();
     final theme = Provider.of<ThemeChanger>(context);
-
+    ProfileController().loadData();
     return MaterialApp(
       navigatorKey: Get.key,
       initialRoute: '/',
@@ -76,9 +80,11 @@ class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
   }
 
   Widget getCorrectPage(int _index) {
+    print("Setting key: " + key.toString());
+    ModuleController().key = key;
     switch (_index) {
       case 0:
-        return Dashboard();
+        return Dashboard(key: key);
       case 1:
         return Overview();
       case 2:

@@ -25,7 +25,7 @@ List<Widget> links = [
           'https://www.hs-worms.de/hochschule/hochschule-worms/gremien/studierendenvertretungen/'),
   Link(
       child: Text('Fachschaft Informatik', textAlign: TextAlign.center),
-      url: 'https://fsinf.hs-worms.de/cms/'),
+      url: 'https://fsinf.hs-worms.de/'),
   Text('Moralische Unterstützung', textAlign: TextAlign.center),
 ];
 

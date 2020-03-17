@@ -1,17 +1,30 @@
-import 'package:MyStudyBuddy2/local_database/local_database.dart';
+import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
-import '../local_database/local_database.dart';
 
 class Dashboard extends StatefulWidget {
+  Dashboard({Key key}) : super(key: key);
+
   @override
-  DashboardState createState() => DashboardState();
+  State<StatefulWidget> createState() => DashboardState();
 }
 
 class DashboardState extends State<Dashboard> {
   @override
+  void initState() {
+    ProfileController().sumAllCP();
+    ProfileController().loadData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Achievement().showAchievement(context, 0);
+    });
+    updateView();
     double spacing = MediaQuery.of(context).size.width / 1.8;
     return SafeArea(
       child: Scaffold(
@@ -41,26 +54,9 @@ class DashboardState extends State<Dashboard> {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: SizedBox(
-                  height: spacing,
-                  width: spacing,
-                  child: LiquidCircularProgressIndicator(
-                    value: ProfileController().getEarnedCP() /
-                        ProfileController().getMaxCP(),
-                    valueColor: AlwaysStoppedAnimation(
-                      Color(0xAA013D62),
-                    ),
-                    backgroundColor: Colors.white,
-                    borderColor: Color(0xCC013D62),
-                    borderWidth: 5.0,
-                    direction: Axis.vertical,
-                    center: Text(
-                      ProfileController().getProgressText(),
-                      style: TextStyle(
-                          color: Colors.blueGrey[900],
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
+                    height: spacing,
+                    width: spacing,
+                    child: drawLiquidProgressBar()),
               ),
             ),
             Expanded(
@@ -97,36 +93,29 @@ class DashboardState extends State<Dashboard> {
                         Container(
                           padding: EdgeInsets.only(left: 5, right: 5),
                           alignment: Alignment.topLeft,
-                          child: Center(
-/*                                   child: FutureBuilder(
-                                      future: getFutureData(),
-                                      builder: (BuildContext context,
-                                          AsyncSnapshot snapshot) {
-                                        // if (snapshot.hasData) {
-                                        //   return Center(
-                                        //     child: Wrap(
-                                        //         direction: Axis.horizontal,
-                                        //         spacing: 0,
-                                        //         runSpacing: 5,
-                                        //         children: getFutureData()),
-                                        //   );
-                                        // } else { 
-                                        return */
-                            child: Center(
-                              child: Align(
-                                heightFactor: 5,
-                                child: FittedBox(
-                                  child: Text(
-                                    "Du hast zurzeit keine Module geplant!",
-                                    style: TextStyle(color: Colors.black45),
+                          child: (ModuleController()
+                                      .getSelectedModules()
+                                      .length !=
+                                  0)
+                              ? Center(
+                                  child: Wrap(
+                                      direction: Axis.horizontal,
+                                      spacing: 0,
+                                      runSpacing: 5,
+                                      children: ModuleController()
+                                          .getAllSelectedModulesWidgets()),
+                                )
+                              : Center(
+                                  child: Align(
+                                    heightFactor: 5,
+                                    child: FittedBox(
+                                      child: Text(
+                                        "Du hast zurzeit keine Module geplant!",
+                                        style: TextStyle(color: Colors.black45),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              //);
-                              // }
-                              // },
-                            ),
-                          ),
                         ),
                       ],
                     ),
@@ -140,14 +129,25 @@ class DashboardState extends State<Dashboard> {
     );
   }
 
-  getFutureData() async {
-    ///TODO Dashboard fixen
-    var module = await DBProvider.db.readModule(151);
-    String title = module.title;
-    return title;
+  Widget drawLiquidProgressBar() {
+    return LiquidCircularProgressIndicator(
+      value: ProfileController().getCPForLiquidProgressBar(),
+      valueColor: AlwaysStoppedAnimation(
+        Color(0xAA013D62),
+      ),
+      backgroundColor: Colors.white,
+      borderColor: Color(0xCC013D62),
+      borderWidth: 5.0,
+      direction: Axis.vertical,
+      center: Text(
+        ProfileController().getProgressText(),
+        style:
+            TextStyle(color: Colors.blueGrey[900], fontWeight: FontWeight.bold),
+      ),
+    );
   }
 
-  updateView() {
+  void updateView() {
     setState(() {});
   }
 }

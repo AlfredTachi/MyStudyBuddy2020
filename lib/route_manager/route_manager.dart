@@ -3,6 +3,7 @@ import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection.dart';
 import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection_QSP.dart';
 import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection_WPF.dart';
+import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/dashboard/profile_page/profile_page.dart';
 import 'package:MyStudyBuddy2/evaluation/evaluation.dart';
 import 'package:MyStudyBuddy2/evaluation/module_list.dart';
@@ -10,13 +11,12 @@ import 'package:MyStudyBuddy2/evaluation/prof_list.dart';
 import 'package:MyStudyBuddy2/grades_prognosis/grades_list.dart';
 import 'package:MyStudyBuddy2/planer/planer.dart';
 import 'package:MyStudyBuddy2/qsp_info/qsp_info.dart';
-import 'package:MyStudyBuddy2/study_quiz/quiz_start.dart';
+import 'package:MyStudyBuddy2/study_quiz/home.dart';
 import 'package:MyStudyBuddy2/studyprogress/studyprogress.dart';
 import 'package:MyStudyBuddy2/grades_prognosis/grades_prognosis.dart';
 import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
 import 'package:MyStudyBuddy2/modulhandbook/modulhandbook.dart';
 import 'package:MyStudyBuddy2/support/faq.dart';
-import 'package:MyStudyBuddy2/support/mail_support.dart';
 import 'package:MyStudyBuddy2/support/moral_support.dart';
 import 'package:MyStudyBuddy2/support/quickaccess.dart';
 import 'package:MyStudyBuddy2/support/support.dart';
@@ -53,8 +53,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => FAQ());
       case '/supportMain/quickaccess':
         return MaterialPageRoute(builder: (_) => Quickaccess());
-      case '/supportMain/mailSupport':
-        return MaterialPageRoute(builder: (_) => MailSupport());
       case '/map':
         return MaterialPageRoute(builder: (_) => CampusPlan());
       case '/settings':
@@ -66,7 +64,7 @@ class RouteGenerator {
       case '/qspinfo':
         return MaterialPageRoute(builder: (_) => QSPInfo());
       case '/quiz':
-        return MaterialPageRoute(builder: (_) => QuizStart());
+        return MaterialPageRoute(builder: (_) => Homepage());
       case '/profList':
         return MaterialPageRoute(builder: (_) => ProfList());
       case '/ModuleList':
@@ -77,6 +75,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => MoralSupport());
       case '/gradesList':
         return MaterialPageRoute(builder: (_) => GradesList());
+      case '/achievement':
+        return MaterialPageRoute(builder: (_) => AchievementPage());
       default:
         return _errorRoute();
     }
