@@ -13,65 +13,112 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
   final db = DBProvider.db;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Noten Rechner"),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.format_list_numbered),
-                onPressed: () {
-                  Navigator.of(context).pushNamed("/gradesList");
-                })
-          ],
-        ),
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 4,
-              child: Container(
-                  child: Padding(
-                padding: const EdgeInsets.only(top: 40.0),
-                child: Center(
-                  child: Column(children: [
-                    Text("Durchschnitt:", style: TextStyle(fontSize: 25)),
-                    Text(average().toString())
-                  ]),
-                ),
-              )),
-            ),
-            Expanded(
-              flex: 6,
-              child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(30)),
-                      gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [
-                          Colors.orange,
-                          Colors.deepOrange,
-                        ],
+    return SafeArea(
+          child: Scaffold(
+          /*appBar: AppBar(
+            title: Text("Noten Rechner"),
+            actions: <Widget>[
+              IconButton(
+                  icon: Icon(Icons.format_list_numbered),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("/gradesList");
+                  })
+            ],
+          ),*/
+          body: Column(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: OutlineButton(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 3, bottom: 3),
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 36,
+                        ),
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
                       )),
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: Text("Worst Case:"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
+                ),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: OutlineButton(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 3, bottom: 3),
+                        child: Icon(
+                          Icons.format_list_numbered,
+                          size: 36,
                         ),
-                        Text(worstCase().toString()),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Text("Best Case:"),
-                        ),
-                        Text(bestCase().toString())
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                      )),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed("/gradesList");
+                      }),
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            flex: 4,
+            child: Container(
+                child: Padding(
+              padding: const EdgeInsets.only(top: 40.0),
+              child: Center(
+                child: Column(children: [
+                  Text("Durchschnitt:", style: TextStyle(fontSize: 25)),
+                  Text(average().toString())
+                ]),
+              ),
+            )),
+          ),
+          Expanded(
+            flex: 6,
+            child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        Colors.orange,
+                        Colors.deepOrange,
                       ],
-                    ),
-                  )),
-            ),
-          ],
-        ));
+                    )),
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Text("Worst Case:"),
+                      ),
+                      Text(worstCase().toString()),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Text("Best Case:"),
+                      ),
+                      Text(bestCase().toString())
+                    ],
+                  ),
+                )),
+          ),
+        ],
+      )),
+    );
   }
 
   double average() {
