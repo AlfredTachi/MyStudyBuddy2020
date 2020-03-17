@@ -19,9 +19,6 @@ class ModuleSelectionState extends State<ModuleSelection> {
   Widget build(BuildContext context) {
     YYDialog.init(context);
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Modulauswahl"),
-        ),
         body: StaggeredView());
   }
 

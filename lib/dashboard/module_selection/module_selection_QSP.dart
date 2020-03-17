@@ -19,9 +19,6 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("QSP Auswahl"),
-      ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
