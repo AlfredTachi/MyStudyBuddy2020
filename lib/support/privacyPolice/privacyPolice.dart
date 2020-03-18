@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
 
 class PrivacyPolice extends StatefulWidget {
   @override
@@ -52,7 +53,7 @@ class PrivacyPoliceState extends State<PrivacyPolice> {
   List<Widget> createList() {
     List<Widget> _items = [
       ListTile(
-        leading: Icon(Icons.account_circle),
+        leading: Icon(IOSQuickAccessIcons.hslogo),
         title: Text('Unsere Datenschutzerklärung'),
         onTap: () {
           Navigator.pushNamed(
@@ -68,7 +69,7 @@ class PrivacyPoliceState extends State<PrivacyPolice> {
         },
       ),
       ListTile(
-        leading: Icon(Icons.lock_outline),
+        leading: Icon(IOSQuickAccessIcons.lsflogo),
         title: Text('LSF Datenschutzerklärung'),
         onTap: () {
           Navigator.pushNamed(
