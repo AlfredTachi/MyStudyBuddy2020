@@ -11,10 +11,45 @@ class StaggeredView extends StatefulWidget {
 class _StaggeredViewState extends State<StaggeredView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: generateSemesterTiles(),
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: <Widget>[ Row(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: OutlineButton(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 3, bottom: 3),
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 36,
+                        ),
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                      )),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
+                ),
+                Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                        padding: const EdgeInsets.only(left:20, top: 3, bottom: 3),
+                        child: Text("Modulauswahl",style: TextStyle(fontSize: 25),))),
+              ],
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: generateSemesterTiles(),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -65,7 +100,8 @@ class _StaggeredViewState extends State<StaggeredView> {
                 child: Wrap(
                   direction: Axis.horizontal,
                   runSpacing: 5,
-                  children: ModuleController().getOnlyNotDoneSemesterModulesWidgets(titleIndex),
+                  children: ModuleController()
+                      .getOnlyNotDoneSemesterModulesWidgets(titleIndex),
                 ),
               ),
             ],
