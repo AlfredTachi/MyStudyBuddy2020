@@ -13,6 +13,9 @@
 ///
 ///
 ///
+/// USAGE Example:
+/// import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
+/// Button(child: Icon(IOSQuickAccessIcons.award)
 import 'package:flutter/widgets.dart';
 
 class IOSQuickAccessIcons {
