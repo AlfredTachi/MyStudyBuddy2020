@@ -113,6 +113,18 @@ flutter:
     - family:  QSPInfoIcons
       fonts:
         - asset: fonts/QSPInfoIcons.ttf
+    - family: SF
+      fonts:
+        - asset: fonts/SF-Pro-Display-Medium.otf
+          weight: 500
+        - asset: fonts/SF-Pro-Display-Bold.otf
+          weight: 700
+        - asset: fonts/SF-Pro-Display-Black.otf
+          weight: 900
+        - asset: fonts/SF-Pro-Display-Regular.otf
+    - family: IOSQA
+      fonts:
+        - asset: fonts/iOS-Quick-Access-Logos.ttf
 
 
   #   - family: Trajan Pro
