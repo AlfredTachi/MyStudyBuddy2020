@@ -9,23 +9,58 @@ class GradesList extends StatefulWidget {
 }
 
 class GradesListState extends State<GradesList> {
-  List<double> grades = ModuleController().getAllDoneGrades();
-  List<String> doneModules = ModuleController().getAllDoneModulesNames();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text("Noten Liste")),
-        body: ListView.builder(
-            itemCount: grades.length,
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(border: Border(bottom: BorderSide())),
-                child: ListTile(
-                  title: Text('${doneModules[index]}',
-                   ),
-                  subtitle: Text('${grades[index]}'),
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: <Widget>[
+            Align(
+              alignment: Alignment.topLeft,
+              child: OutlineButton(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 3, bottom: 3),
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: 36,
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  )),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: createList(),
                 ),
-              );
-            }));
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<Widget> createList() {
+    List<double> grades = ModuleController().getAllDoneGrades();
+    List<String> doneModules = ModuleController().getAllDoneModulesNames();
+    List<Widget> _items = new List<Widget>();
+    for (int i = 0; i < grades.length; i++) {
+      Widget _listItem = Container(
+        decoration: BoxDecoration(border: Border(bottom: BorderSide())),
+        child: ListTile(
+          title: Text("${doneModules[i]}"),
+          subtitle: Text("${grades[i]}"),
+        ),
+      );
+      _items.add(_listItem);
+    }
+    return _items;
   }
 }
