@@ -190,7 +190,7 @@ class QSPInfoState extends State<QSPInfo> {
       if (_modules[i].properties.qsp.contains("VC")) {
         vc++;
       }
-      if (_modules[i].properties.qsp.contains("NC")) {
+      if (_modules[i].properties.qsp.contains("SN")) {
         nc++;
       }
     }
