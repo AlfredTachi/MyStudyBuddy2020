@@ -24,44 +24,66 @@ class QSPInfoState extends State<QSPInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("QSP Informationen"),
+    return SafeArea(
+          child: Scaffold(
+          body:Column(
+              children: <Widget>[
+                Align(
+                      alignment: Alignment.topLeft,
+                      child: OutlineButton(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 3, bottom: 3),
+                            child: Icon(
+                              Icons.arrow_back,
+                              size: 36,
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(15),
+                            bottomRight: Radius.circular(15),
+                          )),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                    Expanded(child: SingleChildScrollView(child: Column(children: <Widget>[
+                      qspdetails(
+                    QSPInfoIcons.software_icon,
+                    "Software Engineering and Development (SED)",
+                    "Die Module dieses Qualifikationsschwerpunkts vertiefen klassische Informatik-Themen," +
+                        "die auf die professionelle Konstruktion komplexer Software-Anwendungen vorbereiten.",
+                    ProfileController().getSED() / 5,
+                    ProfileController().getSED().toString() + "/5",
+                    "Für mehr Infos hier klicken",
+                    "https://www.hs-worms.de/software-konstruktion/"),
+                qspdetails(
+                    QSPInfoIcons.medieninformatik_icon,
+                    "Visual Computing (VC)",
+                    "Die Medieninformatik konzentriert sich auf die Teile der Informatik und ihres Umfelds," +
+                        "die in direktem Kontakt zu Benutzer/innen, also zu Menschen stehen.",
+                    ProfileController().getVC() / 5,
+                    ProfileController().getVC().toString() + "/5",
+                    "Für mehr Infos hier klicken",
+                    "https://www.hs-worms.de/medieninformatik/"),
+                qspdetails(
+                    QSPInfoIcons.cloud_icon,
+                    "Security and Networks (SN)",
+                    "Im Qualifikationsschwerpunkt „Cloud und Internet“ dreht es sich verstärkt um Themen der Infrastruktur, " +
+                        "d.h. insbesondere Rechnersysteme und Netzwerke,die zur Bereitstellung der heutigen netzwerkbasierten" +
+                        "Services erforderlich sind.",
+                    ProfileController().getNC() / 5,
+                    ProfileController().getNC().toString() + "/5",
+                    "Für mehr Infos hier klicken",
+                    "https://www.hs-worms.de/cloud-internet/")
+
+                    ],),))
+                
+                
+              ],
+            ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              qspdetails(
-                  QSPInfoIcons.software_icon,
-                  "Software Engineering and Development (SED)",
-                  "Die Module dieses Qualifikationsschwerpunkts vertiefen klassische Informatik-Themen," +
-                      "die auf die professionelle Konstruktion komplexer Software-Anwendungen vorbereiten.",
-                  ProfileController().getSED() / 5,
-                  ProfileController().getSED().toString() + "/5",
-                  "Für mehr Infos hier klicken",
-                  "https://www.hs-worms.de/software-konstruktion/"),
-              qspdetails(
-                  QSPInfoIcons.medieninformatik_icon,
-                  "Visual Computing (VC)",
-                  "Die Medieninformatik konzentriert sich auf die Teile der Informatik und ihres Umfelds," +
-                      "die in direktem Kontakt zu Benutzer/innen, also zu Menschen stehen.",
-                  ProfileController().getVC() / 5,
-                  ProfileController().getVC().toString() + "/5",
-                  "Für mehr Infos hier klicken",
-                  "https://www.hs-worms.de/medieninformatik/"),
-              qspdetails(
-                  QSPInfoIcons.cloud_icon,
-                  "Security and Networks (SN)",
-                  "Im Qualifikationsschwerpunkt „Cloud und Internet“ dreht es sich verstärkt um Themen der Infrastruktur, " +
-                      "d.h. insbesondere Rechnersysteme und Netzwerke,die zur Bereitstellung der heutigen netzwerkbasierten" +
-                      "Services erforderlich sind.",
-                  ProfileController().getNC() / 5,
-                  ProfileController().getNC().toString() + "/5",
-                  "Für mehr Infos hier klicken",
-                  "https://www.hs-worms.de/cloud-internet/")
-            ],
-          ),
-        ));
+    );
   }
 
   Widget qspdetails(
