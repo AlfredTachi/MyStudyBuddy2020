@@ -1,4 +1,5 @@
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
 import 'package:flutter/material.dart';
 
 class StaggeredView extends StatefulWidget {
@@ -14,7 +15,8 @@ class _StaggeredViewState extends State<StaggeredView> {
     return SafeArea(
       child: Scaffold(
         body: Column(
-          children: <Widget>[ Row(
+          children: <Widget>[
+            Row(
               children: <Widget>[
                 Align(
                   alignment: Alignment.topLeft,
@@ -38,8 +40,12 @@ class _StaggeredViewState extends State<StaggeredView> {
                 Align(
                     alignment: Alignment.topCenter,
                     child: Padding(
-                        padding: const EdgeInsets.only(left:20, top: 3, bottom: 3),
-                        child: Text("Modulauswahl",style: TextStyle(fontSize: 25),))),
+                        padding:
+                            const EdgeInsets.only(left: 20, top: 3, bottom: 3),
+                        child: Text(
+                          "Modulauswahl",
+                          style: TextStyle(fontSize: 25),
+                        ))),
               ],
             ),
             Expanded(
@@ -57,8 +63,18 @@ class _StaggeredViewState extends State<StaggeredView> {
 
   List<Widget> generateSemesterTiles() {
     List<Widget> _semesterTiles = new List<Widget>();
-    for (int i = 1; i <= 7; i++) {
-      _semesterTiles.add(semester(i));
+    if (ProfileController().getStudyTypeIndex() == 0) {
+      for (int i = 1; i <= 6; i++) {
+        _semesterTiles.add(semester(i));
+      }
+    } else if (ProfileController().getStudyTypeIndex() == 1) {
+      for (int i = 1; i <= 7; i++) {
+        _semesterTiles.add(semester(i));
+      }
+    } else if (ProfileController().getStudyTypeIndex() > 1) {
+      for (int i = 1; i <= 6; i++) {
+        _semesterTiles.add(semester(i));
+      }
     }
     return _semesterTiles;
   }
