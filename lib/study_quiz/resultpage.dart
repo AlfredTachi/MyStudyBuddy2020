@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/study_quiz/home.dart';
 
-class Resultpage extends StatefulWidget {
-  int marks;
-  var mydatatemp;
-  Resultpage({Key key, @required this.marks, @required this.mydatatemp})
+class ResultPage extends StatefulWidget {
+  final int marks;
+  final mydatatemp;
+  ResultPage({Key key, @required this.marks, @required this.mydatatemp})
       : super(key: key);
   @override
-  _ResultpageState createState() => _ResultpageState(marks, mydatatemp);
+  _ResultPageState createState() => _ResultPageState(marks, mydatatemp);
 }
 
-class _ResultpageState extends State<Resultpage> {
+class _ResultPageState extends State<ResultPage> {
   List<String> images = [
     "assets/images/success.png",
     "assets/images/good.png",
@@ -46,7 +46,7 @@ class _ResultpageState extends State<Resultpage> {
 
   int marks;
   var mydatatemp;
-  _ResultpageState(this.marks, this.mydatatemp);
+  _ResultPageState(this.marks, this.mydatatemp);
   @override
   Widget build(BuildContext context) {
     return SafeArea(

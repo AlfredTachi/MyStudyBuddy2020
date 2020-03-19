@@ -5,12 +5,12 @@ import 'package:MyStudyBuddy2/study_quiz/resultpage.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-class Getjson extends StatelessWidget {
+class GetJson extends StatelessWidget {
   // accept the langname as a parameter
 
-  String langname;
-  Getjson(this.langname);
-  String assettoload;
+  final String langname;
+  GetJson(this.langname);
+  static String assettoload;
 
   // a function
   // sets the asset to a particular JSON file
@@ -150,7 +150,7 @@ class _QuizpageState extends State<Quizpage> {
         j++;
       } else {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => Resultpage(marks: marks, mydatatemp: mydatatemp),
+          builder: (context) => ResultPage(marks: marks, mydatatemp: mydatatemp),
         ));
       }
       btncolor["a"] = Colors.orangeAccent[200];
