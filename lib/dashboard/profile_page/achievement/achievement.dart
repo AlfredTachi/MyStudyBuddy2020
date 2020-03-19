@@ -151,7 +151,7 @@ class Achievement {
     AchievementProperties(
       id: 10,
       icon: AssetImage("assets/icons/achievement/hungrig.png"),
-      title: "Hungeriger Studi!",
+      title: "Hungriger Studi!",
       description: "Öffne den Mensaplan.",
       isDone: false,
     ),
