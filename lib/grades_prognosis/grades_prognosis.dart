@@ -71,7 +71,7 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
               child: Center(
                 child: Column(children: [
                   Text("Durchschnitt:", style: TextStyle(fontSize: 25)),
-                  Text(average().toString())
+                  Text(average().toString(), style: TextStyle(fontSize: 25))
                 ]),
               ),
             )),
@@ -94,14 +94,14 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0),
-                        child: Text("Worst Case:"),
+                        child: Text("Worst Case:", style: TextStyle(fontSize: 20)),
                       ),
-                      Text(worstCase().toString()),
+                      Text(worstCase().toString(), style: TextStyle(fontSize: 20)),
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
-                        child: Text("Best Case:"),
+                        child: Text("Best Case:", style: TextStyle(fontSize: 20)),
                       ),
-                      Text(bestCase().toString())
+                      Text(bestCase().toString(), style: TextStyle(fontSize: 20))
                     ],
                   ),
                 )),

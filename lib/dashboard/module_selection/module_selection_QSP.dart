@@ -29,8 +29,8 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
                 ? ImageIcon(AssetImage("assets/icons/QSP/Cloud_Icon.png"),
                     size: 30, color: setBottomNavigationBarIconSelectedColor())
                 : ImageIcon(AssetImage("assets/icons/QSP/Cloud_Icon.png"),
-                    size: 30, color: setBottomNavigationBarIconColor()),
-            title: Text('Security and Network', style: TextStyle(fontSize: 12)),
+                    size: 30, color: setBottomNavigationBarColor()),
+            title: Text('Security and Network', style: TextStyle(fontSize: 12, color: setBottomNavigationBarColor())),
           ),
           new BottomNavigationBarItem(
             icon: _currentIndex == 1
@@ -41,18 +41,18 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
                 : ImageIcon(
                     AssetImage("assets/icons/QSP/Medieninformatik_Icon.png"),
                     size: 30,
-                    color: setBottomNavigationBarIconColor()),
-            title: Text('Visual Computing', style: TextStyle(fontSize: 12)),
+                    color: setBottomNavigationBarColor()),
+            title: Text('Visual Computing', style: TextStyle(fontSize: 12,color: setBottomNavigationBarColor())),
           ),
           new BottomNavigationBarItem(
             icon: _currentIndex == 2
                 ? ImageIcon(AssetImage("assets/icons/QSP/Software_Icon.png"),
                     size: 30, color: setBottomNavigationBarIconSelectedColor())
                 : ImageIcon(AssetImage("assets/icons/QSP/Software_Icon.png"),
-                    size: 30, color: setBottomNavigationBarIconColor()),
+                    size: 30, color: setBottomNavigationBarColor()),
             title: Column(children: [
-              FittedBox(child: Text('Software Engineering ', style: TextStyle(fontSize: 12))),
-              Center(child: Text('and Development', style: TextStyle(fontSize: 12)))
+              FittedBox(child: Text('Software Engineering ', style: TextStyle(fontSize: 12, color: setBottomNavigationBarColor()))),
+              Center(child: Text('and Development', style: TextStyle(fontSize: 12, color: setBottomNavigationBarColor())))
             ]),
           ),
         ],
@@ -61,24 +61,12 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
   }
 
   Color setBottomNavigationBarIconSelectedColor() {
-    var brightness = Theme.of(context).brightness;
-    Color color;
-    if (brightness == Brightness.dark) {
-      color = Colors.greenAccent;
-    } else if (brightness != Brightness.dark) {
-      color = Colors.orange;
-    }
+    Color color = Colors.orange;
     return color;
   }
 
-  Color setBottomNavigationBarIconColor() {
-    var brightness = Theme.of(context).brightness;
-    Color color;
-    if (brightness == Brightness.dark) {
-      color = Colors.white;
-    } else if (brightness != Brightness.dark) {
-      color = Colors.black;
-    }
+  Color setBottomNavigationBarColor() {
+    Color color = Colors.black;
     return color;
   }
 

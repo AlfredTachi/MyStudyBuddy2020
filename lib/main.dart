@@ -47,6 +47,7 @@ class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
       home: Scaffold(
         body: getCorrectPage(_currentIndex),
         bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.orange,
           currentIndex: _currentIndex,
           onTap: (_index) {
             setState(() {

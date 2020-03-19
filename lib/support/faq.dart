@@ -56,12 +56,14 @@ class FAQState extends State<FAQ> {
   }
 
   List<Widget> createList() {
+    bool isExpanded = false;
     List<Widget> _items = [
       ExpansionTile(
         title: Text(
           'Wo finde ich das Rechenzentrum (RZ)?',
           textAlign: TextAlign.left,
           softWrap: true,
+          style: TextStyle(color: isExpanded ? Colors.orange : Colors.black),
         ),
         children: <Widget>[
           Padding(
@@ -69,7 +71,7 @@ class FAQState extends State<FAQ> {
             child: Text(
               "Das Servicebüro in Raum A 105 ist die Anlaufstelle für Studierende und Bedienstete in allen Fragen rund um die Computernutzung an der Hochschule.",
               textAlign: TextAlign.start,
-              style: new TextStyle(fontSize: 16),
+              style: new TextStyle(fontSize: 16,),
             ),
           )
         ],

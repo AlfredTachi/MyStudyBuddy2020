@@ -62,21 +62,21 @@ class SupportState extends State<Support> {
     List<Widget> _items = [
       ListTile(
         leading: Icon(Icons.help),
-        title: Text('FAQ'),
+        title: Text('FAQ', style: TextStyle(fontSize: 20)),
         onTap: () {
           Navigator.pushNamed(context, '/supportMain/FAQ');
         },
       ),
       ListTile(
         leading: Icon(Icons.book),
-        title: Text('Schnelleinstieg'),
+        title: Text('Schnelleinstieg', style: TextStyle(fontSize: 20)),
         onTap: () {
           Navigator.pushNamed(context, '/supportMain/quickaccess');
         },
       ),
       ListTile(
           leading: Icon(Icons.mail),
-          title: Text('E-Mail Support'),
+          title: Text('E-Mail Support', style: TextStyle(fontSize: 20)),
           onTap: () async {
             try {
               await FlutterMailer.send(mailOptions);
@@ -84,13 +84,13 @@ class SupportState extends State<Support> {
           }),
       ListTile(
           leading: Icon(Icons.info),
-          title: Text('Impressum'),
+          title: Text('Impressum', style: TextStyle(fontSize: 20)),
           onTap: () {
             Navigator.pushNamed(context, '/supportMain/impressum');
           }),
       ListTile(
           leading: Icon(Icons.lock),
-          title: Text('Datenschutz'),
+          title: Text('Datenschutz', style: TextStyle(fontSize: 20)),
           onTap: () {
             Navigator.pushNamed(
                 context, '/supportMain/privacyPolice/privacyPolice');
