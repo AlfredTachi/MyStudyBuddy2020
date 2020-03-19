@@ -5,9 +5,6 @@ import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection_QSP.da
 import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection_WPF.dart';
 import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/dashboard/profile_page/profile_page.dart';
-import 'package:MyStudyBuddy2/evaluation/evaluation.dart';
-import 'package:MyStudyBuddy2/evaluation/module_list.dart';
-import 'package:MyStudyBuddy2/evaluation/prof_list.dart';
 import 'package:MyStudyBuddy2/grades_prognosis/grades_list.dart';
 import 'package:MyStudyBuddy2/planer/planer.dart';
 import 'package:MyStudyBuddy2/qsp_info/qsp_info.dart';
@@ -21,7 +18,6 @@ import 'package:MyStudyBuddy2/support/moral_support.dart';
 import 'package:MyStudyBuddy2/support/quickaccess.dart';
 import 'package:MyStudyBuddy2/support/support.dart';
 import 'package:MyStudyBuddy2/weather/weather.dart';
-import 'package:MyStudyBuddy2/settings/settings.dart';
 import 'package:MyStudyBuddy2/support/impresssum.dart';
 import 'package:MyStudyBuddy2/support/privacyPolice/privacyPolice.dart';
 import 'package:flutter/material.dart';
@@ -59,8 +55,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Quickaccess());
       case '/map':
         return MaterialPageRoute(builder: (_) => CampusPlan());
-      case '/settings':
-        return MaterialPageRoute(builder: (_) => Settings());
       case '/gradesPrognosis':
         return MaterialPageRoute(builder: (_) => GradesPrognosis());
       case '/planer':
@@ -69,12 +63,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => QSPInfo());
       case '/quiz':
         return MaterialPageRoute(builder: (_) => Homepage());
-      case '/profList':
-        return MaterialPageRoute(builder: (_) => ProfList());
-      case '/ModuleList':
-        return MaterialPageRoute(builder: (_) => ModuleList());
-      case '/evaluation':
-        return MaterialPageRoute(builder: (_) => Evaluation());
       case '/supportMain/quickAccess/moralSupport':
         return MaterialPageRoute(builder: (_) => MoralSupport());
       case '/supportMain/impressum':

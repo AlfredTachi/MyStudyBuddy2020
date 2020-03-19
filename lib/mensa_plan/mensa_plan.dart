@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
 
@@ -41,16 +42,17 @@ class MensaPlanState extends State<MensaPlan> {
               return Center(child: CircularProgressIndicator());
             } else {
               return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                      child: Text(
-                        "Es gibt ein Problem bei der Verbindung. Prüfe deine Internetverbindung",
-                        textAlign: TextAlign.center,
-                      ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                    child: Text(
+                      "Es gibt ein Problem bei der Verbindung. Prüfe deine Internetverbindung",
+                      textAlign: TextAlign.center,
                     ),
-                  ]);
+                  ),
+                ],
+              );
             }
           },
         ),
@@ -59,7 +61,20 @@ class MensaPlanState extends State<MensaPlan> {
   }
 
   Future<void> loadPage() async {
-    await http.get('https://stw-vp.de/de/mensa-webapp');
+    final Response response =
+        await http.get('https://stw-vp.de/de/mensa-webapp');
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      if (response.statusCode == 404) {
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) {
+            Achievement().showAchievement(context, 11);
+          },
+        );
+      }
+      throw Exception('Failed to load Site');
+    }
   }
 
   Widget getCupertinoDesign() {

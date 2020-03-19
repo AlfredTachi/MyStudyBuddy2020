@@ -67,13 +67,6 @@ class Module extends StatefulWidget {
         "semester": properties.semester,
       };
 
-  //getter
-  double getGrade() => properties.grade;
-
-  bool getIsDone() => properties.isDone;
-
-  bool getIsSelected() => properties.isSelected;
-
   //setter
   void setGrade(double newGrade) {
     properties.grade = newGrade;

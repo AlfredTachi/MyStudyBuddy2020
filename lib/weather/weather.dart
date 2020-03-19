@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/link/link.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -281,6 +282,11 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
     if (response.statusCode == 200) {
       return WeatherData.fromJson(json.decode(response.body));
     } else {
+      if (response.statusCode == 404) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Achievement().showAchievement(context, 11);
+        });
+      }
       throw Exception('Failed to load Weather Data');
     }
   }

@@ -155,6 +155,13 @@ class Achievement {
       description: "Öffne den Mensaplan.",
       isDone: false,
     ),
+    AchievementProperties(
+      id: 11,
+      icon: AssetImage("assets/icons/achievement/error.png"),
+      title: "Error 404",
+      description: "Erhalte als Response ein 404 Error Code.",
+      isDone: false,
+    ),
   ];
 
   showAchievement(BuildContext context, int id) async {
