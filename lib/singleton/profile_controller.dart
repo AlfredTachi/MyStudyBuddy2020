@@ -145,7 +145,7 @@ class ProfileController {
     List<Module> _modules = ModuleController().getAllDoneModules();
     int sum = 0;
     for (int i = 0; i < _modules.length; i++) {
-      if (_modules[i].getGrade() != 0.0) {
+      if (_modules[i].properties.grade != 0.0) {
         sum += _modules[i].properties.cp;
       }
     }
