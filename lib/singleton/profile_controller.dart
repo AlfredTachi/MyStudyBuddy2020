@@ -64,6 +64,7 @@ class ProfileController {
     }
     if (type != null) {
       _studyTypeIndex = type;
+      ModuleController().updateStudyTypeModules(_studyTypeIndex);
     }
   }
 
@@ -170,7 +171,7 @@ class ProfileController {
     _dualStudyCtrl.text = prefs.getString("studyType");
     _studyTypeIndex = prefs.getInt("studyTypeIndex");
     if (_studyTypeIndex == null) {
-      _studyTypeIndex = 0;
+      _studyTypeIndex = 1;
       setStudyType(_studyTypeIndex);
       saveData();
     }

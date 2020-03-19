@@ -189,11 +189,199 @@ class ModuleController {
         .where((test) => test.properties.semester == index)
         .toList();
 
+    if (_modules.length > 6) {
+      for (int i = 0; i < _modules.length; i++) {
+        _modules.removeWhere((test) => test.properties.qsp.contains("QSPLA"));
+        _modules.removeWhere((test) => test.properties.qsp.contains("WPLA"));
+      }
+    }
+
     for (int i = 0; i < _modules.length; i++) {
       _widgets.add(_modules[i]);
     }
 
     return _widgets;
+  }
+
+  void updateStudyTypeModules(int index) {
+    if (index == 0) {
+      if (_allModules == null) {
+        return;
+      } else {
+        for (int i = 0; i < _allModules.length; i++) {
+          if (_allModules[i].properties.id == 161) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 171) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 172) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 173) {
+            _allModules[i].properties.semester = 6;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 601) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 602) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 603) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 604) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 605) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 203) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 204) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 10007) {
+            _allModules[i].properties.semester = 4;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 10008) {
+            _allModules[i].properties.semester = 5;
+            updateModule(_allModules[i]);
+          }
+        }
+      }
+    } else if (index == 1) {
+      if (_allModules == null) {
+        return;
+      } else {
+        for (int i = 0; i < _allModules.length; i++) {
+          if (_allModules[i].properties.id == 161) {
+            _allModules[i].properties.semester = 6;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 171) {
+            _allModules[i].properties.semester = 6;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 172) {
+            _allModules[i].properties.semester = 6;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 173) {
+            _allModules[i].properties.semester = 7;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 601) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 602) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 603) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 604) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 605) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 203) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 204) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 10007) {
+            _allModules[i].properties.semester = 4;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 10008) {
+            _allModules[i].properties.semester = 5;
+            updateModule(_allModules[i]);
+          }
+        }
+      }
+    } else {
+      if (_allModules == null) {
+        return;
+      } else {
+        for (int i = 0; i < _allModules.length; i++) {
+          if (_allModules[i].properties.id == 161) {
+            _allModules[i].properties.semester = 6;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 171) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 172) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 173) {
+            _allModules[i].properties.semester = 6;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 601) {
+            _allModules[i].properties.semester = 1;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 602) {
+            _allModules[i].properties.semester = 2;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 603) {
+            _allModules[i].properties.semester = 3;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 604) {
+            _allModules[i].properties.semester = 4;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 605) {
+            _allModules[i].properties.semester = 6;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 203) {
+            _allModules[i].properties.semester = 4;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 204) {
+            _allModules[i].properties.semester = 5;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 10007) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+          if (_allModules[i].properties.id == 10008) {
+            _allModules[i].properties.semester = null;
+            updateModule(_allModules[i]);
+          }
+        }
+      }
+    }
   }
 
   //Returns all Widgets from _allModules
