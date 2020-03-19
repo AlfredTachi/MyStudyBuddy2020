@@ -20,58 +20,58 @@ class _StaggeredViewState extends State<StaggeredView> {
       child: Scaffold(
         body: Column(
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: OutlineButton(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 3, bottom: 3),
-                        child: Icon(
-                          Icons.arrow_back,
-                          size: 36,
+            Container(
+              color: Colors.orange,
+              child: Row(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: OutlineButton(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 3, bottom: 3),
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: 36,
+                          ),
                         ),
-                      ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      )),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      }),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: Text(
-                      "Studienverlauf",
-                      style: TextStyle(fontSize: 25),
-                    ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        )),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        }),
                   ),
-                ),
-                Expanded(
-                  child: Align(
-                      alignment: Alignment.topRight,
-                      child: Builder(builder: (BuildContext context) {
-                        scaffoldContext = context;
-                        return IconButton(
-                            icon: Icon(Icons.cloud_download),
-                            iconSize: 36,
-                            onPressed: () {
-                              _downloadLSFData(context).whenComplete(() {
-                                Achievement().showAchievement(context, 8);
+                   Align(
+                      alignment: Alignment.topCenter,
+                      child: Padding(
+                          padding: const EdgeInsets.only(left:20, top: 3, bottom: 3),
+                          child: Text("Studienverlauf",style: TextStyle(fontSize: 25),))),
+                  Expanded(
+                    child: Align(
+                        alignment: Alignment.topRight,
+                        child: Builder(builder: (BuildContext context) {
+                          scaffoldContext = context;
+                          return IconButton(
+                              icon: Icon(Icons.cloud_download),
+                              iconSize: 36,
+                              onPressed: () {
+                                _downloadLSFData(context).whenComplete(() {
+                                  Achievement().showAchievement(context, 8);
+                                });
                               });
-                            });
-                      })),
-                ),
-              ],
+                        })),
+                  ),
+                ],
+              ),
             ),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  children: generateSemesterTiles(),
+                child: Container(
+                  child: Column(
+                    children: generateSemesterTiles(),
+                  ),
                 ),
               ),
             ),

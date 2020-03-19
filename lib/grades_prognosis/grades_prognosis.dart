@@ -15,63 +15,61 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
   Widget build(BuildContext context) {
     return SafeArea(
           child: Scaffold(
-          /*appBar: AppBar(
-            title: Text("Noten Rechner"),
-            actions: <Widget>[
-              IconButton(
-                  icon: Icon(Icons.format_list_numbered),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed("/gradesList");
-                  })
-            ],
-          ),*/
           body: Column(
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: OutlineButton(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 3, bottom: 3),
-                        child: Icon(
-                          Icons.arrow_back,
-                          size: 36,
+          Container(
+            color: Colors.orange,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: OutlineButton(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 3, bottom: 3),
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: 36,
+                          ),
                         ),
-                      ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      )),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      }),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        )),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        }),
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: OutlineButton(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 3, bottom: 3),
-                        child: Icon(
-                          Icons.format_list_numbered,
-                          size: 36,
+                 Align(
+                        alignment: Alignment.topCenter,
+                        child: Padding(
+                            padding: const EdgeInsets.only(left:10, top: 3, bottom: 3, right: 10),
+                            child: Text("Notenrechner",style: TextStyle(fontSize: 25),))),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: OutlineButton(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 3, bottom: 3),
+                          child: Icon(
+                            Icons.format_list_numbered,
+                            size: 36,
+                          ),
                         ),
-                      ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      )),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed("/gradesList");
-                      }),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          bottomLeft: Radius.circular(15),
+                        )),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed("/gradesList");
+                        }),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Expanded(
             flex: 4,
@@ -81,7 +79,7 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
               child: Center(
                 child: Column(children: [
                   Text("Durchschnitt:", style: TextStyle(fontSize: 25)),
-                  Text(average().toString())
+                  Text(average().toString(), style: TextStyle(fontSize: 25))
                 ]),
               ),
             )),
@@ -104,14 +102,14 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0),
-                        child: Text("Worst Case:"),
+                        child: Text("Worst Case:", style: TextStyle(fontSize: 20)),
                       ),
-                      Text(worstCase().toString()),
+                      Text(worstCase().toString(), style: TextStyle(fontSize: 20)),
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
-                        child: Text("Best Case:"),
+                        child: Text("Best Case:", style: TextStyle(fontSize: 20)),
                       ),
-                      Text(bestCase().toString())
+                      Text(bestCase().toString(), style: TextStyle(fontSize: 20))
                     ],
                   ),
                 )),

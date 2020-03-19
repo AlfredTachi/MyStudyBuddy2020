@@ -18,39 +18,42 @@ class _StaggeredViewState extends State<StaggeredViewSoftware> {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: OutlineButton(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 3, bottom: 3),
-                            child: Icon(
-                              Icons.arrow_back,
-                              size: 36,
+                Container(
+                  color: Colors.orange,
+                  child: Row(
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: OutlineButton(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 3, bottom: 3),
+                              child: Icon(
+                                Icons.arrow_back,
+                                size: 36,
+                              ),
                             ),
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                          )),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          }),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(children: [
-                        FittedBox(
-                            child: Text('Software Engineering ',
-                                style: TextStyle(fontSize: 25))),
-                        Center(
-                            child: Text('and Development',
-                                style: TextStyle(fontSize: 25)))
-                      ]),
-                    ),
-                  ],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(15),
+                              bottomRight: Radius.circular(15),
+                            )),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            }),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(children: [
+                          FittedBox(
+                              child: Text('Software Engineering ',
+                                  style: TextStyle(fontSize: 25))),
+                          Center(
+                              child: Text('and Development',
+                                  style: TextStyle(fontSize: 25)))
+                        ]),
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 8),

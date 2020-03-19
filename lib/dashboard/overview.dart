@@ -33,7 +33,7 @@ class OverviewState extends State<Overview> {
                 Icons.arrow_forward_ios,
                 color: Colors.orange,
               ),
-              title: Text(TileController().getTiles()[index].text),
+              title: Text(TileController().getTiles()[index].text, style: TextStyle(fontSize: 20),),
               onTap: () {
                 Navigator.of(context)
                     .pushNamed(TileController().getTiles()[index].route);

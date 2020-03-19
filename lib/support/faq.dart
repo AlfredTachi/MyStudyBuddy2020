@@ -13,35 +13,38 @@ class FAQState extends State<FAQ> {
       child: Scaffold(
           body: Column(
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.topLeft,
-                child: OutlineButton(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 3, bottom: 3),
-                      child: Icon(
-                        Icons.arrow_back,
-                        size: 36,
+          Container(
+            color: Colors.orange,
+            child: Row(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: OutlineButton(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 3, bottom: 3),
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 36,
+                        ),
                       ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
-                    )),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    }),
-              ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 3, bottom: 3),
-                  child: Text("FAQ", style: TextStyle(fontSize: 25)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                      )),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
                 ),
-              )
-            ],
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20, top: 3, bottom: 3),
+                    child: Text("FAQ", style: TextStyle(fontSize: 25)),
+                  ),
+                )
+              ],
+            ),
           ),
           Expanded(
               child: SingleChildScrollView(
@@ -53,12 +56,14 @@ class FAQState extends State<FAQ> {
   }
 
   List<Widget> createList() {
+    bool isExpanded = false;
     List<Widget> _items = [
       ExpansionTile(
         title: Text(
           'Wo finde ich das Rechenzentrum (RZ)?',
           textAlign: TextAlign.left,
           softWrap: true,
+          style: TextStyle(color: isExpanded ? Colors.orange : Colors.black),
         ),
         children: <Widget>[
           Padding(
@@ -66,7 +71,7 @@ class FAQState extends State<FAQ> {
             child: Text(
               "Das Servicebüro in Raum A 105 ist die Anlaufstelle für Studierende und Bedienstete in allen Fragen rund um die Computernutzung an der Hochschule.",
               textAlign: TextAlign.start,
-              style: new TextStyle(fontSize: 16),
+              style: new TextStyle(fontSize: 16,),
             ),
           )
         ],

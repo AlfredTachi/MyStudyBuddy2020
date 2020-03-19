@@ -111,7 +111,7 @@ class DashboardState extends State<Dashboard> {
                                     child: FittedBox(
                                       child: Text(
                                         "Du hast zurzeit keine Module geplant!",
-                                        style: TextStyle(color: Colors.black45),
+                                        style: TextStyle(fontSize:18,color: Colors.black45),
                                       ),
                                     ),
                                   ),
@@ -142,7 +142,7 @@ class DashboardState extends State<Dashboard> {
       center: Text(
         ProfileController().getProgressText(),
         style:
-            TextStyle(color: Colors.blueGrey[900], fontWeight: FontWeight.bold),
+            TextStyle(fontSize:20, color:Colors.blueGrey[900], fontWeight: FontWeight.bold),
       ),
     );
   }

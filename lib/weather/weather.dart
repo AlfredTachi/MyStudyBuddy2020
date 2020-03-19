@@ -154,7 +154,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
                         ),
                         Text(
                           dateTimeToString(),
-                          style: TextStyle(color: Colors.black45),
+                          style: TextStyle(fontSize:20, color: Colors.black45),
                         ),
                         Text(
                           data.temperature.toString() + " °C",

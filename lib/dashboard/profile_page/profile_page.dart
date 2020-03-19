@@ -301,14 +301,14 @@ class _DualStudyDialogState extends State<_DualStudyDialog> {
               child: Row(
                 children: <Widget>[
                   Radio(
-                    activeColor: Colors.red,
+                    activeColor: Colors.blue,
                     value: 0,
                     groupValue: _groupValue,
                     onChanged: (_val) => changeStudyType(_val),
                   ),
                   Text(
                     "Ohne Praxissemester (6. Semester)",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 15),
                   ),
                 ],
               ),
@@ -324,7 +324,7 @@ class _DualStudyDialogState extends State<_DualStudyDialog> {
                   ),
                   Text(
                     "Mit Praxissemester (7. Semester)",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 15),
                   )
                 ],
               ),
@@ -340,7 +340,7 @@ class _DualStudyDialogState extends State<_DualStudyDialog> {
                   ),
                   Text(
                     "Duales Studium",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 15),
                   )
                 ],
               ),
