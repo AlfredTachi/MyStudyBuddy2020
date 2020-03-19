@@ -43,16 +43,11 @@ class _StaggeredViewState extends State<StaggeredView> {
                           Navigator.of(context).pop();
                         }),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Align(
+                   Align(
                       alignment: Alignment.topCenter,
-                      child: Text(
-                        "Studienverlauf",
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ),
-                  ),
+                      child: Padding(
+                          padding: const EdgeInsets.only(left:20, top: 3, bottom: 3),
+                          child: Text("Studienverlauf",style: TextStyle(fontSize: 25),))),
                   Expanded(
                     child: Align(
                         alignment: Alignment.topRight,
