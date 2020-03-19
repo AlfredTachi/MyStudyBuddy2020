@@ -88,8 +88,18 @@ class _StaggeredViewState extends State<StaggeredView> {
 
   List<Widget> generateSemesterTiles() {
     List<Widget> _semesterTiles = new List<Widget>();
-    for (int i = 1; i <= 7; i++) {
-      _semesterTiles.add(semester(i));
+    if (ProfileController().getStudyTypeIndex() == 0) {
+      for (int i = 1; i <= 6; i++) {
+        _semesterTiles.add(semester(i));
+      }
+    } else if (ProfileController().getStudyTypeIndex() == 1) {
+      for (int i = 1; i <= 7; i++) {
+        _semesterTiles.add(semester(i));
+      }
+    } else if (ProfileController().getStudyTypeIndex() > 1) {
+      for (int i = 1; i <= 6; i++) {
+        _semesterTiles.add(semester(i));
+      }
     }
     return _semesterTiles;
   }
