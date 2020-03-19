@@ -15,16 +15,6 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
   Widget build(BuildContext context) {
     return SafeArea(
           child: Scaffold(
-          /*appBar: AppBar(
-            title: Text("Noten Rechner"),
-            actions: <Widget>[
-              IconButton(
-                  icon: Icon(Icons.format_list_numbered),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed("/gradesList");
-                  })
-            ],
-          ),*/
           body: Column(
         children: <Widget>[
           Row(
@@ -63,8 +53,8 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
                       ),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
+                        topLeft: Radius.circular(15),
+                        bottomLeft: Radius.circular(15),
                       )),
                       onPressed: () {
                         Navigator.of(context).pushNamed("/gradesList");
