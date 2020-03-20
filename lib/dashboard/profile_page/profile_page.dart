@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
 
-import 'package:http/http.dart';
-
 class ProfilePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ProfilePageState();

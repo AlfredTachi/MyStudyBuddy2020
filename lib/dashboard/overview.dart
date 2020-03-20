@@ -1,6 +1,8 @@
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/tile_controller.dart';
 import 'package:MyStudyBuddy2/ios_list_design/cupertino_settings_icon.dart';
 import 'package:MyStudyBuddy2/ios_list_design/cupertino_settings_group.dart';
+import 'package:MyStudyBuddy2/studyprogress/studyprogress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
@@ -11,11 +13,44 @@ class Overview extends StatefulWidget {
 }
 
 class OverviewState extends State<Overview> {
+  GlobalKey _key = new GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: getSlivers(),
     );
+  }
+
+  List<SettingsItem> getList() {
+    List<SettingsItem> list = List<SettingsItem>();
+    for (var tile in TileController().getTiles()) {
+      list.add(SettingsItem(
+        label: tile.text,
+        icon: SettingsIcon(
+          icon: tile.leading,
+          backgroundColor: tile.iosBackgroundColor,
+        ),
+        content: SettingsNavigationIndicator(),
+        onPress: () {
+          if (tile.route != "/studyprogress") {
+            Navigator.of(context).pushNamed(tile.route);
+          } else {
+            ModuleController().studyProgressKey = _key;
+            print("Setting StudyProgressKey to: " +
+                ModuleController().studyProgressKey.toString());
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => Studyprogress(
+                  key: _key,
+                ),
+              ),
+            );
+          }
+        },
+      ));
+    }
+    return list;
   }
 
   List<Widget> getSlivers() {
@@ -55,30 +90,26 @@ class OverviewState extends State<Overview> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(TileController().getTiles()[index].route);
+                  if (TileController().getTiles()[index].route !=
+                      "/studyprogress") {
+                    Navigator.of(context)
+                        .pushNamed(TileController().getTiles()[index].route);
+                  } else {
+                    ModuleController().studyProgressKey = _key;
+                    print("Setting StudyProgressKey to: " +
+                        ModuleController().studyProgressKey.toString());
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => Studyprogress(
+                          key: _key,
+                        ),
+                      ),
+                    );
+                  }
                 },
               );
             }, childCount: TileController().getTiles().length),
     ));
     return _slivers;
-  }
-
-  List<SettingsItem> getList() {
-    List<SettingsItem> list = List<SettingsItem>();
-    for (var tile in TileController().getTiles()) {
-      list.add(SettingsItem(
-        label: tile.text,
-        icon: SettingsIcon(
-          icon: tile.leading,
-          backgroundColor: tile.iosBackgroundColor,
-        ),
-        content: SettingsNavigationIndicator(),
-        onPress: () {
-          Navigator.of(context).pushNamed(tile.route);
-        },
-      ));
-    }
-    return list;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection.dart';
 import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
@@ -17,6 +18,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class DashboardState extends State<Dashboard> {
+  GlobalKey _key = new GlobalKey();
   @override
   void initState() {
     ProfileController().sumAllCP();
@@ -37,8 +39,13 @@ class DashboardState extends State<Dashboard> {
     }
 
     void addModuleButtonPressed() {
-      Navigator.pushNamed(context, "/modulSelection")
-          .whenComplete(() => updateView());
+      ModuleController().moduleSelectionKey = _key;
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => ModuleSelection(
+                          key: _key,
+                        ))).whenComplete(() => updateView());
     }
 
     List<Widget> getColumnChildren() {

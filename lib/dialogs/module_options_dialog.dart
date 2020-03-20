@@ -3,6 +3,7 @@ import 'package:MyStudyBuddy2/dialogs/module_add_grade_dialog.dart';
 import 'package:MyStudyBuddy2/dialogs/module_informations.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:MyStudyBuddy2/studyprogress/studyprogress.dart';
 import 'package:flutter/material.dart';
 
 class ModuleOptionsDialog extends StatefulWidget {
@@ -103,6 +104,24 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
                 } else {
                   ModuleController().removeSelectedModule(widget.module);
                   ModuleController().updateModule(widget.module);
+                }
+                if (ModuleController().moduleSelectionKey != null) {
+                  State s = ModuleController().moduleSelectionKey.currentState;
+                  try {
+                    s.setState(() {});
+                  } catch (ex) {
+                    print(
+                        "Es konnte kein SetState in ModuleSelection ausgeführt werden.");
+                  }
+                }
+                if (ModuleController().studyProgressKey != null) {
+                  StudyprogressState s = ModuleController().studyProgressKey.currentState;
+                  try {
+                    s.update();
+                  } catch (ex) {
+                    print(
+                        "Es konnte kein SetState in StudyProgress ausgeführt werden.");
+                  }
                 }
               } else {
                 widget.module.properties.isSelected = true;

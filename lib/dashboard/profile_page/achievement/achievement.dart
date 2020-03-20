@@ -2,7 +2,10 @@ import 'package:achievement_view/achievement_view.dart';
 import 'package:achievement_view/achievement_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:MyStudyBuddy2/theme/styles.dart';
+import 'dart:io';
 
 class AchievementPage extends StatefulWidget {
   @override
@@ -12,100 +15,117 @@ class AchievementPage extends StatefulWidget {
 class AchievementPageState extends State<AchievementPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: <Widget>[
-                Container(
-            color: Colors.orange,
-            child: Row(
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: OutlineButton(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 3, bottom: 3),
-                        child: Icon(
-                          Icons.arrow_back,
-                          size: 36,
-                        ),
+    List<Widget> getContainerChildren() {
+      List<Widget> _list = List<Widget>();
+      if (!Platform.isIOS) {
+        _list.add(Container(
+          color: Colors.orange,
+          child: Row(
+            children: <Widget>[
+              Align(
+                alignment: Alignment.topLeft,
+                child: OutlineButton(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 3, bottom: 3),
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 36,
                       ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      )),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      }),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    )),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 3, bottom: 3),
+                  child:
+                      Text("Errungenschaften", style: TextStyle(fontSize: 25)),
                 ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20, top: 3, bottom: 3),
-                    child: Text("Errungenschaften", style: TextStyle(fontSize: 25)),
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
-            Expanded(
-                      child: FutureBuilder(
-                  future: Achievement().loadAchievements(),
-                  builder: (BuildContext _con, AsyncSnapshot _snap) {
-                    if (_snap.connectionState == ConnectionState.done) {
-                      return ListView.builder(
-                        itemCount: Achievement().allAchivements.length,
-                        itemBuilder: (BuildContext _context, int _index) {
-                          AchievementProperties prop =
-                              Achievement().allAchivements[_index];
-                          return ListTile(
-                            trailing: (prop.isDone)
-                                ? Icon(
-                                    Icons.lock_open,
-                                    size: 40,
-                                    color: Colors.green,
-                                  )
-                                : Icon(
-                                    Icons.lock_outline,
-                                    size: 40,
-                                  ),
-                            contentPadding: EdgeInsets.all(10),
-                            enabled: true,
-                            leading: ImageIcon(
-                              prop.icon,
-                              size: 40,
-                              color: Colors.black,
-                            ),
-                            title: Text(
-                              prop.title,
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            subtitle: Padding(
-                              padding: const EdgeInsets.only(top: 3.0),
-                              child: AutoSizeText(
-                                prop.description,
-                                maxFontSize: 17,
+        ));
+      }
+      _list.add(
+        Expanded(
+          child: FutureBuilder(
+              future: Achievement().loadAchievements(),
+              builder: (BuildContext _con, AsyncSnapshot _snap) {
+                if (_snap.connectionState == ConnectionState.done) {
+                  return ListView.builder(
+                    itemCount: Achievement().allAchivements.length,
+                    itemBuilder: (BuildContext _context, int _index) {
+                      AchievementProperties prop =
+                          Achievement().allAchivements[_index];
+                      return ListTile(
+                        trailing: (prop.isDone)
+                            ? Icon(
+                                Icons.lock_open,
+                                size: 40,
+                                color: Colors.green,
+                              )
+                            : Icon(
+                                Icons.lock_outline,
+                                size: 40,
                               ),
-                            ),
-                          );
-                        },
+                        contentPadding: EdgeInsets.all(10),
+                        enabled: true,
+                        leading: ImageIcon(
+                          prop.icon,
+                          size: 40,
+                          color: Colors.black,
+                        ),
+                        title: Text(
+                          prop.title,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Padding(
+                          padding: const EdgeInsets.only(top: 3.0),
+                          child: AutoSizeText(
+                            prop.description,
+                            maxFontSize: 17,
+                          ),
+                        ),
                       );
-                    } else {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[CircularProgressIndicator()],
-                      );
-                    }
-                  }),
-            ),
-          ],
+                    },
+                  );
+                } else {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[CircularProgressIndicator()],
+                  );
+                }
+              }),
+        ),
+      );
+      return _list;
+    }
+
+    return Scaffold(
+      appBar: (Platform.isIOS)
+          ? CupertinoNavigationBar(
+              actionsForegroundColor: CupertinoColors.activeOrange,
+              middle: Text(
+                "Errungenschaften",
+                style: Styles.navBarTitle,
+              ),
+            )
+          : null,
+      body: SafeArea(
+        child: Column(
+          children: getContainerChildren(),
         ),
       ),
     );
   }
 }
-
 
 class Achievement {
   //Singleton

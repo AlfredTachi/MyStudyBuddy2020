@@ -9,6 +9,8 @@ import '../model/module.dart';
 class ModuleController {
   static final ModuleController _instance = ModuleController._internal();
   GlobalKey key;
+  GlobalKey moduleSelectionKey;
+  GlobalKey studyProgressKey;
 
   factory ModuleController() => _instance;
 
