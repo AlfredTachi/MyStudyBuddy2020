@@ -1,4 +1,6 @@
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/tile_controller.dart';
+import 'package:MyStudyBuddy2/studyprogress/studyprogress.dart';
 import 'package:flutter/material.dart';
 
 class Overview extends StatefulWidget {
@@ -7,6 +9,8 @@ class Overview extends StatefulWidget {
 }
 
 class OverviewState extends State<Overview> {
+  GlobalKey _key = new GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -33,10 +37,27 @@ class OverviewState extends State<Overview> {
                 Icons.arrow_forward_ios,
                 color: Colors.orange,
               ),
-              title: Text(TileController().getTiles()[index].text, style: TextStyle(fontSize: 20),),
+              title: Text(
+                TileController().getTiles()[index].text,
+                style: TextStyle(fontSize: 20),
+              ),
               onTap: () {
-                Navigator.of(context)
-                    .pushNamed(TileController().getTiles()[index].route);
+                if (TileController().getTiles()[index].route !=
+                    "/studyprogress") {
+                  Navigator.of(context)
+                      .pushNamed(TileController().getTiles()[index].route);
+                } else {
+                  ModuleController().studyProgressKey = _key;
+                  print("Setting StudyProgressKey to: " +
+                      ModuleController().studyProgressKey.toString());
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => Studyprogress(
+                        key: _key,
+                      ),
+                    ),
+                  );
+                }
               },
             );
           }, childCount: TileController().getTiles().length),
