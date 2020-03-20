@@ -104,6 +104,8 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
                   ModuleController().removeSelectedModule(widget.module);
                   ModuleController().updateModule(widget.module);
                 }
+                State s = ModuleController().moduleSelectionKey.currentState;
+                s.setState(() {});
               } else {
                 widget.module.properties.isSelected = true;
                 if (ModuleController().key.currentContext != null) {

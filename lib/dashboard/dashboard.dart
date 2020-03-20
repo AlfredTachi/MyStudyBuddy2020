@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection.dart';
 import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
@@ -12,6 +13,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class DashboardState extends State<Dashboard> {
+  GlobalKey _key = new GlobalKey();
   @override
   void initState() {
     ProfileController().sumAllCP();
@@ -31,8 +33,13 @@ class DashboardState extends State<Dashboard> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Color(0xFF013D62),
           onPressed: () {
-            Navigator.pushNamed(context, "/modulSelection")
-                .whenComplete(() => updateView());
+            ModuleController().moduleSelectionKey = _key;
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => ModuleSelection(
+                          key: _key,
+                        ))).whenComplete(() => updateView());
           },
           tooltip: 'Modul hinzufügen',
           child: Icon(Icons.add),
@@ -93,29 +100,30 @@ class DashboardState extends State<Dashboard> {
                         Container(
                           padding: EdgeInsets.only(left: 5, right: 5),
                           alignment: Alignment.topLeft,
-                          child: (ModuleController()
-                                      .getSelectedModules()
-                                      .length !=
-                                  0)
-                              ? Center(
-                                  child: Wrap(
-                                      direction: Axis.horizontal,
-                                      spacing: 0,
-                                      runSpacing: 5,
-                                      children: ModuleController()
-                                          .getAllSelectedModulesWidgets()),
-                                )
-                              : Center(
-                                  child: Align(
-                                    heightFactor: 5,
-                                    child: FittedBox(
-                                      child: Text(
-                                        "Du hast zurzeit keine Module geplant!",
-                                        style: TextStyle(fontSize:18,color: Colors.black45),
+                          child:
+                              (ModuleController().getSelectedModules().length !=
+                                      0)
+                                  ? Center(
+                                      child: Wrap(
+                                          direction: Axis.horizontal,
+                                          spacing: 0,
+                                          runSpacing: 5,
+                                          children: ModuleController()
+                                              .getAllSelectedModulesWidgets()),
+                                    )
+                                  : Center(
+                                      child: Align(
+                                        heightFactor: 5,
+                                        child: FittedBox(
+                                          child: Text(
+                                            "Du hast zurzeit keine Module geplant!",
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.black45),
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
                         ),
                       ],
                     ),
@@ -141,8 +149,10 @@ class DashboardState extends State<Dashboard> {
       direction: Axis.vertical,
       center: Text(
         ProfileController().getProgressText(),
-        style:
-            TextStyle(fontSize:20, color:Colors.blueGrey[900], fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontSize: 20,
+            color: Colors.blueGrey[900],
+            fontWeight: FontWeight.bold),
       ),
     );
   }
