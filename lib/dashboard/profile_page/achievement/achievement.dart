@@ -67,12 +67,22 @@ class AchievementPageState extends State<AchievementPage> {
                       return ListTile(
                         trailing: (prop.isDone)
                             ? Icon(
-                                Icons.lock_open,
+                                (Platform.isIOS)
+                                    ? IconData(0xf4c8,
+                                        fontFamily: CupertinoIcons.iconFont,
+                                        fontPackage:
+                                            CupertinoIcons.iconFontPackage)
+                                    : Icons.lock_open,
                                 size: 40,
                                 color: Colors.green,
                               )
                             : Icon(
-                                Icons.lock_outline,
+                                (Platform.isIOS)
+                                    ? IconData(0xf457,
+                                        fontFamily: CupertinoIcons.iconFont,
+                                        fontPackage:
+                                            CupertinoIcons.iconFontPackage)
+                                    : Icons.lock_outline,
                                 size: 40,
                               ),
                         contentPadding: EdgeInsets.all(10),
@@ -118,11 +128,15 @@ class AchievementPageState extends State<AchievementPage> {
               ),
             )
           : null,
-      body: SafeArea(
-        child: Column(
-          children: getContainerChildren(),
-        ),
-      ),
+      body: (Platform.isIOS)
+          ? Column(
+              children: getContainerChildren(),
+            )
+          : SafeArea(
+              child: Column(
+                children: getContainerChildren(),
+              ),
+            ),
     );
   }
 }
