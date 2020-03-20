@@ -7,6 +7,21 @@ import 'package:flutter/widgets.dart';
 
 abstract class Styles {
   static const hsBlue = Color(0xFF003D62);
+  static const textFieldColor = Color.fromARGB(128, 255, 255, 255);
+
+  static const profileText = TextStyle(
+    fontSize: 18,
+    color: CupertinoColors.black,
+    fontFamily: "SF",
+    fontWeight: FontWeight.normal
+  );
+
+  static TextStyle profilePlaceholder = TextStyle(
+    fontSize: 18,
+    color: CupertinoColors.inactiveGray.withAlpha(128),
+    fontFamily: "SF",
+    fontWeight: FontWeight.normal
+  );
 
   static const listLabel = TextStyle(
     fontSize: 18,
