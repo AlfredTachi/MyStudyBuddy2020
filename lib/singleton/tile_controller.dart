@@ -1,6 +1,7 @@
 import 'package:MyStudyBuddy2/qsp_info/qsp_info_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class TileController {
   //Singleton
@@ -10,15 +11,103 @@ class TileController {
   static final TileController _instance = TileController._internal();
 
   final List<_Tile> _tiles = [
-    _Tile(Icon(Icons.check_box), "Studienverlauf", "/studyprogress"),
-    _Tile(Icon(QSPInfoIcons.calculator), "Notenrechner", "/gradesPrognosis"),
-    _Tile(Icon(Icons.chrome_reader_mode), "Modulhandbuch", "/moduleHandbook"),
-    _Tile(Icon(Icons.map), "Campusplan", "/map"),
-    _Tile(Icon(Icons.calendar_today), "LSF Frontend", "/planer"),
-    _Tile(Icon(Icons.wb_sunny), "Wetter", "/weather"),
-    _Tile(Icon(Icons.local_library), "Studi Quiz", "/quiz"),
-    // _Tile(Icon(Icons.rate_review), "Evaluation", "/evaluation"),
-    _Tile(Icon(Icons.help), "Hilfe", "/supportMain"),
+    _Tile(
+      (Platform.isIOS)
+          ? IconData(
+              0xf374,
+              fontFamily: CupertinoIcons.iconFont,
+              fontPackage: CupertinoIcons.iconFontPackage,
+            )
+          : Icons.check_box,
+      CupertinoColors.systemGreen,
+      "Studienverlauf",
+      "/studyprogress",
+    ),
+    _Tile(
+      (Platform.isIOS)
+          ? IconData(
+              0xf3f2,
+              fontFamily: CupertinoIcons.iconFont,
+              fontPackage: CupertinoIcons.iconFontPackage,
+            )
+          : QSPInfoIcons.calculator,
+      CupertinoColors.systemBlue,
+      "Notenrechner",
+      "/gradesPrognosis",
+    ),
+    _Tile(
+      (Platform.isIOS)
+          ? IconData(
+              0xf3e8,
+              fontFamily: CupertinoIcons.iconFont,
+              fontPackage: CupertinoIcons.iconFontPackage,
+            )
+          : Icons.chrome_reader_mode,
+      CupertinoColors.systemGrey,
+      "Modulhandbuch",
+      "/moduleHandbook",
+    ),
+    _Tile(
+      (Platform.isIOS)
+          ? IconData(
+              0xf393,
+              fontFamily: CupertinoIcons.iconFont,
+              fontPackage: CupertinoIcons.iconFontPackage,
+            )
+          : Icons.map,
+      CupertinoColors.systemBlue,
+      "Campusplan",
+      "/map",
+    ),
+    _Tile(
+      (Platform.isIOS)
+          ? IconData(
+              0xf3f4,
+              fontFamily: CupertinoIcons.iconFont,
+              fontPackage: CupertinoIcons.iconFontPackage,
+            )
+          : Icons.calendar_today,
+      CupertinoColors.systemRed,
+      "LSF Frontend",
+      "/planer",
+    ),
+    _Tile(
+      (Platform.isIOS)
+          ? IconData(
+              0xf476,
+              fontFamily: CupertinoIcons.iconFont,
+              fontPackage: CupertinoIcons.iconFontPackage,
+            )
+          : Icons.wb_sunny,
+      CupertinoColors.systemBlue,
+      "Wetter",
+      "/weather",
+    ),
+    _Tile(
+      (Platform.isIOS)
+          ? IconData(
+              0xf418,
+              fontFamily: CupertinoIcons.iconFont,
+              fontPackage: CupertinoIcons.iconFontPackage,
+            )
+          : Icons.local_library,
+      CupertinoColors.systemOrange,
+      "Studi Quiz",
+      "/quiz",
+    ),
+    // _Tile(Icon(Icons.rate_review), "Evaluation", "/evaluation",),
+    _Tile(
+      (Platform.isIOS)
+          ? IconData(
+              0xf446,
+              fontFamily: CupertinoIcons.iconFont,
+              fontPackage: CupertinoIcons.iconFontPackage,
+            )
+          : Icons.help,
+      CupertinoColors.systemGrey,
+      "Hilfe",
+      "/supportMain",
+    ),
   ];
 
   List<_Tile> getTiles() {
@@ -27,9 +116,10 @@ class TileController {
 }
 
 class _Tile {
-  Icon leading;
+  IconData leading;
   String text;
   String route;
+  Color iosBackgroundColor;
 
-  _Tile(this.leading, this.text, this.route);
+  _Tile(this.leading, this.iosBackgroundColor, this.text, this.route);
 }
