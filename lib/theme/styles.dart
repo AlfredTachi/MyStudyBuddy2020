@@ -2,40 +2,49 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:MyStudyBuddy2/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class Styles {
   static const hsBlue = Color(0xFF003D62);
 
-  static const weatherDetails = TextStyle(
-    fontSize: 20,
+  static const listLabel = TextStyle(
+    fontSize: 18,
     color: CupertinoColors.black,
     fontFamily: "SF",
     fontWeight: FontWeight.normal
   );
 
-  static const weatherTitle = TextStyle(
-    fontSize: 32,
-    color: CupertinoColors.black,
+  static const listSubtitle = TextStyle(
+    fontSize: 14,
+    color: CupertinoColors.systemGrey,
     fontFamily: "SF",
-    fontWeight: FontWeight.w700
+    fontWeight: FontWeight.normal
   );
+
+  static const weatherDetails = TextStyle(
+      fontSize: 20,
+      color: CupertinoColors.black,
+      fontFamily: "SF",
+      fontWeight: FontWeight.normal);
+
+  static const weatherTitle = TextStyle(
+      fontSize: 32,
+      color: CupertinoColors.black,
+      fontFamily: "SF",
+      fontWeight: FontWeight.w700);
 
   static const weatherTime = TextStyle(
-    fontSize: 16,
-    color: CupertinoColors.placeholderText,
-    fontFamily: "SF",
-    fontWeight: FontWeight.w500
-  );
+      fontSize: 16,
+      color: CupertinoColors.placeholderText,
+      fontFamily: "SF",
+      fontWeight: FontWeight.w500);
 
   static const weatherTemperature = TextStyle(
-    fontSize: 36,
-    color: CupertinoColors.black,
-    fontFamily: "SF",
-    fontWeight: FontWeight.w900
-  );
+      fontSize: 36,
+      color: CupertinoColors.black,
+      fontFamily: "SF",
+      fontWeight: FontWeight.w900);
 
   static const studyprogressCardTitle = TextStyle(
     fontSize: 20,

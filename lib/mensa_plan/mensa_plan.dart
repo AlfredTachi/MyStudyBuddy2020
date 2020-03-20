@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:MyStudyBuddy2/theme/styles.dart';
 import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,17 +17,14 @@ class MensaPlanState extends State<MensaPlan> {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
-      return getCupertinoDesign();
-    } else {
-      return getMaterialDesign();
-    }
-  }
-
-  Widget getMaterialDesign() {
-    return SafeArea(
-      child: Scaffold(
-        body: FutureBuilder(
+    return Scaffold(
+      appBar: (Platform.isIOS)
+      ? CupertinoNavigationBar(
+        middle: Text("Mensaplan", style: Styles.navBarTitle,),
+      )
+      : null,
+      body: SafeArea(
+              child: FutureBuilder(
           future: loadPage(),
           builder: (BuildContext context, AsyncSnapshot snap) {
             if (snap.connectionState == ConnectionState.done) {
@@ -75,9 +72,5 @@ class MensaPlanState extends State<MensaPlan> {
       }
       throw Exception('Failed to load Site');
     }
-  }
-
-  Widget getCupertinoDesign() {
-    return getMaterialDesign();
   }
 }

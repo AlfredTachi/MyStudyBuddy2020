@@ -138,22 +138,21 @@ class SettingsItemState extends State<SettingsItem> {
                             SizedBox(height: 8.5),
                             Text(
                               widget.label,
-                              style: TextStyle(fontFamily: "SF"),
+                              style: Styles.listLabel,
                             ),
                             SizedBox(height: 4),
                             Text(
                               widget.subtitle,
-                              style: TextStyle(
-                                fontFamily: "SF",
-                                fontSize: 12,
-                                letterSpacing: -0.2,
-                              ),
+                              style: Styles.listSubtitle,
                             ),
                           ],
                         )
                       : Padding(
                           padding: EdgeInsets.only(top: 1.5),
-                          child: Text(widget.label, style: TextStyle(fontFamily: "SF"),),
+                          child: Text(
+                            widget.label,
+                            style: Styles.listLabel,
+                          ),
                         ),
                 ),
               ),
