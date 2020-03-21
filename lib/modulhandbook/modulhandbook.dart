@@ -12,9 +12,6 @@ class ModuleHandbooks extends StatefulWidget {
 }
 
 class ModuleHandbooksState extends State<ModuleHandbooks> {
-  num _viewIndex = 0;
-  bool _hasLoaded = false;
-
   @override
   Widget build(BuildContext context) {
     return (Platform.isIOS)

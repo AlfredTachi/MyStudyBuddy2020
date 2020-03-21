@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:MyStudyBuddy2/theme/styles.dart';
 
@@ -14,8 +14,6 @@ class Planer extends StatefulWidget {
 }
 
 class _PlanerState extends State<Planer> with SingleTickerProviderStateMixin {
-  get http => null;
-
   Widget build(BuildContext context) {
     return (Platform.isIOS)
         ? Scaffold(
