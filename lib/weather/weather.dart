@@ -1,7 +1,12 @@
+import 'dart:io';
 import 'dart:convert';
+import 'dart:ui';
 import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:MyStudyBuddy2/theme/styles.dart';
 import 'package:MyStudyBuddy2/link/link.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class Weather extends StatefulWidget {
@@ -15,6 +20,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   bool showDetails = false;
   String status = "";
   String showMore = "Details zeigen";
+  String weatherLink = "http://wetter.hs-worms.de/";
 
   @override
   void initState() {
@@ -44,19 +50,102 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return getMaterialDesign();
-  }
-
-  Widget getMaterialDesign() {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFF013D62),
-        onPressed: () {
-          fetchData();
-        },
-        tooltip: 'Aktualisieren',
-        child: Icon(Icons.refresh),
-      ),
+      appBar: (Platform.isIOS)
+          ? CupertinoNavigationBar(
+              actionsForegroundColor: CupertinoColors.activeOrange,
+              middle: Text(
+                "Wetter",
+                style: Styles.navBarTitle,
+              ),
+              trailing: Builder(
+                builder: (BuildContext context) {
+                  return FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        CupertinoButton(
+                          padding: EdgeInsets.zero,
+                          child: Icon(
+                            IconData(
+                              0xf45a,
+                              fontFamily: CupertinoIcons.iconFont,
+                              fontPackage: CupertinoIcons.iconFontPackage,
+                            ),
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            fetchData();
+                          },
+                        ),
+                        CupertinoButton(
+                          padding: EdgeInsets.zero,
+                          child: Icon(
+                            IconData(
+                              0xf44c,
+                              fontFamily: CupertinoIcons.iconFont,
+                              fontPackage: CupertinoIcons.iconFontPackage,
+                            ),
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            return showCupertinoDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CupertinoAlertDialog(
+                                    title: Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: Text(
+                                        "Informationen zu den Daten",
+                                        style: Styles.alertDialogTitleText,
+                                      ),
+                                    ),
+                                    content: Text(
+                                        "Die Daten werden bereitgestellt vom TOP Wetter Team WWW und der Hochschule Worms. " +
+                                            "Weitere Informationen finden Sie auf der Wetter Seite der HS Worms.",
+                                        style: Styles.minorText),
+                                    actions: <Widget>[
+                                      CupertinoDialogAction(
+                                        isDefaultAction: true,
+                                        child: Text("Abbrechen",
+                                            style:
+                                                Styles.alertDialogActionText),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      CupertinoDialogAction(
+                                        child: Text("Zur Website",
+                                            style:
+                                                Styles.alertDialogActionText),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          _launchURL();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            )
+          : null,
+      floatingActionButton: (Platform.isIOS)
+          ? null
+          : FloatingActionButton(
+              backgroundColor: Color(0xFF013D62),
+              onPressed: () {
+                fetchData();
+              },
+              tooltip: 'Aktualisieren',
+              child: Icon(Icons.refresh),
+            ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -65,133 +154,181 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: OutlineButton(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 3, bottom: 3),
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: Colors.black,
-                            size: 36,
-                          ),
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: OutlineButton(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 3, bottom: 3),
-                          child: Icon(
-                            Icons.info_outline,
-                            color: Colors.black,
-                            size: 36,
-                          ),
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        )),
-                        onPressed: () {
-                          return showDialog(
-                            context: context,
-                            child: SimpleDialog(
-                              contentPadding: EdgeInsets.all(25),
-                              title: FittedBox(
-                                  child: Text("Informationen zu den Daten")),
-                              children: <Widget>[
-                                Text("Die Daten werden bereitgestellt vom TOP Wetter Team WWW und der Hochschule Worms. " +
-                                    "Weitere Informationen finden Sie auf der Wetter Seite der HS Worms."),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 20),
-                                  child: Link(
-                                      child: Text(
-                                        "Hier geht es zur Website!",
-                                        style: TextStyle(
-                                            decoration:
-                                                TextDecoration.underline,
-                                            color: Colors.blue),
-                                      ),
-                                      url: "http://wetter.hs-worms.de/"),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Hs Worms",
-                          style: TextStyle(
-                              fontSize: 42, fontWeight: FontWeight.w100),
-                        ),
-                        Text(
-                          dateTimeToString(),
-                          style: TextStyle(fontSize:20, color: Colors.black45),
-                        ),
-                        Text(
-                          data.temperature.toString() + " °C",
-                          style: TextStyle(
-                              fontSize: 46, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(30),
-                    ),
-                    color: Colors.white.withOpacity(0.5),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.only(left: 5, right: 5),
-                    child: Center(
-                      child: details(),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          child: Column(children: getColumnChildren()),
         ),
       ),
     );
   }
 
+  List<Widget> getColumnChildren() {
+    List<Widget> _list = List<Widget>();
+    if (!Platform.isIOS) {
+      _list.add(
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: OutlineButton(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 3, bottom: 3),
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                      size: 36,
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.topRight,
+                child: OutlineButton(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 3, bottom: 3),
+                    child: Icon(
+                      Icons.info_outline,
+                      color: Colors.black,
+                      size: 36,
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  )),
+                  onPressed: () {
+                    return showDialog(
+                      context: context,
+                      child: SimpleDialog(
+                        contentPadding: EdgeInsets.all(25),
+                        title: FittedBox(
+                            child: Text("Informationen zu den Daten")),
+                        children: <Widget>[
+                          Text("Die Daten werden bereitgestellt vom TOP Wetter Team WWW und der Hochschule Worms. " +
+                              "Weitere Informationen finden Sie auf der Wetter Seite der HS Worms."),
+                          Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Link(
+                                child: Text(
+                                  "Hier geht es zur Website!",
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.blue),
+                                ),
+                                url: weatherLink),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    _list.add(
+      Expanded(
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Hs Worms",
+                  style: (Platform.isIOS)
+                      ? Styles.weatherTitle
+                      : TextStyle(fontSize: 42, fontWeight: FontWeight.w100),
+                ),
+                Text(
+                  dateTimeToString(),
+                  style: (Platform.isIOS)
+                      ? Styles.weatherTime
+                      : TextStyle(fontSize: 20, color: Colors.black45),
+                ),
+                Text(
+                  data.temperature.toString() + " °C",
+                  style: (Platform.isIOS)
+                      ? Styles.weatherTemperature
+                      : TextStyle(fontSize: 46, fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+    _list.add(
+      Expanded(
+        flex: 2,
+        child: (Platform.isIOS)
+            ? Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 15.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                    child: PhysicalModel(
+                      shape: BoxShape.rectangle,
+                      color: CupertinoColors.white.withOpacity(0.5),
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            details(),
+                          ],
+                        )),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(30),
+                  ),
+                  color: Colors.white.withOpacity(0.5),
+                ),
+                child: Container(
+                  padding: EdgeInsets.only(left: 5, right: 5),
+                  child: Center(
+                    child: details(),
+                  ),
+                ),
+              ),
+      ),
+    );
+    return _list;
+  }
+
+  void _launchURL() async {
+    if (await canLaunch(weatherLink)) {
+      await launch(weatherLink);
+    } else {
+      throw 'Could not launch $weatherLink';
+    }
+  }
+
   TextStyle detailTextStyle() {
-    return TextStyle(
+    return (Platform.isIOS)
+    ? Styles.weatherDetails
+    : TextStyle(
       color: Colors.black,
       fontSize: 24,
     );
