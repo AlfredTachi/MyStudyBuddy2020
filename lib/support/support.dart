@@ -3,6 +3,7 @@ import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mailer/flutter_mailer.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:MyStudyBuddy2/theme/styles.dart';
 import 'package:MyStudyBuddy2/ios_list_design/cupertino_settings_icon.dart';
 import 'package:MyStudyBuddy2/ios_list_design/cupertino_settings_group.dart';
@@ -206,10 +207,20 @@ class SupportState extends State<Support> {
   }
 
   void impressumPressed() {
-    Navigator.pushNamed(context, '/supportMain/impressum');
+    (Platform.isIOS)
+        ? _launchURL("https://atlas.ai.it.hs-worms.de/impressum/")
+        : Navigator.pushNamed(context, '/supportMain/impressum');
   }
 
   void privacyPolicePressed() {
     Navigator.pushNamed(context, '/supportMain/privacyPolice/privacyPolice');
+  }
+
+  void _launchURL(String link) async {
+    if (await canLaunch(link)) {
+      await launch(link);
+    } else {
+      throw 'Could not launch $link';
+    }
   }
 }
