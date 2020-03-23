@@ -9,164 +9,164 @@ abstract class Styles {
   static const hsBlue = Color(0xFF013D62);
   static const textFieldColor = Color.fromARGB(128, 255, 255, 255);
 
-  static const liquidCircularProgressIndicatorText = TextStyle(
+  static TextStyle liquidCircularProgressIndicatorText = TextStyle(
       fontSize: 20,
       color: Color(0xFF263238),
       fontWeight: FontWeight.w700,
-      fontFamily: "SF");
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
 
-  static const profileText = TextStyle(
+  static TextStyle profileText = TextStyle(
       fontSize: 18,
       color: CupertinoColors.black,
-      fontFamily: "SF",
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
       fontWeight: FontWeight.normal);
 
   static TextStyle profilePlaceholder = TextStyle(
       fontSize: 18,
       color: CupertinoColors.inactiveGray.withAlpha(128),
-      fontFamily: "SF",
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
       fontWeight: FontWeight.normal);
 
-  static const listLabel = TextStyle(
+  static TextStyle listLabel = TextStyle(
       fontSize: 18,
       color: CupertinoColors.black,
-      fontFamily: "SF",
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
       fontWeight: FontWeight.normal);
 
-  static const listSubtitle = TextStyle(
+  static TextStyle listSubtitle = TextStyle(
       fontSize: 14,
       color: CupertinoColors.systemGrey,
-      fontFamily: "SF",
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
       fontWeight: FontWeight.normal);
 
-  static const weatherDetails = TextStyle(
+  static TextStyle weatherDetails = TextStyle(
       fontSize: 20,
       color: CupertinoColors.black,
-      fontFamily: "SF",
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
       fontWeight: FontWeight.normal);
 
-  static const weatherTitle = TextStyle(
+  static TextStyle weatherTitle = TextStyle(
       fontSize: 32,
       color: CupertinoColors.black,
-      fontFamily: "SF",
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
       fontWeight: FontWeight.w700);
 
-  static const weatherTime = TextStyle(
+  static TextStyle weatherTime = TextStyle(
       fontSize: 16,
       color: CupertinoColors.placeholderText,
-      fontFamily: "SF",
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
       fontWeight: FontWeight.w500);
 
-  static const weatherTemperature = TextStyle(
+  static TextStyle weatherTemperature = TextStyle(
       fontSize: 36,
       color: CupertinoColors.black,
-      fontFamily: "SF",
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
       fontWeight: FontWeight.w900);
 
-  static const studyprogressCardTitle = TextStyle(
+  static TextStyle studyprogressCardTitle = TextStyle(
     fontSize: 20,
     color: hsBlue,
-    fontFamily: "SF",
+    fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
     fontWeight: FontWeight.w700,
   );
 
-  static const moduleCode = TextStyle(
+  static TextStyle moduleCode = TextStyle(
     fontSize: 16,
     color: CupertinoColors.white,
-    fontFamily: "SF",
+    fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
   );
 
-  static const moduleGradePassed = TextStyle(
+  static TextStyle moduleGradePassed = TextStyle(
     fontSize: 10,
     color: CupertinoColors.systemGreen,
-    fontFamily: "SF",
+    fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
   );
 
-  static const moduleGradeNotPassed = TextStyle(
+  static TextStyle moduleGradeNotPassed = TextStyle(
     fontSize: 10,
-    fontFamily: "SF",
+    fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
     color: CupertinoColors.systemRed,
   );
 
-  static const qspLink = TextStyle(
+  static TextStyle qspLink = TextStyle(
     fontSize: 14,
-    fontFamily: "SF",
+    fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
   );
 
-  static const qspDetailsText = TextStyle(
+  static TextStyle qspDetailsText = TextStyle(
       color: CupertinoColors.black,
       fontSize: 14,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.normal,
-      fontFamily: "SF");
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
 
-  static const qspDetailsTitle = TextStyle(
+  static TextStyle qspDetailsTitle = TextStyle(
       color: CupertinoColors.black,
       fontSize: 16,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w500,
-      fontFamily: "SF");
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
 
-  static const minorText = TextStyle(
+  static TextStyle minorText = TextStyle(
       color: Color.fromRGBO(128, 128, 128, 1),
       fontSize: 16,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.normal,
-      fontFamily: "SF");
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
 
-  static const TextStyle textFieldText = TextStyle(
+  static TextStyle textFieldText = TextStyle(
       fontSize: 14,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.normal,
-      fontFamily: "SF");
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
 
-  static const navBarTitle =
-      TextStyle(fontFamily: "SF", fontWeight: FontWeight.w700, fontSize: 18);
+  static TextStyle navBarTitle =
+      TextStyle(fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily, fontWeight: FontWeight.w700, fontSize: 18);
 
-  static const alertDialogActionText = TextStyle(
-    fontFamily: "SF",
+  static TextStyle alertDialogActionText = TextStyle(
+    fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
   );
 
-  static const alertDialogTitleText = TextStyle(
-      fontFamily: "SF",
+  static TextStyle alertDialogTitleText = TextStyle(
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
       fontSize: 24,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w700);
 
-  static const detailsTitleText = TextStyle(
+  static TextStyle detailsTitleText = TextStyle(
       color: CupertinoColors.black,
       fontSize: 30,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
-      fontFamily: "SF");
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
 
-  static const detailsDescriptionText = TextStyle(
+  static TextStyle detailsDescriptionText = TextStyle(
       color: CupertinoColors.black,
       fontSize: 16,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.normal,
-      fontFamily: "SF");
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
 
-  static const moduleInformationTitle = TextStyle(
+  static TextStyle moduleInformationTitle = TextStyle(
     color: CupertinoColors.activeOrange,
     fontSize: 16,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.w700,
-    fontFamily: "SF",
+    fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
   );
 
-  static const moduleInformationText = TextStyle(
+  static TextStyle moduleInformationText = TextStyle(
       color: CupertinoColors.black,
       fontSize: 14,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w500,
-      fontFamily: "SF");
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
 
-  static const gradeInputError = TextStyle(
+  static TextStyle gradeInputError = TextStyle(
       color: CupertinoColors.destructiveRed,
       fontSize: 14,
       fontStyle: FontStyle.normal,
-      fontFamily: "SF");
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
 
   static Color appBackground = CupertinoColors.lightBackgroundGray;
 

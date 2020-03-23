@@ -6,7 +6,7 @@ ThemeData baselight() {
   ThemeData baselight = ThemeData.light();
   return (Platform.isIOS)
       ? ThemeData(
-          fontFamily: "SF",
+          fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
           accentColor: CupertinoColors.activeOrange,
           indicatorColor: CupertinoColors.activeOrange,
           primaryColor: CupertinoColors.activeOrange,

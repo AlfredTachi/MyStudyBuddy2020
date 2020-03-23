@@ -16,6 +16,14 @@
 /// USAGE Example:
 /// import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
 /// Button(child: Icon(IOSQuickAccessIcons.award)
+/// 
+/// 
+/// 
+/// 
+/// ##############################
+/// #########IMPORTANT:###########
+/// ##############################
+/// All these icons (except fachschaftlogo, hslogo, lsflogo, moodlelogo, webmailerlogo) 
 import 'package:flutter/widgets.dart';
 
 class IOSQuickAccessIcons {
