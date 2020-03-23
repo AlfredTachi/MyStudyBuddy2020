@@ -73,14 +73,12 @@ class FAQState extends State<FAQ> {
   }
 
   List<Widget> createList() {
-    bool isExpanded = false;
     List<Widget> _items = [
       ExpansionTile(
         title: Text(
           'Wo finde ich das Rechenzentrum (RZ)?',
           textAlign: TextAlign.left,
           softWrap: true,
-          style: TextStyle(color: isExpanded ? Colors.orange : Colors.black),
         ),
         children: <Widget>[
           Padding(
