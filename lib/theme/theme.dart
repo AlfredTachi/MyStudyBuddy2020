@@ -9,7 +9,9 @@ ThemeData baselight() {
           fontFamily: "SF",
           accentColor: CupertinoColors.activeOrange,
           indicatorColor: CupertinoColors.activeOrange,
-          primaryColor: CupertinoColors.activeOrange)
+          primaryColor: CupertinoColors.activeOrange,
+          scaffoldBackgroundColor: CupertinoColors.lightBackgroundGray,
+          appBarTheme: AppBarTheme(brightness: Brightness.light))
       : baselight.copyWith(
           primaryColor: Colors.orange,
           textTheme: TextTheme(
@@ -23,14 +25,11 @@ ThemeData baselight() {
                 color: Colors.black, fontSize: 20, fontFamily: 'Roboto'),
           ),
           appBarTheme: AppBarTheme(
-              brightness: (Platform.isIOS) ? Brightness.light : null,
               color: Colors.orange,
               textTheme: TextTheme(
                   title: TextStyle(color: Colors.white, fontSize: 22))),
           indicatorColor: Colors.deepOrange,
-          scaffoldBackgroundColor: (Platform.isIOS)
-              ? CupertinoColors.lightBackgroundGray
-              : Colors.white,
+          scaffoldBackgroundColor: Colors.white,
           accentColor: Colors.deepOrangeAccent,
         );
 }
