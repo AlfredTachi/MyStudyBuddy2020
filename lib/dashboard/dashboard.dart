@@ -235,7 +235,9 @@ class DashboardState extends State<Dashboard> {
       direction: Axis.vertical,
       center: Text(
         ProfileController().getProgressText(),
-        style: TextStyle(
+        style: (Platform.isIOS)
+        ? Styles.liquidCircularProgressIndicatorText
+        : TextStyle(
             fontSize: 20,
             color: Colors.blueGrey[900],
             fontWeight: FontWeight.bold),

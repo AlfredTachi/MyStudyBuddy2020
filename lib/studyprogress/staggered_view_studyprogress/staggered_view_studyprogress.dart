@@ -30,6 +30,7 @@ class _StaggeredViewState extends State<StaggeredView> {
               ),
               trailing: Builder(
                 builder: (BuildContext context) {
+                  scaffoldContext = context;
                   return CupertinoButton(
                     padding: EdgeInsets.zero,
                     child: Icon(
@@ -138,7 +139,9 @@ class _StaggeredViewState extends State<StaggeredView> {
       }
     }
     if (Platform.isIOS) {
-      _semesterTiles.add(Container(height: 25,));
+      _semesterTiles.add(Container(
+        height: 25,
+      ));
     }
     return _semesterTiles;
   }
@@ -196,14 +199,17 @@ class _StaggeredViewState extends State<StaggeredView> {
 
   _downloadLSFData(BuildContext context,
       [String name = "", String password = ""]) {
-    String userName = '';
-    String userPassword = '';
+    String userName = name;
+    String userPassword = password;
     return showDialog(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("LSF Login"),
+          title: Text(
+            "LSF Login",
+            style: (Platform.isIOS) ? Styles.alertDialogTitleText : null,
+          ),
           content: Wrap(
             // direction: Axis.vertical,
             children: <Widget>[
@@ -246,7 +252,12 @@ class _StaggeredViewState extends State<StaggeredView> {
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text("Abbrechen"),
+              child: Text(
+                "Abbrechen",
+                style: (Platform.isIOS)
+                    ? TextStyle(color: CupertinoColors.destructiveRed)
+                    : null,
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -273,7 +284,9 @@ class _StaggeredViewState extends State<StaggeredView> {
                         Scaffold.of(scaffoldContext).hideCurrentSnackBar();
                         success = null;
                         createSnackBarWithReloadButton(
-                            "Die Logindaten waren leider falsch");
+                            "Die Logindaten waren leider falsch",
+                            userName,
+                            userPassword);
                       });
                       break;
                     case 2:

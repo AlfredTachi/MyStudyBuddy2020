@@ -59,7 +59,10 @@ class OurPrivacyPoliceState extends State<OurPrivacyPolice> {
                       javascriptMode: JavascriptMode.unrestricted,
                     );
                   } else if (snap.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return Center(
+                        child: (Platform.isIOS)
+                            ? CupertinoActivityIndicator()
+                            : CircularProgressIndicator());
                   } else {
                     return Column(
                         mainAxisAlignment: MainAxisAlignment.center,

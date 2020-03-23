@@ -19,12 +19,15 @@ class MensaPlanState extends State<MensaPlan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: (Platform.isIOS)
-      ? CupertinoNavigationBar(
-        middle: Text("Mensaplan", style: Styles.navBarTitle,),
-      )
-      : null,
+          ? CupertinoNavigationBar(
+              middle: Text(
+                "Mensaplan",
+                style: Styles.navBarTitle,
+              ),
+            )
+          : null,
       body: SafeArea(
-              child: FutureBuilder(
+        child: FutureBuilder(
           future: loadPage(),
           builder: (BuildContext context, AsyncSnapshot snap) {
             if (snap.connectionState == ConnectionState.done) {
@@ -36,7 +39,10 @@ class MensaPlanState extends State<MensaPlan> {
                 javascriptMode: JavascriptMode.unrestricted,
               );
             } else if (snap.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                  child: (Platform.isIOS)
+                      ? CupertinoActivityIndicator()
+                      : CircularProgressIndicator());
             } else {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,

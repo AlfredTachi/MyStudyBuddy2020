@@ -104,7 +104,11 @@ class AchievementPageState extends State<AchievementPage> {
                 } else {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[CircularProgressIndicator()],
+                    children: <Widget>[
+                      (Platform.isIOS)
+                          ? CupertinoActivityIndicator()
+                          : CircularProgressIndicator()
+                    ],
                   );
                 }
               }),

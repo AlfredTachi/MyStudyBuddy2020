@@ -9,33 +9,35 @@ abstract class Styles {
   static const hsBlue = Color(0xFF013D62);
   static const textFieldColor = Color.fromARGB(128, 255, 255, 255);
 
+  static const liquidCircularProgressIndicatorText = TextStyle(
+      fontSize: 20,
+      color: Color(0xFF263238),
+      fontWeight: FontWeight.w700,
+      fontFamily: "SF");
+
   static const profileText = TextStyle(
-    fontSize: 18,
-    color: CupertinoColors.black,
-    fontFamily: "SF",
-    fontWeight: FontWeight.normal
-  );
+      fontSize: 18,
+      color: CupertinoColors.black,
+      fontFamily: "SF",
+      fontWeight: FontWeight.normal);
 
   static TextStyle profilePlaceholder = TextStyle(
-    fontSize: 18,
-    color: CupertinoColors.inactiveGray.withAlpha(128),
-    fontFamily: "SF",
-    fontWeight: FontWeight.normal
-  );
+      fontSize: 18,
+      color: CupertinoColors.inactiveGray.withAlpha(128),
+      fontFamily: "SF",
+      fontWeight: FontWeight.normal);
 
   static const listLabel = TextStyle(
-    fontSize: 18,
-    color: CupertinoColors.black,
-    fontFamily: "SF",
-    fontWeight: FontWeight.normal
-  );
+      fontSize: 18,
+      color: CupertinoColors.black,
+      fontFamily: "SF",
+      fontWeight: FontWeight.normal);
 
   static const listSubtitle = TextStyle(
-    fontSize: 14,
-    color: CupertinoColors.systemGrey,
-    fontFamily: "SF",
-    fontWeight: FontWeight.normal
-  );
+      fontSize: 14,
+      color: CupertinoColors.systemGrey,
+      fontFamily: "SF",
+      fontWeight: FontWeight.normal);
 
   static const weatherDetails = TextStyle(
       fontSize: 20,
@@ -127,7 +129,7 @@ abstract class Styles {
 
   static const alertDialogTitleText = TextStyle(
       fontFamily: "SF",
-      fontSize: 18,
+      fontSize: 24,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w700);
 
