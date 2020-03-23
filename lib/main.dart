@@ -2,6 +2,7 @@ import 'package:MyStudyBuddy2/dashboard/dashboard.dart';
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/mensa_plan/mensa_plan.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
 import 'package:MyStudyBuddy2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -82,29 +83,26 @@ class MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
   List<BottomNavigationBarItem> getBottomNavigationBarItems() {
     return [
       BottomNavigationBarItem(
-        icon: Icon((Platform.isIOS)
-            ? IconData(
-                0xf41a,
-                fontFamily: CupertinoIcons.iconFont,
-                fontPackage: CupertinoIcons.iconFontPackage,
-              )
-            : Icons.person),
+        icon: Icon(
+          (Platform.isIOS) ? IOSQuickAccessIcons.person : Icons.person,
+          size: (Platform.isIOS) ? 24 : null,
+        ),
         title: Text("Mein Studium"),
       ),
       BottomNavigationBarItem(
-        icon: Icon((Platform.isIOS)
-            ? IconData(0xf454,
-                fontFamily: CupertinoIcons.iconFont,
-                fontPackage: CupertinoIcons.iconFontPackage)
-            : Icons.home),
+        icon: Icon(
+          (Platform.isIOS)
+              ? IOSQuickAccessIcons.list_bullet_below_rectangle
+              : Icons.home,
+          size: (Platform.isIOS) ? 24 : null,
+        ),
         title: Text("Übersicht"),
       ),
       BottomNavigationBarItem(
-        icon: Icon((Platform.isIOS)
-            ? IconData(0xf4d1,
-                fontFamily: CupertinoIcons.iconFont,
-                fontPackage: CupertinoIcons.iconFontPackage)
-            : Icons.restaurant),
+        icon: Icon(
+          (Platform.isIOS) ? IOSQuickAccessIcons.studentdesk : Icons.restaurant,
+          size: (Platform.isIOS) ? 24 : null,
+        ),
         title: Text("Mensaplan"),
       ),
     ];

@@ -55,7 +55,7 @@ class SettingsIcon extends StatelessWidget {
           child: Icon(
             icon,
             color: foregroundColor,
-            size: 20,
+            size: 17,
           ),
         ),
       ),

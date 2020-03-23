@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:ui';
 import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
+import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:MyStudyBuddy2/theme/styles.dart';
 import 'package:MyStudyBuddy2/link/link.dart';
@@ -67,12 +68,8 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
                         CupertinoButton(
                           padding: EdgeInsets.zero,
                           child: Icon(
-                            IconData(
-                              0xf45a,
-                              fontFamily: CupertinoIcons.iconFont,
-                              fontPackage: CupertinoIcons.iconFontPackage,
-                            ),
-                            size: 30,
+                            IOSQuickAccessIcons.arrow_2_circlepath,
+                            size: 25,
                           ),
                           onPressed: () {
                             fetchData();
@@ -81,12 +78,8 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
                         CupertinoButton(
                           padding: EdgeInsets.zero,
                           child: Icon(
-                            IconData(
-                              0xf44c,
-                              fontFamily: CupertinoIcons.iconFont,
-                              fontPackage: CupertinoIcons.iconFontPackage,
-                            ),
-                            size: 30,
+                            IOSQuickAccessIcons.info_circle,
+                            size: 25,
                           ),
                           onPressed: () {
                             return showCupertinoDialog(

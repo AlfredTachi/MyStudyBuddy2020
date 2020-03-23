@@ -1,3 +1,4 @@
+import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
 import 'package:achievement_view/achievement_view.dart';
 import 'package:achievement_view/achievement_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -68,22 +69,16 @@ class AchievementPageState extends State<AchievementPage> {
                         trailing: (prop.isDone)
                             ? Icon(
                                 (Platform.isIOS)
-                                    ? IconData(0xf4c8,
-                                        fontFamily: CupertinoIcons.iconFont,
-                                        fontPackage:
-                                            CupertinoIcons.iconFontPackage)
+                                    ? IOSQuickAccessIcons.lock_open
                                     : Icons.lock_open,
-                                size: 40,
+                                size: 35,
                                 color: Colors.green,
                               )
                             : Icon(
                                 (Platform.isIOS)
-                                    ? IconData(0xf457,
-                                        fontFamily: CupertinoIcons.iconFont,
-                                        fontPackage:
-                                            CupertinoIcons.iconFontPackage)
+                                    ? IOSQuickAccessIcons.lock
                                     : Icons.lock_outline,
-                                size: 40,
+                                size: 35,
                               ),
                         contentPadding: EdgeInsets.all(10),
                         enabled: true,

@@ -2,6 +2,7 @@ import 'package:MyStudyBuddy2/dashboard/module_selection/module_selection.dart';
 import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
+import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -40,12 +41,12 @@ class DashboardState extends State<Dashboard> {
 
     void addModuleButtonPressed() {
       ModuleController().moduleSelectionKey = _key;
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => ModuleSelection(
-                          key: _key,
-                        ))).whenComplete(() => updateView());
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) => ModuleSelection(
+                    key: _key,
+                  ))).whenComplete(() => updateView());
     }
 
     List<Widget> getColumnChildren() {
@@ -112,9 +113,9 @@ class DashboardState extends State<Dashboard> {
                             child: Text(
                               "Meine Module",
                               style: (Platform.isIOS)
-                              ? Styles.detailsTitleText
-                              : TextStyle(
-                                  fontSize: 25, color: Colors.black54),
+                                  ? Styles.detailsTitleText
+                                  : TextStyle(
+                                      fontSize: 25, color: Colors.black54),
                             ),
                           ),
                           (Platform.isIOS)
@@ -122,18 +123,13 @@ class DashboardState extends State<Dashboard> {
                                   builder: (BuildContext context) {
                                     return Padding(
                                       padding: EdgeInsets.only(
-                                          bottom: 15, right: 10),
+                                          bottom: 10, right: 10),
                                       child: CupertinoButton(
                                         padding: EdgeInsets.all(0),
                                         child: Icon(
-                                          IconData(
-                                            0xf489,
-                                            fontFamily: CupertinoIcons.iconFont,
-                                            fontPackage:
-                                                CupertinoIcons.iconFontPackage,
-                                          ),
+                                          IOSQuickAccessIcons.plus_circle,
                                           color: CupertinoColors.black,
-                                          size: 40,
+                                          size: 35,
                                         ),
                                         onPressed: () {
                                           addModuleButtonPressed();
@@ -196,13 +192,9 @@ class DashboardState extends State<Dashboard> {
                   return CupertinoButton(
                     padding: EdgeInsets.zero,
                     child: Icon(
-                      IconData(
-                        0xf47d,
-                        fontFamily: CupertinoIcons.iconFont,
-                        fontPackage: CupertinoIcons.iconFontPackage,
-                      ),
+                      IOSQuickAccessIcons.person_circle,
                       color: CupertinoColors.activeOrange,
-                      size: 30,
+                      size: 25,
                     ),
                     onPressed: () {
                       profilePageButtonPressed();

@@ -1,5 +1,6 @@
 import 'package:MyStudyBuddy2/local_database/local_database.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
 import 'package:MyStudyBuddy2/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -214,13 +215,9 @@ class _GradesPrognosisState extends State<GradesPrognosis> {
                   return CupertinoButton(
                     padding: EdgeInsets.zero,
                     child: Icon(
-                      IconData(
-                        0xf453,
-                        fontFamily: CupertinoIcons.iconFont,
-                        fontPackage: CupertinoIcons.iconFontPackage,
-                      ),
+                      IOSQuickAccessIcons.list_bullet,
                       color: CupertinoColors.activeOrange,
-                      size: 30,
+                      size: 25,
                     ),
                     onPressed: () {
                       gradeListButtonPressed();

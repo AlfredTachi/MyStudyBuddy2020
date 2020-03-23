@@ -383,9 +383,9 @@ class ProfilePageState extends State<ProfilePage> {
                   return CupertinoButton(
                     padding: EdgeInsets.zero,
                     child: Icon(
-                      IOSQuickAccessIcons.award,
+                      IOSQuickAccessIcons.rosette,
                       color: CupertinoColors.activeOrange,
-                      size: 30,
+                      size: 25,
                     ),
                     onPressed: () {
                       achivementsPageButtonPressed();

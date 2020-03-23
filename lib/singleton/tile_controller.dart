@@ -1,7 +1,10 @@
 import 'package:MyStudyBuddy2/qsp_info/qsp_info_icons.dart';
+import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
+
+import 'package:flutter_launcher_icons/constants.dart';
 
 class TileController {
   //Singleton
@@ -13,11 +16,7 @@ class TileController {
   final List<_Tile> _tiles = [
     _Tile(
       (Platform.isIOS)
-          ? IconData(
-              0xf374,
-              fontFamily: CupertinoIcons.iconFont,
-              fontPackage: CupertinoIcons.iconFontPackage,
-            )
+          ? IOSQuickAccessIcons.checkmark_square_fill
           : Icons.check_box,
       CupertinoColors.systemGreen,
       "Studienverlauf",
@@ -25,11 +24,7 @@ class TileController {
     ),
     _Tile(
       (Platform.isIOS)
-          ? IconData(
-              0xf3f2,
-              fontFamily: CupertinoIcons.iconFont,
-              fontPackage: CupertinoIcons.iconFontPackage,
-            )
+          ? IOSQuickAccessIcons.f_cursive_circle_fill
           : QSPInfoIcons.calculator,
       CupertinoColors.systemBlue,
       "Notenrechner",
@@ -37,59 +32,33 @@ class TileController {
     ),
     _Tile(
       (Platform.isIOS)
-          ? IconData(
-              0xf3e8,
-              fontFamily: CupertinoIcons.iconFont,
-              fontPackage: CupertinoIcons.iconFontPackage,
-            )
+          ? IOSQuickAccessIcons.book_fill
           : Icons.chrome_reader_mode,
-      CupertinoColors.systemGrey,
+      CupertinoColors.systemIndigo,
       "Modulhandbuch",
       "/moduleHandbook",
     ),
     _Tile(
-      (Platform.isIOS)
-          ? IconData(
-              0xf393,
-              fontFamily: CupertinoIcons.iconFont,
-              fontPackage: CupertinoIcons.iconFontPackage,
-            )
-          : Icons.map,
+      (Platform.isIOS) ? IOSQuickAccessIcons.map_fill : Icons.map,
       CupertinoColors.systemBlue,
       "Campusplan",
       "/map",
     ),
     _Tile(
-      (Platform.isIOS)
-          ? IconData(
-              0xf3f4,
-              fontFamily: CupertinoIcons.iconFont,
-              fontPackage: CupertinoIcons.iconFontPackage,
-            )
-          : Icons.calendar_today,
+      (Platform.isIOS) ? IOSQuickAccessIcons.calendar : Icons.calendar_today,
       CupertinoColors.systemRed,
       "LSF Frontend",
       "/planer",
     ),
     _Tile(
-      (Platform.isIOS)
-          ? IconData(
-              0xf476,
-              fontFamily: CupertinoIcons.iconFont,
-              fontPackage: CupertinoIcons.iconFontPackage,
-            )
-          : Icons.wb_sunny,
+      (Platform.isIOS) ? IOSQuickAccessIcons.cloud_sun_fill : Icons.wb_sunny,
       CupertinoColors.systemBlue,
       "Wetter",
       "/weather",
     ),
     _Tile(
       (Platform.isIOS)
-          ? IconData(
-              0xf418,
-              fontFamily: CupertinoIcons.iconFont,
-              fontPackage: CupertinoIcons.iconFontPackage,
-            )
+          ? IOSQuickAccessIcons.pencil_circle_fill
           : Icons.local_library,
       CupertinoColors.systemOrange,
       "Studi Quiz",
@@ -98,11 +67,7 @@ class TileController {
     // _Tile(Icon(Icons.rate_review), "Evaluation", "/evaluation",),
     _Tile(
       (Platform.isIOS)
-          ? IconData(
-              0xf446,
-              fontFamily: CupertinoIcons.iconFont,
-              fontPackage: CupertinoIcons.iconFontPackage,
-            )
+          ? IOSQuickAccessIcons.questionmark_circle_fill
           : Icons.help,
       CupertinoColors.systemGrey,
       "Hilfe",
