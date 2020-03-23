@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-import 'package:flutter_launcher_icons/constants.dart';
-
 class TileController {
   //Singleton
   TileController._internal();
