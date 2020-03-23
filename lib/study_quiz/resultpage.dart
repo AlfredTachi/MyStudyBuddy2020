@@ -1,5 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:MyStudyBuddy2/study_quiz/home.dart';
+import 'package:MyStudyBuddy2/theme/styles.dart';
 
 class ResultPage extends StatefulWidget {
   final int marks;
@@ -49,69 +52,116 @@ class _ResultPageState extends State<ResultPage> {
   _ResultPageState(this.marks, this.mydatatemp);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.topLeft,
-              child: OutlineButton(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 3, bottom: 3),
-                    child: Icon(
-                      Icons.arrow_back,
-                      size: 36,
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(15),
-                    bottomRight: Radius.circular(15),
-                  )),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => Homepage(),
-                    ));
-                  }),
-            ),
-            Expanded(
-              child: Material(
-                child: Container(
-                  child: Column(
-                    children: <Widget>[
-                      Material(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.7,
-                          child: Image(
-                            image: AssetImage(
-                              image,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 5.0,
-                            horizontal: 15.0,
-                          ),
-                          child: Center(
-                            child: Text(
-                              message,
-                              style: TextStyle(
-                                fontSize: 22.0,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          )),
-                    ],
-                  ),
-                ),
+    return (Platform.isIOS)
+        ? Scaffold(
+            appBar: CupertinoNavigationBar(
+              actionsForegroundColor: CupertinoColors.activeOrange,
+              leading: CupertinoNavigationBarBackButton(
+                onPressed: () {
+                  backPressed();
+                },
+              ),
+              middle: Text(
+                "Ergebnis",
+                style: Styles.navBarTitle,
               ),
             ),
-          ],
-        ),
-      ),
-    );
+            body: Column(
+              children: <Widget>[
+                Image(
+                  image: AssetImage(image),
+                ),
+                Material(
+                  child: Container(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 5.0,
+                              horizontal: 15.0,
+                            ),
+                            child: Center(
+                              child: Text(
+                                message,
+                                style: Styles.weatherDetails,
+                                textAlign: TextAlign.center,
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        : SafeArea(
+            child: Scaffold(
+              body: Column(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: OutlineButton(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 3, bottom: 3),
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: 36,
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        )),
+                        onPressed: () {
+                          backPressed();
+                        }),
+                  ),
+                  Expanded(
+                    child: Material(
+                      child: Container(
+                        child: Column(
+                          children: <Widget>[
+                            Material(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.7,
+                                child: Image(
+                                  image: AssetImage(
+                                    image,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 5.0,
+                                  horizontal: 15.0,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    message,
+                                    style: TextStyle(
+                                      fontSize: 22.0,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+  }
+
+  void backPressed() {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) => Homepage(),
+    ));
   }
 }
