@@ -43,11 +43,15 @@ class _StaggeredViewState extends State<StaggeredView> {
                           Navigator.of(context).pop();
                         }),
                   ),
-                   Align(
+                  Align(
                       alignment: Alignment.topCenter,
                       child: Padding(
-                          padding: const EdgeInsets.only(left:20, top: 3, bottom: 3),
-                          child: Text("Studienverlauf",style: TextStyle(fontSize: 25),))),
+                          padding: const EdgeInsets.only(
+                              left: 20, top: 3, bottom: 3),
+                          child: Text(
+                            "Studienverlauf",
+                            style: TextStyle(fontSize: 25),
+                          ))),
                   Expanded(
                     child: Align(
                         alignment: Alignment.topRight,
@@ -146,17 +150,18 @@ class _StaggeredViewState extends State<StaggeredView> {
     );
   }
 
-  Future<void> _downloadLSFData(BuildContext context,
+  _downloadLSFData(BuildContext context,
       [String name = "", String password = ""]) {
     String userName = '';
     String userPassword = '';
-    return showDialog<void>(
+    return showDialog(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("LSF Login"),
-          content: Column(
+          content: Wrap(
+            // direction: Axis.vertical,
             children: <Widget>[
               Row(
                 children: <Widget>[
