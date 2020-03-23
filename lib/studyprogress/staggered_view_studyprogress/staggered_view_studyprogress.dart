@@ -301,7 +301,7 @@ class _StaggeredViewState extends State<StaggeredView> {
                       setState(() {
                         success = null;
                         createSnackBarWithReloadButton(
-                            "Ein unbekannter Fehler ist aufgetreten!",
+                            "Das Laden war nur teilweise erfolgreich. Evtl. musst du noch etwas nachtragen.",
                             userName,
                             userPassword);
                       });
