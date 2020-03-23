@@ -23,6 +23,7 @@ class SupportState extends State<Support> {
     return (Platform.isIOS)
         ? Scaffold(
             appBar: CupertinoNavigationBar(
+              actionsForegroundColor: CupertinoColors.activeOrange,
               middle: Text(
                 "Hilfe",
                 style: Styles.navBarTitle,
