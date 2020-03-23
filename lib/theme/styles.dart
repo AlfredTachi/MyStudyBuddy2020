@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class Styles {
-  static const hsBlue = Color(0xFF003D62);
+  static const hsBlue = Color(0xFF013D62);
   static const textFieldColor = Color.fromARGB(128, 255, 255, 255);
 
   static const profileText = TextStyle(
@@ -63,7 +63,7 @@ abstract class Styles {
 
   static const studyprogressCardTitle = TextStyle(
     fontSize: 20,
-    color: CupertinoColors.black,
+    color: hsBlue,
     fontFamily: "SF",
     fontWeight: FontWeight.w700,
   );

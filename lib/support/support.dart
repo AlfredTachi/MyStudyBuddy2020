@@ -97,7 +97,7 @@ class SupportState extends State<Support> {
     return <SettingsItem>[
       SettingsItem(
         icon: SettingsIcon(
-          icon: IOSQuickAccessIcons.questionmark_circle_fill,
+          icon: IOSQuickAccessIcons.questionmark_circle,
           backgroundColor: CupertinoColors.systemYellow,
         ),
         label: "FAQ",
@@ -130,7 +130,7 @@ class SupportState extends State<Support> {
       ),
       SettingsItem(
         icon: SettingsIcon(
-          icon: IOSQuickAccessIcons.info_circle_fill,
+          icon: IOSQuickAccessIcons.info_circle,
           backgroundColor: CupertinoColors.systemOrange,
         ),
         label: "Impressum",

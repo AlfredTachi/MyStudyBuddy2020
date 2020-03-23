@@ -22,7 +22,7 @@ class TileController {
     ),
     _Tile(
       (Platform.isIOS)
-          ? IOSQuickAccessIcons.f_cursive_circle_fill
+          ? IOSQuickAccessIcons.f_cursive_circle
           : QSPInfoIcons.calculator,
       CupertinoColors.systemBlue,
       "Notenrechner",
@@ -56,7 +56,7 @@ class TileController {
     ),
     _Tile(
       (Platform.isIOS)
-          ? IOSQuickAccessIcons.pencil_circle_fill
+          ? IOSQuickAccessIcons.pencil
           : Icons.local_library,
       CupertinoColors.systemOrange,
       "Studi Quiz",
@@ -65,7 +65,7 @@ class TileController {
     // _Tile(Icon(Icons.rate_review), "Evaluation", "/evaluation",),
     _Tile(
       (Platform.isIOS)
-          ? IOSQuickAccessIcons.questionmark_circle_fill
+          ? IOSQuickAccessIcons.questionmark_circle
           : Icons.help,
       CupertinoColors.systemGrey,
       "Hilfe",
