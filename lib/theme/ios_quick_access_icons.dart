@@ -24,7 +24,7 @@
 /// #########IMPORTANT:###########
 /// ##############################
 /// All these icons (except fachschaftlogo, hslogo, lsflogo, moodlelogo,
-/// webmailerlogo) are under Apple Inc.'s Copyright and may not be used
+/// webmailerlogo) are under Apple Inc.'s Copyright and may only be used
 /// in accordance to the LICENSE AGREEMENT FOR THE APPLE SAN FRANCISCO FONT
 /// 
 import 'package:flutter/widgets.dart';
