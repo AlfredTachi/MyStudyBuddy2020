@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:MyStudyBuddy2/link/link.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:MyStudyBuddy2/theme/styles.dart';
 import 'dart:io';
 
 class OurPrivacyPolice extends StatefulWidget {
@@ -91,6 +93,69 @@ class OurPrivacyPoliceState extends State<OurPrivacyPolice> {
   }
 
   Widget getCupertinoDesign() {
-    return getMaterialDesign();
+    final Link datenschutzLink = Link(
+      child: Text("https://atlas.ai.it.hs-worms.de/datenschutz/"),
+      url: "https://atlas.ai.it.hs-worms.de/datenschutz/",
+    );
+    return Scaffold(
+      appBar: CupertinoNavigationBar(
+        actionsForegroundColor: CupertinoColors.activeOrange,
+        middle: Text(
+          "Datenschutzerklärung",
+          style: Styles.navBarTitle,
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                child: PhysicalModel(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(15),
+                    color: CupertinoColors.white,
+                    child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10.0),
+                                child: Text(
+                                  "Diese App speichert alle Nutzerdaten ausschließlich auf Ihrem lokalen Gerät. Eine Übertragung finden nur durch den Aufruf von verlinkten Webseiten oder die Nutzung von APIs (LSF Daten abrufen, \"Moralische Unterstützung\").",
+                                  textAlign: TextAlign.center,
+                                  style: Styles.detailsDescriptionText,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10.0),
+                                child: Text(
+                                  "Welche Daten übertragen werden, finden Sie in den Datenschutzerklärungen der jeweiligen Dienste und Webseiten. Die Datenschutzerklärungen, die nicht über die verlinkten Webseiten verfügbar sind, wurden unter dem Menüpunkt \"Hilfe > Datenschutz\" verlinkt.",
+                                  textAlign: TextAlign.center,
+                                  style: Styles.detailsDescriptionText,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10.0),
+                                child: Text(
+                                  "Zusätzlich finden Sie hier die allgemeine Datenschutzerklärung des Studiengangs Angewandte Informatik der Hochschule Worms: ",
+                                  textAlign: TextAlign.center,
+                                  style: Styles.detailsDescriptionText,
+                                ),
+                              ),
+                              CupertinoButton(
+                                  minSize:
+                                      Styles.detailsDescriptionText.fontSize,
+                                  padding: EdgeInsets.all(0),
+                                  child: datenschutzLink.child,
+                                  onPressed: () {
+                                    datenschutzLink.press();
+                                  }),
+                            ]))))),
+          ],
+        ),
+      ),
+    );
   }
 }

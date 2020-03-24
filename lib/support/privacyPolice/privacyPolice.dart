@@ -20,7 +20,7 @@ class PrivacyPoliceState extends State<PrivacyPolice> {
             appBar: CupertinoNavigationBar(
               actionsForegroundColor: CupertinoColors.activeOrange,
               middle: Text(
-                "Datenschutzerklärung",
+                "Datenschutzerklärungen",
                 style: Styles.navBarTitle,
               ),
             ),
@@ -128,9 +128,11 @@ class PrivacyPoliceState extends State<PrivacyPolice> {
           backgroundColor: Styles.hsBlue,
         ),
         label: "Hochschule",
+        subtitle: "Diese App",
         content: SettingsNavigationIndicator(),
         onPress: () {
-          _launchURL("https://atlas.ai.it.hs-worms.de/datenschutz/");
+          Navigator.pushNamed(
+              context, '/supportMain/privacyPolice/ourPrivacyPolice');
         },
       ),
       SettingsItem(
@@ -151,20 +153,36 @@ class PrivacyPoliceState extends State<PrivacyPolice> {
           backgroundColor: CupertinoColors.systemGrey,
         ),
         label: "LSF",
+        subtitle: "Laden der LSF Daten",
         content: SettingsNavigationIndicator(),
         onPress: () {
-          _launchURL("https://www.hs-worms.de/fileadmin/media/SG2/Informieren/Datenschutz/Datenschutzinformationen_aktuell.pdf");
+          _launchURL(
+              "https://www.hs-worms.de/fileadmin/media/SG2/Informieren/Datenschutz/Datenschutzinformationen_aktuell.pdf");
+        },
+      ),
+      SettingsItem(
+        icon: SettingsIcon(
+          icon: IconData(0xf2d8,
+                  fontFamily: CupertinoIcons.iconFont,
+                  fontPackage: CupertinoIcons.iconFontPackage),
+          backgroundColor: CupertinoColors.systemRed,
+        ),
+        label: "Moralische Unterstützung",
+        subtitle: "DogAPI",
+        content: SettingsNavigationIndicator(),
+        onPress: () {
+          _launchURL(
+              "https://thedogapi.com/privacy");
         },
       ),
     ];
   }
 
-    void _launchURL(String link) async {
+  void _launchURL(String link) async {
     if (await canLaunch(link)) {
       await launch(link);
     } else {
       throw 'Could not launch $link';
     }
   }
-
 }
