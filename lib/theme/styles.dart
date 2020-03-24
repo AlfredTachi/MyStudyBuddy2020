@@ -120,8 +120,10 @@ abstract class Styles {
       fontWeight: FontWeight.normal,
       fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
 
-  static TextStyle navBarTitle =
-      TextStyle(fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily, fontWeight: FontWeight.w700, fontSize: 18);
+  static TextStyle navBarTitle = TextStyle(
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
+      fontWeight: FontWeight.w700,
+      fontSize: 18);
 
   static TextStyle alertDialogActionText = TextStyle(
     fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily,
@@ -138,6 +140,13 @@ abstract class Styles {
       fontSize: 30,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
+      fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
+
+  static TextStyle detailsSubtitle = TextStyle(
+      color: CupertinoColors.black,
+      fontSize: 20,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w500,
       fontFamily: CupertinoTextThemeData().navLargeTitleTextStyle.fontFamily);
 
   static TextStyle detailsDescriptionText = TextStyle(

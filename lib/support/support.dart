@@ -207,9 +207,7 @@ class SupportState extends State<Support> {
   }
 
   void impressumPressed() {
-    (Platform.isIOS)
-        ? _launchURL("https://atlas.ai.it.hs-worms.de/impressum/")
-        : Navigator.pushNamed(context, '/supportMain/impressum');
+    Navigator.pushNamed(context, '/supportMain/impressum');
   }
 
   void privacyPolicePressed() {
