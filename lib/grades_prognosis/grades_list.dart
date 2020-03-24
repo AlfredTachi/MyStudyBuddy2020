@@ -46,6 +46,9 @@ class GradesListState extends State<GradesList> {
       );
       _items.add(_listItem);
     }
+    if (_items.isEmpty) {
+      _items.add(SettingsItem(label: "Du hast noch keine Noten eingetragen."));
+    }
     return _items;
   }
 

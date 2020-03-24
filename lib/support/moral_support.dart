@@ -82,28 +82,39 @@ class MoralSupportState extends State<MoralSupport> {
           builder: (context, snap) {
             if (snap.connectionState == ConnectionState.done) {
               DogImage img = snap.data;
-              return Column(
-                children: <Widget>[
-                  Container(
-                    width: 300,
-                    height: 500,
-                    child: Image.network(
-                      img.url,
+              return Container(
+                height: MediaQuery.of(context).size.height-64,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 9,
+                      child: Image.network(
+                        img.url,
+                      ),
                     ),
-                  ),
-                  (Platform.isIOS)
-                      ? CupertinoButton(
-                          child: Text("Hilfe!"),
-                          color: CupertinoColors.activeOrange,
-                          onPressed: () {
-                            setState(() {});
-                          })
-                      : RaisedButton(
-                          child: Text("Hilfe!"),
-                          onPressed: () {
-                            setState(() {});
-                          })
-                ],
+                    Expanded(
+                        flex: 2,
+                        child: (Platform.isIOS)
+                            ? Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Container(
+                                height: 50,
+                                width: 200,
+                                child: CupertinoButton(
+                                    child: Text("Hilfe!"),
+                                    color: CupertinoColors.activeOrange,
+                                    onPressed: () {
+                                      setState(() {});
+                                    }),
+                              ),
+                            )
+                            : RaisedButton(
+                                child: Text("Hilfe!"),
+                                onPressed: () {
+                                  setState(() {});
+                                })),
+                  ],
+                ),
               );
             } else {
               return Center(

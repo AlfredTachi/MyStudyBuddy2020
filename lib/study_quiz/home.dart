@@ -42,7 +42,7 @@ class _HomepageState extends State<Homepage> {
                       padding: const EdgeInsets.only(bottom: 25.0),
                       child: Text(
                         langname,
-                        style: Styles.detailsTitleText,
+                        style: (MediaQuery.of(context).size.width < 650) ? Styles.detailsTitleText.copyWith(fontSize: 25): Styles.detailsTitleText,
                       ),
                     ),
                     Text(

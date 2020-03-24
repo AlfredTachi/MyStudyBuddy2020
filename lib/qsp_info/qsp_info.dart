@@ -192,15 +192,27 @@ class QSPInfoState extends State<QSPInfo> {
               Row(
                 children: <Widget>[
                   (Platform.isIOS)
-                      ? CupertinoButton(
-                          padding: EdgeInsets.only(left: 20.0),
-                          child: Text(
-                            urltitle,
-                            style: Styles.qspLink,
-                          ),
-                          onPressed: () {
-                            _launchURL(url);
-                          })
+                      ? (MediaQuery.of(context).size.width < 650)
+                          ? Container(
+                              width: 150,
+                              child: CupertinoButton(
+                                  padding: EdgeInsets.only(left: 20.0),
+                                  child: Text(
+                                    urltitle,
+                                    style: Styles.qspLink,
+                                  ),
+                                  onPressed: () {
+                                    _launchURL(url);
+                                  }))
+                          : CupertinoButton(
+                              padding: EdgeInsets.only(left: 20.0),
+                              child: Text(
+                                urltitle,
+                                style: Styles.qspLink,
+                              ),
+                              onPressed: () {
+                                _launchURL(url);
+                              })
                       : Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(left: 30),

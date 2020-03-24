@@ -72,7 +72,9 @@ class _QuizpageState extends State<Quizpage> {
   var mydata;
   _QuizpageState(this.mydata);
 
-  Color colortoshow = (Platform.isIOS) ? CupertinoColors.activeOrange : Colors.orangeAccent[100];
+  Color colortoshow = (Platform.isIOS)
+      ? CupertinoColors.activeOrange
+      : Colors.orangeAccent[100];
   Color right = (Platform.isIOS) ? CupertinoColors.systemGreen : Colors.green;
   Color wrong = (Platform.isIOS) ? CupertinoColors.destructiveRed : Colors.red;
   int marks = 0;
@@ -83,10 +85,18 @@ class _QuizpageState extends State<Quizpage> {
   String showtimer = "30";
 
   Map<String, Color> btncolor = {
-    "a": (Platform.isIOS) ? CupertinoColors.activeOrange : Colors.orangeAccent[200],
-    "b": (Platform.isIOS) ? CupertinoColors.activeOrange : Colors.orangeAccent[200],
-    "c": (Platform.isIOS) ? CupertinoColors.activeOrange : Colors.orangeAccent[200],
-    "d": (Platform.isIOS) ? CupertinoColors.activeOrange : Colors.orangeAccent[200],
+    "a": (Platform.isIOS)
+        ? CupertinoColors.activeOrange
+        : Colors.orangeAccent[200],
+    "b": (Platform.isIOS)
+        ? CupertinoColors.activeOrange
+        : Colors.orangeAccent[200],
+    "c": (Platform.isIOS)
+        ? CupertinoColors.activeOrange
+        : Colors.orangeAccent[200],
+    "d": (Platform.isIOS)
+        ? CupertinoColors.activeOrange
+        : Colors.orangeAccent[200],
   };
   var randomArray;
 
@@ -156,10 +166,18 @@ class _QuizpageState extends State<Quizpage> {
               ResultPage(marks: marks, mydatatemp: mydatatemp),
         ));
       }
-      btncolor["a"] = (Platform.isIOS) ? CupertinoColors.activeOrange : Colors.orangeAccent[200];
-      btncolor["b"] = (Platform.isIOS) ? CupertinoColors.activeOrange : Colors.orangeAccent[200];
-      btncolor["c"] = (Platform.isIOS) ? CupertinoColors.activeOrange : Colors.orangeAccent[200];
-      btncolor["d"] = (Platform.isIOS) ? CupertinoColors.activeOrange : Colors.orangeAccent[200];
+      btncolor["a"] = (Platform.isIOS)
+          ? CupertinoColors.activeOrange
+          : Colors.orangeAccent[200];
+      btncolor["b"] = (Platform.isIOS)
+          ? CupertinoColors.activeOrange
+          : Colors.orangeAccent[200];
+      btncolor["c"] = (Platform.isIOS)
+          ? CupertinoColors.activeOrange
+          : Colors.orangeAccent[200];
+      btncolor["d"] = (Platform.isIOS)
+          ? CupertinoColors.activeOrange
+          : Colors.orangeAccent[200];
     });
     starttimer();
   }
@@ -257,13 +275,13 @@ class _QuizpageState extends State<Quizpage> {
             ? CupertinoNavigationBar(
                 actionsForegroundColor: CupertinoColors.activeOrange,
                 middle: Text("Kategorie: " + mydatatempcategory[i.toString()]),
+                trailing: Text(showtimer),
               )
             : null,
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              flex: (Platform.isIOS) ? 4 : 3,
-              child: (Platform.isIOS)
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              (Platform.isIOS)
                   ? Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 15.0),
@@ -272,7 +290,7 @@ class _QuizpageState extends State<Quizpage> {
                           borderRadius: BorderRadius.circular(15),
                           color: CupertinoColors.activeOrange,
                           child: Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(20.0),
                               child: Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -320,11 +338,8 @@ class _QuizpageState extends State<Quizpage> {
                         ],
                       ),
                     ),
-            ),
-            if (!Platform.isIOS)
-              Expanded(
-                flex: 3,
-                child: Container(
+              if (!Platform.isIOS)
+                Container(
                   padding: EdgeInsets.all(15.0),
                   alignment: Alignment.bottomLeft,
                   child: Text(
@@ -333,10 +348,7 @@ class _QuizpageState extends State<Quizpage> {
                         TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
                   ),
                 ),
-              ),
-            Expanded(
-              flex: 6,
-              child: (Platform.isIOS)
+              (Platform.isIOS)
                   ? Padding(
                       padding: EdgeInsets.only(
                           left: 15.0, right: 15.0, top: 10.0, bottom: 10.0),
@@ -366,27 +378,23 @@ class _QuizpageState extends State<Quizpage> {
                         ],
                       ),
                     ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                padding:
-                    (Platform.isIOS) ? EdgeInsets.only(bottom: 25.0) : null,
-                alignment: Alignment.topCenter,
-                child: Center(
-                  child: Text(
-                    showtimer,
-                    style: (Platform.isIOS)
-                        ? Styles.weatherTitle
-                        : TextStyle(
-                            fontSize: 35.0,
-                            fontWeight: FontWeight.w700,
-                          ),
+              if (!Platform.isIOS)
+                Container(
+                  alignment: Alignment.topCenter,
+                  child: Center(
+                    child: Text(
+                      showtimer,
+                      style: (Platform.isIOS)
+                          ? Styles.weatherTitle
+                          : TextStyle(
+                              fontSize: 35.0,
+                              fontWeight: FontWeight.w700,
+                            ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
