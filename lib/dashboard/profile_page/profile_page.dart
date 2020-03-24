@@ -57,7 +57,7 @@ class ProfilePageState extends State<ProfilePage> {
                     hintStyle: (Platform.isIOS)
                         ? Styles.profilePlaceholder
                         : TextStyle(color: Colors.black45),
-                    hintText: "inf Nummer",
+                    hintText: "inf Nummer (z.B. inf9876)",
                     enabledBorder: OutlineInputBorder(
                       borderRadius: (Platform.isIOS)
                           ? BorderRadius.circular(5)
