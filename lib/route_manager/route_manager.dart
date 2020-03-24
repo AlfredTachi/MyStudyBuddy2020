@@ -18,7 +18,7 @@ import 'package:MyStudyBuddy2/support/moral_support.dart';
 import 'package:MyStudyBuddy2/support/quickaccess.dart';
 import 'package:MyStudyBuddy2/support/support.dart';
 import 'package:MyStudyBuddy2/weather/weather.dart';
-import 'package:MyStudyBuddy2/support/impresssum.dart';
+import 'package:MyStudyBuddy2/support/impressum.dart';
 import 'package:MyStudyBuddy2/support/privacyPolice/privacyPolice.dart';
 import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/support/privacyPolice/lsfPrivacyPolice.dart';
