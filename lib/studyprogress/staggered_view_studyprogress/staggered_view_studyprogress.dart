@@ -210,45 +210,47 @@ class _StaggeredViewState extends State<StaggeredView> {
             "LSF Login",
             style: (Platform.isIOS) ? Styles.alertDialogTitleText : null,
           ),
-          content: Wrap(
-            // direction: Axis.vertical,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: "Anmeldename",
-                        hintText: "z.B. inf9876",
+          content: SingleChildScrollView(
+            child: Wrap(
+              // direction: Axis.vertical,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextFormField(
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          labelText: "Anmeldename",
+                          hintText: "z.B. inf9876",
+                        ),
+                        initialValue: name,
+                        onChanged: (value) {
+                          userName = value;
+                        },
                       ),
-                      initialValue: name,
-                      onChanged: (value) {
-                        userName = value;
-                      },
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                      autofocus: true,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: "Passwort",
-                        hintText: "Passwort eingeben",
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextFormField(
+                        autofocus: true,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: "Passwort",
+                          hintText: "Passwort eingeben",
+                        ),
+                        initialValue: password,
+                        onChanged: (value) {
+                          userPassword = value;
+                        },
                       ),
-                      initialValue: password,
-                      onChanged: (value) {
-                        userPassword = value;
-                      },
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
           actions: <Widget>[
             FlatButton(
