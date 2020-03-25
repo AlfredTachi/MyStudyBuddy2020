@@ -106,27 +106,36 @@ class SupportState extends State<Support> {
   }
 
   String getAppVersion() {
+    String version = "";
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-      String version = packageInfo.version;
-      return version;
+      version = packageInfo.version;
+    }).catchError((err) {
+      print(err);
     });
+    return version;
   }
 
   String getOperatingSystem() {
+    //Android
+    String release = "";
+    int sdkNumber = 0;
+
+    //IOS
+    String systemName = "";
+    String version = "";
+
     if (Platform.isAndroid) {
       DeviceInfoPlugin().androidInfo.then((var androidInfo) {
-        var release = androidInfo.version.release;
-        var sdkInt = androidInfo.version.sdkInt;
-        return "Android" + release + "SDK" + sdkInt.toString();
+        release = androidInfo.version.release;
+        sdkNumber = androidInfo.version.sdkInt;
       });
-    } else if (Platform.isIOS) {
-      DeviceInfoPlugin().iosInfo.then((var iosInfo) {
-        var systemName = iosInfo.systemName;
-        var version = iosInfo.systemVersion;
-        return systemName + version;
-      });
+      return "Android" + release + "SDK" + sdkNumber.toString();
     } else {
-      return "";
+      DeviceInfoPlugin().iosInfo.then((var iosInfo) {
+        systemName = iosInfo.systemName;
+        version = iosInfo.systemVersion;
+      });
+      return systemName + version;
     }
   }
 
