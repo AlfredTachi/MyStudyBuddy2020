@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mailer/flutter_mailer.dart';
+import 'package:package_info/package_info.dart';
 
 class Support extends StatefulWidget {
   @override
@@ -10,7 +14,7 @@ class SupportState extends State<Support> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-          child: Scaffold(
+      child: Scaffold(
           body: Column(
         children: <Widget>[
           Container(
@@ -38,45 +42,61 @@ class SupportState extends State<Support> {
                 ),
                 Align(
                   alignment: Alignment.topCenter,
-                                child: Padding(
+                  child: Padding(
                     padding: const EdgeInsets.only(left: 20, top: 3, bottom: 3),
-                    child: Text("Hilfe",style:TextStyle(fontSize: 25)),
+                    child: Text("Hilfe", style: TextStyle(fontSize: 25)),
                   ),
                 )
               ],
             ),
           ),
           Expanded(
-              child:
-                  SingleChildScrollView(child: Column(children: createList()))),
+            child: SingleChildScrollView(
+              child: FutureBuilder(
+                future: createList(),
+                builder: (BuildContext con, AsyncSnapshot snap) {
+                  List<Widget> data = snap.data;
+                  if (snap.hasData) {
+                    if (snap.connectionState == ConnectionState.done)
+                      return Column(children: data);
+                  }
+                  return CircularProgressIndicator();
+                },
+              ),
+            ),
+          ),
         ],
       )),
     );
   }
 
-  List<Widget> createList() {
+  Future<List<Widget>> createList() async {
     final MailOptions mailOptions = MailOptions(
-      subject: 'Support My Study Buddy',
-      recipients: ['inf2671@hs-worms.de'],
+      subject: "Support MyStudyBuddy2" +
+          ", App Version: " +
+          await getAppVersion() +
+          ", "+
+          await getOperatingSystem(),
+      recipients: ["aninf-mm@hs-worms.de"],
     );
     List<Widget> _items = [
       ListTile(
         leading: Icon(Icons.help),
-        title: Text('FAQ', style: TextStyle(fontSize: 20)),
+        title: Text("FAQ", style: TextStyle(fontSize: 20)),
         onTap: () {
-          Navigator.pushNamed(context, '/supportMain/FAQ');
+          Navigator.pushNamed(context, "/supportMain/FAQ");
         },
       ),
       ListTile(
         leading: Icon(Icons.book),
-        title: Text('Schnelleinstieg', style: TextStyle(fontSize: 20)),
+        title: Text("Schnelleinstieg", style: TextStyle(fontSize: 20)),
         onTap: () {
-          Navigator.pushNamed(context, '/supportMain/quickaccess');
+          Navigator.pushNamed(context, "/supportMain/quickaccess");
         },
       ),
       ListTile(
           leading: Icon(Icons.mail),
-          title: Text('E-Mail Support', style: TextStyle(fontSize: 20)),
+          title: Text("E-Mail Support", style: TextStyle(fontSize: 20)),
           onTap: () async {
             try {
               await FlutterMailer.send(mailOptions);
@@ -84,19 +104,51 @@ class SupportState extends State<Support> {
           }),
       ListTile(
           leading: Icon(Icons.info),
-          title: Text('Impressum', style: TextStyle(fontSize: 20)),
+          title: Text("Impressum", style: TextStyle(fontSize: 20)),
           onTap: () {
-            Navigator.pushNamed(context, '/supportMain/impressum');
+            Navigator.pushNamed(context, "/supportMain/impressum");
           }),
       ListTile(
           leading: Icon(Icons.lock),
-          title: Text('Datenschutz', style: TextStyle(fontSize: 20)),
+          title: Text("Datenschutz", style: TextStyle(fontSize: 20)),
           onTap: () {
             Navigator.pushNamed(
-                context, '/supportMain/privacyPolice/privacyPolice');
+                context, "/supportMain/privacyPolice/privacyPolice");
           }),
     ];
 
     return _items;
+  }
+
+  Future<String> getAppVersion() async {
+    return PackageInfo.fromPlatform()
+        .then((PackageInfo packageInfo) => packageInfo.version)
+        .catchError((err) {
+      print(err);
+    });
+  }
+
+  Future<String> getOperatingSystem() async {
+    //Android
+    String release = "";
+    int sdkNumber = 0;
+
+    //IOS
+    String systemName = "";
+    String version = "";
+
+    if (Platform.isAndroid) {
+      return DeviceInfoPlugin().androidInfo.then((var androidInfo) {
+        release = androidInfo.version.release;
+        sdkNumber = androidInfo.version.sdkInt;
+        return "Android: " + release + ", SDK: " + sdkNumber.toString();
+      });
+    } else {
+      return DeviceInfoPlugin().iosInfo.then((var iosInfo) {
+        systemName = iosInfo.systemName;
+        version = iosInfo.systemVersion;
+        return systemName + version;
+      });
+    }
   }
 }
