@@ -72,10 +72,12 @@ class SupportState extends State<Support> {
 
   Future<List<Widget>> createList() async {
     final MailOptions mailOptions = MailOptions(
-      subject: "Support My Study Buddy 2 " +
-          await getOperatingSystem() + ", App Version: "+
-          await getAppVersion(),
-      recipients: ["inf2671@hs-worms.de"],
+      subject: "Support MyStudyBuddy2" +
+          ", App Version: " +
+          await getAppVersion() +
+          ", "+
+          await getOperatingSystem(),
+      recipients: ["aninf-mm@hs-worms.de"],
     );
     List<Widget> _items = [
       ListTile(
@@ -139,7 +141,7 @@ class SupportState extends State<Support> {
       return DeviceInfoPlugin().androidInfo.then((var androidInfo) {
         release = androidInfo.version.release;
         sdkNumber = androidInfo.version.sdkInt;
-        return "Android: " + release + ", SDK:" + sdkNumber.toString();
+        return "Android: " + release + ", SDK: " + sdkNumber.toString();
       });
     } else {
       return DeviceInfoPlugin().iosInfo.then((var iosInfo) {
@@ -149,27 +151,4 @@ class SupportState extends State<Support> {
       });
     }
   }
-
-  /* Future<String> getAppVersion() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String version = packageInfo.version;
-    return version;
-  }
-
-  Future<String> getOperatingSystem() async {
-    if (Platform.isAndroid) {
-      var androidInfo = await DeviceInfoPlugin().androidInfo;
-      var release = androidInfo.version.release;
-      var sdkInt = androidInfo.version.sdkInt;
-      return "Android" + release + "SDK" + sdkInt.toString();
-    } else if (Platform.isIOS) {
-      var iosInfo = await DeviceInfoPlugin().iosInfo;
-      var systemName = iosInfo.systemName;
-      var version = iosInfo.systemVersion;
-      return systemName + version;
-    } else {
-      return "";
-    }
-  }*/
-
 }
