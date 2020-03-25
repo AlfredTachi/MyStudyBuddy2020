@@ -51,17 +51,30 @@ class SupportState extends State<Support> {
             ),
           ),
           Expanded(
-              child:
-                  SingleChildScrollView(child: Column(children: createList()))),
+            child: SingleChildScrollView(
+              child: FutureBuilder(
+                future: createList(),
+                builder: (BuildContext con, AsyncSnapshot snap) {
+                  List<Widget> data = snap.data;
+                  if (snap.hasData) {
+                    if (snap.connectionState == ConnectionState.done)
+                      return Column(children: data);
+                  }
+                  return CircularProgressIndicator();
+                },
+              ),
+            ),
+          ),
         ],
       )),
     );
   }
 
-  List<Widget> createList() {
+  Future<List<Widget>> createList() async {
     final MailOptions mailOptions = MailOptions(
-      subject:
-          "Support My Study Buddy 2 " + getOperatingSystem() + getAppVersion(),
+      subject: "Support My Study Buddy 2 " +
+          await getOperatingSystem() + ", App Version: "+
+          await getAppVersion(),
       recipients: ["inf2671@hs-worms.de"],
     );
     List<Widget> _items = [
@@ -105,17 +118,15 @@ class SupportState extends State<Support> {
     return _items;
   }
 
-  String getAppVersion() {
-    String version = "";
-    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-      version = packageInfo.version;
-    }).catchError((err) {
+  Future<String> getAppVersion() async {
+    return PackageInfo.fromPlatform()
+        .then((PackageInfo packageInfo) => packageInfo.version)
+        .catchError((err) {
       print(err);
     });
-    return version;
   }
 
-  String getOperatingSystem() {
+  Future<String> getOperatingSystem() async {
     //Android
     String release = "";
     int sdkNumber = 0;
@@ -125,17 +136,17 @@ class SupportState extends State<Support> {
     String version = "";
 
     if (Platform.isAndroid) {
-      DeviceInfoPlugin().androidInfo.then((var androidInfo) {
+      return DeviceInfoPlugin().androidInfo.then((var androidInfo) {
         release = androidInfo.version.release;
         sdkNumber = androidInfo.version.sdkInt;
+        return "Android: " + release + ", SDK:" + sdkNumber.toString();
       });
-      return "Android" + release + "SDK" + sdkNumber.toString();
     } else {
-      DeviceInfoPlugin().iosInfo.then((var iosInfo) {
+      return DeviceInfoPlugin().iosInfo.then((var iosInfo) {
         systemName = iosInfo.systemName;
         version = iosInfo.systemVersion;
+        return systemName + version;
       });
-      return systemName + version;
     }
   }
 
