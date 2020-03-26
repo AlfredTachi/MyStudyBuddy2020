@@ -1,8 +1,10 @@
 import 'package:MyStudyBuddy2/dialogs/module_options_dialog.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:MyStudyBuddy2/singleton/profile_controller.dart';
+import 'package:MyStudyBuddy2/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' show parse;
@@ -146,8 +148,10 @@ class ModuleState extends State<Module> {
                             child: FittedBox(
                               fit: BoxFit.contain,
                               child: Text(widget.properties.code,
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.white)),
+                                  style: (Platform.isIOS)
+                                      ? Styles.moduleCode
+                                      : TextStyle(
+                                          fontSize: 16, color: Colors.white)),
                             )),
                       ),
                     )
@@ -160,8 +164,10 @@ class ModuleState extends State<Module> {
                             child: FittedBox(
                               fit: BoxFit.contain,
                               child: Text(widget.properties.code,
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.white)),
+                                  style: (Platform.isIOS)
+                                      ? Styles.moduleCode
+                                      : TextStyle(
+                                          fontSize: 16, color: Colors.white)),
                             )),
                       ),
                     ),
@@ -175,12 +181,15 @@ class ModuleState extends State<Module> {
                               fit: BoxFit.contain,
                               child: Text(widget.properties.grade.toString(),
                                   style: (widget.properties.grade < 5.0)
-                                      ? TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.lightGreen)
-                                      : TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.red)),
+                                      ? (Platform.isIOS)
+                                          ? Styles.moduleGradePassed
+                                          : TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.lightGreen)
+                                      : (Platform.isIOS)
+                                          ? Styles.moduleGradeNotPassed
+                                          : TextStyle(
+                                              fontSize: 10, color: Colors.red)),
                             )),
                       ),
                     )

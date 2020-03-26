@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
+import 'package:MyStudyBuddy2/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class ModuleAddGradeDialog extends StatefulWidget {
   final Module module;
@@ -19,7 +22,10 @@ class ModuleAddGradeDialogState extends State<ModuleAddGradeDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Note eintragen!'),
+      title: Text(
+        'Note eintragen!',
+        style: (Platform.isIOS) ? Styles.alertDialogTitleText : null,
+      ),
       content: Wrap(
         children: [
           TextField(
@@ -48,6 +54,7 @@ class ModuleAddGradeDialogState extends State<ModuleAddGradeDialog> {
             child: OutlineButton(
               onPressed: () {
                 if (grade.isNotEmpty) {
+                  grade = grade.replaceAll(",", ".");
                   try {
                     if (double.tryParse(grade) >= 1.0 &&
                         double.tryParse(grade) <= 4.0) {

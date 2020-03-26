@@ -1,19 +1,18 @@
 import 'dart:io';
 import 'package:MyStudyBuddy2/theme/styles.dart';
+import 'package:MyStudyBuddy2/link/link.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mailer/flutter_mailer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
-class OurPrivacyPolice extends StatefulWidget {
+class Impressum extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return _OurPrivacyPoliceState();
-  }
+  ImpressumState createState() => ImpressumState();
 }
 
-class _OurPrivacyPoliceState extends State<OurPrivacyPolice> {
+class ImpressumState extends State<Impressum> {
   @override
   Widget build(BuildContext context) {
     return (Platform.isIOS)
@@ -22,7 +21,7 @@ class _OurPrivacyPoliceState extends State<OurPrivacyPolice> {
                 ? CupertinoNavigationBar(
                     actionsForegroundColor: CupertinoColors.activeOrange,
                     middle: Text(
-                      "Datenschutzerklärung",
+                      "Impressum",
                       style: Styles.navBarTitle,
                     ),
                   )
@@ -66,7 +65,7 @@ class _OurPrivacyPoliceState extends State<OurPrivacyPolice> {
                   alignment: Alignment.topCenter,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20, top: 3, bottom: 3),
-                    child: Text("Datenschutzerklärung", style: TextStyle(fontSize: 25)),
+                    child: Text("Impressum", style: TextStyle(fontSize: 25)),
                   ),
                 )
               ],
@@ -117,11 +116,10 @@ class _OurPrivacyPoliceState extends State<OurPrivacyPolice> {
         color: Colors.black,
       ),
       h4: TextStyle(
-        fontFamily: "Roboto",
-        fontSize: 20,
-        fontStyle: FontStyle.italic,
-        color: Colors.black
-      ),
+          fontFamily: "Roboto",
+          fontSize: 20,
+          fontStyle: FontStyle.italic,
+          color: Colors.black),
     );
 
     return FutureBuilder(
@@ -134,13 +132,19 @@ class _OurPrivacyPoliceState extends State<OurPrivacyPolice> {
               styleSheet: (Platform.isIOS) ? null : stylesheet,
               data: data,
               onTapLink: (address) async {
-                final MailOptions mailOptions = MailOptions(
-                  subject: "MyStudyBuddy2 App",
-                  recipients: [address],
-                );
-                try {
-                  await FlutterMailer.send(mailOptions);
-                } catch (error) {}
+                if (address.contains("mailto")) {
+                  address = address.replaceAll("mailto:", "");
+                  final MailOptions mailOptions = MailOptions(
+                    subject: "MyStudyBuddy2 App",
+                    recipients: [address],
+                  );
+                  try {
+                    await FlutterMailer.send(mailOptions);
+                  } catch (error) {}
+                } else {
+                  Link link = Link(child: null, url: address,);
+                  link.press();
+                }
               },
             );
         }
@@ -150,6 +154,6 @@ class _OurPrivacyPoliceState extends State<OurPrivacyPolice> {
   }
 
   Future<String> getFile() async {
-    return await rootBundle.loadString('assets/support/datenschutz.md');
+    return await rootBundle.loadString('assets/support/impressum.md');
   }
 }

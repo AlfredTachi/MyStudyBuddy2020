@@ -4,12 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
 
-class Impressum extends StatefulWidget {
+class DogAPIPrivacyPolice extends StatefulWidget {
   @override
-  ImpressumState createState() => ImpressumState();
+  DogAPIPrivacyPoliceState createState() =>
+      DogAPIPrivacyPoliceState();
 }
 
-class ImpressumState extends State<Impressum> {
+class DogAPIPrivacyPoliceState
+    extends State<DogAPIPrivacyPolice> {
   get http => null;
 
   @override
@@ -54,11 +56,14 @@ class ImpressumState extends State<Impressum> {
                 builder: (BuildContext context, AsyncSnapshot snap) {
                   if (snap.connectionState == ConnectionState.done) {
                     return WebView(
-                      initialUrl: "https://atlas.ai.it.hs-worms.de/impressum/",
+                      initialUrl: "https://thedogapi.com/privacy/",
                       javascriptMode: JavascriptMode.unrestricted,
                     );
                   } else if (snap.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return Center(
+                        child: (Platform.isIOS)
+                            ? CupertinoActivityIndicator()
+                            : CircularProgressIndicator());
                   } else {
                     return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +88,7 @@ class ImpressumState extends State<Impressum> {
   }
 
   Future<void> loadPage() async {
-    await http.get("https://atlas.ai.it.hs-worms.de/impressum/");
+    await http.get("https://thedogapi.com/privacy");
   }
 
   Widget getCupertinoDesign() {

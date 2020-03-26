@@ -1,5 +1,8 @@
+import 'package:MyStudyBuddy2/theme/styles.dart';
 import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'dart:io';
 
 class ModuleInformationDialog extends StatefulWidget {
   final Module module;
@@ -14,16 +17,24 @@ class ModuleInformationDialogState extends State<ModuleInformationDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Informationen"),
+      title: Text(
+        "Informationen",
+        style: (Platform.isIOS) ? Styles.alertDialogTitleText : null,
+      ),
       content: Wrap(crossAxisAlignment: WrapCrossAlignment.start, children: [
         Wrap(
           direction: Axis.vertical,
           children: <Widget>[
             Text(
               "Name",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: (Platform.isIOS)
+                  ? Styles.moduleInformationTitle
+                  : TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text(widget.module.properties.title)
+            Text(
+              widget.module.properties.title,
+              style: (Platform.isIOS) ? Styles.moduleInformationText : null,
+            )
           ],
         ),
         Divider(),
@@ -32,9 +43,14 @@ class ModuleInformationDialogState extends State<ModuleInformationDialog> {
           children: <Widget>[
             Text(
               "Modul ID",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: (Platform.isIOS)
+                  ? Styles.moduleInformationTitle
+                  : TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text(widget.module.properties.id.toString())
+            Text(
+              widget.module.properties.id.toString(),
+              style: (Platform.isIOS) ? Styles.moduleInformationText : null,
+            )
           ],
         ),
         Divider(),
@@ -43,9 +59,14 @@ class ModuleInformationDialogState extends State<ModuleInformationDialog> {
           children: <Widget>[
             Text(
               "Credit Points",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: (Platform.isIOS)
+                  ? Styles.moduleInformationTitle
+                  : TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text(widget.module.properties.cp.toString())
+            Text(
+              widget.module.properties.cp.toString(),
+              style: (Platform.isIOS) ? Styles.moduleInformationText : null,
+            )
           ],
         ),
         Divider(),
@@ -54,9 +75,14 @@ class ModuleInformationDialogState extends State<ModuleInformationDialog> {
           children: <Widget>[
             Text(
               "Note",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: (Platform.isIOS)
+                  ? Styles.moduleInformationTitle
+                  : TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text(getGradeText())
+            Text(
+              getGradeText(),
+              style: (Platform.isIOS) ? Styles.moduleInformationText : null,
+            )
           ],
         ),
       ]),
