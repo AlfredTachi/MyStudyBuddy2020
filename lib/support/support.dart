@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
+
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mailer/flutter_mailer.dart';
 import 'package:MyStudyBuddy2/theme/styles.dart';
 import 'package:MyStudyBuddy2/ios_list_design/cupertino_settings_icon.dart';
 import 'package:MyStudyBuddy2/ios_list_design/cupertino_settings_group.dart';
+import 'package:package_info/package_info.dart';
 
 class Support extends StatefulWidget {
   @override
@@ -156,14 +159,14 @@ class SupportState extends State<Support> {
     List<Widget> _items = [
       ListTile(
         leading: Icon(Icons.help),
-        title: Text('FAQ', style: TextStyle(fontSize: 20)),
+        title: Text("FAQ", style: TextStyle(fontSize: 20)),
         onTap: () {
           faqPressed();
         },
       ),
       ListTile(
         leading: Icon(Icons.book),
-        title: Text('Schnelleinstieg', style: TextStyle(fontSize: 20)),
+        title: Text("Schnelleinstieg", style: TextStyle(fontSize: 20)),
         onTap: () {
           quickaccessPressed();
         },
@@ -176,13 +179,13 @@ class SupportState extends State<Support> {
           }),
       ListTile(
           leading: Icon(Icons.info),
-          title: Text('Impressum', style: TextStyle(fontSize: 20)),
+          title: Text("Impressum", style: TextStyle(fontSize: 20)),
           onTap: () {
             impressumPressed();
           }),
       ListTile(
           leading: Icon(Icons.lock),
-          title: Text('Datenschutz', style: TextStyle(fontSize: 20)),
+          title: Text("Datenschutz", style: TextStyle(fontSize: 20)),
           onTap: () {
             privacyPolicePressed();
           }),
@@ -192,14 +195,22 @@ class SupportState extends State<Support> {
   }
 
   void faqPressed() {
-    Navigator.pushNamed(context, '/supportMain/FAQ');
+    Navigator.pushNamed(context, "/supportMain/FAQ");
   }
 
   void quickaccessPressed() {
-    Navigator.pushNamed(context, '/supportMain/quickaccess');
+    Navigator.pushNamed(context, "/supportMain/quickaccess");
   }
 
   void mailPressed() async {
+    final MailOptions mailOptions = MailOptions(
+      subject: "Support MyStudyBuddy2" +
+          ", App Version: " +
+          await getAppVersion() +
+          ", " +
+          await getOperatingSystem(),
+      recipients: ["aninf-mm@hs-worms.de"],
+    );
     try {
       await FlutterMailer.send(mailOptions);
     } catch (error) {}
@@ -211,5 +222,37 @@ class SupportState extends State<Support> {
 
   void privacyPolicePressed() {
     Navigator.pushNamed(context, '/supportMain/privacyPolice/privacyPolice');
+  }
+
+  Future<String> getAppVersion() async {
+    return PackageInfo.fromPlatform()
+        .then((PackageInfo packageInfo) => packageInfo.version)
+        .catchError((err) {
+      print(err);
+    });
+  }
+
+  Future<String> getOperatingSystem() async {
+    //Android
+    String release = "";
+    int sdkNumber = 0;
+
+    //IOS
+    String systemName = "";
+    String version = "";
+
+    if (Platform.isIOS) {
+      return DeviceInfoPlugin().androidInfo.then((var androidInfo) {
+        release = androidInfo.version.release;
+        sdkNumber = androidInfo.version.sdkInt;
+        return "Android: " + release + ", SDK: " + sdkNumber.toString();
+      });
+    } else {
+      return DeviceInfoPlugin().iosInfo.then((var iosInfo) {
+        systemName = iosInfo.systemName;
+        version = iosInfo.systemVersion;
+        return systemName + version;
+      });
+    }
   }
 }
