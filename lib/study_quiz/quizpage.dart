@@ -75,8 +75,10 @@ class _QuizpageState extends State<Quizpage> {
   Color colortoshow = (Platform.isIOS)
       ? CupertinoColors.activeOrange
       : Colors.orangeAccent[100];
-  Color right = (Platform.isIOS) ? CupertinoColors.systemGreen : Colors.green;
-  Color wrong = (Platform.isIOS) ? CupertinoColors.destructiveRed : Colors.red;
+  Color right =
+      (Platform.isIOS) ? CupertinoColors.systemGreen : Colors.green;
+  Color wrong =
+      (Platform.isIOS) ? CupertinoColors.destructiveRed : Colors.red;
   int marks = 0;
   int i = 1;
   // extra varibale to iterate
@@ -240,6 +242,125 @@ class _QuizpageState extends State<Quizpage> {
     var mydatatemp = mydata[1][i.toString()];
     var mydatatempcategory = mydata[3];
     var keys = ['a', 'b', 'c', 'd'];
+
+    Widget getBody() {
+      return SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            (Platform.isIOS)
+                ? Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                    child: PhysicalModel(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(15),
+                        color: CupertinoColors.activeOrange,
+                        child: Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 20),
+                                    child: Text(
+                                        "Frage: " +
+                                            j.toString() +
+                                            "/" +
+                                            randomArray.length.toString(),
+                                        style: Styles.detailsTitleText),
+                                  ),
+                                  Text(
+                                    mydata[0][i.toString()],
+                                    style: Styles.detailsDescriptionText,
+                                    textAlign: TextAlign.center,
+                                  )
+                                ],
+                              ),
+                            ))))
+                : Container(
+                    padding: EdgeInsets.all(15.0),
+                    alignment: Alignment.bottomLeft,
+                    child: Row(
+                      children: <Widget>[
+                        Padding(padding: EdgeInsets.fromLTRB(10, 0, 10, 0)),
+                        Text(
+                          "Frage: " +
+                              j.toString() +
+                              "/" +
+                              randomArray.length.toString(),
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.left,
+                        ),
+                        Text(
+                          "    Kategorie: " + mydatatempcategory[i.toString()],
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.right,
+                        ),
+                      ],
+                    ),
+                  ),
+            if (!Platform.isIOS)
+              Container(
+                padding: EdgeInsets.all(15.0),
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  mydata[0][i.toString()],
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
+                ),
+              ),
+            (Platform.isIOS)
+                ? Padding(
+                    padding: EdgeInsets.only(
+                        left: 15.0, right: 15.0, top: 10.0, bottom: 10.0),
+                    child: PhysicalModel(
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(15),
+                      color: CupertinoColors.white,
+                      child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                for (int k = 0; k < mydatatemp.length; k++)
+                                  choicebutton(keys[k])
+                              ],
+                            ),
+                          )),
+                    ),
+                  )
+                : Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        for (int k = 0; k < mydatatemp.length; k++)
+                          choicebutton(keys[k]),
+                      ],
+                    ),
+                  ),
+            if (!Platform.isIOS)
+              Container(
+                alignment: Alignment.topCenter,
+                child: Center(
+                  child: Text(
+                    showtimer,
+                    style: (Platform.isIOS)
+                        ? Styles.weatherTitle
+                        : TextStyle(
+                            fontSize: 35.0,
+                            fontWeight: FontWeight.w700,
+                          ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      );
+    }
+
     return WillPopScope(
       onWillPop: () {
         return showDialog(
@@ -271,132 +392,19 @@ class _QuizpageState extends State<Quizpage> {
                 ));
       },
       child: Scaffold(
-        appBar: (Platform.isIOS)
-            ? CupertinoNavigationBar(
-                actionsForegroundColor: CupertinoColors.activeOrange,
-                middle: Text("Kategorie: " + mydatatempcategory[i.toString()]),
-                trailing: Text(showtimer),
-              )
-            : null,
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              (Platform.isIOS)
-                  ? Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 15.0),
-                      child: PhysicalModel(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(15),
-                          color: CupertinoColors.activeOrange,
-                          child: Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 20),
-                                      child: Text(
-                                          "Frage: " +
-                                              j.toString() +
-                                              "/" +
-                                              randomArray.length.toString(),
-                                          style: Styles.detailsTitleText),
-                                    ),
-                                    Text(
-                                      mydata[0][i.toString()],
-                                      style: Styles.detailsDescriptionText,
-                                      textAlign: TextAlign.center,
-                                    )
-                                  ],
-                                ),
-                              ))))
-                  : Container(
-                      padding: EdgeInsets.all(15.0),
-                      alignment: Alignment.bottomLeft,
-                      child: Row(
-                        children: <Widget>[
-                          Padding(padding: EdgeInsets.fromLTRB(10, 0, 10, 0)),
-                          Text(
-                            "Frage: " +
-                                j.toString() +
-                                "/" +
-                                randomArray.length.toString(),
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.left,
-                          ),
-                          Text(
-                            "    Kategorie: " +
-                                mydatatempcategory[i.toString()],
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.right,
-                          ),
-                        ],
-                      ),
-                    ),
-              if (!Platform.isIOS)
-                Container(
-                  padding: EdgeInsets.all(15.0),
-                  alignment: Alignment.bottomLeft,
-                  child: Text(
-                    mydata[0][i.toString()],
-                    style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
-                  ),
-                ),
-              (Platform.isIOS)
-                  ? Padding(
-                      padding: EdgeInsets.only(
-                          left: 15.0, right: 15.0, top: 10.0, bottom: 10.0),
-                      child: PhysicalModel(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(15),
-                        color: CupertinoColors.white,
-                        child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  for (int k = 0; k < mydatatemp.length; k++)
-                                    choicebutton(keys[k])
-                                ],
-                              ),
-                            )),
-                      ),
-                    )
-                  : Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          for (int k = 0; k < mydatatemp.length; k++)
-                            choicebutton(keys[k]),
-                        ],
-                      ),
-                    ),
-              if (!Platform.isIOS)
-                Container(
-                  alignment: Alignment.topCenter,
-                  child: Center(
-                    child: Text(
-                      showtimer,
-                      style: (Platform.isIOS)
-                          ? Styles.weatherTitle
-                          : TextStyle(
-                              fontSize: 35.0,
-                              fontWeight: FontWeight.w700,
-                            ),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ),
+          appBar: (Platform.isIOS)
+              ? CupertinoNavigationBar(
+                  actionsForegroundColor: CupertinoColors.activeOrange,
+                  middle:
+                      Text("Kategorie: " + mydatatempcategory[i.toString()]),
+                  trailing: Text(showtimer),
+                )
+              : null,
+          body: (Platform.isIOS)
+              ? getBody()
+              : SafeArea(
+                  child: getBody(),
+                )),
     );
   }
 }
