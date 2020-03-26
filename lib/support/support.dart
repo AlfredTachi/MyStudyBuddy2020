@@ -241,7 +241,7 @@ class SupportState extends State<Support> {
     String systemName = "";
     String version = "";
 
-    if (Platform.isIOS) {
+    if (!Platform.isIOS) {
       return DeviceInfoPlugin().androidInfo.then((var androidInfo) {
         release = androidInfo.version.release;
         sdkNumber = androidInfo.version.sdkInt;
