@@ -21,7 +21,7 @@ Deutschland
 Telefon: +49 6241/509-0
 Telefax: +49 6241/509-222
 [kontakt@hs-worms.de](mailto:kontakt@hs-worms.de)
-[https://hs-worms.de]
+[https://hs-worms.de](https://hs-worms.de)
 
 Umsatzsteueridentifikationsnummer gemäß §27a Umsatzsteuergesetz: DE813351149
 

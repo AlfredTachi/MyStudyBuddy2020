@@ -107,30 +107,15 @@ class QuickaccessState extends State<Quickaccess> {
                     ],
                   ),
                 ),
-                ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: links.length,
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      if (index != 6) {
-                        return Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Card(
-                              margin: new EdgeInsets.symmetric(
-                                  horizontal: 10.0, vertical: 6.0),
-                              elevation: 8.0,
-                              child: ListTile(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20.0, vertical: 10.0),
-                                  leading: links[index]),
-                            ));
-                      } else if (links[index].runtimeType == Text) {
-                        return Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: GestureDetector(
-                              onTap: () {
-                                goToMoralSupport(context);
-                              },
+                Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: links.length,
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index != 6) {
+                          return Container(
+                              width: MediaQuery.of(context).size.width,
                               child: Card(
                                 margin: new EdgeInsets.symmetric(
                                     horizontal: 10.0, vertical: 6.0),
@@ -139,22 +124,39 @@ class QuickaccessState extends State<Quickaccess> {
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 20.0, vertical: 10.0),
                                     leading: links[index]),
-                              ),
-                            ));
-                      } else {
-                        return Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Card(
-                              margin: new EdgeInsets.symmetric(
-                                  horizontal: 10.0, vertical: 6.0),
-                              elevation: 8.0,
-                              child: ListTile(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20.0, vertical: 10.0),
-                                  leading: links[index]),
-                            ));
-                      }
-                    }),
+                              ));
+                        } else if (links[index].runtimeType == Text) {
+                          return Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: GestureDetector(
+                                onTap: () {
+                                  goToMoralSupport(context);
+                                },
+                                child: Card(
+                                  margin: new EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 6.0),
+                                  elevation: 8.0,
+                                  child: ListTile(
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 10.0),
+                                      leading: links[index]),
+                                ),
+                              ));
+                        } else {
+                          return Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: Card(
+                                margin: new EdgeInsets.symmetric(
+                                    horizontal: 10.0, vertical: 6.0),
+                                elevation: 8.0,
+                                child: ListTile(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20.0, vertical: 10.0),
+                                    leading: links[index]),
+                              ));
+                        }
+                      }),
+                ),
               ],
             )),
           );

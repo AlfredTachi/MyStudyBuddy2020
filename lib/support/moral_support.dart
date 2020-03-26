@@ -76,60 +76,52 @@ class MoralSupportState extends State<MoralSupport> {
       );
     }
     _list.add(
-      Center(
-        child: FutureBuilder(
-          future: getDogImage(),
-          builder: (context, snap) {
-            if (snap.connectionState == ConnectionState.done) {
-              DogImage img = snap.data;
-              return Container(
-                height: MediaQuery.of(context).size.height-64,
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 9,
-                      child: Image.network(
+      Expanded(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                flex: 3,
+                child: FutureBuilder(
+                  future: getDogImage(),
+                  builder: (context, snap) {
+                    if (snap.connectionState == ConnectionState.done) {
+                      DogImage img = snap.data;
+                      return Image.network(
                         img.url,
-                      ),
-                    ),
-                    Expanded(
-                        flex: 2,
+                      );
+                    } else {
+                      return Center(
                         child: (Platform.isIOS)
-                            ? Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Container(
-                                height: 50,
-                                width: 200,
-                                child: CupertinoButton(
-                                    child: Text("Hilfe!"),
-                                    color: CupertinoColors.activeOrange,
-                                    onPressed: () {
-                                      setState(() {});
-                                    }),
-                              ),
-                            )
-                            : RaisedButton(
-                                child: Text("Hilfe!"),
-                                onPressed: () {
-                                  setState(() {});
-                                })),
-                  ],
+                            ? CupertinoActivityIndicator()
+                            : CircularProgressIndicator(),
+                      );
+                    }
+                  },
                 ),
-              );
-            } else {
-              return Center(
+              ),
+              Expanded(
+                flex: 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     (Platform.isIOS)
-                        ? CupertinoActivityIndicator()
-                        : CircularProgressIndicator(),
+                        ? CupertinoButton(
+                            color: CupertinoColors.activeOrange,
+                            child: Text("Hilfe"),
+                            onPressed: () {
+                              setState(() {});
+                            })
+                        : RaisedButton(
+                            child: Text("Hilfe!"),
+                            onPressed: () {
+                              setState(() {});
+                            }),
                   ],
                 ),
-              );
-            }
-          },
+              ),
+            ],
+          ),
         ),
       ),
     );

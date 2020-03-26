@@ -96,7 +96,7 @@ class QSPInfoState extends State<QSPInfo> {
           qspdetails(
               QSPInfoIcons.software_icon,
               "Software Engineering and Development (SED)",
-              "Die Module dieses Qualifikationsschwerpunkts vertiefen klassische Informatik-Themen," +
+              "Die Module dieses Qualifikationsschwerpunkts vertiefen klassische Informatik-Themen, " +
                   "die auf die professionelle Konstruktion komplexer Software-Anwendungen vorbereiten.",
               ProfileController().getSED() / 5,
               ProfileController().getSED().toString() + "/5",
@@ -105,7 +105,7 @@ class QSPInfoState extends State<QSPInfo> {
           qspdetails(
               QSPInfoIcons.medieninformatik_icon,
               "Visual Computing (VC)",
-              "Die Medieninformatik konzentriert sich auf die Teile der Informatik und ihres Umfelds," +
+              "Der Schwerpunkt Visual Computing konzentriert sich auf die Teile der Informatik und ihres Umfelds," +
                   "die in direktem Kontakt zu Benutzer/innen, also zu Menschen stehen.",
               ProfileController().getVC() / 5,
               ProfileController().getVC().toString() + "/5",
@@ -114,7 +114,7 @@ class QSPInfoState extends State<QSPInfo> {
           qspdetails(
               QSPInfoIcons.cloud_icon,
               "Security and Networks (SN)",
-              "Im Qualifikationsschwerpunkt „Cloud und Internet“ dreht es sich verstärkt um Themen der Infrastruktur, " +
+              "Im Qualifikationsschwerpunkt „Security and Networks“ dreht es sich verstärkt um Themen der Infrastruktur, " +
                   "d.h. insbesondere Rechnersysteme und Netzwerke,die zur Bereitstellung der heutigen netzwerkbasierten" +
                   "Services erforderlich sind.",
               ProfileController().getNC() / 5,
