@@ -101,7 +101,7 @@ class PrivacyPoliceState extends State<PrivacyPolice> {
       ),
       ListTile(
         leading: Icon(Icons.settings),
-        title: Text('Studierendenwerk Datenschutzerklärung'),
+        title: Text('Studierendenwerk (Mensaplan)'),
         onTap: () {
           Navigator.pushNamed(context,
               '/supportMain/privacyPolice/studierendenwerkPrivacyPolice');
@@ -109,10 +109,18 @@ class PrivacyPoliceState extends State<PrivacyPolice> {
       ),
       ListTile(
         leading: Icon(IOSQuickAccessIcons.lsflogo),
-        title: Text('LSF Datenschutzerklärung'),
+        title: Text('LSF (Laden der LSF Prüfungsergebnisse)'),
         onTap: () {
           Navigator.pushNamed(
               context, '/supportMain/privacyPolice/lsfPrivacyPolice');
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.tag_faces),
+        title: Text('Moralische Unterstützung (DogAPI)'),
+        onTap: () {
+          Navigator.pushNamed(
+              context, '/supportMain/privacyPolice/dogAPIPrivacyPolice');
         },
       ),
     ];

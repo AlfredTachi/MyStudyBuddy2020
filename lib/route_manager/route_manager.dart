@@ -24,6 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/support/privacyPolice/lsfPrivacyPolice.dart';
 import 'package:MyStudyBuddy2/support/privacyPolice/ourPrivacyPolice.dart';
 import 'package:MyStudyBuddy2/support/privacyPolice/StudierendenwerkPrivacyPolice.dart';
+import 'package:MyStudyBuddy2/support/privacyPolice/dogAPI.dart';
 import '../dashboard/module_selection/module_selection.dart';
 
 class RouteGenerator {
@@ -75,6 +76,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => OurPrivacyPolice());
       case '/supportMain/privacyPolice/studierendenwerkPrivacyPolice':
         return MaterialPageRoute(builder: (_)=> StudierendenwerkPrivacyPolice());
+      case '/supportMain/privacyPolice/dogAPIPrivacyPolice':
+        return MaterialPageRoute(builder: (_)=> DogAPIPrivacyPolice());
       case '/gradesList':
         return MaterialPageRoute(builder: (_) => GradesList());
       case '/achievement':
