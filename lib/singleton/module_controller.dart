@@ -53,7 +53,7 @@ class ModuleController {
         .toList();
 
     for (int i = 0; i < _modules.length; i++) {
-      if (_modules[i].properties.grade != 0.0) {
+      if (_modules[i].properties.grade != 0.0 && _modules[i].properties.grade != null ) {
         _grades.add(_modules[i].properties.grade);
       }
     }

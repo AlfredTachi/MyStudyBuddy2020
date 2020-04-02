@@ -1,5 +1,6 @@
 import 'package:MyStudyBuddy2/ios_list_design/cupertino_settings_icon.dart';
 import 'package:MyStudyBuddy2/ios_list_design/cupertino_settings_group.dart';
+import 'package:MyStudyBuddy2/model/module.dart';
 import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,15 +37,28 @@ class GradesListState extends State<GradesList> {
   }
 
   List<SettingsItem> getList() {
+    List<Module> modules = ModuleController().getAllDoneModules();
     List<double> grades = ModuleController().getAllDoneGrades();
     List<String> doneModules = ModuleController().getAllDoneModulesNames();
     List<SettingsItem> _items = new List<SettingsItem>();
-    for (int i = 0; i < grades.length; i++) {
-      SettingsItem _listItem = SettingsItem(
-        label: doneModules[i],
-        subtitle: grades[i].toString(),
-      );
-      _items.add(_listItem);
+    int n = 0;
+    for (int i = 0; i < doneModules.length; i++) {
+      if (modules[i].properties.code != "AS" &&
+          modules[i].properties.code != "PS" &&
+          modules[i].properties.code != "TOP") {
+        SettingsItem _listItem = SettingsItem(
+          label: doneModules[i],
+          subtitle: grades[n].toString(),
+        );
+        _items.add(_listItem);
+        n++;
+      } else {
+        SettingsItem _listItem = SettingsItem(
+          label: doneModules[i],
+          subtitle: "BE",
+        );
+        _items.add(_listItem);
+      }
     }
     if (_items.isEmpty) {
       _items.add(SettingsItem(label: "Du hast noch keine Noten eingetragen."));
@@ -53,18 +67,34 @@ class GradesListState extends State<GradesList> {
   }
 
   List<Widget> createList() {
+    List<Module> modules = ModuleController().getAllDoneModules();
     List<double> grades = ModuleController().getAllDoneGrades();
     List<String> doneModules = ModuleController().getAllDoneModulesNames();
     List<Widget> _items = new List<Widget>();
-    for (int i = 0; i < grades.length; i++) {
-      Widget _listItem = Container(
-        decoration: BoxDecoration(border: Border(bottom: BorderSide())),
-        child: ListTile(
-          title: Text("${doneModules[i]}"),
-          subtitle: Text("${grades[i]}"),
-        ),
-      );
-      _items.add(_listItem);
+    int n = 0;
+    for (int i = 0; i < doneModules.length; i++) {
+      if (modules[i].properties.code != "AS" &&
+          modules[i].properties.code != "PS" &&
+          modules[i].properties.code != "TOP") {
+        Widget _listItem = Container(
+          decoration: BoxDecoration(border: Border(bottom: BorderSide())),
+          child: ListTile(
+            title: Text("${doneModules[i]}"),
+            subtitle: Text("${grades[n]}"),
+          ),
+        );
+         _items.add(_listItem);
+         n++;
+      } else {
+        Widget _listItem = Container(
+          decoration: BoxDecoration(border: Border(bottom: BorderSide())),
+          child: ListTile(
+            title: Text("${doneModules[i]}"),
+            subtitle: Text("BE"),
+          ),
+        );
+        _items.add(_listItem);
+      }
     }
     return _items;
   }
