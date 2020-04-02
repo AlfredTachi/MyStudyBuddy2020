@@ -1,0 +1,86 @@
+[
+    {
+		
+		"0":"Wofür steht die Abkürzung CRUD?",
+        "1":"Threads sind nicht an einen Prozess gebunden.",
+		"2":"Multitasking bezeichnet grob das parallele Ausführen von Prozessen durch ein Betriebssystem.",
+		"3":"Wofür steht die Abkürzung ACID?",
+		"4":"Manche Ausprägungen eines Merkmals bilden den Wertebereich.",
+		"5":"Eine Stichprobe ist Eine Teilmenge der Grundgesamtheit.",
+		"6":"'Vererbung und Polymorphismus'gehören zur selben Wegner-Stufe.",
+		"7":"Eine abstrakte Klasse verwendet von jeder Referenz nur die indirekte Instanz.",
+		"8":"Eine konkrete Klasse wird in C++ mittels abstrakter, rein virtueller Funktionen implementiert.",
+		"9":"Die Kardinalzahlen geben an, mit wie vielen Objekten der eigenen oder anderer Klassen Beziehungen bestehen."
+    },
+    {
+		
+		"0": {
+            "a": "Create, Release, Update, Delete",
+            "b": "Create, Read, Update, Delete",
+            "c": "Create, Read, Update, Done",
+            "d": "Create, Release, Update, Done"
+        },
+        "1": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"2": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"3": {
+            "a": "Atomarity, Continuity, Isometric, Durability",
+            "b": "Atomarity, Consistency, Isometric, Durability",
+            "c": "Atomarity, Continuity, Isolation, Durability",
+            "d": "Atomarity, Consistency, Isolation, Durability"
+        },
+		"4": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"5": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"6": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"7": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"8": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"9": {
+            "a": "wahr",
+            "b": "falsch"
+        }
+    },
+    {
+		"0":"Create, Read, Update, Delete",
+        "1":"falsch",
+		"2":"wahr",
+		"3":"Atomarity,Consistency,Isolation,Durability",
+		"4":"falsch",
+		"5":"wahr",
+		"6":"wahr",
+		"7":"falsch",
+		"8":"falsch",
+		"9":"wahr"
+    },
+    {
+        "0":"DB",
+        "1":"BSK",
+		"2":"BSK",
+		"3":"DB",
+		"4":"Mathe2",
+		"5":"Mathe2",
+		"6":"Prog2",
+		"7":"Prog2",
+		"8":"Prog2",
+		"9":"Prog2"
+    }
+]

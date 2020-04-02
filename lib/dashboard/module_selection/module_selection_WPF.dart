@@ -10,9 +10,6 @@ class ModuleSelectionWPFState extends State<ModuleSelectionWPF> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Modulauswahl WPF"),
-      ),
       body:StaggeredViewWPF()
     );
   }

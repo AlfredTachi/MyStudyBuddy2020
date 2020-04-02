@@ -1,44 +1,8 @@
-import 'package:MyStudyBuddy2/model/module.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:MyStudyBuddy2/theme/styles.dart';
+import 'package:MyStudyBuddy2/singleton/module_controller.dart';
 import 'package:flutter/material.dart';
-
-Module myModule = Module(0, "");
-final List<Widget> myModules = [];
-
-Material module(String heading) {
-  return Material(
-      color: Color(0xFF013D62),
-      elevation: 3.0,
-      shadowColor: Colors.black,
-      borderRadius: BorderRadius.circular(12.0),
-      child: Padding(
-        padding: EdgeInsets.all(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
-                  child: Text(heading, style: TextStyle(fontSize: 25)),
-                ),
-              ],
-            ),
-            Expanded(
-              child: new Container(
-                child: GridView.count(
-                  primary: false,
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  children: myModules,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ));
-}
+import 'package:flutter/cupertino.dart';
+import 'dart:io';
 
 class StaggeredViewMedia extends StatefulWidget {
   @override
@@ -51,54 +15,99 @@ class _StaggeredViewState extends State<StaggeredViewMedia> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
-                    child: Text("Visual Computing",
-                        style: TextStyle(fontSize: 25)),
-                  ),
-                ],
+      appBar: (Platform.isIOS)
+          ? CupertinoNavigationBar(
+              actionsForegroundColor: CupertinoColors.activeOrange,
+              middle: Text(
+                "Visual Computing",
+                style: Styles.navBarTitle,
               ),
-              Expanded(
-                child: new Container(
-                  padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
-                  child: StaggeredGridView.count(
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    children: myModules(),
-                    staggeredTiles: myModulesTiles(context),
+            )
+          : null,
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                if (!Platform.isIOS)
+                  Container(
+                    color: Colors.orange,
+                    child: Row(
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: OutlineButton(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 3, bottom: 3),
+                                child: Icon(
+                                  Icons.arrow_back,
+                                  size: 36,
+                                ),
+                              ),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(15),
+                                bottomRight: Radius.circular(15),
+                              )),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }),
+                        ),
+                        Align(
+                            alignment: Alignment.topCenter,
+                            child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20, top: 3, bottom: 3),
+                                child: Text("VisualComputing",
+                                    style: TextStyle(fontSize: 25)))),
+                      ],
+                    ),
+                  ),
+                  (Platform.isIOS)
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 15.0),
+                        child: PhysicalModel(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(15),
+                          color: CupertinoColors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Center(
+                                  child: Wrap(
+                                    direction: Axis.horizontal,
+                                    runSpacing: 5,
+                                    children: ModuleController()
+                                        .getQSPModulesWidgets(
+                                            "Visual Computing"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                : Container(
+                  padding: EdgeInsets.only(top: 8),
+                  child: Center(
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      runSpacing: 5,
+                      children: ModuleController()
+                          .getQSPModulesWidgets("Visual Computing"),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
-  }
-
-  List<StaggeredTile> myModulesTiles(context) {
-    List<StaggeredTile> list = new List();
-    double screenHeight = MediaQuery.of(context).size.height;
-    for (int i = 1; i <= 5; i++) {
-      list.add(StaggeredTile.extent(1, screenHeight / 8));
-    }
-    return list;
-  }
-
-  List<Widget> myModules() {
-    List<Widget> myModules = new List();
-    for (int i = 1; i <= 7; i++) {
-      myModule = Module(i, (i.toString() + ". M").toString());
-      myModules.add(myModule.module());
-    }
-    return myModules;
   }
 }

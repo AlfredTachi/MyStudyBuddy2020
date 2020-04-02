@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:MyStudyBuddy2/studyprogress/staggered_view_studyprogress/staggered_view_studyprogress.dart';
-import '../drawer/drawer.dart';
 
 class Studyprogress extends StatefulWidget {
+  Studyprogress({Key key}) : super(key: key);
+
   @override
   StudyprogressState createState() => StudyprogressState();
 }
@@ -10,12 +11,10 @@ class Studyprogress extends StatefulWidget {
 class StudyprogressState extends State<Studyprogress> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Studienverlauf"),
-      ),
-      drawer: OwnDrawer(),
-      body:StaggeredView()
-    );
+    return Scaffold(body: StaggeredView());
+  }
+
+  update() {
+    setState(() {});
   }
 }

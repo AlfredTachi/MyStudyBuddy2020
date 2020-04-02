@@ -1,8 +1,14 @@
-import 'dart:convert';
-import 'package:MyStudyBuddy2/drawer/drawer.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:io';
+import 'dart:convert';
+import 'dart:ui';
+import 'package:MyStudyBuddy2/dashboard/profile_page/achievement/achievement.dart';
+import 'package:MyStudyBuddy2/theme/ios_quick_access_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:MyStudyBuddy2/theme/styles.dart';
+import 'package:MyStudyBuddy2/link/link.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 
 class Weather extends StatefulWidget {
   @override
@@ -14,6 +20,8 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
   AnimationController animationCtrl;
   bool showDetails = false;
   String status = "";
+  String showMore = "Details zeigen";
+  String weatherLink = "http://wetter.hs-worms.de/";
 
   @override
   void initState() {
@@ -43,141 +51,339 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
-      return getMaterialDesign();
-    } else {
-      return getMaterialDesign();
-    }
-  }
-
-  Widget getCupertinoDesign() {
-    ///TODO implement IOS Design
-    return Container();
-  }
-
-  Widget getMaterialDesign() {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Wetter"),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.refresh),
-              onPressed: () {
-                fetchData();
-              })
-        ],
-      ),
-      drawer: OwnDrawer(),
-      body: Center(
-        child: Container(
-          padding: EdgeInsets.only(top: 20),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                Color(0xFF013D62),
-                Color(0xBB013D62),
-                Color(0x99013D62)
-              ])),
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+      appBar: (Platform.isIOS)
+          ? CupertinoNavigationBar(
+              actionsForegroundColor: CupertinoColors.activeOrange,
+              middle: Text(
+                "Wetter",
+                style: Styles.navBarTitle,
+              ),
+              trailing: Builder(
+                builder: (BuildContext context) {
+                  return FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height / 5),
-                          child: Column(
-                            children: <Widget>[
-                              (status.isNotEmpty) ? Text(status) : Container(),
-                              Text(
-                                "HS Worms",
-                                style: TextStyle(
-                                  fontSize: 50,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                "Zuletzt aktualisiert: " + dateTimeToString(),
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  data.temperature.toString() + " °C",
-                                  style: TextStyle(
-                                    fontSize: 44,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
+                        CupertinoButton(
+                          padding: EdgeInsets.zero,
+                          child: Icon(
+                            IOSQuickAccessIcons.arrow_2_circlepath,
+                            size: 25,
                           ),
-                        ),
-                        Divider(),
-                        MaterialButton(
                           onPressed: () {
-                            if (animationCtrl.isCompleted) {
-                              showDetails = true;
-                              animationCtrl.reverse();
-                            } else {
-                              showDetails = false;
-                              animationCtrl.forward();
-                            }
-                            setState(() {});
+                            fetchData();
                           },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              AnimatedIcon(
-                                icon: AnimatedIcons.close_menu,
-                                progress: animationCtrl,
-                              ),
-                              Text(
-                                "Show more",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ],
-                          ),
                         ),
-                        Divider(),
-                        (showDetails) ? details() : Container(),
+                        CupertinoButton(
+                          padding: EdgeInsets.zero,
+                          child: Icon(
+                            IOSQuickAccessIcons.info_circle,
+                            size: 25,
+                          ),
+                          onPressed: () {
+                            return showCupertinoDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CupertinoAlertDialog(
+                                    title: Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: Text(
+                                        "Informationen zu den Daten",
+                                        style: Styles.alertDialogTitleText,
+                                      ),
+                                    ),
+                                    content: Text(
+                                        "Die Daten werden bereitgestellt vom TOP Wetter Team WWW und der Hochschule Worms. " +
+                                            "Weitere Informationen finden Sie auf der Wetter Seite der HS Worms.",
+                                        style: Styles.minorText),
+                                    actions: <Widget>[
+                                      CupertinoDialogAction(
+                                        isDefaultAction: true,
+                                        child: Text("Abbrechen",
+                                            style:
+                                                Styles.alertDialogActionText),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      CupertinoDialogAction(
+                                        child: Text("Zur Website",
+                                            style:
+                                                Styles.alertDialogActionText),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          _launchURL();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                        ),
                       ],
                     ),
+                  );
+                },
+              ),
+            )
+          : null,
+      floatingActionButton: (Platform.isIOS)
+          ? null
+          : FloatingActionButton(
+              backgroundColor: Color(0xFF013D62),
+              onPressed: () {
+                fetchData();
+              },
+              tooltip: 'Aktualisieren',
+              child: Icon(Icons.refresh),
+            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/weather.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
+          child: Column(children: getColumnChildren()),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> getColumnChildren() {
+    List<Widget> _list = List<Widget>();
+    if (!Platform.isIOS) {
+      _list.add(
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: OutlineButton(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 3, bottom: 3),
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                      size: 36,
+                    ),
                   ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.topRight,
+                child: OutlineButton(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 3, bottom: 3),
+                    child: Icon(
+                      Icons.info_outline,
+                      color: Colors.black,
+                      size: 36,
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  )),
+                  onPressed: () {
+                    return showDialog(
+                      context: context,
+                      child: SimpleDialog(
+                        contentPadding: EdgeInsets.all(25),
+                        title: FittedBox(
+                            child: Text("Informationen zu den Daten")),
+                        children: <Widget>[
+                          Text("Die Daten werden bereitgestellt vom TOP Wetter Team WWW und der Hochschule Worms. " +
+                              "Weitere Informationen finden Sie auf der Wetter Seite der HS Worms."),
+                          Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Link(
+                                child: Text(
+                                  "Hier geht es zur Website!",
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.blue),
+                                ),
+                                url: weatherLink),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    _list.add(
+      Expanded(
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Hs Worms",
+                  style: (Platform.isIOS)
+                      ? Styles.weatherTitle
+                      : TextStyle(fontSize: 42, fontWeight: FontWeight.w100),
+                ),
+                Text(
+                  dateTimeToString(),
+                  style: (Platform.isIOS)
+                      ? Styles.weatherTime
+                      : TextStyle(fontSize: 20, color: Colors.black45),
+                ),
+                Text(
+                  data.temperature.toString() + " °C",
+                  style: (Platform.isIOS)
+                      ? Styles.weatherTemperature
+                      : TextStyle(fontSize: 46, fontWeight: FontWeight.bold),
+                )
               ],
             ),
           ),
         ),
       ),
     );
+    _list.add(
+      Expanded(
+        flex: 2,
+        child: (Platform.isIOS)
+            ? Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 15.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                    child: PhysicalModel(
+                      shape: BoxShape.rectangle,
+                      color: CupertinoColors.white.withOpacity(0.5),
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            details(),
+                          ],
+                        )),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(30),
+                  ),
+                  color: Colors.white.withOpacity(0.5),
+                ),
+                child: Container(
+                  padding: EdgeInsets.only(left: 5, right: 5),
+                  child: Center(
+                    child: details(),
+                  ),
+                ),
+              ),
+      ),
+    );
+    return _list;
+  }
+
+  void _launchURL() async {
+    if (await canLaunch(weatherLink)) {
+      await launch(weatherLink);
+    } else {
+      throw 'Could not launch $weatherLink';
+    }
+  }
+
+  TextStyle detailTextStyle() {
+    return (Platform.isIOS)
+    ? Styles.weatherDetails
+    : TextStyle(
+      color: Colors.black,
+      fontSize: 24,
+    );
   }
 
   Widget details() {
     try {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("Luftdruck: " + data.barometer.round().toString() + " hPa",),
-          Text("Luftfeuchtigkeit: " + data.humidity.toString() + " %"),
-          Text("Windgesch.: " +
-              (data.windSpeed / 3.6).round().toString() +
-              " m/s"),
-          Text("Windrichtung: " + data.windDir.toString()),
-          Text("UV Strahlung: " + data.getUvEvaluation()),
-          Text("Regen: " + data.rainPerMM.toString() + "mm"),
-          Text("Sonnenaufgang: " + data.sunRise.toString()),
-          Text("Sonnenuntergang: " + data.sunSet.toString()),
-        ],
+      return SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            FittedBox(
+              child: Text(
+                "Luftdruck: " + data.barometer.round().toString() + " hPa",
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Luftfeuchtigkeit: " + data.humidity.toString() + " %",
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Windgesch.: " +
+                    (data.windSpeed / 3.6).round().toString() +
+                    " m/s",
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Windrichtung: " + data.windDir.toString(),
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "UV Strahlung: " + data.getUvEvaluation(),
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Regen: " + data.rainPerMM.toString() + "mm",
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Sonnenaufgang: " + data.sunRise.toString(),
+                style: detailTextStyle(),
+              ),
+            ),
+            FittedBox(
+              child: Text(
+                "Sonnenuntergang: " + data.sunSet.toString(),
+                style: detailTextStyle(),
+              ),
+            ),
+          ],
+        ),
       );
     } catch (ex) {
       return Text("Fehler beim abrufen der Daten!");
@@ -206,6 +412,11 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
     if (response.statusCode == 200) {
       return WeatherData.fromJson(json.decode(response.body));
     } else {
+      if (response.statusCode == 404) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Achievement().showAchievement(context, 11);
+        });
+      }
       throw Exception('Failed to load Weather Data');
     }
   }

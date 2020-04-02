@@ -1,0 +1,87 @@
+[
+    {
+		"0":"Welcher der folgenden Grundsätze ist keiner der sieben Grundsätze der Dialoggestaltung nach DIN EN ISO 9241-110 (früher ISO 9241-10)?",
+        "1":"Welche der folgenden Möglichkeiten gehört nicht zu den 8 Fallacies verteilter Systeme?",
+		"2":"Was ist die Millersche Zahl nach George Miller, 1956?",
+		"3":"Die optimale Größe des Entwicklerteams liegt bei 7 Mitgliedern.",
+		"4":"Transparenz, Überprüfung und Anpassung sind die drei Säulen der emprischer Prozessfindung.",
+		"5":"Der Product Owner ist für alle Schätzungen verantwortlich.",
+		"6":"Das Daily Scrum ist ein entscheidendes Meeting zur Überprüfung und Anpassung",
+		"7":"Während des Sprints darf der Anforderungsumfang nicht verändert werden.",
+		"8":"Der Scrum Master muss am Daily Scrum teilnehmen.",
+		"9":"Der Scrum Master unterstützt das Team bei der Schaffung hochwertiger Produkte."
+    },
+    {
+		
+		"0": {
+            "a": "Steuerbarkeit",
+            "b": "Atomarität",
+            "c": "Lernförderlichkeit",
+            "d": "Fehlertoleranz"
+        },
+        "1": {
+            "a": "Das Netzwerk arbeitet zuverlässig",
+            "b": "Die Bandbreite ist unbegrenzt",
+            "c": "Es gibt nur einen Administrator",
+            "d": "Die Latenzzeit ist immer größer 0"
+        },
+		"2": {
+            "a": "Die Limitierung des Arbeitsgedächntnis auf 7 +- 2 Informationseinheiten",
+            "b": "Die Limitierung des Langzeitgedächtnis auf 10 +- 2 Informationseinheiten",
+            "c": "Die Limitierung des Langzeitgedächtnis auf 7 +- 2 Informationseinheiten",
+            "d": "Die Limitierung des Arbeitsgedächntnis auf 10 +- 2 Informationseinheiten"
+        },
+		"3": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"4": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"5": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"6": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"7": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"8": {
+            "a": "wahr",
+            "b": "falsch"
+        },
+		"9": {
+            "a": "wahr",
+            "b": "falsch"
+        }
+    },
+    {
+		"0":"Atomarität",
+        "1":"Die Latenzzeit ist immer größer 0",
+		"2":"Limitierung des Arbeitsgedächntnis auf 7 +- 2 Informationseinheiten",
+		"3":"falsch",
+		"4":"wahr",
+		"5":"falsch",
+		"6":"wahr",
+		"7":"falsch",
+		"8":"falsch",
+		"9":"wahr"
+    },
+    {
+		"0":"UX",
+        "1":"CSA",
+		"2":"UX",
+		"3":"TOP/Scrum",
+		"4":"TOP/Scrum",
+		"5":"TOP/Scrum",
+		"6":"TOP/Scrum",
+		"7":"TOP/Scrum",
+		"8":"TOP/Scrum",
+		"9":"TOP/Scrum"
+    }
+]
