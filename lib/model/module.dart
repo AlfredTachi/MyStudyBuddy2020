@@ -138,7 +138,12 @@ class ModuleState extends State<Module> {
           },
           child: Column(
             children: <Widget>[
-              (widget.properties.grade != null && widget.properties.grade != 0)
+              (widget.properties.grade != null &&
+                          widget.properties.grade != 0 ||
+                      ((widget.properties.code == "AS" ||
+                              widget.properties.code == "PS" ||
+                              widget.properties.code == "TOP") &&
+                          widget.properties.isDone))
                   ? Expanded(
                       flex: 3,
                       child: Padding(
@@ -171,7 +176,12 @@ class ModuleState extends State<Module> {
                             )),
                       ),
                     ),
-              (widget.properties.grade != null && widget.properties.grade != 0)
+              (widget.properties.grade != null &&
+                          widget.properties.grade != 0 ||
+                      ((widget.properties.code == "AS" ||
+                              widget.properties.code == "PS" ||
+                              widget.properties.code == "TOP") &&
+                          widget.properties.isDone))
                   ? Expanded(
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 8),
@@ -179,17 +189,29 @@ class ModuleState extends State<Module> {
                             alignment: Alignment.bottomLeft,
                             child: FittedBox(
                               fit: BoxFit.contain,
-                              child: Text(widget.properties.grade.toString(),
-                                  style: (widget.properties.grade < 5.0)
-                                      ? (Platform.isIOS)
+                              child: (widget.properties.code == "AS" ||
+                                      widget.properties.code == "PS" ||
+                                      widget.properties.code == "TOP")
+                                  ? Text(
+                                      "BE",
+                                      style: (Platform.isIOS)
                                           ? Styles.moduleGradePassed
                                           : TextStyle(
                                               fontSize: 10,
-                                              color: Colors.lightGreen)
-                                      : (Platform.isIOS)
-                                          ? Styles.moduleGradeNotPassed
-                                          : TextStyle(
-                                              fontSize: 10, color: Colors.red)),
+                                              color: Colors.lightGreen),
+                                    )
+                                  : Text(widget.properties.grade.toString(),
+                                      style: (widget.properties.grade < 5.0)
+                                          ? (Platform.isIOS)
+                                              ? Styles.moduleGradePassed
+                                              : TextStyle(
+                                                  fontSize: 10,
+                                                  color: Colors.lightGreen)
+                                          : (Platform.isIOS)
+                                              ? Styles.moduleGradeNotPassed
+                                              : TextStyle(
+                                                  fontSize: 10,
+                                                  color: Colors.red)),
                             )),
                       ),
                     )

@@ -22,12 +22,14 @@ class ModuleOptionsDialog extends StatefulWidget {
 class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
   String _selectModuleText;
   String _gradeText;
+  String _doneText;
 
   @override
   void initState() {
     super.initState();
     _setSelectedModuleText();
     _setGradeString();
+    _setDoneString();
   }
 
   void _setSelectedModuleText() {
@@ -44,6 +46,13 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
       _gradeText = "Note löschen";
     else
       _gradeText = "Note eintragen";
+  }
+
+  void _setDoneString() {
+    if (widget.module.properties.isDone == true)
+      _doneText = "Modul löschen";
+    else
+      _doneText = "Modul abschließen";
   }
 
   @override
@@ -84,53 +93,98 @@ class ModuleOptionsDialogState extends State<ModuleOptionsDialog> {
                       child: ModuleInformationDialog(widget.module),
                     );
                   }),
-          (Platform.isIOS)
-              ? CupertinoButton(
-                  child: Text(
-                    _gradeText,
-                    style: TextStyle(color: CupertinoColors.activeOrange),
+          if (widget.module.properties.code != "AS" &&
+              widget.module.properties.code != "PS" &&
+              widget.module.properties.code != "TOP")
+            (Platform.isIOS)
+                ? CupertinoButton(
+                    child: Text(
+                      _gradeText,
+                      style: TextStyle(color: CupertinoColors.activeOrange),
+                    ),
+                    onPressed: () async {
+                      if (widget.module.properties.grade != 0 &&
+                          widget.module.properties.grade != null) {
+                        setState(() {
+                          widget.module.properties.grade = 0;
+                          ModuleController().updateModule(widget.module);
+                          _setGradeString();
+                        });
+                      } else {
+                        return showDialog(
+                          context: context,
+                          child: ModuleAddGradeDialog(widget.module),
+                        ).whenComplete(() {
+                          setState(() {
+                            _setGradeString();
+                          });
+                        });
+                      }
+                    })
+                : FlatButton(
+                    child: Text(_gradeText),
+                    onPressed: () async {
+                      if (widget.module.properties.grade != 0 &&
+                          widget.module.properties.grade != null) {
+                        setState(() {
+                          widget.module.properties.grade = 0;
+                          ModuleController().updateModule(widget.module);
+                          _setGradeString();
+                        });
+                      } else {
+                        return showDialog(
+                          context: context,
+                          child: ModuleAddGradeDialog(widget.module),
+                        ).whenComplete(() {
+                          setState(() {
+                            _setGradeString();
+                          });
+                        });
+                      }
+                    },
                   ),
-                  onPressed: () async {
-                    if (widget.module.properties.grade != 0 &&
-                        widget.module.properties.grade != null) {
-                      setState(() {
-                        widget.module.properties.grade = 0;
-                        ModuleController().updateModule(widget.module);
-                        _setGradeString();
-                      });
-                    } else {
-                      return showDialog(
-                        context: context,
-                        child: ModuleAddGradeDialog(widget.module),
-                      ).whenComplete(() {
+          if (widget.module.properties.code == "AS" ||
+              widget.module.properties.code == "PS" ||
+              widget.module.properties.code == "TOP")
+            (Platform.isIOS)
+                ? CupertinoButton(
+                    child: Text(
+                      _doneText,
+                      style: TextStyle(color: CupertinoColors.activeOrange),
+                    ),
+                    onPressed: () async {
+                      if (widget.module.properties.isDone) {
                         setState(() {
-                          _setGradeString();
+                          widget.module.properties.isDone = false;
+                          ModuleController().updateModule(widget.module);
+                          _setDoneString();
                         });
-                      });
-                    }
-                  })
-              : FlatButton(
-                  child: Text(_gradeText),
-                  onPressed: () async {
-                    if (widget.module.properties.grade != 0 &&
-                        widget.module.properties.grade != null) {
-                      setState(() {
-                        widget.module.properties.grade = 0;
-                        ModuleController().updateModule(widget.module);
-                        _setGradeString();
-                      });
-                    } else {
-                      return showDialog(
-                        context: context,
-                        child: ModuleAddGradeDialog(widget.module),
-                      ).whenComplete(() {
+                      } else {
                         setState(() {
-                          _setGradeString();
+                          widget.module.properties.isDone = true;
+                          ModuleController().updateModule(widget.module);
+                          _setDoneString();
                         });
-                      });
-                    }
-                  },
-                ),
+                      }
+                    })
+                : FlatButton(
+                    child: Text(_doneText),
+                    onPressed: () async {
+                      if (widget.module.properties.isDone) {
+                        setState(() {
+                          widget.module.properties.isDone = false;
+                          ModuleController().updateModule(widget.module);
+                          _setDoneString();
+                        });
+                      } else {
+                        setState(() {
+                          widget.module.properties.isDone = true;
+                          ModuleController().updateModule(widget.module);
+                          _setDoneString();
+                        });
+                      }
+                    },
+                  ),
           (Platform.isIOS)
               ? CupertinoButton(
                   child: Text(
