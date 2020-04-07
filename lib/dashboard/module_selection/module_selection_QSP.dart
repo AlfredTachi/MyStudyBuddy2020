@@ -41,7 +41,10 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
     return [
       new BottomNavigationBarItem(
         icon: (Platform.isIOS)
-            ? Icon(IOSQuickAccessIcons.cloud, size: 24,)
+            ? Icon(
+                IOSQuickAccessIcons.cloud,
+                size: 24,
+              )
             : _currentIndex == 0
                 ? ImageIcon(AssetImage("assets/icons/QSP/Cloud_Icon.png"),
                     size: 30, color: setBottomNavigationBarIconSelectedColor())
@@ -50,12 +53,19 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
         title: Text('Security and Network',
             style: (Platform.isIOS)
                 ? null
-                : TextStyle(
-                    fontSize: 12, color: setBottomNavigationBarColor())),
+                : _currentIndex == 0
+                    ? TextStyle(
+                        fontSize: 12,
+                        color: setBottomNavigationBarIconSelectedColor())
+                    : TextStyle(
+                        fontSize: 12, color: setBottomNavigationBarColor())),
       ),
       new BottomNavigationBarItem(
         icon: (Platform.isIOS)
-            ? Icon(IOSQuickAccessIcons.eye, size: 24,)
+            ? Icon(
+                IOSQuickAccessIcons.eye,
+                size: 24,
+              )
             : _currentIndex == 1
                 ? ImageIcon(
                     AssetImage("assets/icons/QSP/Medieninformatik_Icon.png"),
@@ -68,12 +78,19 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
         title: Text('Visual Computing',
             style: (Platform.isIOS)
                 ? null
-                : TextStyle(
-                    fontSize: 12, color: setBottomNavigationBarColor())),
+                : _currentIndex == 1
+                    ? TextStyle(
+                        fontSize: 12,
+                        color: setBottomNavigationBarIconSelectedColor())
+                    : TextStyle(
+                        fontSize: 12, color: setBottomNavigationBarColor())),
       ),
       new BottomNavigationBarItem(
           icon: (Platform.isIOS)
-              ? Icon(IOSQuickAccessIcons.chevron_left_slash_chevron_right, size: 24,)
+              ? Icon(
+                  IOSQuickAccessIcons.chevron_left_slash_chevron_right,
+                  size: 24,
+                )
               : _currentIndex == 2
                   ? ImageIcon(AssetImage("assets/icons/QSP/Software_Icon.png"),
                       size: 30,
@@ -85,16 +102,24 @@ class ModuleSelectionQSPState extends State<ModuleSelectionQSP> {
                 child: Text('Software Engineering ',
                     style: (Platform.isIOS)
                         ? null
-                        : TextStyle(
-                            fontSize: 12,
-                            color: setBottomNavigationBarColor()))),
+                        : _currentIndex == 2
+                            ? TextStyle(
+                                fontSize: 12,
+                                color:
+                                    setBottomNavigationBarIconSelectedColor())
+                            : TextStyle(
+                                fontSize: 12,
+                                color: setBottomNavigationBarColor()))),
             Center(
                 child: Text('and Development',
                     style: (Platform.isIOS)
                         ? null
-                        : TextStyle(
-                            fontSize: 12,
-                            color: setBottomNavigationBarColor())))
+                        : _currentIndex == 2
+                    ? TextStyle(
+                        fontSize: 12,
+                        color: setBottomNavigationBarIconSelectedColor())
+                    : TextStyle(
+                        fontSize: 12, color: setBottomNavigationBarColor())),)
           ]))
     ];
   }

@@ -16,6 +16,7 @@ class ModuleInformationDialog extends StatefulWidget {
 class ModuleInformationDialogState extends State<ModuleInformationDialog> {
   @override
   Widget build(BuildContext context) {
+    print(widget.module.properties.cp.toString());
     return AlertDialog(
       title: Text(
         "Informationen",
@@ -91,12 +92,22 @@ class ModuleInformationDialogState extends State<ModuleInformationDialog> {
 
   String getGradeText() {
     String gradeText;
-    if (widget.module.properties.grade == null) {
-      gradeText = "Keine Note vorhanden";
-    } else if (widget.module.properties.grade == 0) {
-      gradeText = "Note ausstehend";
+    if (widget.module.properties.code == "AS" ||
+        widget.module.properties.code == "PS" ||
+        widget.module.properties.code == "TOP") {
+      if (widget.module.properties.isDone) {
+        gradeText = "Modul bestanden";
+      } else {
+        gradeText = "Modul noch nicht bestanden";
+      }
     } else {
-      gradeText = widget.module.properties.grade.toString();
+      if (widget.module.properties.grade == null) {
+        gradeText = "Keine Note vorhanden";
+      } else if (widget.module.properties.grade == 0) {
+        gradeText = "Note ausstehend";
+      } else {
+        gradeText = widget.module.properties.grade.toString();
+      }
     }
     return gradeText;
   }
