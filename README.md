@@ -1,6 +1,6 @@
 # MyStudyBuddy2
 
-A new Flutter project.
+- [About project](https://atlas.ai.it.hs-worms.de/confluence/display/PUB/Team+Buddys+-+SoSe+2020)
 
 ## Getting Started
 
