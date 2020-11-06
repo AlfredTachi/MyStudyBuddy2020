@@ -2,6 +2,8 @@
 
 - [About project](https://atlas.ai.it.hs-worms.de/confluence/display/PUB/Team+Buddys+-+SoSe+2020)
 
+![](assets/images/TOPBuddys.jpg)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
